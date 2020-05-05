@@ -1,0 +1,950 @@
+1
+00:00:00,500 --> 00:00:02,530
+现在规范可以谈什么呢？
+Now what can a specification talk about?
+
+2
+00:00:02,530 --> 00:00:04,730
+它可以描述
+Well it can describe the relationships
+
+3
+00:00:04,730 --> 00:00:07,860
+在参数和方法的返回值之间。
+between the parameters and the return value of the method.
+
+4
+00:00:07,860 --> 00:00:10,260
+但它不应该谈论局部变量
+But it should never talk about local variables
+
+5
+00:00:10,260 --> 00:00:14,070
+或私有字段、方法类或其他实现
+or private fields, the methods class, or other implementation
+
+6
+00:00:14,070 --> 00:00:14,630
+细节。
+details.
+
+7
+00:00:14,630 --> 00:00:17,630
+很多东西是读者看不见的
+A lot of those things are invisible to the reader
+
+8
+00:00:17,630 --> 00:00:18,540
+规格的。
+of the spec.
+
+9
+00:00:18,540 --> 00:00:22,290
+特别是在Java中，方法的源代码
+In Java in particular the source code of the method
+
+10
+00:00:22,290 --> 00:00:25,440
+对于规范的读者来说是不可用的，
+is often unavailable to the reader of the spec,
+
+11
+00:00:25,440 --> 00:00:27,970
+因为Java doc工具提取这些规范注释
+because the Java doc tool extracts these spec comments
+
+12
+00:00:27,970 --> 00:00:31,170
+从你的代码并呈现为HTML。
+from your code and renders them as HTML.
+
+13
+00:00:31,170 --> 00:00:33,970
+所以请记住这是你
+So keep in mind that this is the only part that you
+
+14
+00:00:33,970 --> 00:00:36,440
+应该在说明书里谈。
+should talk about in the spec.
+
+15
+00:00:36,440 --> 00:00:39,810
+现在在测试中，我们讨论黑盒测试
+Now in testing we talk about black box tests that
+
+16
+00:00:39,810 --> 00:00:42,150
+选择时只考虑规格，
+are chosen with only the specification in mind,
+
+17
+00:00:42,150 --> 00:00:44,610
+以及根据知识选择的玻璃盒测试
+and glass box tests that are chosen with knowledge
+
+18
+00:00:44,610 --> 00:00:47,360
+实际实现的
+of the actual implementation, as discussed more
+
+19
+00:00:47,360 --> 00:00:48,700
+在测试读数中。
+in the testing reading.
+
+20
+00:00:48,700 --> 00:00:52,350
+但需要注意的是，即使是玻璃盒测试也必须
+But it's important to note that even glass box tests must
+
+21
+00:00:52,350 --> 00:00:54,970
+遵循规范。
+follow the specification.
+
+22
+00:00:54,970 --> 00:00:56,420
+现在你的具体实现
+Now your particular implementation
+
+23
+00:00:56,420 --> 00:00:58,840
+可能比规范要求的更可靠，
+may have stronger guarantees than the spec calls for,
+
+24
+00:00:58,840 --> 00:01:02,010
+或者在规范未定义的情况下可能有特定的行为，
+or it may have specific behavior where the spec is undefined,
+
+25
+00:01:02,010 --> 00:01:06,270
+但是您的测试用例不应该依赖于这种行为。
+but your test cases should not count on that behavior.
+
+26
+00:01:06,270 --> 00:01:08,270
+测试用例必须遵守合同，
+Tests cases must obey the contract,
+
+27
+00:01:08,270 --> 00:01:10,060
+就像其他客户一样。
+just like every other client.
+
+28
+00:01:10,060 --> 00:01:12,310
+例如，假设你正在测试
+So for example, suppose you're testing
+
+29
+00:01:12,310 --> 00:01:14,800
+这个发现的规格，和那个有点不同
+this spec of Find, which is slightly different than the one
+
+30
+00:01:14,800 --> 00:01:17,010
+我们已经用了这么久。
+we've used so far.
+
+31
+00:01:17,010 --> 00:01:19,980
+它说的是你正在寻找的价值
+What it says is that the value that you're searching for
+
+32
+00:01:19,980 --> 00:01:23,690
+必须出现在阵列的某个地方，可能不止一次，
+has to occur somewhere in the array, maybe more than once,
+
+33
+00:01:23,690 --> 00:01:28,660
+它返回某个索引i，该值出现在那里。
+and it returns some index i, where that value occurs.
+
+34
+00:01:28,660 --> 00:01:30,690
+所以这个规范有一个很强的前提条件
+So this spec has a strong precondition
+
+35
+00:01:30,690 --> 00:01:33,510
+需要找到val，它是一个相当弱的
+val is required to be found, and it is a fairly weak
+
+36
+00:01:33,510 --> 00:01:35,600
+后置条件，即如果val出现
+post-condition, in the sense that if val appears
+
+37
+00:01:35,600 --> 00:01:37,730
+不止一次规格说明什么都没说
+more than once the spec says nothing
+
+38
+00:01:37,730 --> 00:01:42,220
+返回val的哪个特定索引。
+about which particular index of val is returned.
+
+39
+00:01:42,220 --> 00:01:44,330
+现在即使你实现了find
+Now even if you implemented find so that it always
+
+40
+00:01:44,330 --> 00:01:46,750
+返回最低的索引，即您的测试用例
+returns the lowest index, your test case
+
+41
+00:01:46,750 --> 00:01:50,220
+不能假设这种特定的行为。
+can't assume that specific behavior.
+
+42
+00:01:50,220 --> 00:01:53,070
+例如，如果我们的数组是这样的，
+So for example, if our array is this,
+
+43
+00:01:53,070 --> 00:01:56,170
+只列出三个七，我们在找号码
+just a list of three sevens, and we're looking for the number
+
+44
+00:01:56,170 --> 00:02:01,670
+其中有七个，我们不能编写一个需要它的测试用例
+seven in it, we cannot write a test case that requires that
+
+45
+00:02:01,670 --> 00:02:06,532
+此查找返回此处的零索引。
+this find return the zero index here.
+
+46
+00:02:06,532 --> 00:02:08,240
+相反，我们应该写得更笼统些
+Instead we should write it more generally
+
+47
+00:02:08,240 --> 00:02:11,580
+如果我们取索引的find返回，
+and say, well if we take the indexed find returns,
+
+48
+00:02:11,580 --> 00:02:15,400
+然后我们在数组中的索引处查找值，
+and then we look up the value at that index in the array,
+
+49
+00:02:15,400 --> 00:02:18,680
+那必须和我们最初的价值一样
+well that has to be the same as the value we originally
+
+50
+00:02:18,680 --> 00:02:19,630
+寻找。
+searched for.
+
+51
+00:02:19,630 --> 00:02:24,734
+所以这允许find返回0或1或2。
+So this allows find to return zero or one or two.
+
+52
+00:02:24,734 --> 00:02:26,150
+同样，即使您实现了
+Similarly, even if you implemented
+
+53
+00:02:26,150 --> 00:02:29,060
+当val不在的时候，它会合理地抛出一个异常
+find so that it sensibly throws an exception when val isn't
+
+54
+00:02:29,060 --> 00:02:31,880
+发现，而不是返回一些任意的误导性索引，
+found, instead of returning some arbitrary misleading index,
+
+55
+00:02:31,880 --> 00:02:34,180
+换句话说，我们正在写一份调查报告
+in other words we're writing a find that checks
+
+56
+00:02:34,180 --> 00:02:38,810
+它本身的前提是，你的测试不能假设这种行为
+its own precondition, your test can't assume that behavior
+
+57
+00:02:38,810 --> 00:02:40,680
+因为找不到
+because it can't call find in a way that
+
+58
+00:02:40,680 --> 00:02:42,310
+违反了这个先决条件。
+violates that precondition.
+
+59
+00:02:42,310 --> 00:02:45,750
+不允许违反这个合同。
+It's not allowed to break this contract.
+
+60
+00:02:45,750 --> 00:02:47,450
+那么玻璃盒测试什么
+So then what does glass box testing even
+
+61
+00:02:47,450 --> 00:02:49,579
+意思是如果你不能超出规格？
+mean if you're not allowed to go beyond the spec?
+
+62
+00:02:49,579 --> 00:02:51,870
+好吧，这意味着你试图找到新的测试用例
+Well it means you're trying to find new test cases that
+
+63
+00:02:51,870 --> 00:02:54,470
+执行的不同部分，
+exercise different parts of the implementation,
+
+64
+00:02:54,470 --> 00:02:56,600
+但仍在检查这些测试用例
+but still checking those test cases
+
+65
+00:02:56,600 --> 00:02:58,900
+以独立于实现的方式。
+in an implementation-independent way.
+
+67
+00:03:01,980 --> 00:03:04,880
+现在让我们考虑一下测试单元的规格。
+Now let's think about testing units with respect to specs.
+
+68
+00:03:04,880 --> 00:03:08,220
+回想一下我们有一个网络搜索的例子
+So recall we had an example of a web search
+
+69
+00:03:08,220 --> 00:03:11,620
+有三种方法一起工作。
+that had three methods working together.
+
+70
+00:03:11,620 --> 00:03:14,460
+获取获取URL并生成字符串的网页；
+Get Web Page that took a URL and produced the string;
+
+71
+00:03:14,460 --> 00:03:17,910
+提取需要字符串的单词，可能是网页，
+Extract Words that takes a string, presumably a web page,
+
+72
+00:03:17,910 --> 00:03:22,280
+并返回一个单词列表；然后生成索引
+and returns a list of words; and then MakeIndex
+
+73
+00:03:22,280 --> 00:03:26,370
+它接受一组URL并尝试
+that takes overall a set of URLs and tries
+
+74
+00:03:26,370 --> 00:03:30,750
+构造将单词映射到URL集的索引。
+to construct an index that maps words to sets of URLs.
+
+75
+00:03:30,750 --> 00:03:33,280
+在里面进行索引调用
+And this make index calls within it
+
+76
+00:03:33,280 --> 00:03:36,520
+这两种方法，获取网页和提取单词。
+these two methods, Get Web Page and Extract Words.
+
+77
+00:03:36,520 --> 00:03:38,817
+现在回到网络测试阅读中，我们讨论了单元
+Now back in net testing reading we talked about unit
+
+78
+00:03:38,817 --> 00:03:40,400
+测试，我们应该写的想法
+testing, the idea that we should write
+
+79
+00:03:40,400 --> 00:03:43,510
+单独测试程序的每个模块。
+tests of each module of our program in isolation.
+
+80
+00:03:43,510 --> 00:03:47,950
+好的单元测试只关注一个规范。
+Good unit test is focused on just a single specification.
+
+81
+00:03:47,950 --> 00:03:50,730
+我们的测试几乎总是依赖于Java库的规范
+Our test will nearly always rely on the specs of Java library
+
+82
+00:03:50,730 --> 00:03:53,040
+在这些方法中调用的方法，
+methods that are being called inside these methods,
+
+83
+00:03:53,040 --> 00:03:55,610
+但是我们编写的一个方法的单元测试
+but a unit test for one method we've written
+
+84
+00:03:55,610 --> 00:03:57,950
+如果另一个方法失败了就不应该失败
+shouldn't fail if a different method fails
+
+85
+00:03:57,950 --> 00:03:59,960
+以满足它的规格。
+to satisfy it's spec.
+
+86
+00:03:59,960 --> 00:04:02,250
+正如我们在测试读数中看到的例子，
+So as we saw in the example in the testing reading,
+
+87
+00:04:02,250 --> 00:04:04,930
+单词提取测试不应该
+a test for extract words shouldn't
+
+88
+00:04:04,930 --> 00:04:10,440
+如果获取网页不满足其后置条件，则失败。
+fail if Get Web Page doesn't satisfy it's postcondition.
+
+89
+00:04:10,440 --> 00:04:16,790
+因此，提取单词的测试不应该调用Get Web Page。
+So the test for Extract Words should not call Get Web Page.
+
+90
+00:04:16,790 --> 00:04:18,959
+好的集成测试
+Now good integration tests, tests
+
+91
+00:04:18,959 --> 00:04:20,594
+使用模块组合，
+that use a combination of modules,
+
+92
+00:04:20,594 --> 00:04:22,510
+会确保我们不同的方法
+will make sure that our different methods have
+
+93
+00:04:22,510 --> 00:04:24,970
+同事和实现者的兼容规范
+compatible specifications that colleagues and implementers
+
+94
+00:04:24,970 --> 00:04:26,720
+以不同的方式传递返回
+in different methods are passing returning
+
+95
+00:04:26,720 --> 00:04:28,900
+别人期望的价值观。
+values the others expect.
+
+96
+00:04:28,900 --> 00:04:31,680
+集成测试不能取代系统化设计
+The integration test cannot replace systematically-designed
+
+97
+00:04:31,680 --> 00:04:33,030
+单元测试。
+unit tests.
+
+98
+00:04:33,030 --> 00:04:36,350
+例如，如果我们只调用test Extract Words
+For example, if we only ever called test Extract Words
+
+99
+00:04:36,350 --> 00:04:38,860
+换句话说，通过调用MakeIndex，
+by calling MakeIndex, in other words,
+
+100
+00:04:38,860 --> 00:04:42,450
+通过MakeIndex调用来测试提取单词，
+test Extract Words by calling it through MakeIndex,
+
+101
+00:04:42,450 --> 00:04:44,840
+我们只在一个很小的地方测试
+we'll only test it on a potentially small part
+
+102
+00:04:44,840 --> 00:04:46,550
+它的输入空间
+of its input space, the inputs that
+
+103
+00:04:46,550 --> 00:04:49,530
+是Get网页的可能输出。
+are possible outputs of Get Web Page.
+
+104
+00:04:49,530 --> 00:04:52,030
+这样我们就离开了藏匿虫子的地方
+And in doing so we've left the place for bugs to hide
+
+105
+00:04:52,030 --> 00:04:55,910
+当我们，例如，提取
+that are ready to jump out when we, for instance, take Extract
+
+106
+00:04:55,910 --> 00:04:57,960
+为了不同的目的
+Words and try to reason for a different purpose
+
+107
+00:04:57,960 --> 00:04:59,350
+在我们计划的其他地方。
+somewhere else in our program.
+
+108
+00:04:59,350 --> 00:05:02,200
+或者当Get Web Page开始返回编写的Web页面时
+Or when Get Web Page starts returning web pages written
+
+109
+00:05:02,200 --> 00:05:04,330
+以新的格式，等等。
+in a new format, and so forth.
+
+110
+00:05:04,330 --> 00:05:07,390
+我们真的想单独测试提取单词
+We really want to test extract words in isolation
+
+111
+00:05:07,390 --> 00:05:10,390
+有很好的单元测试。
+with a good unit test.
+
+112
+00:05:10,390 --> 00:05:14,420
+我们之前讨论过可变对象和不可变对象，
+Now we previously discussed mutable vs. immutable objects,
+
+113
+00:05:14,420 --> 00:05:16,250
+但我们的技术规范还没有给我们
+but our specs Find haven't given us
+
+114
+00:05:16,250 --> 00:05:19,150
+说明如何描述侧面的机会
+a chance to illustrate how to describe the side
+
+115
+00:05:19,150 --> 00:05:23,560
+副作用是对不可变数据的更改。
+effects, where a side effect is a change to immutable data.
+
+116
+00:05:23,560 --> 00:05:25,189
+这是个突变。
+It's a mutation.
+
+117
+00:05:25,189 --> 00:05:27,480
+我们将如何描述那些在后条件
+How are we going to describe those in the postcondition
+
+118
+00:05:27,480 --> 00:05:28,360
+一个规格？
+of a specification?
+
+119
+00:05:28,360 --> 00:05:31,230
+这里有一个规范描述了
+Well here's a specification that describes a method that
+
+120
+00:05:31,230 --> 00:05:33,360
+变异一个物体。
+mutates an object.
+
+121
+00:05:33,360 --> 00:05:36,030
+这是一个方法，有两个列表，
+This is a method at all, takes two lists,
+
+122
+00:05:36,030 --> 00:05:38,209
+列出一和二。
+list one and list two.
+
+123
+00:05:38,209 --> 00:05:40,500
+我要先跳到后场，
+And I'm going to jump ahead to the postcondition first,
+
+124
+00:05:40,500 --> 00:05:43,470
+它修改了列表一，它修改了列表一
+it modifies list one, it mutates list one
+
+125
+00:05:43,470 --> 00:05:47,050
+将列表2的元素添加到列表的末尾。
+by adding the elements of list two to the end of it.
+
+126
+00:05:47,050 --> 00:05:48,660
+然后返回布尔值
+And then it returns Boolean, which
+
+127
+00:05:48,660 --> 00:05:50,560
+如果列表1已更改，则为true
+is true if list one has been changed
+
+128
+00:05:50,560 --> 00:05:52,780
+因为这个电话。
+as a result of the call.
+
+129
+00:05:52,780 --> 00:05:54,510
+这实际上是一个相当常见的模式
+This is actually a fairly common pattern
+
+130
+00:05:54,510 --> 00:05:59,904
+您将在Java API中看到，它只是返回
+you'll see in the Java API which is to just return
+
+131
+00:05:59,904 --> 00:06:02,070
+告诉你是否有任何变异
+to this Boolean to tell you whether any mutation has
+
+132
+00:06:02,070 --> 00:06:03,342
+真的发生了。
+actually occurred.
+
+133
+00:06:03,342 --> 00:06:05,800
+所以我们把这个，简化了一点，
+So we've actually taken this, it's a little bit simplified,
+
+134
+00:06:05,800 --> 00:06:07,008
+从Java列表界面。
+from the Java list interface.
+
+136
+00:06:10,860 --> 00:06:12,940
+现在如果我们看看先决条件，
+Now if we look at the precondition,
+
+137
+00:06:12,940 --> 00:06:14,904
+我跳过了先决条件，它告诉我们
+I skipped over the precondition, it tells us
+
+138
+00:06:14,904 --> 00:06:16,820
+如果你试图
+that the behavior of the method if you attempt
+
+139
+00:06:16,820 --> 00:06:20,200
+如果list one和list
+to add the elements of a list to itself, if list one and list
+
+140
+00:06:20,200 --> 00:06:22,670
+两个引用同一个列表对象，
+two refer to the same list object,
+
+141
+00:06:22,670 --> 00:06:24,780
+如快照图所示，
+as is shown over here in the snapshot diagram,
+
+142
+00:06:24,780 --> 00:06:26,460
+它是未定义的。
+it's undefined.
+
+143
+00:06:26,460 --> 00:06:28,660
+那是在外面——这打破了先决条件。
+That's outside-- that breaks the precondition.
+
+144
+00:06:28,660 --> 00:06:31,160
+你可以很容易地想象为什么？实施？]方法将
+You can easily imagine why the [? implemented ?] method will
+
+145
+00:06:31,160 --> 00:06:32,830
+希望强制使用此构造。
+want to impose this construct.
+
+146
+00:06:32,830 --> 00:06:35,180
+首先，不排除任何有用的应用程序
+First, it's not like to rule out any useful application
+
+147
+00:06:35,180 --> 00:06:36,440
+方法。
+of the method.
+
+148
+00:06:36,440 --> 00:06:38,770
+而且它更容易实现。
+And it makes it easier to implement.
+
+149
+00:06:38,770 --> 00:06:42,070
+因为它允许一个简单的实现，其中
+Because it allows for a simple implementation, in which you're
+
+150
+00:06:42,070 --> 00:06:44,630
+从列表2中一次取一个元素
+just taking elements one at a time from list two
+
+151
+00:06:44,630 --> 00:06:47,400
+把它们加到列表中直到你
+and adding them to list one until you
+
+152
+00:06:47,400 --> 00:06:48,791
+到列表二的末尾。
+get to the end of list two.
+
+153
+00:06:48,791 --> 00:06:50,790
+现在这个简单实现的问题是，
+Now the problem with that simple implementation,
+
+154
+00:06:50,790 --> 00:06:53,640
+如果两个列表都指向同一个列表对象，
+if both lists point to the same list object,
+
+155
+00:06:53,640 --> 00:06:56,590
+你将继续添加元素
+is that you will keep adding on elements
+
+156
+00:06:56,590 --> 00:06:59,620
+在列表一和列表二的末尾，
+to the end of both list one and list two,
+
+157
+00:06:59,620 --> 00:07:01,806
+你永远到不了第二个名单的末尾。
+you will never get to the end of list two.
+
+158
+00:07:01,806 --> 00:07:03,180
+两份名单都会继续增长
+Both lists will just keep growing
+
+159
+00:07:03,180 --> 00:07:05,590
+不断成长。
+and growing and growing.
+
+160
+00:07:05,590 --> 00:07:09,400
+所以这个快照图演示了这种行为。
+So this snapshot diagram demonstrates that behavior.
+
+161
+00:07:09,400 --> 00:07:11,180
+所以这是一个简单的算法
+So that's a simple algorithm will not
+
+162
+00:07:11,180 --> 00:07:13,700
+如果列表1和列表2是同一列表，则终止。
+terminate if list one and list two are the same list.
+
+163
+00:07:13,700 --> 00:07:15,850
+或者说实际上，在Java中
+Or practically speaking, in Java it
+
+164
+00:07:15,850 --> 00:07:17,630
+一旦此列表出现，将引发内存错误
+will throw a memory error once this list
+
+165
+00:07:17,630 --> 00:07:19,030
+物体变大了
+object has grown so large that it
+
+166
+00:07:19,030 --> 00:07:20,870
+消耗所有可用内存。
+consumes all available memory.
+
+167
+00:07:20,870 --> 00:07:24,590
+不管是无限循环还是崩溃，
+Either way, whether it's an infinite loop or a crash,
+
+168
+00:07:24,590 --> 00:07:27,910
+这是规范允许的，因为你
+that's permitted by the spec because you
+
+169
+00:07:27,910 --> 00:07:31,730
+如果你这么做就违反了先决条件。
+violated the precondition if you're doing it.
+
+170
+00:07:31,730 --> 00:07:33,590
+现在也记住我们隐含的前提条件
+Now remember also our implicit precondition
+
+171
+00:07:33,590 --> 00:07:36,211
+列表1和列表2必须是有效对象，不能为空。
+that list one and list two must be valid objects, not null.
+
+172
+00:07:36,211 --> 00:07:38,710
+我们通常不说这个，因为事实上
+We'll usually omit saying this because it's virtually always
+
+173
+00:07:38,710 --> 00:07:40,617
+需要对象引用。
+required of object references.
+
+174
+00:07:40,617 --> 00:07:42,450
+这是另一个变异方法的例子。
+Here's another example of a mutating method.
+
+175
+00:07:42,450 --> 00:07:47,070
+这是Sort，它需要一个字符串列表，没有前置条件，
+This is Sort, it takes a list of strings, has no precondition,
+
+176
+00:07:47,070 --> 00:07:50,655
+它将列表按顺序排列，这样我的列表，
+and it puts the list in sorted order so that list of i,
+
+177
+00:07:50,655 --> 00:07:55,797
+所以让我们列一张j的清单，我比j小。
+so let's make a list of j for all i's less than j.
+
+178
+00:07:55,797 --> 00:07:57,380
+下面是一个方法的例子
+And here's an example of a method that
+
+179
+00:07:57,380 --> 00:07:59,970
+不会改变它的论点。
+does not mutate its argument.
+
+180
+00:07:59,970 --> 00:08:03,580
+两个小写，它接受字符串列表并返回
+Two lower case that takes a list of strings and returns
+
+181
+00:08:03,580 --> 00:08:07,400
+一个新列表，其中该列表的每个元素
+a new list, where each element of that list
+
+182
+00:08:07,400 --> 00:08:10,070
+是对应元素的小写版本
+is the lower case version of the corresponding elements
+
+183
+00:08:10,070 --> 00:08:11,640
+输入列表的。
+of the input list.
+
+184
+00:08:11,640 --> 00:08:14,612
+正如我们所说的，null是隐式不允许的
+And just as we've said that null is implicitly disallowed
+
+185
+00:08:14,612 --> 00:08:16,070
+除非另有说明，我们
+unless stated otherwise, we're also
+
+186
+00:08:16,070 --> 00:08:18,620
+使用不允许变异的惯例
+going to use the convention that mutation is disallowed
+
+187
+00:08:18,620 --> 00:08:19,710
+除非另有说明。
+unless stated otherwise.
+
+188
+00:08:19,710 --> 00:08:22,140
+所以这并不是说，即使你通过了
+So this does not say, even though you're passing it
+
+189
+00:08:22,140 --> 00:08:24,900
+这里有一个可变的对象，它没有
+a mutable object here, it does not
+
+190
+00:08:24,900 --> 00:08:27,416
+假设它会改变那个物体。
+say it's going to mutate that object.
+
+191
+00:08:27,416 --> 00:08:29,790
+所以在没有描述突变的后条件的情况下
+So in the absence of a post condition describing mutation
+
+192
+00:08:29,790 --> 00:08:34,670
+我们要求两个小写不改变它的输入列表。
+we demand that two lower case not mutate its input list.
+

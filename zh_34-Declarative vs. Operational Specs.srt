@@ -1,0 +1,315 @@
+1
+00:00:01,110 --> 00:00:04,640
+我们思考如何判断规格的下一个维度
+Our next dimension for thinking about how we judge specs
+
+2
+00:00:04,640 --> 00:00:08,120
+是声明性的还是操作性的。
+is declarative versus operational.
+
+3
+00:00:08,120 --> 00:00:11,400
+操作规范给出了一系列步骤
+Operational specifications give a series of steps
+
+4
+00:00:11,400 --> 00:00:13,230
+方法执行的。
+that the method performs.
+
+5
+00:00:13,230 --> 00:00:18,090
+所以伪代码描述将是一个操作规范。
+So a pseudo code description would be an operational spec.
+
+6
+00:00:18,090 --> 00:00:21,230
+声明性规范不提供详细信息
+Declarative specifications don't give details
+
+7
+00:00:21,230 --> 00:00:22,570
+中间步骤。
+of those intermediate steps.
+
+8
+00:00:22,570 --> 00:00:25,780
+相反，它们只是描述了最终结果的性质
+Instead, they just describe properties of the final outcome
+
+9
+00:00:25,780 --> 00:00:27,770
+最终输出状态的。
+of the final output state.
+
+10
+00:00:27,770 --> 00:00:32,281
+以及它与初始状态，输入的关系。
+And how that's related to the initial state, the inputs.
+
+11
+00:00:32,281 --> 00:00:35,840
+现在几乎总是，声明性规范更可取。
+Now almost always, declarative specifications are preferable.
+
+12
+00:00:35,840 --> 00:00:36,864
+它们通常较短。
+They're usually shorter.
+
+13
+00:00:36,864 --> 00:00:39,030
+他们通常更容易让客户理解。
+They're usually easier for the client to understand.
+
+14
+00:00:39,030 --> 00:00:43,420
+最重要的是，它们不公开实现细节
+And most importantly, they don't expose implementation details
+
+15
+00:00:43,420 --> 00:00:46,900
+客户机可能会对
+that the client might develop a dependency on and then find
+
+16
+00:00:46,900 --> 00:00:50,140
+当实现发生更改时不再保持。
+no longer hold when the implementation has changed.
+
+17
+00:00:50,140 --> 00:00:52,510
+例如，如果我们想
+So for example, if we want to allow either
+
+18
+00:00:52,510 --> 00:00:55,740
+我们的find，find first和find last的实现，
+of our implementations of find, find first and find last,
+
+19
+00:00:55,740 --> 00:00:58,160
+我们不想在说明书上说什么
+we would not want to say in the spec something
+
+20
+00:00:58,160 --> 00:01:00,610
+就像方法在数组中向下移动直到
+like the method goes down the array until it
+
+21
+00:01:00,610 --> 00:01:02,660
+找到[？元音？].
+finds [? vowel ?].
+
+22
+00:01:02,660 --> 00:01:04,430
+除了这一点很模糊之外，
+Since aside from this being rather vague,
+
+23
+00:01:04,430 --> 00:01:07,000
+规范实际上表明搜索继续进行
+the spec actually suggests that the search proceeds
+
+24
+00:01:07,000 --> 00:01:09,230
+从低到高的指数
+from lower to higher indices and that the lowest
+
+25
+00:01:09,230 --> 00:01:10,540
+将被退回。
+will be returned.
+
+26
+00:01:10,540 --> 00:01:14,870
+也许说明符并没有真正的意图。
+Which perhaps specifier did not actually intend.
+
+27
+00:01:14,870 --> 00:01:16,960
+程序员有时会失误的一个原因
+One reason programmers sometimes lapse
+
+28
+00:01:16,960 --> 00:01:18,647
+编写一个操作规范是
+into writing an operational spec is
+
+29
+00:01:18,647 --> 00:01:20,230
+因为他们正在使用规范注释
+because they're using the spec comment
+
+30
+00:01:20,230 --> 00:01:23,770
+解释维护程序员的实现
+to explain the implementation for a maintenance programmer
+
+31
+00:01:23,770 --> 00:01:26,070
+在那之后谁会继续。
+who's going to follow on after that.
+
+32
+00:01:26,070 --> 00:01:26,965
+别那么做。
+Don't do that.
+
+33
+00:01:26,965 --> 00:01:29,090
+记住你有两个不同的听众。
+Keep in mind that you have two different audiences.
+
+34
+00:01:29,090 --> 00:01:30,860
+你有客户程序，或者有人
+You have a client program, or somebody
+
+35
+00:01:30,860 --> 00:01:33,407
+谁在调用您的方法，谁是维护者
+who is calling your method, and a maintainer
+
+36
+00:01:33,407 --> 00:01:35,740
+谁将实际执行和维护
+who is actually going to be implementing and maintaining
+
+37
+00:01:35,740 --> 00:01:38,290
+你的实现。
+your implementation.
+
+38
+00:01:38,290 --> 00:01:41,919
+对于规范，规范实际上是为客户设计的
+For the spec, the spec is really designed for the client
+
+39
+00:01:41,919 --> 00:01:42,710
+还有维修人员。
+and the maintainer.
+
+40
+00:01:42,710 --> 00:01:46,252
+但是维护者，沟通
+But the maintainer, to communicate
+
+41
+00:01:46,252 --> 00:01:48,210
+对于维护人员，您真正想使用的是
+with the maintainer you really want to use just
+
+42
+00:01:48,210 --> 00:01:51,494
+方法体中的注释。
+comments within the body of your method.
+
+43
+00:01:51,494 --> 00:01:52,910
+现在对于任何给定的规格，可能
+Now for any given specs, there may
+
+44
+00:01:52,910 --> 00:01:55,410
+有很多方法可以很好地表达它。
+be many ways to express it well declaratively.
+
+45
+00:01:55,410 --> 00:01:59,050
+下面是一些开始的例子。
+Here are some examples of starts with.
+
+46
+00:01:59,050 --> 00:02:01,130
+例如，从可能开始
+So for example, starts with might
+
+47
+00:02:01,130 --> 00:02:02,900
+假设只有当且仅当
+say that it returns true if and only
+
+48
+00:02:02,900 --> 00:02:05,570
+如果存在一些字符串后缀，例如
+if there exists some string suffix such
+
+49
+00:02:05,570 --> 00:02:10,206
+前缀加后缀与字符串相同。
+that prefix plus suffix is the same as string.
+
+50
+00:02:10,206 --> 00:02:12,990
+如果只有
+You might say that returns true if and only
+
+51
+00:02:12,990 --> 00:02:15,932
+如果有一个整数，如果你取第一个
+if there's an integer i such that if you take the first i
+
+52
+00:02:15,932 --> 00:02:18,390
+字符串中的字符，您将得到一个字符串
+characters from string, you're going to get a string that's
+
+53
+00:02:18,390 --> 00:02:20,190
+等于前缀。
+equal to prefix.
+
+54
+00:02:20,190 --> 00:02:22,930
+可能会说些更像英语的话
+Might even say something that's more like English
+
+55
+00:02:22,930 --> 00:02:28,890
+如果字符串中的第一个字符数为
+that this is true if the first number of characters in string
+
+56
+00:02:28,890 --> 00:02:31,600
+等于前缀点长度相同
+equal to prefix dot length are the same
+
+57
+00:02:31,600 --> 00:02:33,510
+作为字符和前缀。
+as the characters and prefix.
+
+58
+00:02:33,510 --> 00:02:34,570
+否则就错了。
+Otherwise false.
+
+59
+00:02:34,570 --> 00:02:38,490
+这三个都是声明性规范
+All three of these are declarative specifications
+
+60
+00:02:38,490 --> 00:02:42,080
+因为他们只是描述了返回值之间的关系
+because they just described how the return value relates
+
+61
+00:02:42,080 --> 00:02:44,980
+输入值。
+to the input value.
+
+62
+00:02:44,980 --> 00:02:47,440
+我们真的要选择清楚的规格
+It's really up to us to choose the clear specifications
+
+63
+00:02:47,440 --> 00:02:50,770
+我们可以为[听不见]的客户和维护者提供服务。
+that we can for the clients and maintainers of [INAUDIBLE].
+

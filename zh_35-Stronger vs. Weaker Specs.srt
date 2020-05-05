@@ -1,0 +1,985 @@
+1
+00:00:00,726 --> 00:00:02,350
+所以假设你想改变一种方法。
+So suppose you want to change a method.
+
+2
+00:00:02,350 --> 00:00:04,420
+你是实施者，你也可以
+You're the implementer, and you either
+
+3
+00:00:04,420 --> 00:00:07,060
+希望更改实现的行为方式，或者
+want to change how the implementation behaves or you
+
+4
+00:00:07,060 --> 00:00:09,330
+希望更改规范本身。
+want to change the specification itself.
+
+5
+00:00:09,330 --> 00:00:11,680
+但你的项目里已经有客户了
+But there are already clients out there in your program
+
+6
+00:00:11,680 --> 00:00:13,471
+或者更进一步取决于方法
+or maybe beyond that depend on the method's
+
+7
+00:00:13,471 --> 00:00:15,500
+现行规范。
+current specification.
+
+8
+00:00:15,500 --> 00:00:18,710
+所以问题是，我们如何比较两个人的行为
+So the question is, how do we compare the behaviors of two
+
+9
+00:00:18,710 --> 00:00:21,690
+规格决定是否可以安全更换
+specs to decide whether it's safe to replace
+
+10
+00:00:21,690 --> 00:00:24,100
+旧规格和新规格
+the old spec with the new spec and that it
+
+11
+00:00:24,100 --> 00:00:27,300
+不会让客户破产吗？
+won't break the clients?
+
+12
+00:00:27,300 --> 00:00:28,950
+有一个定义——一个规范
+There's a definition-- a specification
+
+13
+00:00:28,950 --> 00:00:31,600
+s2大于或等于规范
+s2 is stronger than or equal to a specification
+
+14
+00:00:31,600 --> 00:00:34,630
+s1如果且仅当s2的前提条件是
+s1 if and only if s2's precondition is
+
+15
+00:00:34,630 --> 00:00:38,780
+小于或等于s1和s2的后条件
+weaker than or equal to s1's, and s2's postcondition
+
+16
+00:00:38,780 --> 00:00:41,910
+强于或等于s1，至少对于州
+is stronger than or equal to s1's, at least for the states
+
+17
+00:00:41,910 --> 00:00:45,221
+满足s1的前提条件。
+that satisfy s1's precondition.
+
+18
+00:00:45,221 --> 00:00:47,510
+如果是这样，那么任何实现
+If this is the case, then any implementation
+
+19
+00:00:47,510 --> 00:00:52,510
+满足s2的也可用于满足s1。
+that satisfies s2 can also be used to satisfy s1.
+
+20
+00:00:52,510 --> 00:00:55,960
+替换原规格的s1是安全的
+And it's safe to replace the original spec s1
+
+21
+00:00:55,960 --> 00:00:59,980
+在你的程序中使用这个新的更强大的规范s2。
+with this new stronger spec s2 in your program.
+
+22
+00:00:59,980 --> 00:01:02,560
+所以这两条规则包含了几个想法。
+So these two rules embody several ideas.
+
+23
+00:01:02,560 --> 00:01:06,060
+他们告诉你，你总是可以削弱先决条件。
+They tell you you can always weaken the precondition.
+
+24
+00:01:06,060 --> 00:01:08,000
+您始终可以使用现有的等级库s1，
+You can always take an existing spec s1,
+
+25
+00:01:08,000 --> 00:01:10,450
+使其前提条件变弱，使新的规范s2。
+make its precondition weaker, to make a new spec s2.
+
+26
+00:01:10,450 --> 00:01:12,570
+不会影响客户的
+And that won't affect the clients
+
+27
+00:01:12,570 --> 00:01:15,590
+因为它对客户的要求更少。
+because it makes fewer demands on the clients.
+
+28
+00:01:15,590 --> 00:01:19,060
+较弱的先决条件永远不会让客户不安。
+A weaker precondition will never upset a client.
+
+29
+00:01:19,060 --> 00:01:22,414
+你总是可以加强后处理。
+And you can always strengthen the postcondition.
+
+30
+00:01:22,414 --> 00:01:23,830
+这意味着
+That means that the implementation
+
+31
+00:01:23,830 --> 00:01:27,355
+做出了比原来更多的承诺。
+is making more promises than it originally did.
+
+32
+00:01:27,355 --> 00:01:29,730
+所以那些依赖最初承诺的客户
+So the clients that were relying on the original promises
+
+33
+00:01:29,730 --> 00:01:32,690
+也不会不高兴。
+won't be unhappy either.
+
+34
+00:01:32,690 --> 00:01:36,480
+所以举个例子，记住我们有一个查找的规范--find
+So for example, remember we had this spec for find-- find
+
+35
+00:01:36,480 --> 00:01:39,785
+正好是一个——这是
+exactly one-- which is a precondition that the value
+
+36
+00:01:39,785 --> 00:01:41,860
+你要找的就是一次
+you're looking for occurs exactly once
+
+37
+00:01:41,860 --> 00:01:45,190
+并返回索引。
+and returns some index where it occurs.
+
+38
+00:01:45,190 --> 00:01:50,220
+我们可以用这个更强的规范来代替那个规范
+We can replace that spec with this stronger spec, which
+
+39
+00:01:50,220 --> 00:01:52,070
+先决条件较弱。
+has a weaker precondition.
+
+40
+00:01:52,070 --> 00:01:53,560
+所以不是要求客户
+So instead of requiring the client
+
+41
+00:01:53,560 --> 00:01:56,920
+给我们一个数组，其中的值只出现一次，
+to give us an array where the value occurs exactly once,
+
+42
+00:01:56,920 --> 00:01:59,590
+我们允许这个值不只出现一次，
+we allow the value to occur not just exactly once,
+
+43
+00:01:59,590 --> 00:02:01,720
+但是，事实上，两次，三次，
+but, in fact, twice, three times,
+
+44
+00:02:01,720 --> 00:02:02,960
+你想要多少次就多少次。
+as many times as you want.
+
+45
+00:02:02,960 --> 00:02:08,357
+至少一次是比一次弱的先决条件。
+At least once is a weaker precondition than exactly once.
+
+46
+00:02:08,357 --> 00:02:09,940
+没有一个客户这么说
+And none of the clients that call this
+
+47
+00:02:09,940 --> 00:02:12,460
+会在乎的，因为他们都很满足
+will care because they were all satisfying this stronger
+
+48
+00:02:12,460 --> 00:02:13,380
+先决条件。
+precondition before.
+
+49
+00:02:13,380 --> 00:02:15,000
+所以，当然，他们在做什么
+So, of course, what they're doing
+
+50
+00:02:15,000 --> 00:02:17,235
+将已经满足这一较弱的先决条件。
+will already satisfy this weaker precondition.
+
+51
+00:02:17,235 --> 00:02:22,550
+所以这个规格——把规格改成这个是安全的。
+So this spec-- it's safe to change the spec to this.
+
+52
+00:02:22,550 --> 00:02:25,970
+然后我们可以依次改变规格
+We can then in turn change the spec
+
+53
+00:02:25,970 --> 00:02:28,380
+所以它有更强的后置条件。
+so that it has a stronger postcondition.
+
+54
+00:02:28,380 --> 00:02:32,730
+所以不是说我们可以返回任何索引
+So instead of just saying we can return any index i where value
+
+55
+00:02:32,730 --> 00:02:35,720
+发生，我们将要求实现返回
+occurs, we're going to require that the implementation return
+
+56
+00:02:35,720 --> 00:02:40,000
+值出现的最低索引i。
+the lowest index i where the value occurs.
+
+57
+00:02:40,000 --> 00:02:42,180
+再说一遍，因为我们最初的客户
+And again, because our original clients were only
+
+58
+00:02:42,180 --> 00:02:45,290
+取决于这种脆弱的后条件，
+depending on this weak postcondition,
+
+59
+00:02:45,290 --> 00:02:49,850
+更强的后条件不会影响他们。
+the stronger postcondition is not going to bother them.
+
+60
+00:02:49,850 --> 00:02:52,610
+那么，这个规范呢？
+Now, what about this specification?
+
+61
+00:02:52,610 --> 00:02:57,010
+查找可能丢失，这会削弱后条件
+Find can be missing, which weakens the postcondition
+
+62
+00:02:57,010 --> 00:02:58,590
+到了什么都不是的地步。
+to the point where it's nothing.
+
+63
+00:02:58,590 --> 00:03:02,330
+换句话说，唯一的后置条件--
+In other words, the only postcondition--
+
+64
+00:03:02,330 --> 00:03:04,607
+唯一的前提是
+the only precondition really is the types
+
+65
+00:03:04,607 --> 00:03:06,190
+在这些输入上。
+on these inputs that are being put in.
+
+66
+00:03:06,190 --> 00:03:09,170
+否则，我们不会对
+But otherwise, we're not making any requirements on
+
+67
+00:03:09,170 --> 00:03:12,740
+值是否出现在该数组中。
+whether value occurs in that array.
+
+68
+00:03:12,740 --> 00:03:14,900
+然后因为现在的情况
+And then because there are now situations
+
+69
+00:03:14,900 --> 00:03:17,290
+如果没有索引可以返回，
+where there is no index that it can return,
+
+70
+00:03:17,290 --> 00:03:20,270
+我们必须在后置条件中加上一个条款
+we have to add a clause to the postcondition that
+
+71
+00:03:20,270 --> 00:03:24,990
+如果值不在数组中，则说明它的作用。
+says what it does if the value is not in the array.
+
+72
+00:03:24,990 --> 00:03:26,080
+所以想想这个。
+So think about this one.
+
+73
+00:03:26,080 --> 00:03:28,259
+我们会在练习中回到这里
+And we'll come back to it in the exercises
+
+74
+00:03:28,259 --> 00:03:29,300
+在这一节后面。
+that follow this section.
+
+76
+00:03:31,860 --> 00:03:34,200
+现在，让我们考虑一种视觉方式
+Now, let's think about a visual way
+
+77
+00:03:34,200 --> 00:03:36,880
+考虑规格的强度。
+to regard strength of specifications.
+
+78
+00:03:36,880 --> 00:03:39,320
+所以让我们想象一下这里的空间
+So let's imagine that this space here
+
+79
+00:03:39,320 --> 00:03:41,930
+是所有可能的Java方法的空间。
+is the space of all possible Java methods.
+
+80
+00:03:41,930 --> 00:03:44,180
+这个空间中的每个点代表一个方法
+And each point in this space represents a method
+
+81
+00:03:44,180 --> 00:03:44,970
+实施。
+implementation.
+
+82
+00:03:44,970 --> 00:03:47,360
+所以我们在这里先放了点东西
+So we put some points in here for our find first
+
+83
+00:03:47,360 --> 00:03:49,307
+我们最后的发现。
+and our find last.
+
+84
+00:03:49,307 --> 00:03:51,640
+如果你回头看那段代码，你会首先看到
+If you look back at that code, you'll see the find first
+
+85
+00:03:51,640 --> 00:03:52,807
+最后发现的不是规格。
+and find last are not specs.
+
+86
+00:03:52,807 --> 00:03:54,223
+它们实际上是实现。
+They are actually implementations.
+
+87
+00:03:54,223 --> 00:03:55,950
+它们有实现
+They have method bodies that implement
+
+88
+00:03:55,950 --> 00:03:57,441
+他们的实际行为。
+their actual behavior.
+
+89
+00:03:57,441 --> 00:03:59,690
+所以我们将它们表示为这个空间中的点。
+So we're going to denote them as points in this space.
+
+90
+00:03:59,690 --> 00:04:00,800
+现在，这是一个很大的空间。
+Now, this is a big space.
+
+91
+00:04:00,800 --> 00:04:04,420
+它还包括许多方法的要点，这些方法什么都没有
+It also includes points for lots of methods that have nothing
+
+92
+00:04:04,420 --> 00:04:09,480
+像排序一样在数组中查找
+to do with finding in an array like doing sorting
+
+93
+00:04:09,480 --> 00:04:13,630
+连接字符串。
+and concatenating strings.
+
+94
+00:04:13,630 --> 00:04:16,680
+所以Java中所有可能的方法都在这里。
+So all the possible methods in Java are in here.
+
+95
+00:04:16,680 --> 00:04:20,870
+但这是先找后找的要点。
+But these are the points for find first and find last.
+
+96
+00:04:20,870 --> 00:04:22,650
+现在，在这里，一个规范
+Now, in this space, a specification
+
+97
+00:04:22,650 --> 00:04:24,740
+定义一组点，您可以
+defines a set of points, which you
+
+98
+00:04:24,740 --> 00:04:28,000
+可以认为是一个地区
+might think of as a region, where a given
+
+99
+00:04:28,000 --> 00:04:30,250
+实现可以遵循规范，
+implementation can either obey the spec,
+
+100
+00:04:30,250 --> 00:04:32,590
+能按规格操作
+can behave according to the spec satisfying
+
+101
+00:04:32,590 --> 00:04:36,460
+如果客户遵守了他们的先决条件，
+that contract that if the client obeys they precondition,
+
+102
+00:04:36,460 --> 00:04:38,550
+然后实现遵循后条件。
+then the implementation obeys the postcondition.
+
+104
+00:04:41,150 --> 00:04:44,970
+如果一个实现满足这个规范，
+And if an implementation would be-- satisfies that spec,
+
+105
+00:04:44,970 --> 00:04:48,000
+它会在这个区域内。
+it's going to be inside this region.
+
+106
+00:04:48,000 --> 00:04:51,770
+如果没有，它就会在那个区域之外。
+And if it doesn't, it's going to be outside that region.
+
+107
+00:04:51,770 --> 00:04:54,170
+现在，先找，后找，两者都满意
+Now, find first and find last both satisfy
+
+108
+00:04:54,170 --> 00:04:56,960
+找到一个或多个索引规范
+this find one or more any index spec
+
+109
+00:04:56,960 --> 00:05:03,860
+我们之前在这里看到的——这个就在这里。
+that we had earlier up here-- this one right here.
+
+110
+00:05:03,860 --> 00:05:07,220
+所以我们把它们放在代表
+So we would place them inside the circle representing
+
+111
+00:05:07,220 --> 00:05:07,940
+那个规格。
+that spec.
+
+113
+00:05:10,850 --> 00:05:14,150
+现在，想想客户在做什么
+Now, one way to think about what clients are doing
+
+114
+00:05:14,150 --> 00:05:18,150
+是他们在看这个空间的这个规格。
+is that they're looking in on this space at this spec.
+
+115
+00:05:18,150 --> 00:05:20,350
+他们实际上只能看到这个规格。
+And they can actually only really see this spec.
+
+116
+00:05:20,350 --> 00:05:22,550
+此规范的作用类似于防火墙
+This specification acts like a firewall
+
+117
+00:05:22,550 --> 00:05:26,714
+在这里，客户无法真正看透。
+here that clients can't really see through.
+
+118
+00:05:26,714 --> 00:05:28,630
+一个很好的思考方法
+One reason that's a nice way to think about it
+
+119
+00:05:28,630 --> 00:05:31,270
+意思是在这个边界内，
+is that it means that within this boundary,
+
+120
+00:05:31,270 --> 00:05:33,630
+在这个空间内，实现者有自由
+within this space, implementers have the freedom
+
+121
+00:05:33,630 --> 00:05:37,510
+四处移动，根据需要修改代码，
+to move around, changing their code as much as they want,
+
+122
+00:05:37,510 --> 00:05:40,000
+改变函数的行为，
+changing the behavior of that function,
+
+123
+00:05:40,000 --> 00:05:42,290
+不用担心会让客户不安
+without fear of upsetting a client as long
+
+124
+00:05:42,290 --> 00:05:45,075
+因为他们不在防火墙之外。
+as they don't go outside this firewall.
+
+125
+00:05:45,075 --> 00:05:47,450
+这很重要，因为它可以让实现者改进
+This is important because it lets the implementer improve
+
+126
+00:05:47,450 --> 00:05:48,908
+他们算法的性能，
+the performance of their algorithm,
+
+127
+00:05:48,908 --> 00:05:50,617
+或许可以清理他们代码的清晰性，
+maybe clean up the clarity of their code,
+
+128
+00:05:50,617 --> 00:05:52,449
+当他们发现
+change what they're doing when they discover
+
+129
+00:05:52,449 --> 00:05:53,700
+虫子之类的东西。
+a bug, that sort of thing.
+
+130
+00:05:53,700 --> 00:05:57,860
+所以我们可以在像find first这样的实现之间移动
+So we can move between implementations like find first
+
+131
+00:05:57,860 --> 00:05:59,630
+找到最后一点或其他任何一点
+and find last or any of the other points
+
+132
+00:05:59,630 --> 00:06:01,500
+在这个区域内。
+inside this region.
+
+133
+00:06:01,500 --> 00:06:04,640
+客户不会在意，因为他们只是
+And clients won't care because they're just
+
+134
+00:06:04,640 --> 00:06:05,920
+取决于这个规格。
+depending on this spec.
+
+135
+00:06:05,920 --> 00:06:13,440
+他们取决于整个地区能否履行合同
+They're depending on this whole region satisfying the contract
+
+136
+00:06:13,440 --> 00:06:15,180
+他们所依赖的。
+that they're depending on.
+
+137
+00:06:15,180 --> 00:06:16,900
+客户不知道哪个实现
+Clients don't know which implementation
+
+138
+00:06:16,900 --> 00:06:17,840
+他们会得到的。
+they're going to get.
+
+139
+00:06:17,840 --> 00:06:20,444
+他们必须尊重规格。
+They have to respect the spec.
+
+140
+00:06:20,444 --> 00:06:22,110
+但他们也有改变的自由
+But they also have the freedom to change
+
+141
+00:06:22,110 --> 00:06:24,180
+他们如何毫无畏惧地使用实现
+how they're using the implementation without fear
+
+142
+00:06:24,180 --> 00:06:26,221
+他们会——事情会突然破裂。
+that they will-- that things will suddenly break.
+
+143
+00:06:26,221 --> 00:06:28,606
+所以与其朝这个方向打电话，
+So instead of calling in this direction,
+
+144
+00:06:28,606 --> 00:06:30,980
+我们可以想象他们是朝这个方向来的。
+we might imagine their calling in this direction instead.
+
+145
+00:06:30,980 --> 00:06:34,120
+但只要他们尊重这个边界，
+But as long as they're respecting this boundary,
+
+146
+00:06:34,120 --> 00:06:36,950
+一切都会好起来的。
+things are going to work.
+
+147
+00:06:36,950 --> 00:06:38,520
+现在，类似的规格如何
+Now, how do similar specifications
+
+148
+00:06:38,520 --> 00:06:40,465
+在这张视觉图片中相互关联？
+relate to one another in this visual picture?
+
+149
+00:06:40,465 --> 00:06:43,850
+假设我们从规范s1开始
+So suppose we start with a specification s1
+
+150
+00:06:43,850 --> 00:06:47,930
+并使用它创建新的规范s2。
+and use it to create a new specification s2.
+
+151
+00:06:47,930 --> 00:06:50,120
+假设s2比s1强。
+And suppose s2 is stronger than s1.
+
+152
+00:06:50,120 --> 00:06:53,440
+换言之，用s2代替s1是安全的。
+So it's, in other words, safe to replace s1 with s2.
+
+153
+00:06:53,440 --> 00:06:57,040
+那么这些规格将如何出现在我们的图表中？
+Then how will these specs appear in our diagram?
+
+154
+00:06:57,040 --> 00:06:58,710
+让我们先考虑一下加强
+Let's think first about strengthening
+
+155
+00:06:58,710 --> 00:07:00,210
+后条件。
+the postcondition.
+
+156
+00:07:00,210 --> 00:07:02,920
+s2的后置条件强于s1的后置条件。
+s2's postcondition is stronger than s1's postcondition.
+
+157
+00:07:02,920 --> 00:07:05,775
+我们知道，根据定义，s2是一个更强的规范
+And we know that s2 is a stronger spec by the definition
+
+158
+00:07:05,775 --> 00:07:08,200
+我们已经付出了。
+that we already gave.
+
+159
+00:07:08,200 --> 00:07:09,990
+现在，这对实现者意味着什么
+Now, what that means for implementers
+
+160
+00:07:09,990 --> 00:07:11,730
+是因为他们没有多少自由。
+is that they have less freedom.
+
+161
+00:07:11,730 --> 00:07:15,270
+他们对产量的要求更高。
+The requirements on their output is stronger.
+
+162
+00:07:15,270 --> 00:07:19,810
+也许他们以前满足于找到一个或多个索引
+Maybe they previously satisfied find one or more any index
+
+163
+00:07:19,810 --> 00:07:24,490
+通过返回一些与值匹配的任意索引i。
+by returning some arbitrary index i that matches the value.
+
+164
+00:07:24,490 --> 00:07:26,580
+但现在，规格更严格了。
+But now, the spec is tighter.
+
+165
+00:07:26,580 --> 00:07:29,190
+现在，规范要求他们
+Now, the spec is returning that they-- demanding that they
+
+166
+00:07:29,190 --> 00:07:32,249
+返回最低索引i。
+return the lowest index i.
+
+167
+00:07:32,249 --> 00:07:33,790
+所以现在有一些实现
+So there are now implementations that
+
+168
+00:07:33,790 --> 00:07:39,290
+在这个s1里面，但是在这个s2外面。
+are inside this s1 here, but outside this s2.
+
+170
+00:07:43,680 --> 00:07:46,010
+在find中是否有实现
+Could there be implementations inside find
+
+171
+00:07:46,010 --> 00:07:48,210
+一个或多个第一索引，但在外部查找
+one or more first index, but outside find
+
+172
+00:07:48,210 --> 00:07:49,130
+一个或多个索引？
+one or more any index?
+
+173
+00:07:49,130 --> 00:07:51,410
+不，因为所有这些实现
+No, because all of those implementations
+
+174
+00:07:51,410 --> 00:07:54,350
+满足比找到一个或多个
+satisfy a stronger precondition than what find one or more
+
+175
+00:07:54,350 --> 00:07:57,012
+任何索引要求。
+any index demands.
+
+176
+00:07:57,012 --> 00:07:58,470
+现在，让我们想想会发生什么
+Now, let's think about what happens
+
+177
+00:07:58,470 --> 00:08:01,870
+如果我们削弱后条件，这又使
+if we weaken the postcondition, which again makes
+
+178
+00:08:01,870 --> 00:08:04,647
+s2是一个更强的规格。
+s2 a stronger specification.
+
+179
+00:08:04,647 --> 00:08:07,230
+实现必须处理以前的新输入
+Implementations have to handle new inputs that were previously
+
+180
+00:08:07,230 --> 00:08:08,800
+不包括在规范中。
+excluded by the spec.
+
+181
+00:08:08,800 --> 00:08:11,040
+如果他们以前在这些输入上表现不好，
+If they behaved badly on those inputs before,
+
+182
+00:08:11,040 --> 00:08:12,360
+我们不会注意到的。
+we wouldn't have noticed.
+
+183
+00:08:12,360 --> 00:08:15,700
+但现在，他们的不良行为暴露了出来。
+But now, their bad behavior is exposed.
+
+184
+00:08:15,700 --> 00:08:17,530
+我们看到当s2比s1强时，
+We see that when s2 is stronger than s1,
+
+185
+00:08:17,530 --> 00:08:22,160
+它在这个图中定义了一个较小的区域。
+it defines a smaller region in this diagram.
+
+186
+00:08:22,160 --> 00:08:27,570
+较弱的规范将定义更大的区域。
+And a weaker specification would define a larger region.
+
+187
+00:08:27,570 --> 00:08:29,360
+所以在这个例子中，如果我们
+So for this example, if we introduced
+
+188
+00:08:29,360 --> 00:08:33,450
+这个新规范找到一个或多个第一索引，
+this new spec find one or more first index,
+
+189
+00:08:33,450 --> 00:08:36,190
+首先，这个实现仍然满足它。
+find first, that implementation still satisfies it.
+
+190
+00:08:36,190 --> 00:08:38,720
+所以它在这个新规范的圈子里。
+So it's inside the circle of this new spec.
+
+191
+00:08:38,720 --> 00:08:41,390
+但最后的发现并不能满足它，
+But find last doesn't satisfy it,
+
+192
+00:08:41,390 --> 00:08:45,032
+所以它不在这个范围内。
+so it's outside the region of that spec.
+
+193
+00:08:45,032 --> 00:08:47,620
+我们还可以有另一个规格s3
+And we could also have another spec s3
+
+194
+00:08:47,620 --> 00:08:50,130
+它既不强也不弱于s2。
+that is neither stronger nor weaker than s2.
+
+195
+00:08:50,130 --> 00:08:51,680
+可能会重叠。
+It might overlap.
+
+196
+00:08:51,680 --> 00:08:53,430
+所以可能会有实现
+So there might be implementations
+
+197
+00:08:53,430 --> 00:08:57,690
+只满足s1，s3，或者两者都满足
+that satisfy only s1, only s3, or that satisfy both of them
+
+198
+00:08:57,690 --> 00:08:58,210
+一起。
+together.
+
+199
+00:08:58,210 --> 00:09:00,120
+或者它们可能完全不相交。
+Or they might be entirely disjoint.
+
+200
+00:09:00,120 --> 00:09:02,920
+可能没有办法编写一个实现
+There might be no way to write an implementation that
+
+201
+00:09:02,920 --> 00:09:06,510
+同时满足s1和s3。
+satisfies both s1 and s3.
+

@@ -1,0 +1,630 @@
+1
+00:00:00,500 --> 00:00:02,480
+我们给出的使用检查异常规则
+The rule we've given use checked exceptions
+
+2
+00:00:02,480 --> 00:00:05,290
+对于它的一些预期情况
+for some of its anticipated situations and unchecked
+
+3
+00:00:05,290 --> 00:00:09,099
+信号错误的异常，如意外故障。
+exceptions to signal bugs, like unexpected failures.
+
+4
+00:00:09,099 --> 00:00:11,390
+这是有道理的，但这不是故事的结尾
+This will make sense, but it isn't the end of the story
+
+5
+00:00:11,390 --> 00:00:13,160
+问题是Java中的异常
+and the snag is that exceptions in Java
+
+6
+00:00:13,160 --> 00:00:16,740
+并不像它们那么轻。
+aren't as lightweight as they might be.
+
+7
+00:00:16,740 --> 00:00:18,120
+现在是表演罚分
+Now there's a performance penalty
+
+8
+00:00:18,120 --> 00:00:20,290
+引发异常，但更重要的是
+for throwing an exception, but more importantly
+
+9
+00:00:20,290 --> 00:00:23,040
+Java中的异常会导致另一个更严重的交叉。
+exceptions in Java incur another more serious cross.
+
+10
+00:00:23,040 --> 00:00:24,450
+对程序员来说是一种痛苦
+They're a pain for the programmer
+
+11
+00:00:24,450 --> 00:00:28,440
+在设计方法和使用方法中使用。
+to use, both in designing methods and using methods.
+
+12
+00:00:28,440 --> 00:00:32,189
+如果您设计一个方法来拥有自己的新异常，
+If you design a method to have its own new exception,
+
+13
+00:00:32,189 --> 00:00:35,397
+必须为异常创建一个新类。
+you have to create a new class for the exception.
+
+14
+00:00:35,397 --> 00:00:37,730
+如果调用可以引发选中异常的方法，
+If you call a method that can throw a checked exception,
+
+15
+00:00:37,730 --> 00:00:39,570
+你必须用try/catch语句来包装它
+you have to wrap it in a try/catch statement
+
+16
+00:00:39,570 --> 00:00:41,510
+即使你知道例外永远不会
+even if you know the exception will never
+
+17
+00:00:41,510 --> 00:00:43,410
+即使你能证明
+be thrown-- even if you can prove
+
+18
+00:00:43,410 --> 00:00:46,060
+那是你自己设计的。
+that to yourself by design.
+
+19
+00:00:46,060 --> 00:00:48,930
+现在，后一个规定让人左右为难——所以假设，
+Now the latter stipulation makes a dilemma-- so suppose,
+
+20
+00:00:48,930 --> 00:00:52,410
+例如，您正在设计队列数据结构。
+for example, you're designing a queue data structure.
+
+21
+00:00:52,410 --> 00:00:55,090
+弹出队列会引发选中的异常
+Should popping the queue throw a checked exception
+
+22
+00:00:55,090 --> 00:00:56,977
+当队列为空时？
+when the queue is empty?
+
+23
+00:00:56,977 --> 00:00:59,310
+好吧，假设你想支持一种编程风格
+Well, suppose you want to support a style of programming
+
+24
+00:00:59,310 --> 00:01:02,080
+在循环中弹出队列的客户端
+the client in which the queue is popped in the loop
+
+25
+00:01:02,080 --> 00:01:03,690
+直到抛出异常，所以
+until the exception is thrown, so you
+
+26
+00:01:03,690 --> 00:01:06,890
+为设计选择选中的异常。
+choose a checked exception for your design.
+
+27
+00:01:06,890 --> 00:01:09,800
+但现在其他一些客户想在上下文中使用该方法
+But now some other client wants to use the method in a context
+
+28
+00:01:09,800 --> 00:01:12,435
+其中在弹出客户之前，
+in which immediately prior to popping the client,
+
+29
+00:01:12,435 --> 00:01:15,490
+它已经测试了队列是否为空并且仅
+it has already tested whether the queue is empty and only
+
+30
+00:01:15,490 --> 00:01:17,230
+如果不是的话会流行。
+pops if it isn't.
+
+31
+00:01:17,230 --> 00:01:19,130
+现在令人抓狂的是，那个客户
+Now maddeningly, that client will still
+
+32
+00:01:19,130 --> 00:01:21,160
+需要用try/catch语句包装调用，
+need to wrap the call in a try/catch statement,
+
+33
+00:01:21,160 --> 00:01:22,670
+即使那个客户确信
+even though that client is convinced
+
+34
+00:01:22,670 --> 00:01:25,710
+队列不是空的。
+that the queue is not empty.
+
+35
+00:01:25,710 --> 00:01:28,010
+所以这建议了一个更精细的设计规则--
+So this suggests a more refined design rule--
+
+36
+00:01:28,010 --> 00:01:30,060
+您应该只使用未检查的异常
+you should use an unchecked exception only
+
+37
+00:01:30,060 --> 00:01:34,790
+发出意外失败的信号，或者如果您希望客户机
+to signal an unexpected failure or if you expect that clients
+
+38
+00:01:34,790 --> 00:01:37,690
+通常会编写代码以确保异常不会
+will usually write code that ensures the exception will not
+
+39
+00:01:37,690 --> 00:01:40,740
+因为有一个方便又便宜的方法
+happen because there's a convenient and inexpensive way
+
+40
+00:01:40,740 --> 00:01:42,750
+以避免例外。
+to avoid the exception.
+
+41
+00:01:42,750 --> 00:01:46,064
+否则，应使用选中的异常。
+Otherwise, you should use a checked exception.
+
+42
+00:01:46,064 --> 00:01:47,980
+下面是一些应用此规则的示例
+Now here's some examples of applying this rule
+
+43
+00:01:47,980 --> 00:01:49,690
+假设的方法。
+to hypothetical methods.
+
+44
+00:01:49,690 --> 00:01:53,345
+对于我们的队列示例，queue.pop可以抛出未经检查的空
+For our queue example, queue.pop could throw an unchecked empty
+
+45
+00:01:53,345 --> 00:01:54,970
+队列为空时出现队列异常
+queue exception when the queue is empty
+
+46
+00:01:54,970 --> 00:01:57,386
+因为有理由期望打电话的人避免这样做
+because it's reasonable to expect the caller to avoid this
+
+47
+00:01:57,386 --> 00:02:02,490
+通过以前调用queue.size或queue.isempty。
+by previously making a call like queue.size or queue.isempty.
+
+48
+00:02:02,490 --> 00:02:06,200
+具有get web page entry方法的URL类
+A URL class with a get web page entry method
+
+49
+00:02:06,200 --> 00:02:09,660
+它应该下载URL引用的网页
+that's supposed to download the web page that the URL refers
+
+50
+00:02:09,660 --> 00:02:13,160
+如果不能，则需要抛出一个选中的IOException
+to would need to throw a checked IOException when it can't
+
+51
+00:02:13,160 --> 00:02:15,990
+检索网页，因为调用者不容易
+retrieve the web page because it's not easy for the caller
+
+52
+00:02:15,990 --> 00:02:17,630
+为了防止这种情况。
+to prevent this.
+
+53
+00:02:17,630 --> 00:02:20,251
+这是一个预期的失败，打电话的人不能真的
+It's an anticipated failure that the caller can't really
+
+54
+00:02:20,251 --> 00:02:22,250
+在不尝试下载网页的情况下阻止。
+prevent without trying to download the web page.
+
+55
+00:02:22,250 --> 00:02:27,400
+类似地，整数平方根方法
+Similarly, an integer square root method
+
+56
+00:02:27,400 --> 00:02:31,400
+获取一个整数并返回一个整数
+takes an integer and returns an integer
+
+57
+00:02:31,400 --> 00:02:33,410
+应该只返回平方根
+and should only return that square root
+
+58
+00:02:33,410 --> 00:02:34,880
+如果x是一个完美的正方形。
+if x is a perfect square.
+
+59
+00:02:34,880 --> 00:02:38,271
+你会希望它抛出一个checked not perfect square异常
+You'd want it to throw a checked not perfect square exception
+
+60
+00:02:38,271 --> 00:02:40,770
+当x没有积分平方根时，因为测试x是否
+when x has no integral square root because testing whether x
+
+61
+00:02:40,770 --> 00:02:43,560
+一个完美的正方形对客户来说同样困难
+is a perfect square is just as hard for the client
+
+62
+00:02:43,560 --> 00:02:45,330
+找到实际的平方根。
+as finding the actual square root.
+
+63
+00:02:45,330 --> 00:02:49,700
+指望打电话的人阻止是不合理的。
+It's not reasonable to expect the caller to prevent it.
+
+64
+00:02:49,700 --> 00:02:51,630
+现在在Java中使用异常的代价
+Now the cost of using exceptions in Java
+
+65
+00:02:51,630 --> 00:02:54,400
+是许多Java API不幸
+is one reason that many Java APIs unfortunately
+
+66
+00:02:54,400 --> 00:02:56,775
+请将空引用用作特殊值。
+do use the null reference as a special value.
+
+68
+00:03:00,580 --> 00:03:03,270
+以下是一些可以滥用异常的方法
+Here's some ways that exceptions can be abused
+
+69
+00:03:03,270 --> 00:03:06,480
+这个例子来自于Josh Bloch的杰出著作
+and this example comes from Josh Bloch's outstanding book
+
+70
+00:03:06,480 --> 00:03:09,390
+我建议使用有效的Java
+Effective Java, which I recommend
+
+71
+00:03:09,390 --> 00:03:12,920
+你读过的第二版第57条。
+that you read-- it's Item 57 in the second edition.
+
+72
+00:03:12,920 --> 00:03:15,020
+那么这个代码是做什么的呢？
+So what does this code do?
+
+73
+00:03:15,020 --> 00:03:16,825
+嗯，它在做循环。
+Well, it's doing the loop.
+
+74
+00:03:16,825 --> 00:03:20,960
+我是一个从0开始的索引
+i is an index that is starting from 0
+
+75
+00:03:20,960 --> 00:03:25,550
+每次通过这个循环递增
+and being incremented each time through this loop
+
+76
+00:03:25,550 --> 00:03:27,710
+它被用作这个数组的索引
+and it's used as an index into this array, that
+
+77
+00:03:27,710 --> 00:03:30,720
+是一个对象数组，然后我们调用一个方法，
+is an array of objects that we're then calling a method up,
+
+78
+00:03:30,720 --> 00:03:31,750
+好吗？
+all right?
+
+79
+00:03:31,750 --> 00:03:33,840
+所以我们在这些物体中循环
+So we're looping through this array of objects
+
+80
+00:03:33,840 --> 00:03:36,520
+并对数组中的每个元素调用f方法
+and calling the f method on each element in the array
+
+81
+00:03:36,520 --> 00:03:39,770
+然后，一旦我太兴奋了
+and then, once i gets too high, it's
+
+82
+00:03:39,770 --> 00:03:42,390
+将抛出数组索引越界异常，
+going to throw an array index out of bounds exception,
+
+83
+00:03:42,390 --> 00:03:45,820
+跳出那个循环，被这个catch语句捕获，
+break out of that loop, be caught by this catch statement,
+
+84
+00:03:45,820 --> 00:03:48,670
+什么也不做，继续前进。
+do nothing, and move on.
+
+85
+00:03:48,670 --> 00:03:50,460
+所以它是一个无限循环，终止于
+So it's an infinite loop that terminates
+
+86
+00:03:50,460 --> 00:03:53,330
+通过抛出、捕获和忽略超出边界的数组
+by throwing, catching, and ignoring an array out of bounds
+
+87
+00:03:53,330 --> 00:03:56,235
+一旦[听不见]就例外
+exception as soon as it [INAUDIBLE] that's
+
+88
+00:03:56,235 --> 00:03:58,920
+数组边界之外的第一个数组元素。
+the first array element outside the bounds of the array.
+
+89
+00:03:58,920 --> 00:04:01,220
+现在它应该相当于
+Now it's supposed to be equivalent to the much more
+
+90
+00:04:01,220 --> 00:04:08,520
+这三个元素for循环的熟悉而惯用的版本
+familiar and idiomatic version of this three element for loop
+
+91
+00:04:08,520 --> 00:04:11,300
+或者更简单的事情，
+statement or even the simpler thing,
+
+92
+00:04:11,300 --> 00:04:14,105
+这只是每个循环的
+which is just the for each that loops
+
+93
+00:04:14,105 --> 00:04:15,480
+通过数组的元素
+through the elements of the array
+
+94
+00:04:15,480 --> 00:04:18,430
+其中大写T是任意类型的
+where capital T is whatever the type is
+
+95
+00:04:18,430 --> 00:04:21,360
+那个数组的元素。
+of the elements of that array.
+
+96
+00:04:21,360 --> 00:04:23,550
+现在这个基于异常的版本是block
+Now this exception-based version as block
+
+97
+00:04:23,550 --> 00:04:26,589
+写是一个非常错误的尝试，以提高性能。
+writes is a very misguided attempt to improve performance.
+
+98
+00:04:26,589 --> 00:04:29,130
+它基于错误推理，因为虚拟机
+It's based on faulty reasoning that since the virtual machine
+
+99
+00:04:29,130 --> 00:04:33,500
+正在检查这些数组访问的边界，
+is checking the bounds of these array accesses already,
+
+100
+00:04:33,500 --> 00:04:35,110
+正常回路终止试验--
+the normal loop termination test--
+
+101
+00:04:35,110 --> 00:04:37,560
+这个——实际上是多余的，应该
+this one-- is actually redundant and should
+
+102
+00:04:37,560 --> 00:04:39,050
+避开，好吗？
+be avoided, all right?
+
+103
+00:04:39,050 --> 00:04:44,322
+所以这个和这个之间有多余的检查。
+So there is redundant checking between this and this.
+
+104
+00:04:44,322 --> 00:04:46,030
+不幸的是，因为Java中的异常
+Unfortunately, because exceptions in Java
+
+105
+00:04:46,030 --> 00:04:50,020
+仅在特殊情况下使用，
+are designed for use only under exceptional circumstances,
+
+106
+00:04:50,020 --> 00:04:53,930
+大多数jvm并不试图优化其性能。
+most JVMs do not attempt to optimize their performance.
+
+107
+00:04:53,930 --> 00:04:56,610
+一个基于异常的习惯用法，比如这个循环，
+An exception-based idiom, like this loop,
+
+108
+00:04:56,610 --> 00:05:00,000
+可能比标准的慢70倍
+may actually run 70 times slower than the standard one
+
+109
+00:05:00,000 --> 00:05:02,270
+当它只循环通过几个值时
+when it's looping through only a few values like only
+
+110
+00:05:02,270 --> 00:05:03,626
+100个值。
+100 values.
+
+111
+00:05:03,626 --> 00:05:05,750
+现在更糟的是，基于异常的习惯用法
+Now much worse than that, the exception-based idiom
+
+112
+00:05:05,750 --> 00:05:07,720
+甚至不能保证工作。
+is not even guaranteed to work.
+
+113
+00:05:07,720 --> 00:05:10,000
+它在这里调用这个函数f。
+It's calling this function f here.
+
+114
+00:05:10,000 --> 00:05:12,420
+假设有一个bug导致了越界
+Suppose there's a bug that results in an out of bounds
+
+115
+00:05:12,420 --> 00:05:14,100
+访问一些不相关的数组。
+access to some unrelated array.
+
+116
+00:05:14,100 --> 00:05:15,770
+会发生什么事？
+What's going to happen?
+
+117
+00:05:15,770 --> 00:05:17,500
+代码中会发生什么
+What's going to happen in this code
+
+118
+00:05:17,500 --> 00:05:22,904
+如果f碰巧抛出数组索引越界异常？
+if f happens to throw an array index out of bounds exception?
+
+119
+00:05:22,904 --> 00:05:24,320
+好吧，如果合理的循环习语
+Well, if the reasonable loop idiom
+
+120
+00:05:24,320 --> 00:05:26,827
+如果使用该漏洞将生成一个未察觉的异常，
+were used that bug would generate an uncaught exception,
+
+121
+00:05:26,827 --> 00:05:29,410
+导致立即终止具有完整堆栈的线程
+resulting in an immediate thread termination with a full stack
+
+122
+00:05:29,410 --> 00:05:30,080
+追踪。
+trace.
+
+123
+00:05:30,080 --> 00:05:35,220
+但是如果使用这个版本的话
+But if this version is used, that bug in f
+
+124
+00:05:35,220 --> 00:05:38,700
+会被抓在这里蒙面。
+is going to get caught here and masked.
+
+125
+00:05:38,700 --> 00:05:43,990
+你会把失败的速度变成一个循环
+You will have turned what was a fail fast into a loop
+
+126
+00:05:43,990 --> 00:05:46,170
+终止和不检查。
+termination and no checking.
+
+127
+00:05:46,170 --> 00:05:50,490
+这个程序将继续运行并做错误的事情。
+The program will just roll on and do the wrong thing.
+

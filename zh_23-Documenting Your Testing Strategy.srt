@@ -1,0 +1,415 @@
+1
+00:00:01,140 --> 00:00:04,120
+所以对于左边的示例函数
+So for the example function on the left, which
+
+2
+00:00:04,120 --> 00:00:06,900
+你可能还记得我们以前在
+you may remember we worked on partitioning in an earlier
+
+3
+00:00:06,900 --> 00:00:10,230
+在阅读中锻炼，我们想要
+exercise in this reading, we want
+
+4
+00:00:10,230 --> 00:00:13,100
+在分区中记录测试策略
+to document the testing strategy in the partitioning
+
+5
+00:00:13,100 --> 00:00:13,600
+我们用的。
+that we use.
+
+6
+00:00:13,600 --> 00:00:16,200
+我们有一个办法--
+And here's one way that we can do that--
+
+7
+00:00:16,200 --> 00:00:19,820
+在我们的测试文件中写一条评论
+by writing a comment in our testing file
+
+8
+00:00:19,820 --> 00:00:23,720
+这说明了我们如何划分输入。
+that says how we partition the inputs.
+
+9
+00:00:23,720 --> 00:00:25,440
+而且，对于每个测试用例
+And that also, for each test case
+
+10
+00:00:25,440 --> 00:00:28,190
+我们通过这个分区产生的，
+that we generate as a result of that partition,
+
+11
+00:00:28,190 --> 00:00:31,310
+指示它实际覆盖的部分。
+indicates which parts it actually covers.
+
+12
+00:00:31,310 --> 00:00:34,620
+这个策略实际上解决了一些边界值
+This strategy actually addresses some boundary values that we
+
+13
+00:00:34,620 --> 00:00:37,780
+以前都没考虑过。
+didn't even consider before.
+
+14
+00:00:37,780 --> 00:00:40,090
+所以这样做很重要，尤其是
+So it'll be important to do that, particularly
+
+15
+00:00:40,090 --> 00:00:41,700
+当你写测试的时候
+when you're writing up your tests
+
+16
+00:00:41,700 --> 00:00:43,590
+对于本课程中的习题集。
+for the problem sets in this course.
+
+18
+00:00:46,550 --> 00:00:48,090
+现在判断测试套件的一种方法
+Now one way to judge a test suite
+
+19
+00:00:48,090 --> 00:00:51,110
+就是问这个程序的执行情况如何。
+is to ask how thoroughly it exercises the program.
+
+20
+00:00:51,110 --> 00:00:53,090
+这个想法叫做覆盖。
+This idea is called coverage.
+
+21
+00:00:53,090 --> 00:00:55,280
+有三种常见的保险，
+And there are three common kinds of coverage,
+
+22
+00:00:55,280 --> 00:00:59,330
+有点精疲力尽了。
+sort of an increasing level of exhaustiveness.
+
+23
+00:00:59,330 --> 00:01:00,780
+首先是对账单的覆盖。
+First is statement coverage.
+
+24
+00:01:00,780 --> 00:01:03,870
+问的是每个语句至少有一个
+And that's asking is every statement run by at least one
+
+25
+00:01:03,870 --> 00:01:06,570
+测试用例，程序中的每个语句。
+test case, every statement in the program.
+
+26
+00:01:06,570 --> 00:01:09,090
+第二个是分支覆盖，它更强大
+Second is branch coverage, which is stronger
+
+27
+00:01:09,090 --> 00:01:10,100
+比报表覆盖率高。
+than statement coverage.
+
+28
+00:01:10,100 --> 00:01:12,470
+它说如果或当每一个陈述
+It says that for every if or while statement
+
+29
+00:01:12,470 --> 00:01:16,360
+在程序中——这些程序中有分支
+in the program-- so these have branches in them-- that
+
+30
+00:01:16,360 --> 00:01:19,140
+条件测试是从if开始的吗--
+is the condition test beginning with the if--
+
+31
+00:01:19,140 --> 00:01:23,610
+或者while的每个迭代——都是布尔测试。
+or every iteration of the while-- is a Boolean test.
+
+32
+00:01:23,610 --> 00:01:26,050
+问题是真与假
+And the question is are both the true and false
+
+33
+00:01:26,050 --> 00:01:29,480
+某个测试用例所进行的布尔测试的方向？
+direction of that Boolean test taken by some test case?
+
+34
+00:01:29,480 --> 00:01:31,210
+它向两个方向分支，
+Does it branch in both directions,
+
+35
+00:01:31,210 --> 00:01:33,060
+是真是假？
+both true and false?
+
+36
+00:01:33,060 --> 00:01:35,350
+然后最强的是路径覆盖。
+And then the strongest one is path coverage.
+
+37
+00:01:35,350 --> 00:01:38,000
+所有可能的分支组合--
+So is every possible combination of branches--
+
+38
+00:01:38,000 --> 00:01:41,490
+这是整个程序的所有路径——通过一些测试来探索
+that is every path through the program-- explored by some test
+
+39
+00:01:41,490 --> 00:01:42,820
+案子？
+case?
+
+40
+00:01:42,820 --> 00:01:45,467
+所以分支覆盖比语句覆盖强，
+So branch coverage is stronger than statement coverage,
+
+41
+00:01:45,467 --> 00:01:47,800
+也就是说，它通常需要更多的测试来实现。
+that is, it typically requires more tests to achieve it.
+
+42
+00:01:47,800 --> 00:01:50,340
+路径覆盖比分支覆盖强。
+And path coverage is stronger than branch coverage.
+
+43
+00:01:50,340 --> 00:01:53,940
+在业界，100%的声明覆盖率是一个共同的目标。
+In industry, 100% statement coverage is a common goal.
+
+44
+00:01:53,940 --> 00:01:56,580
+但即使这样也很难做到，因为你经常
+But even that can be hard to get to because you often
+
+45
+00:01:56,580 --> 00:02:00,410
+有基本上无法达到的防御代码，比如断言
+have basically unreachable defensive code, like assertions
+
+46
+00:02:00,410 --> 00:02:01,970
+那说明你不应该来这里。
+that say you should never get here.
+
+47
+00:02:01,970 --> 00:02:03,320
+这不是什么不寻常的事。
+It's not an unusual thing.
+
+48
+00:02:03,320 --> 00:02:08,020
+而且这些永远不会被您的测试代码真正调用。
+And those would never actually be invoked by your test code.
+
+49
+00:02:08,020 --> 00:02:10,350
+所以100%的声明覆盖率可能很难。
+So 100% statement coverage can be hard.
+
+50
+00:02:10,350 --> 00:02:14,610
+100%的分支覆盖率是非常理想的。
+100% branch coverage is highly desirable.
+
+51
+00:02:14,610 --> 00:02:16,770
+和安全关键行业规范
+And safety critical industry code
+
+52
+00:02:16,770 --> 00:02:20,150
+有一个比100%的分支更严格的标准
+has an even more arduous criteria than 100% branch
+
+53
+00:02:20,150 --> 00:02:23,540
+覆盖范围，如MCDC，这是一个修改后的决定
+coverage, such as MCDC, which is a modified decision
+
+54
+00:02:23,540 --> 00:02:25,690
+以及条件保险。
+and condition coverage.
+
+55
+00:02:25,690 --> 00:02:28,870
+但不幸的是，100%的路径覆盖，最强的一个，
+But unfortunately 100% path coverage, the strongest one,
+
+56
+00:02:28,870 --> 00:02:31,100
+完全不可能，因为
+is completely unfeasible because it
+
+57
+00:02:31,100 --> 00:02:33,910
+需要一个指数级的测试用例，测试套件
+would require an exponentially sized test case, test suite
+
+58
+00:02:33,910 --> 00:02:35,960
+去实现它。
+to achieve it.
+
+59
+00:02:35,960 --> 00:02:38,180
+现在是获得良好覆盖率的标准方法
+Now a standard approach to getting good coverage
+
+60
+00:02:38,180 --> 00:02:41,470
+在测试套件实现之前添加测试
+is to add tests until the test suite achieves
+
+61
+00:02:41,470 --> 00:02:43,240
+令人满意的报表覆盖率。
+satisfactory statement coverage.
+
+62
+00:02:43,240 --> 00:02:46,160
+换言之，使每一个合理可及的陈述
+In other words, so that every reasonably reachable statement
+
+63
+00:02:46,160 --> 00:02:50,175
+在程序中至少由一个测试用例执行。
+in the program is executed by at least one test case.
+
+64
+00:02:50,175 --> 00:02:52,300
+实际上，您通常衡量语句覆盖率
+In practice, you usually measure statement coverage
+
+65
+00:02:52,300 --> 00:02:54,160
+使用代码覆盖工具
+with a code coverage tool which counts
+
+66
+00:02:54,160 --> 00:02:56,080
+测试运行每个语句的次数
+the number of times each statement is run by your test
+
+67
+00:02:56,080 --> 00:02:56,580
+一套。
+suite.
+
+68
+00:02:56,580 --> 00:02:58,890
+所以有了这样的工具，白盒测试
+So with a tool like that, white box testing
+
+69
+00:02:58,890 --> 00:03:00,530
+其实很简单。
+is actually pretty easy.
+
+70
+00:03:00,530 --> 00:03:03,550
+你先测量黑匣子测试的覆盖率，
+You measure the coverage of your black box test first,
+
+71
+00:03:03,550 --> 00:03:05,660
+然后添加更多的测试用例，直到
+and then you add more test cases until you've
+
+72
+00:03:05,660 --> 00:03:08,950
+设法涵盖了所有重要的陈述。
+managed to cover all of the important statements.
+
+73
+00:03:08,950 --> 00:03:11,210
+有一个很好的Eclipse代码覆盖工具，
+There's a good code coverage tool for Eclipse,
+
+74
+00:03:11,210 --> 00:03:14,200
+名为Eclema，显示在右侧。
+called EclEmma, shown on the right.
+
+75
+00:03:14,200 --> 00:03:16,960
+我鼓励你安装和使用它。
+I encourage you to install it and use it.
+
+76
+00:03:16,960 --> 00:03:18,930
+注意这些线——EclEmma
+Notice that the lines-- EclEmma has
+
+77
+00:03:18,930 --> 00:03:22,060
+为测试套件执行的行上色
+colored the lines that have been executed by the test suite
+
+78
+00:03:22,060 --> 00:03:23,090
+绿色。
+green.
+
+79
+00:03:23,090 --> 00:03:26,569
+未被覆盖的线条是红色的。
+The lines that have not been covered are colored red.
+
+80
+00:03:26,569 --> 00:03:28,860
+如果你从你的覆盖工具中看到这种结果，
+If you saw this kind of result from your coverage tool,
+
+81
+00:03:28,860 --> 00:03:30,276
+你的下一步就是上来
+your next step would be to come up
+
+82
+00:03:30,276 --> 00:03:32,870
+一个导致while循环主体的测试用例
+with a test case that causes the body of this while loop
+
+83
+00:03:32,870 --> 00:03:34,790
+执行并将其添加到测试套件中
+to execute and add it to your test suite
+
+84
+00:03:34,790 --> 00:03:37,650
+使红线变成绿色。
+so that the red lines become green.
+

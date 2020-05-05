@@ -1,0 +1,840 @@
+1
+00:00:00,499 --> 00:00:02,430
+规范是团队合作的关键。
+Specifications are the linchpin of teamwork.
+
+2
+00:00:02,430 --> 00:00:05,030
+想把责任下放是不可能的
+It's impossible to think about delegating responsibility
+
+3
+00:00:05,030 --> 00:00:08,320
+用于实现方法，除非您有明确的规范
+for implementing a method unless you have a clear specification
+
+4
+00:00:08,320 --> 00:00:10,144
+作为合同。
+that acts as a contract.
+
+5
+00:00:10,144 --> 00:00:12,310
+执行者负责履行合同，
+Implementer's responsible for meeting that contract,
+
+6
+00:00:12,310 --> 00:00:13,820
+以及使用该方法的客户端
+and a client that uses the method
+
+7
+00:00:13,820 --> 00:00:15,970
+可以信赖那个合同。
+can rely on that contract.
+
+8
+00:00:15,970 --> 00:00:18,360
+事实上，我们会看到像真正的法律合同一样，
+In fact, we'll see that like real legal contracts,
+
+9
+00:00:18,360 --> 00:00:20,620
+规格对双方都有要求。
+specifications place demands on both parties.
+
+10
+00:00:20,620 --> 00:00:22,122
+规格可以有
+The specification can have can have
+
+11
+00:00:22,122 --> 00:00:26,009
+先决条件，将责任推给客户。
+a precondition, which puts the responsibility on the client.
+
+12
+00:00:26,009 --> 00:00:28,050
+在这篇文章中，我们将讨论角色
+In this reading, we're going to look at the roles
+
+13
+00:00:28,050 --> 00:00:30,037
+方法规范发挥作用。
+that method specifications play.
+
+14
+00:00:30,037 --> 00:00:31,870
+我们将讨论什么先决条件
+We're going to talk about what preconditions
+
+15
+00:00:31,870 --> 00:00:33,480
+后置条件是什么意思
+and postconditions are and what they mean
+
+16
+00:00:33,480 --> 00:00:34,688
+对于实现者和客户。
+for implementers and clients.
+
+17
+00:00:34,688 --> 00:00:36,947
+我们还将讨论如何使用异常
+We'll also talk about how to use exceptions, which
+
+18
+00:00:36,947 --> 00:00:38,780
+是一个非常重要的语言特征
+are a very important language feature that's
+
+19
+00:00:38,780 --> 00:00:40,660
+不仅可以在Java中找到，在Python中也可以找到
+found not only in Java, but also in Python
+
+20
+00:00:40,660 --> 00:00:43,870
+以及其他现代语言，使我们能够
+and other modern languages that allow us to make a method's
+
+21
+00:00:43,870 --> 00:00:48,210
+界面更安全，更容易理解。
+interface safer from bugs and easier to understand.
+
+22
+00:00:48,210 --> 00:00:50,240
+那么为什么要制定规范呢？
+So why specifications?
+
+23
+00:00:50,240 --> 00:00:52,080
+程序中最讨厌的错误出现了
+The nastiest bugs in programs arise
+
+24
+00:00:52,080 --> 00:00:54,500
+因为对行为的误解
+because of misunderstandings about behavior
+
+25
+00:00:54,500 --> 00:00:57,875
+在接口处，调用方之间
+at the interface, between the caller
+
+26
+00:00:57,875 --> 00:00:59,250
+一个代码和实现，
+of a code and the implementation,
+
+27
+00:00:59,250 --> 00:01:01,420
+函数的调用与实现
+the call of the function and the implementation
+
+28
+00:01:01,420 --> 00:01:03,450
+这一功能。
+of that function.
+
+29
+00:01:03,450 --> 00:01:05,120
+现在每个人都有一个规范
+Now everybody has a specification
+
+30
+00:01:05,120 --> 00:01:10,050
+考虑到一个函数应该如何运行，
+in mind about how, let's say, a function should behave,
+
+31
+00:01:10,050 --> 00:01:13,110
+但并不是每个人都写下来。
+but not everybody actually writes them down.
+
+32
+00:01:13,110 --> 00:01:15,030
+因此，团队中的不同程序员
+As a result, different programmers on the team
+
+33
+00:01:15,030 --> 00:01:17,690
+可能有不同的规格。
+might have different specifications in mind.
+
+34
+00:01:17,690 --> 00:01:20,250
+所以当程序失败的时候，很难准确地找出
+So when the program fails, it's hard to figure out exactly
+
+35
+00:01:20,250 --> 00:01:22,110
+该怪哪部分代码。
+which part of the code is to blame.
+
+36
+00:01:22,110 --> 00:01:24,820
+所以写下这些精确的规格
+So writing down these precise specs
+
+37
+00:01:24,820 --> 00:01:29,254
+可以让你知道你应该把你的修复。
+can let you figure out where you should put your fix.
+
+38
+00:01:29,254 --> 00:01:31,170
+规范对方法的客户机也有好处
+Specs are also good for the client of a method
+
+39
+00:01:31,170 --> 00:01:34,670
+因为他们不让客户真正阅读
+because they spare the client the task of actually reading
+
+40
+00:01:34,670 --> 00:01:36,050
+密码。
+the code.
+
+41
+00:01:36,050 --> 00:01:40,580
+下面是Java库中的一个例子，
+And here's an example of that from part of the Java library,
+
+42
+00:01:40,580 --> 00:01:41,710
+事实上。
+actually.
+
+43
+00:01:41,710 --> 00:01:46,990
+这是BigInteger类中的add方法
+So this is the add method from the BigInteger class
+
+44
+00:01:46,990 --> 00:01:50,100
+这就是它的规格描述
+and this is what its spec looks like-- describes
+
+45
+00:01:50,100 --> 00:01:52,620
+它的参数类型是什么
+what the types are of its arguments
+
+46
+00:01:52,620 --> 00:01:55,250
+它说明了它的实际功能。
+and it says what it actually does.
+
+47
+00:01:55,250 --> 00:01:58,940
+它非常，非常短而且容易理解。
+And it's very, very short and easy to understand.
+
+48
+00:01:58,940 --> 00:02:00,980
+如果我们没有那个规格，我们
+Now if we didn't have that spec, we
+
+49
+00:02:00,980 --> 00:02:04,070
+可能得去看看路
+might have to actually go and look at the way
+
+50
+00:02:04,070 --> 00:02:05,380
+该功能已实现。
+that function is implemented.
+
+51
+00:02:05,380 --> 00:02:08,460
+实际上，所有的Java库函数
+In fact, all the Java library functions
+
+52
+00:02:08,460 --> 00:02:12,000
+他们的消息来源在网上，所以我们可以去看看，
+do have their source online, so we can go and look at it,
+
+53
+00:02:12,000 --> 00:02:14,020
+但这更难理解。
+but this is far more difficult to understand.
+
+54
+00:02:14,020 --> 00:02:16,660
+事实上，如果我们想理解它，
+And in fact, if we wanted to understand it,
+
+55
+00:02:16,660 --> 00:02:21,770
+我们不仅要读这个，还可以
+we'd have to not only read this, but we might also
+
+56
+00:02:21,770 --> 00:02:23,910
+必须看看构造器实际做了什么，
+have to look at what the constructor actually does,
+
+57
+00:02:23,910 --> 00:02:27,000
+这些辅助函数的功能——比较大小和相减，
+what these helper functions-- compare magnitude and subtract,
+
+58
+00:02:27,000 --> 00:02:29,610
+而且可信的带前导零整数。
+and trusted strip leading zero ints do.
+
+59
+00:02:29,610 --> 00:02:32,980
+可能有很多代码需要我们去挖掘
+There might be lots of code that we have to dig through in order
+
+60
+00:02:32,980 --> 00:02:35,900
+找出这个函数的实际行为。
+to figure out actually what the behavior of this function is.
+
+61
+00:02:35,900 --> 00:02:39,235
+把它和阅读这个简单的高层描述结合起来。
+Pair that with just reading this simple high level description.
+
+63
+00:02:41,519 --> 00:02:43,810
+最后，规范对于方法的实现者是有好处的
+Finally, specs are good for the implementer of a method
+
+64
+00:02:43,810 --> 00:02:46,360
+因为他们给了实施者改变的自由
+because they give the implementer freedom to change
+
+65
+00:02:46,360 --> 00:02:48,830
+在没有告诉客户的情况下实施，
+the implementation without even telling the clients,
+
+66
+00:02:48,830 --> 00:02:52,100
+完全不改变客户端代码。
+without changing the client code at all.
+
+67
+00:02:52,100 --> 00:02:54,270
+这实际上意味着规范可以使代码更快。
+And that actually means specs can make code faster.
+
+68
+00:02:54,270 --> 00:02:57,750
+有时会有一个弱规范
+Sometimes by having a weak specification that
+
+69
+00:02:57,750 --> 00:03:02,520
+留下一些模糊的东西
+leaves vague some of the things that the function might
+
+70
+00:03:02,520 --> 00:03:06,060
+在某些情况下，你可以选择
+do in some circumstances, you can choose a much more
+
+71
+00:03:06,060 --> 00:03:08,124
+有效实施。
+efficient implementation.
+
+72
+00:03:08,124 --> 00:03:09,540
+特殊前提——记住
+Particular precondition-- remember
+
+73
+00:03:09,540 --> 00:03:12,480
+这是客户的条件--可能排除
+that's a condition that's on the client-- may rule out
+
+74
+00:03:12,480 --> 00:03:15,290
+某些状态，某些方法，你可以调用
+certain states, certain ways you might call a method that would
+
+75
+00:03:15,290 --> 00:03:17,640
+强迫你，强迫实施者
+have forced you, forced the implementer
+
+76
+00:03:17,640 --> 00:03:19,176
+做一些昂贵的支票
+to make some kind of expensive check
+
+77
+00:03:19,176 --> 00:03:20,300
+那已经没有必要了。
+that's no longer necessary.
+
+78
+00:03:20,300 --> 00:03:24,220
+我们将在后面的阅读中看到一些例子。
+And we'll see some examples of that later in this reading.
+
+79
+00:03:24,220 --> 00:03:28,110
+所以有一种方法可以让你思考什么是规范
+So one way you can think about what a specification is
+
+80
+00:03:28,110 --> 00:03:32,310
+它是客户端和实现者之间的防火墙。
+is that it's a firewall between the client and the implementer.
+
+81
+00:03:32,310 --> 00:03:36,260
+它保护客户不受工作细节的影响
+It shields the client from the details of the workings
+
+82
+00:03:36,260 --> 00:03:37,270
+执行情况。
+of the implementation.
+
+83
+00:03:37,270 --> 00:03:39,020
+你不必真的去读
+You don't have to actually read the source
+
+84
+00:03:39,020 --> 00:03:41,520
+程序的代码（如果您有它的规范）。
+code of the procedure if you have its spec.
+
+85
+00:03:41,520 --> 00:03:43,770
+它保护实现者不受细节的影响
+And it shields the implementer from the details
+
+86
+00:03:43,770 --> 00:03:46,870
+客户将如何使用它。
+of how the clients are going to use it.
+
+87
+00:03:46,870 --> 00:03:49,050
+实现者不必询问每个客户机
+The implementer doesn't have to ask every client
+
+88
+00:03:49,050 --> 00:03:50,390
+他们计划如何使用这个单位。
+how they plan to use the unit.
+
+89
+00:03:50,390 --> 00:03:53,720
+所以这个防火墙，这个想法，结果
+So this firewall, this idea, results
+
+90
+00:03:53,720 --> 00:03:56,550
+在这两段代码的分离中
+in a decoupling between these two pieces of code
+
+91
+00:03:56,550 --> 00:04:00,130
+允许单位代码和客户代码
+that allow the code of the unit and the code of the client
+
+92
+00:04:00,130 --> 00:04:03,420
+独立地改变，只要这些改变尊重
+to be changed independently, as long as those changes respect
+
+93
+00:04:03,420 --> 00:04:06,275
+本规范及双方均遵守其义务。
+this specification and each side obeys its obligation.
+
+95
+00:04:09,010 --> 00:04:11,320
+让我们认真考虑一下这个想法
+Let's get down to brass tacks and think about the idea
+
+96
+00:04:11,320 --> 00:04:13,000
+行为对等。
+of behavioral equivalence.
+
+97
+00:04:13,000 --> 00:04:17,589
+这里有两种方法，先找到后找到。
+Here are two methods, find first and find last.
+
+98
+00:04:17,589 --> 00:04:20,350
+它们都取一个整数数组
+Both of them take an array of integers
+
+99
+00:04:20,350 --> 00:04:22,850
+一个特定的整数值和搜索
+and a particular integer value and search
+
+100
+00:04:22,850 --> 00:04:24,320
+对于数组中的那个值。
+for that value in the array.
+
+101
+00:04:24,320 --> 00:04:27,430
+然后他们返回阵地，
+And then they return the position,
+
+102
+00:04:27,430 --> 00:04:32,724
+在数组中找到的值的索引。
+the index of the value if it's found in the array.
+
+103
+00:04:32,724 --> 00:04:34,890
+当然，这两个的代码是不同的，
+Now, of course, the code for these two is different,
+
+104
+00:04:34,890 --> 00:04:36,120
+所以在这个意义上，它们是不同的。
+so in that sense, they're different.
+
+105
+00:04:36,120 --> 00:04:37,920
+我们给他们起了不同的名字
+And we've actually given them different names just
+
+106
+00:04:37,920 --> 00:04:39,230
+所以我们可以谈谈他们
+so we can talk about them, so they're
+
+107
+00:04:39,230 --> 00:04:40,400
+在这方面不同。
+different in that respect.
+
+108
+00:04:40,400 --> 00:04:43,330
+但让我们想想他们的行为。
+But let's think about their behavior.
+
+109
+00:04:43,330 --> 00:04:44,820
+为了确定行为等效性，
+To determine behavior equivalence,
+
+110
+00:04:44,820 --> 00:04:48,470
+问题是我们是否可以替换一个实现
+the question is whether we can substitute one implementation
+
+111
+00:04:48,470 --> 00:04:53,470
+对于另一个，不必更改使用它的代码。
+for the other without having to change the code that uses it.
+
+112
+00:04:53,470 --> 00:04:55,260
+现在这两种方法，
+Now these two methods, turns out,
+
+113
+00:04:55,260 --> 00:04:57,880
+在某些情况下确实有不同的行为。
+do actually have different behavior in some situations.
+
+114
+00:04:57,880 --> 00:05:02,530
+所以当在数组中根本找不到val时，这两种情况下，
+So when val isn't found in the array at all, both cases,
+
+115
+00:05:02,530 --> 00:05:04,480
+此循环将无法成功找到--
+this loop will not successfully find--
+
+116
+00:05:04,480 --> 00:05:06,440
+它将穿过整个阵列。
+it will go through the whole array.
+
+117
+00:05:06,440 --> 00:05:10,210
+然后find first将返回数组的长度
+And then find first will return the length of the array
+
+118
+00:05:10,210 --> 00:05:12,150
+最后一个将返回负数。
+and find last will return negative one.
+
+119
+00:05:12,150 --> 00:05:14,830
+顺便说一下，这两个索引都是无效的
+Both of these, by the way, are invalid indexes and that's
+
+120
+00:05:14,830 --> 00:05:20,107
+这些方法试图通过返回它们来做什么。
+what these methods are trying to do by returning them.
+
+121
+00:05:20,107 --> 00:05:21,690
+但它们在不同方面是无效的。
+But they're invalid in different ways.
+
+122
+00:05:21,690 --> 00:05:23,690
+这个在数组的末尾
+This one is off the end of the array
+
+123
+00:05:23,690 --> 00:05:27,590
+这个在数组开始之前。
+and this one is before the start of the array.
+
+124
+00:05:27,590 --> 00:05:29,850
+还有别的案子
+There's another case or other cases
+
+125
+00:05:29,850 --> 00:05:31,800
+他们表现不同的地方。
+where they behave differently.
+
+126
+00:05:31,800 --> 00:05:34,970
+当val出现不止一次时，则
+When val appears more than once, then
+
+127
+00:05:34,970 --> 00:05:37,880
+先找到威尔——因为它在移动
+find first will-- because it's moving
+
+128
+00:05:37,880 --> 00:05:40,110
+从头到尾穿过数组--
+through the array from start to end--
+
+129
+00:05:40,110 --> 00:05:42,470
+它会发现第一次出现val
+it will find the first occurrence of val
+
+130
+00:05:42,470 --> 00:05:45,230
+并返回索引。
+and return the index for that.
+
+131
+00:05:45,230 --> 00:05:48,630
+而find last，因为它从数组的末尾开始，
+Whereas find last, because it's going from the end of array,
+
+132
+00:05:48,630 --> 00:05:51,400
+最终会找到该值的最后一次出现
+will end up finding the last occurrence of that value
+
+133
+00:05:51,400 --> 00:05:54,370
+把它还给我。
+and return that.
+
+134
+00:05:54,370 --> 00:05:56,430
+所以他们有不同的方式，
+So there are ways in which they're different,
+
+135
+00:05:56,430 --> 00:05:58,370
+但也有一种关键的[听不见的]方式
+but there's also this crucial [INAUDIBLE] way
+
+136
+00:05:58,370 --> 00:05:59,806
+它们是一样的。
+in which they're the same.
+
+137
+00:05:59,806 --> 00:06:02,080
+当val在数组中恰好出现一次时，
+When val occurs exactly once in the array,
+
+138
+00:06:02,080 --> 00:06:03,940
+这两种方法的行为完全相同。
+these two methods behave exactly the same.
+
+139
+00:06:03,940 --> 00:06:06,674
+它们在索引中返回它发生的位置。
+They return in the index where it occurs.
+
+140
+00:06:06,674 --> 00:06:08,840
+可能是客户从不依赖这种行为
+And it may be the clients never rely on the behavior
+
+141
+00:06:08,840 --> 00:06:09,770
+其他的案子。
+of those other cases.
+
+142
+00:06:09,770 --> 00:06:11,620
+每当他们调用该方法时，客户机
+Whenever they call the method, the clients
+
+143
+00:06:11,620 --> 00:06:13,745
+确定他们会在数组中传递
+are certain they're going to be passing in an array
+
+144
+00:06:13,745 --> 00:06:16,440
+只出现一个val，只有一个元素
+with exactly one occurrence of val, exactly one element that
+
+145
+00:06:16,440 --> 00:06:18,220
+匹配val。
+matches val.
+
+146
+00:06:18,220 --> 00:06:21,710
+对于这样的客户，这些方法是一样的，
+For clients like that, these methods are the same,
+
+147
+00:06:21,710 --> 00:06:24,200
+我们可以从一个实现切换到另一个实现
+and we can switch from one implementation to the other
+
+148
+00:06:24,200 --> 00:06:26,190
+没有任何问题。
+without any issue.
+
+149
+00:06:26,190 --> 00:06:27,840
+所以行为对等的概念
+So the notion of behavioral equivalence
+
+150
+00:06:27,840 --> 00:06:30,030
+在旁观者的眼中，在使用者的眼中，
+really is in the eye of the beholder, in the user,
+
+151
+00:06:30,030 --> 00:06:31,760
+在客户那里。
+in the client.
+
+152
+00:06:31,760 --> 00:06:33,510
+为了使替代成为可能
+In order to make it possible to substitute
+
+153
+00:06:33,510 --> 00:06:35,718
+一个实现另一个，我们可能需要
+one implementation for the other, which we might want
+
+154
+00:06:35,718 --> 00:06:41,510
+根据性能或修复错误，
+to do, depending on performance or fixing bugs,
+
+155
+00:06:41,510 --> 00:06:43,630
+我们想知道什么时候可以接受。
+we want to know when this is acceptable.
+
+156
+00:06:43,630 --> 00:06:45,770
+所以我们需要一个说明
+So we need a specification that states
+
+157
+00:06:45,770 --> 00:06:48,400
+正是这些客户所依赖的
+exactly what these clients depend on
+
+158
+00:06:48,400 --> 00:06:50,440
+使实施者有自由
+so that the implementer has the freedom
+
+159
+00:06:50,440 --> 00:06:53,510
+做那个替代品。
+to make that substitution.
+
+160
+00:06:53,510 --> 00:06:56,300
+所以在这种情况下，我们可以编写这个规范。
+So in this case, we might write this specification.
+
+161
+00:06:56,300 --> 00:07:00,250
+上面说客户必须保证val
+It says that the client has to guarantee that the val will
+
+162
+00:07:00,250 --> 00:07:03,370
+在数组中只出现一次，如果是这样，
+occur exactly once in the array, and when that's true,
+
+163
+00:07:03,370 --> 00:07:08,110
+它的作用是返回那个索引。
+the effect of it will be to return the index of that.
+
+164
+00:07:08,110 --> 00:07:12,740
+在接下来的规范中，这两个
+And in what we do next with this specification, these two
+
+165
+00:07:12,740 --> 00:07:14,630
+代码片段——这两个实现
+pieces of code-- these two implementations
+
+166
+00:07:14,630 --> 00:07:16,434
+find函数的
+of the find function-- would be equivalent
+
+167
+00:07:16,434 --> 00:07:18,850
+而实施者也有权这样做
+and the implementer would have the freedom to do it either
+
+168
+00:07:18,850 --> 00:07:19,634
+太好了。
+way.
+
+169
+00:07:19,634 --> 00:07:21,300
+所以在下一部分，我们要谈谈
+So in the next part, we're going to talk
+
+170
+00:07:21,300 --> 00:07:26,930
+关于这些要求和影响条款的实际含义。
+about what these requires and affects clauses actually mean.
+

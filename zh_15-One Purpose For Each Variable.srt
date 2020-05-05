@@ -1,0 +1,210 @@
+1
+00:00:00,500 --> 00:00:03,430
+我们的下一个原则是每个变量都有一个目的。
+Our next principle is having one purpose for each variable.
+
+2
+00:00:03,430 --> 00:00:06,690
+在这个一年中的一天的例子中，参数dayOfMonth
+In this day of year example, the parameter dayOfMonth
+
+3
+00:00:06,690 --> 00:00:10,220
+用来计算一个非常不同的值。
+is to be used to compute a very different value.
+
+4
+00:00:10,220 --> 00:00:11,760
+它被重用来计算回报
+It's reused to compute the return
+
+5
+00:00:11,760 --> 00:00:15,720
+函数的值，它不是一个月中的某一天。
+value of the function, which is not the day of the month.
+
+6
+00:00:15,720 --> 00:00:18,830
+不要重用参数，也不要重用变量。
+Don't reuse parameters, and don't reuse variables.
+
+7
+00:00:18,830 --> 00:00:20,980
+变量不是编程中的稀缺资源。
+Variables are not a scarce resource in programming.
+
+8
+00:00:20,980 --> 00:00:22,660
+你应该自由地介绍他们。
+You should introduce them freely.
+
+9
+00:00:22,660 --> 00:00:24,510
+你应该给他们起个好名字。
+You should give them good names.
+
+10
+00:00:24,510 --> 00:00:27,332
+当你不再需要它们的时候就停止使用它们。
+And then just stop using them when you stop needing them.
+
+11
+00:00:27,332 --> 00:00:29,290
+如果一个变量
+You will confuse your reader if a variable that
+
+12
+00:00:29,290 --> 00:00:32,439
+过去的意思是一件事突然开始有意义
+used to mean one thing suddenly starts meaning something
+
+13
+00:00:32,439 --> 00:00:34,940
+不同的几行下来。
+different a few lines down.
+
+14
+00:00:34,940 --> 00:00:37,200
+这不仅是一个容易理解的问题，
+Not only is this an ease of understanding question,
+
+15
+00:00:37,200 --> 00:00:42,150
+但它也会影响软件的安全性和改变的准备。
+but it also affects safety from bugs and readiness for change.
+
+16
+00:00:42,150 --> 00:00:44,390
+方法参数尤其应该
+Method parameters in particular should generally
+
+17
+00:00:44,390 --> 00:00:46,067
+保持原样。
+be left unmodified.
+
+18
+00:00:46,067 --> 00:00:48,150
+这对于做好改变的准备非常重要，
+This is very important for being ready for change,
+
+19
+00:00:48,150 --> 00:00:49,970
+因为在未来，方法的另一部分
+because in the future, some other part of the method
+
+20
+00:00:49,970 --> 00:00:51,845
+可能想知道原始参数
+may want to know what the original parameters
+
+21
+00:00:51,845 --> 00:00:52,805
+方法是。
+and method were.
+
+22
+00:00:52,805 --> 00:00:54,930
+你不应该在计算的时候把它们吹走
+You shouldn't blow them away while you're computing
+
+23
+00:00:54,930 --> 00:00:56,600
+方法的主体。
+the body of the method.
+
+24
+00:00:56,600 --> 00:01:00,490
+所以用final作为方法参数是个好主意
+So it's a good idea to use final for method parameters
+
+25
+00:01:00,490 --> 00:01:02,300
+以及尽可能多的其他变量。
+and for as many other variables as you can.
+
+26
+00:01:02,300 --> 00:01:04,424
+最后一个关键字，记住，表示变量
+The final keyword, remember, says that the variable
+
+27
+00:01:04,424 --> 00:01:05,940
+不应该被重新分配。
+should never be reassigned.
+
+28
+00:01:05,940 --> 00:01:10,430
+Java编译器将静态地检查它。
+And the Java compiler will check that statically.
+
+29
+00:01:10,430 --> 00:01:12,270
+下面是我们的第二个臭例子。
+Now, here's our second smelly example.
+
+30
+00:01:12,270 --> 00:01:15,400
+在一年中的某一天的方法中实际上有一个潜在的错误。
+There was actually a latent bug in that day of year method.
+
+31
+00:01:15,400 --> 00:01:18,030
+它根本不能应付闰年。
+It didn't handle leap years at all.
+
+32
+00:01:18,030 --> 00:01:21,980
+作为解决这个问题的一部分，假设我们编写一个闰年方法。
+As part of fixing that, suppose we write a leap year method.
+
+33
+00:01:21,980 --> 00:01:24,570
+这就是它，一种叫做leap的方法。
+Here's what it is, a method called leap.
+
+34
+00:01:24,570 --> 00:01:26,790
+它需要一个代表年份的整数
+It takes an integer representing the year
+
+35
+00:01:26,790 --> 00:01:29,130
+然后返回true或false，具体取决于
+and then returns true or false, depending on
+
+36
+00:01:29,130 --> 00:01:32,890
+不管那一年是不是闰年。
+whether that year is a leap year or not.
+
+37
+00:01:32,890 --> 00:01:34,280
+这是尸体。
+And here is the body of that.
+
+38
+00:01:34,280 --> 00:01:36,100
+这里有很多臭代码。
+And there's lots of smelly code in here.
+
+39
+00:01:36,100 --> 00:01:38,810
+实际上在这段代码中隐藏了一些错误。
+And there are actually bugs hidden in this code.
+
+40
+00:01:38,810 --> 00:01:41,730
+它有什么缺陷，我们有什么风格问题
+What bugs does it have, and what style problems that we've
+
+41
+00:01:41,730 --> 00:01:42,750
+已经谈过了？
+already talked about?
+
+42
+00:01:42,750 --> 00:01:45,690
+让我们在下面的练习中看看。
+Let's see in the exercises next.
+

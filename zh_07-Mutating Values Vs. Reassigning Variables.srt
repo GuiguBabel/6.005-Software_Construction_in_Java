@@ -1,0 +1,810 @@
+1
+00:00:00,556 --> 00:00:02,930
+对我们来说画出
+It's going to be useful for us to draw pictures of what's
+
+2
+00:00:02,930 --> 00:00:04,324
+在运行时发生在程序中
+happening in a program at runtime
+
+3
+00:00:04,324 --> 00:00:05,990
+为了理解微妙的问题。
+in order to understand subtle questions.
+
+4
+00:00:05,990 --> 00:00:07,870
+其中一个问题就是
+And one of those questions is the difference
+
+5
+00:00:07,870 --> 00:00:12,710
+在改变值和重新分配变量之间。
+between mutating a value, and reassigning a variable.
+
+6
+00:00:12,710 --> 00:00:15,310
+我们将使用一个称为快照图的符号。
+We're going to use a notation called a snapshot diagram.
+
+7
+00:00:15,310 --> 00:00:17,460
+以最简单的形式，一个快照图
+And in simplest form, a snapshot diagram
+
+8
+00:00:17,460 --> 00:00:20,900
+显示程序中的每个变量——如n和list--
+shows each variable in the program-- like n and list--
+
+9
+00:00:20,900 --> 00:00:25,480
+一个箭头从变量指向它的值。
+with an arrow pointing from that variable to its value.
+
+10
+00:00:25,480 --> 00:00:28,070
+这个值可能是一个基元类型，所以n是一个int，
+That value might be a primitive type, so n is an int,
+
+11
+00:00:28,070 --> 00:00:31,030
+所以这些整数只是简单的数字。
+so these integers are just written as simple numbers.
+
+12
+00:00:31,030 --> 00:00:32,759
+或者它可能是一个对象类型，所以
+Or it might be an object type, so
+
+13
+00:00:32,759 --> 00:00:35,956
+list指向数组列表。
+list points to an array list.
+
+14
+00:00:35,956 --> 00:00:37,330
+我们把它画成一个圆圈
+And we show that as a circle that
+
+15
+00:00:37,330 --> 00:00:39,600
+其中包含类型的名称。
+has the name of the type in it.
+
+16
+00:00:39,600 --> 00:00:43,310
+但对象值通常有自己的内部变量，
+but object values often have their own internal variables,
+
+17
+00:00:43,310 --> 00:00:46,440
+我们会用箭头指出
+and we'll use arrows pointing out
+
+18
+00:00:46,440 --> 00:00:48,845
+以显示这些内部变量的值。
+in order to show the values of those internal variables.
+
+19
+00:00:48,845 --> 00:00:51,920
+例如，一个整数数组
+So for example, an array list of integers
+
+20
+00:00:51,920 --> 00:00:57,920
+对数组中的每个元素都有一个引用
+has essentially a reference for every element of that array
+
+21
+00:00:57,920 --> 00:00:58,860
+列表。
+list.
+
+22
+00:00:58,860 --> 00:01:00,671
+在这个特殊的时刻，
+And at this particular point in time,
+
+23
+00:01:00,671 --> 00:01:02,670
+列表中有三个元素
+there are three elements in that list-- so we'll
+
+24
+00:01:02,670 --> 00:01:04,200
+索引它们0、1和2。
+index them 0, 1, and 2.
+
+25
+00:01:04,200 --> 00:01:08,754
+它们指向其他值，3，10，和5。
+And they point to other values, 3, 10, and 5.
+
+26
+00:01:08,754 --> 00:01:10,420
+现在，这门课的图表都是
+Now, the diagrams in this course are all
+
+27
+00:01:10,420 --> 00:01:13,300
+从Java代码的示例中，
+going to come out of examples from Java code,
+
+28
+00:01:13,300 --> 00:01:15,510
+但这个符号实际上是通用的。
+but this notation is actually really general.
+
+29
+00:01:15,510 --> 00:01:18,245
+这是一种思考变量和值的通用方法，
+It's a general way of thinking about variables, and values,
+
+30
+00:01:18,245 --> 00:01:20,440
+以及编程中的对象，因此
+and objects in programming, so you
+
+31
+00:01:20,440 --> 00:01:23,856
+可以用于多种不同的语言。
+can use it for a variety of different languages.
+
+32
+00:01:23,856 --> 00:01:25,730
+现在，它将给我们一种可视化的方法
+Now, it's going to give us a way to visualize
+
+33
+00:01:25,730 --> 00:01:27,680
+改变变量之间的区别，
+the difference between changing a variable,
+
+34
+00:01:27,680 --> 00:01:29,980
+重新分配变量，并更改
+reassigning a variable, and changing
+
+35
+00:01:29,980 --> 00:01:35,120
+一个值——它改变了一个对象的内部结构。
+a value-- that is changing the internals of an object.
+
+36
+00:01:35,120 --> 00:01:37,270
+所以当你给变量赋值时
+So when you assign to a variable, what you're doing
+
+37
+00:01:37,270 --> 00:01:39,920
+正在更改变量箭头指向的位置，
+is changing where the variable's arrow points,
+
+38
+00:01:39,920 --> 00:01:41,670
+你可以把它指向一个不同的值。
+and you can point it to a different value.
+
+39
+00:01:41,670 --> 00:01:46,320
+最初，当我们声明并初始化为3时，
+So initially, when we declare and initialize it to 3,
+
+40
+00:01:46,320 --> 00:01:49,490
+这是箭头，因为箭头指向3。
+this is arrow, n as arrow points to 3.
+
+41
+00:01:49,490 --> 00:01:52,224
+但当我们重新分配时
+But then when we reassign it, when
+
+42
+00:01:52,224 --> 00:01:54,390
+我们计算冰雹序列的下一个值，
+we compute the next value of the hailstone sequence,
+
+43
+00:01:54,390 --> 00:01:56,640
+例如，将n重新指定为10，
+for example, and reassign n to 10,
+
+44
+00:01:56,640 --> 00:01:58,660
+这意味着箭会消失，现在
+that means this arrow goes away, and now there's
+
+45
+00:01:58,660 --> 00:01:59,840
+指向10的箭头。
+an arrow pointing to 10.
+
+46
+00:01:59,840 --> 00:02:02,620
+当我们做下一步的时候，就是除以2
+And then when we do the next step, which is to divide by 2
+
+47
+00:02:02,620 --> 00:02:06,040
+再加上5，我们去掉指向10的箭头，
+and get 5, again, we get rid of that arrow pointing to 10,
+
+48
+00:02:06,040 --> 00:02:08,550
+我们把新箭头指向5。
+and we point the new arrow to 5.
+
+49
+00:02:08,550 --> 00:02:10,370
+所以我们不会改变这些数字--
+So we're not changing these numbers--
+
+50
+00:02:10,370 --> 00:02:13,120
+我们要做的是改变n的箭头指向。
+what we're doing is changing where n's arrow points.
+
+51
+00:02:13,120 --> 00:02:15,380
+这就是作业的作用。
+That's what an assignment does.
+
+52
+00:02:15,380 --> 00:02:17,920
+现在，当我们改变可变值的内容时
+Now, when we change the contents of a mutable value
+
+53
+00:02:17,920 --> 00:02:21,460
+对于一个有内部变量的对象，我们所做的
+of an object that has internal variables, what we're doing
+
+54
+00:02:21,460 --> 00:02:25,500
+正在更改从该值内部指向的箭头。
+is changing the arrows that point from inside that value.
+
+55
+00:02:25,500 --> 00:02:27,050
+这叫做值的变异。
+And that's called mutating the value.
+
+56
+00:02:27,050 --> 00:02:30,180
+例如，对于一个列表，我们首先创建这个列表，
+So for example, for a list, we create that list initially,
+
+57
+00:02:30,180 --> 00:02:31,810
+里面什么都没有。
+and it has nothing in it.
+
+58
+00:02:31,810 --> 00:02:34,350
+当我们给它添加一个元素时，
+And when we do an add of an element to it,
+
+59
+00:02:34,350 --> 00:02:38,390
+好吧，这将从元素0创建这个箭头
+well, that's going to create this arrow here from element 0
+
+60
+00:02:38,390 --> 00:02:40,500
+值为3。
+to the value 3.
+
+61
+00:02:40,500 --> 00:02:44,050
+如果我们加上5，这里就会有一个箭头
+And then if we add a 5, that's going to create an arrow here
+
+62
+00:02:44,050 --> 00:02:46,180
+从元素1到值5。
+from element 1 to value 5.
+
+63
+00:02:46,180 --> 00:02:48,250
+如果我们再回去，那就是
+And then if we go back and set, that is
+
+64
+00:02:48,250 --> 00:02:52,460
+将索引0处的元素更改为9，
+change the element at index 0, and point it to 9 instead,
+
+65
+00:02:52,460 --> 00:02:54,130
+好吧，这样就可以摆脱这只箭了，
+well that will get rid of this arrow,
+
+66
+00:02:54,130 --> 00:02:56,970
+它将指向9。
+and it will point to 9, instead.
+
+67
+00:02:56,970 --> 00:03:00,050
+在所有这些列表中，list变量是
+You notice in all of this that list, the list variable is
+
+68
+00:03:00,050 --> 00:03:02,940
+仍然指向同一数组列表
+still pointing to the same array list
+
+69
+00:03:02,940 --> 00:03:06,660
+反对。所以我们不会重新分配这个变量，
+object. so we're not reassigning this variable,
+
+70
+00:03:06,660 --> 00:03:08,873
+就像我们重新分配n一样。
+the same way that we were reassigning n.
+
+72
+00:03:13,810 --> 00:03:16,350
+现在有些是可变的--对不起，
+Now some of these are variable-- sorry,
+
+73
+00:03:16,350 --> 00:03:18,710
+我们使用的一些对象是不可变的，
+some of these objects that we work with are immutable,
+
+74
+00:03:18,710 --> 00:03:20,130
+其中一些是可变的。
+and some of them are mutable.
+
+75
+00:03:20,130 --> 00:03:23,570
+那就是说，我们能不能改变它们的内部结构？
+So that means, can we change their internals or not?
+
+76
+00:03:23,570 --> 00:03:27,740
+所以对于字符串，我们可以重新分配一个变量
+So for strings, we can reassign a variable
+
+77
+00:03:27,740 --> 00:03:30,680
+指向一个字符串对象，但我们不能
+that points to a string object, but we can't actually
+
+78
+00:03:30,680 --> 00:03:33,540
+更改该字符串对象的内部。
+change the internals of that string object.
+
+79
+00:03:33,540 --> 00:03:35,820
+所以当你运行这样的代码时
+So when you run code like this, that
+
+80
+00:03:35,820 --> 00:03:38,990
+在字符串末尾添加一个字母，它实际上是什么
+adds a letter to the end of a string, what it's actually
+
+81
+00:03:38,990 --> 00:03:41,130
+创建一个新的字符串对象，
+doing is creating a fresh string object,
+
+82
+00:03:41,130 --> 00:03:43,630
+表示扩展字符串，
+representing that extended string,
+
+83
+00:03:43,630 --> 00:03:49,650
+并将变量s重新分配给新的string对象。
+and reassigning the variable, s, to that new string object.
+
+84
+00:03:49,650 --> 00:03:51,930
+字符串是不可变类型的示例--
+String is an example of an immutable type--
+
+85
+00:03:51,930 --> 00:03:54,710
+它的值永远不允许更改。
+it's a type whose values are never allowed to change.
+
+86
+00:03:54,710 --> 00:03:57,640
+这个对象的内部永远不能
+The internals of this object can never
+
+87
+00:03:57,640 --> 00:04:00,320
+一旦他们被创造出来就改变。
+change once they've been created.
+
+88
+00:04:00,320 --> 00:04:02,280
+不变性是一个主要的设计原则
+Immutability is a major design principle
+
+89
+00:04:02,280 --> 00:04:05,390
+在这门课上我们要谈很多。
+we're going to talk about a lot in this course.
+
+90
+00:04:05,390 --> 00:04:06,960
+在快照图表中，我们将
+In a snapshot diagram, we're going
+
+91
+00:04:06,960 --> 00:04:09,550
+在对象上使用双边框
+to use a double border on the object
+
+92
+00:04:09,550 --> 00:04:11,130
+表明它是不可变的--
+to indicate that it's immutable--
+
+93
+00:04:11,130 --> 00:04:16,050
+你不能打开它改变里面的东西。
+that you can't crack it open and change what's inside.
+
+94
+00:04:16,050 --> 00:04:18,589
+相比之下，还有另一个班
+By contrast, there's another class
+
+95
+00:04:18,589 --> 00:04:21,279
+在Java中称为字符串生成器。
+in Java called String Builder.
+
+96
+00:04:21,279 --> 00:04:23,130
+字符串生成器也表示
+And String Builder also represents
+
+97
+00:04:23,130 --> 00:04:25,230
+一系列字符，但它有
+a sequence of characters, but it has
+
+98
+00:04:25,230 --> 00:04:28,970
+允许您更改该对象的值的方法，
+methods that allow you to change the value of that object,
+
+99
+00:04:28,970 --> 00:04:30,610
+就像我们改变的一样
+the same way that we were changing
+
+100
+00:04:30,610 --> 00:04:32,540
+上面这个数组列表的值，
+the value of this array list up here,
+
+101
+00:04:32,540 --> 00:04:35,267
+可以更改字符串生成器的值。
+you can change the value of the String Builder.
+
+102
+00:04:35,267 --> 00:04:37,475
+所以你可以从一个字符串生成器开始，
+So you can start with a string builder that's just a,
+
+103
+00:04:37,475 --> 00:04:39,647
+现在当你在上面加上一个b，
+and now when you append a b to it,
+
+104
+00:04:39,647 --> 00:04:41,730
+你没有得到一个新的字符串生成器对象--
+you're not getting a fresh String Builder object--
+
+105
+00:04:41,730 --> 00:04:43,440
+就像我们在弦上做的——你实际上
+like we did for strings-- you're actually
+
+106
+00:04:43,440 --> 00:04:45,190
+更改字符串生成器。
+changing that String Builder.
+
+107
+00:04:45,190 --> 00:04:48,700
+所以现在s b实际上是这里的a b，
+So s b now actually means a b here,
+
+108
+00:04:48,700 --> 00:04:51,530
+因为它指向一个值已更改的对象。
+because it's pointing to an object whose value is changed.
+
+109
+00:04:51,530 --> 00:04:54,880
+所以这两个快照图看起来非常不同。
+So these two snapshot diagrams look very different.
+
+110
+00:04:54,880 --> 00:04:58,010
+很好，因为这些代码
+And that's good, because these bits of code
+
+111
+00:04:58,010 --> 00:04:59,670
+实际上表现得很不一样。
+actually behave very differently.
+
+112
+00:04:59,670 --> 00:05:01,892
+易变性与不变性的区别
+The difference between mutability and immutability
+
+113
+00:05:01,892 --> 00:05:04,100
+将在我们的代码制定过程中发挥重要作用
+is going to play an important role in making our code
+
+114
+00:05:04,100 --> 00:05:06,470
+不会有虫子。
+safe from bugs.
+
+115
+00:05:06,470 --> 00:05:10,020
+所以现在，除了不可变的值之外，可变的类型
+So now, in addition to immutable values, mutable types
+
+116
+00:05:10,020 --> 00:05:12,780
+和string一样，Java也给了我们
+like string, Java also gives us the ability
+
+117
+00:05:12,780 --> 00:05:14,640
+创建不可变引用。
+to create immutable references.
+
+118
+00:05:14,640 --> 00:05:17,820
+这些变量只能分配一次，然后
+And these are variables that can only be assigned once, and then
+
+119
+00:05:17,820 --> 00:05:19,780
+以后再也不调。
+never reassigned afterwards.
+
+120
+00:05:19,780 --> 00:05:22,200
+我们使用关键字final来表示我们想要
+We use the keyword final to indicate that we want
+
+121
+00:05:22,200 --> 00:05:25,360
+一个不可变的变量。
+a variable to be immutable.
+
+122
+00:05:25,360 --> 00:05:27,131
+Java编译器必须自己证明
+The Java compiler has to prove to itself
+
+123
+00:05:27,131 --> 00:05:29,630
+你的最终变量只分配一次。
+that your final variables is only going to be assigned once.
+
+124
+00:05:29,630 --> 00:05:31,470
+如果不能证明的话
+And if it can't prove that, it's going
+
+125
+00:05:31,470 --> 00:05:32,890
+产生静态错误。
+to produce a static error.
+
+126
+00:05:32,890 --> 00:05:35,670
+所以final实际上给了你静态检查
+So final actually gives you static checking
+
+127
+00:05:35,670 --> 00:05:38,020
+对于不可变引用。
+for immutable references.
+
+128
+00:05:38,020 --> 00:05:39,860
+在快照图表中，我们将
+In a snapshot diagram, we're going
+
+129
+00:05:39,860 --> 00:05:43,210
+再次使用双线表示不能更改
+to use, again, a double line to indicate that you can't change
+
+130
+00:05:43,210 --> 00:05:46,980
+一旦我们
+this-- we're not going be able to move this arrow once we've
+
+131
+00:05:46,980 --> 00:05:51,140
+开始，指向5。
+started, and pointing to 5.
+
+132
+00:05:51,140 --> 00:05:53,560
+现在，注意我们可以有一个不可变的引用
+Now, notice we can have an immutable reference
+
+133
+00:05:53,560 --> 00:05:55,080
+一个可变的值。
+to a mutable value.
+
+134
+00:05:55,080 --> 00:05:58,790
+例如，如果我们改变了字符串的声明
+So for example, if we changed this declaration of String
+
+135
+00:05:58,790 --> 00:06:01,340
+在这里建造者，所以它有最终的结果，
+Builder here, so that it had final in it,
+
+136
+00:06:01,340 --> 00:06:03,130
+这个箭头会变成双箭头，
+this arrow would turn into a double arrow,
+
+137
+00:06:03,130 --> 00:06:06,650
+也就是说某人总是会指出这个价值，
+and it would say that sb will always point to this value,
+
+138
+00:06:06,650 --> 00:06:09,140
+将始终指向此对象。
+will always point to this object.
+
+139
+00:06:09,140 --> 00:06:11,250
+但是字符串生成器对象的内部
+But the internals of the String Builder object
+
+140
+00:06:11,250 --> 00:06:12,660
+仍然可以改变。
+can still change.
+
+141
+00:06:12,660 --> 00:06:16,700
+所以某人总是会指那里，但是
+So sb will always point there, but it
+
+142
+00:06:16,700 --> 00:06:21,000
+可能意味着不同的字符序列。
+may mean a different sequence of characters.
+
+143
+00:06:21,000 --> 00:06:22,950
+相反，我们可以有一个可变的引用
+Conversely, we can have a mutable reference
+
+144
+00:06:22,950 --> 00:06:24,470
+一个不变的值。
+to an immutable value.
+
+145
+00:06:24,470 --> 00:06:26,440
+这就是这里发生的事情--
+And that's exactly what was going on here--
+
+146
+00:06:26,440 --> 00:06:28,810
+s是可变引用。
+s is a mutable reference.
+
+147
+00:06:28,810 --> 00:06:30,010
+这不是最后的决定。
+It's not final.
+
+148
+00:06:30,010 --> 00:06:32,890
+但它只指向这些不可变的值，
+But it only ever points to these immutable values,
+
+149
+00:06:32,890 --> 00:06:35,261
+这些不变的字符串，永远不会改变。
+these immutable strings, which will never change.
+
+151
+00:06:37,850 --> 00:06:40,420
+无论何时申报，使用final都是很好的做法
+It's good practice to use final, whenever we declare
+
+152
+00:06:40,420 --> 00:06:42,940
+一个参数的方法，对于尽可能多的局部变量
+the methods of a parameter, and for as many local variables
+
+153
+00:06:42,940 --> 00:06:45,620
+因为我们可以逃脱。
+as we can get away with.
+
+154
+00:06:45,620 --> 00:06:48,140
+比如变量的类型，比如int
+Like the type of the variable, like the int
+
+155
+00:06:48,140 --> 00:06:50,720
+在这里，这个最终声明实际上是
+here, this declaration of final is actually
+
+156
+00:06:50,720 --> 00:06:51,910
+重要文件。
+important documentation.
+
+157
+00:06:51,910 --> 00:06:53,880
+这对代码的读者很有用
+It's useful to the reader of the code, which
+
+158
+00:06:53,880 --> 00:06:55,380
+使代码更容易理解，
+makes the code easier to understand,
+
+159
+00:06:55,380 --> 00:06:57,505
+它由编译器进行静态检查
+and it's statically checked by the compiler-- which
+
+160
+00:06:57,505 --> 00:06:59,266
+让它更安全。
+makes it safer from bugs.
+
+161
+00:06:59,266 --> 00:07:02,440
+所以冰雹序列中有两个变量--
+So we've got two variables in this hailstone sequence--
+
+162
+00:07:02,440 --> 00:07:04,130
+我们有n个名单。
+we've got n and we've got list.
+
+163
+00:07:04,130 --> 00:07:07,150
+问题是，我们可以宣布哪些是最终的？
+Question is, which of these can we declare final?
+
+164
+00:07:07,150 --> 00:07:09,810
+我们将在下一个练习中讨论这个问题。
+We'll look at that in the next exercise.
+

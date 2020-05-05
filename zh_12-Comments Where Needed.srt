@@ -1,0 +1,345 @@
+1
+00:00:01,580 --> 00:00:03,710
+一个关于评论的简短概括词。
+A quick general word about commenting.
+
+2
+00:00:03,710 --> 00:00:06,440
+优秀的软件开发人员在代码中写评论，
+Good software developers write comments in their code,
+
+3
+00:00:06,440 --> 00:00:08,566
+但他们做这件事谨慎而明智。
+but they do it carefully and judiciously.
+
+4
+00:00:08,566 --> 00:00:11,380
+最好的评论是做我们关心的三件事
+The best comments are ones that do the three things we care
+
+5
+00:00:11,380 --> 00:00:13,986
+大约在2005年，它们使代码更容易理解，
+about in 005, they make the code easier to understand,
+
+6
+00:00:13,986 --> 00:00:16,360
+因为你已经写下来了
+they make it safer from bugs, because you've written down
+
+7
+00:00:16,360 --> 00:00:19,210
+未来维护人员将拥有的重要假设
+important assumptions that future maintainers will have
+
+8
+00:00:19,210 --> 00:00:22,870
+去关注，他们会让它更容易改变。
+to pay attention to, and they make it more ready for change.
+
+9
+00:00:22,870 --> 00:00:25,220
+所以有一种至关重要的评论
+So one crucial kind of comment that does all three
+
+10
+00:00:25,220 --> 00:00:27,550
+这些东西的规格说明。
+of these things is a specification.
+
+11
+00:00:27,550 --> 00:00:30,420
+Spec出现在方法上方或类上方
+Spec appears above the method or above a class
+
+12
+00:00:30,420 --> 00:00:33,450
+并记录该方法或类的行为。
+and documents the behavior of that method or class.
+
+13
+00:00:33,450 --> 00:00:36,230
+在Java中，我们通常将其写成Java.comment，
+In Java, we usually write it as a java.comment,
+
+14
+00:00:36,230 --> 00:00:42,630
+这意味着它以/**开头，通常包括字段
+meaning that it starts with /** and typically includes fields
+
+15
+00:00:42,630 --> 00:00:47,920
+以@like@参数和@return开头。
+that start with an @ like @parameter and @return.
+
+16
+00:00:47,920 --> 00:00:50,590
+这是一个函数规范的例子
+So this is an example of a spec for a function
+
+17
+00:00:50,590 --> 00:00:52,410
+我们以前见过的。
+that we've seen before.
+
+18
+00:00:52,410 --> 00:00:55,285
+规范的作用是记录假设。
+What's specifications do is, they document assumptions.
+
+19
+00:00:55,285 --> 00:00:56,910
+我们已经提过几次了，
+We've already mentioned them few times,
+
+20
+00:00:56,910 --> 00:00:59,716
+在以后的课上我们会有更多关于他们的话题，
+and we'll have lot more to say about them in a future class,
+
+21
+00:00:59,716 --> 00:01:01,590
+但这是一种非常重要的评论。
+but that's a super important kind of comment.
+
+22
+00:01:01,590 --> 00:01:06,040
+你应该在每种主要方法之前都看到这样一个
+You should see one like this before each major method
+
+23
+00:01:06,040 --> 00:01:08,154
+在你的代码中分类。
+and class in your code.
+
+24
+00:01:08,154 --> 00:01:09,820
+另一种非常重要的评论
+Another really important kind of comment
+
+25
+00:01:09,820 --> 00:01:13,730
+如果你复制了一段代码
+is one that says where a bit of code came from if you copied it
+
+26
+00:01:13,730 --> 00:01:15,860
+或者从其他地方改编。
+or adapted it from somewhere else.
+
+27
+00:01:15,860 --> 00:01:18,310
+对于实践软件开发人员来说非常重要
+Super important for practicing software developers
+
+28
+00:01:18,310 --> 00:01:21,500
+当你从网上复制代码时，我们做了很多。
+when you copy code from the web, and we do a lot of that.
+
+29
+00:01:21,500 --> 00:01:24,810
+例如，我们发现
+For example, we find examples of how
+
+30
+00:01:24,810 --> 00:01:28,870
+在堆栈溢出时执行操作并复制或调整它们
+to do things on Stack Overflow and copy them or adapt them
+
+31
+00:01:28,870 --> 00:01:30,622
+我们的密码。
+into our code.
+
+32
+00:01:30,622 --> 00:01:32,330
+每当我们这样做的时候，我们应该
+And whenever we do that, we should always
+
+33
+00:01:32,330 --> 00:01:35,560
+有评论说这是从哪里来的。
+have a comment that says where this came from.
+
+34
+00:01:35,560 --> 00:01:38,400
+一个理由是它能帮助我们
+One reason to say that is that it helps us
+
+35
+00:01:38,400 --> 00:01:40,730
+避免侵犯版权。
+avoid violations of copyright.
+
+36
+00:01:40,730 --> 00:01:43,072
+所以在堆栈溢出时这些小片段
+So these kinds of small snippets on Stack Overflow
+
+37
+00:01:43,072 --> 00:01:44,530
+通常属于公共领域。
+are typically in the public domain.
+
+38
+00:01:44,530 --> 00:01:46,446
+但如果你从其他来源复制代码，
+But if you're copying code from other sources,
+
+39
+00:01:46,446 --> 00:01:48,462
+它实际上可能是专有的，或者
+it may actually be proprietary, or it
+
+40
+00:01:48,462 --> 00:01:50,670
+可能包含在其他类型的开放源代码许可证中
+may be covered by other kinds of open source licenses
+
+41
+00:01:50,670 --> 00:01:53,579
+这比公共领域更具限制性。
+that are more restrictive than the public domain.
+
+42
+00:01:53,579 --> 00:01:55,120
+记录来源的另一个原因
+Another reason for documenting source
+
+43
+00:01:55,120 --> 00:01:57,100
+代码可能会过时。
+is that the code can fall out of date.
+
+44
+00:01:57,100 --> 00:02:01,070
+所以这段特殊的代码来自堆栈溢出
+So this particular bit of code came from a Stack Overflow
+
+45
+00:02:01,070 --> 00:02:04,585
+关于如何将URL读入字符串的问题。
+question about how to read a URL into a string.
+
+46
+00:02:04,585 --> 00:02:06,860
+所以这实际上有几个答案。
+So that actually has several answers.
+
+47
+00:02:06,860 --> 00:02:08,699
+这是最高评价的答案，
+And this is the highest rated answer,
+
+48
+00:02:08,699 --> 00:02:11,260
+但后来被这个更好的
+but was later superseded by this better
+
+49
+00:02:11,260 --> 00:02:16,330
+在Java库中使用最新API的答案。
+answer that uses more recent APIs in the Java library.
+
+50
+00:02:16,330 --> 00:02:19,930
+所以代码示例可以发展。
+So code examples can evolve.
+
+51
+00:02:19,930 --> 00:02:21,887
+通过记录这个参考，你
+And by recording that reference, you
+
+52
+00:02:21,887 --> 00:02:24,220
+允许维护人员查看
+allow the maintainer to go and look and see whether this
+
+53
+00:02:24,220 --> 00:02:27,480
+仍然是最好的方法。
+is still the best way to do it.
+
+54
+00:02:27,480 --> 00:02:29,080
+所以这些都是好的评论。
+So those are good comments.
+
+55
+00:02:29,080 --> 00:02:31,640
+有些评论是不好的
+Some comments are bad, and they're
+
+56
+00:02:31,640 --> 00:02:33,290
+通常是不好的，因为它们是不必要的。
+often bad because they're unnecessary.
+
+57
+00:02:33,290 --> 00:02:37,410
+所以如果你写的评论只是音译
+So if you're writing a comment that simply transliterates
+
+58
+00:02:37,410 --> 00:02:41,077
+用Java编写成英语的代码，
+the code that was written in Java into English,
+
+59
+00:02:41,077 --> 00:02:42,660
+那就没有任何信息了，
+then that doesn't add any information,
+
+60
+00:02:42,660 --> 00:02:44,920
+它不会使代码更简单
+it does nothing to make the code easier
+
+61
+00:02:44,920 --> 00:02:47,760
+理解或记录假设，
+to understand or to document assumptions,
+
+62
+00:02:47,760 --> 00:02:51,970
+你不应该有这样的评论。
+and you should simply not have comments like this.
+
+63
+00:02:51,970 --> 00:02:54,050
+但如果有不清楚的代码，
+But if there is code that's obscure,
+
+64
+00:02:54,050 --> 00:02:57,844
+很好地说明了代码的实际意图。
+it's good to say what the code is actually intended to do.
+
+65
+00:02:57,844 --> 00:02:59,510
+我们一开始的例子
+The example that we had at the beginning
+
+66
+00:02:59,510 --> 00:03:02,169
+这本书，每年的一天，确实需要一些评论。
+this reading, day of year, does need some comments.
+
+67
+00:03:02,169 --> 00:03:03,960
+它没有任何评论，而且很多评论，
+It has no comments at all, and a lot of it,
+
+68
+00:03:03,960 --> 00:03:07,730
+实际上，很模糊，所以我们在练习中要做一件事
+actually, is obscure, so one thing we'll do in the exercises
+
+69
+00:03:07,730 --> 00:03:11,970
+看看我们可以在代码中添加注释的位置。
+is look at where we might put comments into that code.
+

@@ -1,0 +1,630 @@
+1
+00:00:01,839 --> 00:00:03,630
+所以我们讨论了一些相似之处
+So we talked about some of the similarities
+
+2
+00:00:03,630 --> 00:00:05,986
+以及Python之间的一些表面差异
+and some of the superficial differences between Python
+
+3
+00:00:05,986 --> 00:00:06,485
+还有Java。
+and Java.
+
+4
+00:00:06,485 --> 00:00:10,280
+最重要的有意义的区别
+The most important meaningful difference
+
+5
+00:00:10,280 --> 00:00:14,240
+变量n的声明在最上面
+is the declaration of that variable n at very top
+
+6
+00:00:14,240 --> 00:00:16,930
+特别是，它具体做了什么
+and in particular, what it does to specify
+
+7
+00:00:16,930 --> 00:00:20,370
+它的类型和这个词int。
+its type with this word int.
+
+8
+00:00:20,370 --> 00:00:21,150
+那么什么是类型？
+So what's a type?
+
+9
+00:00:21,150 --> 00:00:24,320
+类型是一组可能的值
+Well, a type is a set of possible values
+
+10
+00:00:24,320 --> 00:00:25,920
+以及你的手术
+along with the operations that you
+
+11
+00:00:25,920 --> 00:00:28,920
+可以执行这些值。
+can perform on those values.
+
+12
+00:00:28,920 --> 00:00:31,710
+Java有很多类型。
+Java has a number of types.
+
+13
+00:00:31,710 --> 00:00:33,640
+其中一些是原始类型。
+Some of them are primitive types.
+
+14
+00:00:33,640 --> 00:00:36,330
+这些实际上是由一个小写的单词表示的。
+And these are actually indicated by a lowercase word.
+
+15
+00:00:36,330 --> 00:00:41,500
+所以int是一个表示整数的基元类型。
+So int is a primitive type that represents integers.
+
+16
+00:00:41,500 --> 00:00:45,650
+Long是表示更多整数的基元类型。
+Long is a primitive type that represents more integers.
+
+17
+00:00:45,650 --> 00:00:50,740
+所以int被限制在大约正负20亿。
+So int is limited to roughly plus or minus 2 billion.
+
+18
+00:00:50,740 --> 00:00:54,950
+Long可以表示更大范围的整数。
+Long can represent a larger range of integers.
+
+19
+00:00:54,950 --> 00:00:56,990
+布尔值表示true或false。
+Boolean represents either true or false.
+
+20
+00:00:56,990 --> 00:00:59,260
+Double表示浮点数
+Double represents floating point numbers that
+
+21
+00:00:59,260 --> 00:01:00,990
+里面有小数点。
+have a decimal point in them.
+
+22
+00:01:00,990 --> 00:01:04,200
+Char表示单个字符。
+Char represents single characters.
+
+23
+00:01:04,200 --> 00:01:05,910
+Java也有对象类型。
+Java also has object types.
+
+24
+00:01:05,910 --> 00:01:08,830
+以及在Java中区分原语类型的方式
+And the way you distinguish in Java between primitive type
+
+25
+00:01:08,830 --> 00:01:11,510
+对象类型按惯例大写。
+and object type by convention it's capitalized.
+
+26
+00:01:11,510 --> 00:01:15,481
+所以大写的S字符串表示一系列字符。
+So a capital S String represents a sequence of characters.
+
+27
+00:01:15,481 --> 00:01:19,280
+大写B大整数表示
+A capital B Big Integer represents
+
+28
+00:01:19,280 --> 00:01:20,960
+任意大小的整数。
+an integer of arbitrary size.
+
+29
+00:01:20,960 --> 00:01:23,880
+所以它可以表示相同范围的整数。
+So it can represent the same range of integers.
+
+30
+00:01:23,880 --> 00:01:26,280
+这是一个长扫描。
+And it's a long scan.
+
+31
+00:01:26,280 --> 00:01:28,217
+但它也可以变得和你一样大
+But it can also get as big as you
+
+32
+00:01:28,217 --> 00:01:30,550
+可以保存在程序可用的内存中。
+can hold in the memory that's available to your program.
+
+33
+00:01:30,550 --> 00:01:33,070
+所以从这个意义上说，它就像Python中的一个数字。
+So in that sense, it acts like a number in Python.
+
+35
+00:01:36,170 --> 00:01:38,910
+这些是Java的一些类型，
+So those are some of the types that Java has,
+
+36
+00:01:38,910 --> 00:01:41,010
+尤其是一些价值观
+and in particular, some of the values
+
+37
+00:01:41,010 --> 00:01:42,570
+这些类型可以表示的。
+that those types can represent.
+
+38
+00:01:42,570 --> 00:01:45,080
+但另一个关键特征是
+But another key feature of a type
+
+39
+00:01:45,080 --> 00:01:48,260
+类型具有与其关联的操作。
+is that a type has operations associated with it.
+
+40
+00:01:48,260 --> 00:01:50,630
+操作是接受输入并产生
+Operations are functions that take inputs and produce
+
+41
+00:01:50,630 --> 00:01:51,180
+输出。
+outputs.
+
+42
+00:01:51,180 --> 00:01:56,820
+这些输入和输出就是这些类型的值。
+And those inputs and outputs are values of those types.
+
+43
+00:01:56,820 --> 00:02:00,330
+现在，操作的语法有所不同。
+Now, the syntax for operations varies.
+
+44
+00:02:00,330 --> 00:02:03,780
+一些类型和一些操作内置于语言中。
+Some types and some operations are built in to the language.
+
+45
+00:02:03,780 --> 00:02:07,020
+所以他们使用一种非常熟悉的语法，
+And so they use a very familiar syntax,
+
+46
+00:02:07,020 --> 00:02:11,520
+但是一个非常特殊的，比如中缀标点符号
+but a very specialized one like an infix punctuation operator
+
+47
+00:02:11,520 --> 00:02:14,810
+就像a加b代表操作一样
+like a plus b represents the operation
+
+48
+00:02:14,810 --> 00:02:18,420
+取一个整数a和一个整数b
+that takes an integer a and an integer b
+
+49
+00:02:18,420 --> 00:02:19,962
+并产生一个整数。
+and produces an integer.
+
+50
+00:02:19,962 --> 00:02:22,420
+如果我们要用数学符号来写，
+So if we were going to write that in mathematical notation,
+
+51
+00:02:22,420 --> 00:02:26,130
+我们可以说有一个名为plus的函数
+we would say that there is a function named plus that
+
+52
+00:02:26,130 --> 00:02:28,760
+有两个参数，一个int和一个int，
+takes two arguments, an int and an int,
+
+53
+00:02:28,760 --> 00:02:33,320
+并产生一个int结果。我们知道
+and produces an int result. We do
+
+54
+00:02:33,320 --> 00:02:35,390
+把这当作一个手术，尽管
+think of this as an operation even though it's
+
+55
+00:02:35,390 --> 00:02:37,750
+内置于语言中。
+built in to the language.
+
+56
+00:02:37,750 --> 00:02:39,520
+你会看到另一种手术
+Another kind of operation that you'll see
+
+57
+00:02:39,520 --> 00:02:42,610
+是可以对对象调用的方法。
+is a method you can call on an object.
+
+58
+00:02:42,610 --> 00:02:44,820
+所以当你处理这些大整数时
+So when you're working with these big integers, which
+
+59
+00:02:44,820 --> 00:02:48,050
+是Java提供的任意大小的整数，
+are the arbitrary-sized integers that Java offers,
+
+60
+00:02:48,050 --> 00:02:50,100
+你不能用这个加号运算符。
+you can't use this plus operator.
+
+61
+00:02:50,100 --> 00:02:52,380
+相反，您可以调用该函数
+Instead, you invoke that function
+
+62
+00:02:52,380 --> 00:02:56,090
+通过对要添加的一个整数调用add方法
+by calling the add method on one of the integers you want to add
+
+63
+00:02:56,090 --> 00:02:59,440
+并传入另一个要添加的整数。
+and passing in the other integer that you want to add.
+
+64
+00:02:59,440 --> 00:03:02,660
+但从数学上讲，这实际上是同一种
+But mathematically, this is effectively the same kind
+
+65
+00:03:02,660 --> 00:03:05,510
+作为正数的功能。
+of function as plus was.
+
+66
+00:03:05,510 --> 00:03:08,380
+这个函数，在这个例子中，叫做add，
+It's a function that, in this case, is called add,
+
+67
+00:03:08,380 --> 00:03:11,840
+但这需要一个值和另一个值，
+but that takes one value and another value,
+
+68
+00:03:11,840 --> 00:03:15,390
+它们都是整数，并产生第三个值，
+both of them integer-like, and produces a third value,
+
+69
+00:03:15,390 --> 00:03:18,510
+这是他们的总和。
+which is their sum.
+
+70
+00:03:18,510 --> 00:03:21,190
+这就是表示操作的方法。
+So that's the method way of representing an operation.
+
+71
+00:03:21,190 --> 00:03:24,540
+还有第三种方法，作为函数，
+Then there's a third way, which is as a function,
+
+72
+00:03:24,540 --> 00:03:27,130
+或者，作为一个静态方法，Java会调用它们。
+or as a static method is what Java would call them.
+
+73
+00:03:27,130 --> 00:03:30,460
+例如，如果要使用[？罪恶？]操作，
+For example, if you want to use the [? sin ?] operation,
+
+74
+00:03:30,460 --> 00:03:33,030
+定义在浮点数上，
+which is defined on floating point numbers,
+
+75
+00:03:33,030 --> 00:03:36,000
+那你就打电话给[？数学罪？]而你
+then you would call it by calling [? math.sin. ?] And you
+
+76
+00:03:36,000 --> 00:03:39,940
+会传递一个double，传递值为double，
+would pass it a double, pass at a value of double,
+
+77
+00:03:39,940 --> 00:03:41,704
+记住的是浮点数。
+which remember is floating point number.
+
+78
+00:03:41,704 --> 00:03:42,870
+它将返回一个双倍。
+And it will return a double.
+
+79
+00:03:42,870 --> 00:03:46,860
+它将计算这个三角正弦函数。
+And it will compute this trigonometric sine function.
+
+80
+00:03:46,860 --> 00:03:48,450
+现在，这和我们
+Now, this is different than what we
+
+81
+00:03:48,450 --> 00:03:51,730
+就在这里，因为这个大写的数学是一门课。
+did right here because this capital M Math is a class.
+
+82
+00:03:51,730 --> 00:03:52,850
+它不是物体。
+It's not an object.
+
+83
+00:03:52,850 --> 00:03:56,380
+这是一个碰巧包含sin函数的类。
+It's a class that happens to contain the sin function.
+
+84
+00:03:56,380 --> 00:04:00,560
+所以这唯一的论点
+And so the only argument that this takes
+
+85
+00:04:00,560 --> 00:04:02,940
+这是我们要经过的西塔吗。
+is this theta that we're passing in here.
+
+86
+00:04:02,940 --> 00:04:05,410
+所以这个函数只有一个参数
+So this is a function that takes one argument
+
+87
+00:04:05,410 --> 00:04:09,700
+并产生一个结果。
+and produces one result.
+
+88
+00:04:09,700 --> 00:04:12,282
+所以有各种不同的方法可以对类型进行操作
+So there are various different ways that operations on a type
+
+89
+00:04:12,282 --> 00:04:14,240
+可以用语言表示和显示。
+might be represented and shown in the language.
+
+90
+00:04:14,240 --> 00:04:18,399
+但重要的是要意识到
+But the important thing is to realize that underlying it
+
+91
+00:04:18,399 --> 00:04:21,414
+是某种功能。
+is some kind of function.
+
+92
+00:04:21,414 --> 00:04:23,080
+它可以用不同的方式书写，
+And it may be written in different ways,
+
+93
+00:04:23,080 --> 00:04:25,880
+但基本上还是一样的。
+but it's still doing basically the same thing.
+
+94
+00:04:25,880 --> 00:04:27,380
+例如，在Java中，如果你想
+So for example, in Java, if you want
+
+95
+00:04:27,380 --> 00:04:28,990
+如果要测量一根绳子的长度，你
+to take the length of a string, you
+
+96
+00:04:28,990 --> 00:04:30,680
+对该字符串调用方法。
+call a method on that string.
+
+97
+00:04:30,680 --> 00:04:32,960
+获取要定义长度的字符串
+You take the string that you want to define the length
+
+98
+00:04:32,960 --> 00:04:37,320
+和你做点。后面的length（）以获取
+of and you do dot. length() after it in order to get that
+
+99
+00:04:37,320 --> 00:04:38,206
+方法。
+method.
+
+100
+00:04:38,206 --> 00:04:40,080
+现在，它是一种不同的语法，一种不同的方式
+Now, it's a different syntax, a different way
+
+101
+00:04:40,080 --> 00:04:44,330
+把你想用Python写的东西写成函数，Len，
+of writing what you would write in Python as a function, Len,
+
+102
+00:04:44,330 --> 00:04:45,940
+以字符串作为参数。
+that takes the string as an argument.
+
+103
+00:04:45,940 --> 00:04:48,220
+但基本上是一样的。
+But it's fundamentally the same operation.
+
+104
+00:04:48,220 --> 00:04:50,350
+它是一个输入为字符串的函数
+It's a function whose input is a string and whose
+
+105
+00:04:50,350 --> 00:04:53,010
+输出是字符串长度的整数。
+output is the integer that is the length of the string.
+
+106
+00:04:53,010 --> 00:04:56,760
+只是碰巧使用了不同的语法。
+It just happens to use different syntax.
+
+107
+00:04:56,760 --> 00:04:59,630
+现在，一个麻烦的地方是一些手术，
+Now, one troublesome spot is that some operations,
+
+108
+00:04:59,630 --> 00:05:03,450
+函数的某些名称在某种意义上被重载
+some names of functions are overloaded in the sense
+
+109
+00:05:03,450 --> 00:05:06,620
+相同的操作名用于函数
+that the same operation name is used for functions
+
+110
+00:05:06,620 --> 00:05:08,800
+那需要非常不同的类型。
+that take very different types.
+
+111
+00:05:08,800 --> 00:05:11,240
+在许多编程语言中，您经常看到这一点
+You see this frequently in many programming languages
+
+112
+00:05:11,240 --> 00:05:13,790
+加，减，乘以，
+with the arithmetic operators like plus, minus, times,
+
+113
+00:05:13,790 --> 00:05:14,385
+和分歧。
+and divides.
+
+114
+00:05:14,385 --> 00:05:17,680
+原因是我们对这些很熟悉，
+The reason is these are so familiar to us,
+
+115
+00:05:17,680 --> 00:05:21,580
+数学家已经让它们超载很久了，
+and mathematicians have been overloading them for so long,
+
+116
+00:05:21,580 --> 00:05:25,500
+加号实际上有不同的版本。
+that there's actually different versions of plus.
+
+117
+00:05:25,500 --> 00:05:27,130
+加上我在这里说的，
+This plus that I talked about here,
+
+118
+00:05:27,130 --> 00:05:29,630
+如果a和b有integer类型，它是
+if a and b have type integer, it's
+
+119
+00:05:29,630 --> 00:05:31,600
+将调用整数加法。
+going to invoke the integer addition.
+
+120
+00:05:31,600 --> 00:05:35,270
+但如果a和b有双字型
+But if a and b have type double, then it's
+
+121
+00:05:35,270 --> 00:05:39,540
+将调用双重加法。
+going to invoke a double addition.
+
+122
+00:05:39,540 --> 00:05:42,990
+我们还会在Java中看到一些方法，比如add，
+We'll see also in Java that methods, like add,
+
+123
+00:05:42,990 --> 00:05:44,610
+也可能超载。
+can also be overloaded.
+
+124
+00:05:44,610 --> 00:05:46,440
+几乎所有的编程语言
+Almost every programming language
+
+125
+00:05:46,440 --> 00:05:48,370
+有一定程度的超载。
+has some degree of overloading.
+
+126
+00:05:48,370 --> 00:05:50,370
+可能会有点麻烦。
+And it can be a little bit troublesome.
+
+127
+00:05:50,370 --> 00:05:52,750
+我们一会儿就知道原因了。
+And we'll see why in a bit.
+

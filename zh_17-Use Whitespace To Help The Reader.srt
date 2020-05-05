@@ -1,0 +1,430 @@
+1
+00:00:01,869 --> 00:00:03,660
+使代码更可读的另一件事
+Another thing that makes code more readable
+
+2
+00:00:03,660 --> 00:00:06,920
+很好的利用了空白，空格，缩进，
+is good use of whitespace, spaces, indentations,
+
+3
+00:00:06,920 --> 00:00:08,620
+断线。
+line breaks.
+
+4
+00:00:08,620 --> 00:00:11,070
+所以这个跳跃的例子不太擅长。
+So this leap example is not so good at.
+
+5
+00:00:11,070 --> 00:00:13,250
+你会注意到这是一个其他人都不在的地方
+You'll notice here is a place where the else is not
+
+6
+00:00:13,250 --> 00:00:14,410
+与它的if排成一行。
+lined up with its if.
+
+7
+00:00:14,410 --> 00:00:17,580
+这是一个国际单项体育联合会不与其他人排队的地方
+Here's a place where the if isn't lined up with the other
+
+8
+00:00:17,580 --> 00:00:19,640
+如果在同一个街区。
+if that's in the same block.
+
+9
+00:00:19,640 --> 00:00:21,915
+没有充分的理由造成压痕不良，
+No good reason for having bad indentation,
+
+10
+00:00:21,915 --> 00:00:23,725
+它使你的代码更难阅读。
+it makes your code harder to read.
+
+11
+00:00:23,725 --> 00:00:26,200
+你的程序编辑器有一个自动功能
+And your programming editor has an automatic feature
+
+12
+00:00:26,200 --> 00:00:28,020
+重新格式化代码。
+that reformats code.
+
+13
+00:00:28,020 --> 00:00:30,050
+所以你应该用这个。
+So you should just use that.
+
+14
+00:00:30,050 --> 00:00:32,125
+戴夫，你的例子在这方面做得更好。
+Dave, your example does much better at this.
+
+15
+00:00:32,125 --> 00:00:34,720
+你注意到了，所有其他的如果都排得很好。
+You notice, all of these else ifs are all nicely lined up.
+
+16
+00:00:34,720 --> 00:00:37,490
+但不仅如此，还利用了空间
+But not only that, also uses spaces
+
+17
+00:00:37,490 --> 00:00:39,960
+把这些数字排成一行
+to line up these numbers so that you
+
+18
+00:00:39,960 --> 00:00:41,294
+更容易检查。
+can check them much more easily.
+
+19
+00:00:41,294 --> 00:00:43,043
+我们已经看到我们想要摆脱
+We've already seen that we want to get rid
+
+20
+00:00:43,043 --> 00:00:44,190
+所有的重复。
+of all of this repetition.
+
+21
+00:00:44,190 --> 00:00:47,490
+但是如果你这样做了你的代码必须有规律性，
+But if you do you have to have regularity in your code,
+
+22
+00:00:47,490 --> 00:00:50,240
+如果使用缩进和间距
+it's great if you use indentation and spacing to make
+
+23
+00:00:50,240 --> 00:00:54,650
+它非常清晰易读，易于检查。
+it very clear and easy to read and easy to check.
+
+24
+00:00:54,650 --> 00:00:58,240
+在代码行中放置空格也很重要。
+It's also important to put spaces within your code lines.
+
+25
+00:00:58,240 --> 00:01:02,530
+例如，这个表达式非常拥挤。
+So for example, this expression is very crowded.
+
+26
+00:01:02,530 --> 00:01:06,220
+它只是一个没有空格的连续字符串。
+It's just a string of continuous characters with no spaces.
+
+27
+00:01:06,220 --> 00:01:08,540
+把它想象成一句话，
+Think about it rather like a sentence,
+
+28
+00:01:08,540 --> 00:01:11,260
+你想把空间放在好的地方
+and you want to put spaces at good places
+
+29
+00:01:11,260 --> 00:01:15,210
+把句子中的单词分开
+to separate the words of your sentence
+
+30
+00:01:15,210 --> 00:01:17,480
+为了让它更容易阅读。
+in order to make it easier to read.
+
+31
+00:01:17,480 --> 00:01:19,720
+关于空白我想说的最后一件事
+Final thing I want to say about whitespace
+
+32
+00:01:19,720 --> 00:01:23,925
+你应该避免在代码中使用制表符。
+is that you should avoid having tab characters in your code.
+
+33
+00:01:23,925 --> 00:01:26,180
+你应该使用空格字符。
+You should use space characters.
+
+34
+00:01:26,180 --> 00:01:29,160
+注意，当我说tab时，我真正的意思是
+Notice that when I say tab, what I really mean
+
+35
+00:01:29,160 --> 00:01:32,875
+是制表符，不是按制表符时发生的情况
+is the tab character, not what happens when you push the Tab
+
+36
+00:01:32,875 --> 00:01:33,750
+按键盘上的键。
+key on your keyboard.
+
+37
+00:01:33,750 --> 00:01:37,020
+聪明的编辑会做聪明的事
+A smart editor will do something smart
+
+38
+00:01:37,020 --> 00:01:39,560
+当你按Tab键时。
+when you push the Tab key.
+
+39
+00:01:39,560 --> 00:01:41,290
+为什么我们不想要制表符呢？
+So why don't we want tab characters?
+
+40
+00:01:41,290 --> 00:01:43,970
+原因是不同的工具
+Well, the reason is that different tools treat
+
+41
+00:01:43,970 --> 00:01:45,500
+标签字符不同。
+tab characters differently.
+
+42
+00:01:45,500 --> 00:01:46,890
+我们来看一个例子。
+And lets look at an example.
+
+43
+00:01:46,890 --> 00:01:49,950
+这是我们在Eclipse中的leap代码。
+So here's our leap code in Eclipse.
+
+44
+00:01:49,950 --> 00:01:52,330
+我们已经批评过这个凹痕了，
+And we've already criticized this indentation a little,
+
+45
+00:01:52,330 --> 00:01:54,270
+但在很大程度上，一切都很好。
+but for the most part, it's doing OK.
+
+46
+00:01:54,270 --> 00:01:57,450
+这个if和它的其他if排成一列。
+This if is lined up with its else.
+
+47
+00:01:57,450 --> 00:02:01,900
+这群人的头上都是花括号。
+This public is lined up with its end curly brace.
+
+48
+00:02:01,900 --> 00:02:04,660
+但现在如果我用另一个工具看这段代码，
+But now if I look at this code in a different tool,
+
+49
+00:02:04,660 --> 00:02:08,810
+比如说，在网络浏览器中查看，
+let's say, look at it in a web browser,
+
+50
+00:02:08,810 --> 00:02:11,070
+突然之间事情就大不一样了，对吧？
+suddenly things are dramatically different, right?
+
+51
+00:02:11,070 --> 00:02:14,492
+这个字符串变量声明的目的远不止于此
+This string variable declaration is intended way farther
+
+52
+00:02:14,492 --> 00:02:16,450
+当我在浏览器中查看时
+when I'm looking at it in the browser than when
+
+53
+00:02:16,450 --> 00:02:18,100
+我在月食中看到它。
+I'm looking at it in Eclipse.
+
+54
+00:02:18,100 --> 00:02:21,930
+这个if，你找不到对应于这个if的else。
+This if, you can't find the else that corresponds to this if.
+
+55
+00:02:21,930 --> 00:02:24,330
+好像刚用两个大括号结束。
+It looks like it's just ended with two curly braces.
+
+56
+00:02:24,330 --> 00:02:25,860
+那这里发生了什么？
+So what happened here?
+
+57
+00:02:25,860 --> 00:02:28,270
+发生了什么事，我们都不知道，
+Well, what happened is, unbeknownst to us,
+
+58
+00:02:28,270 --> 00:02:33,060
+在不可见的情况下，这段代码实际上是混合使用了制表符
+invisibly, this code is actually using a mix of tab characters
+
+59
+00:02:33,060 --> 00:02:36,640
+对应于像这样的跳跃和空格字符
+which correspond to jumps like this and space characters
+
+60
+00:02:36,640 --> 00:02:40,620
+它代表着单一的空间发展。
+which represent just single space advances.
+
+61
+00:02:40,620 --> 00:02:45,100
+在Eclipse中，默认值是tab表示四个空格，
+And in Eclipse, the default is that a tab means four spaces,
+
+62
+00:02:45,100 --> 00:02:49,520
+它跳过四个空格，而在许多其他工具中，
+it jumps four spaces, whereas in many other tools,
+
+63
+00:02:49,520 --> 00:02:52,330
+包括web浏览器，还有很多文本编辑器，
+including web browsers but also a lot of text editors,
+
+64
+00:02:52,330 --> 00:02:55,000
+这个跳跃实际上相当于8个空格。
+that jump actually corresponds to eight spaces.
+
+65
+00:02:55,000 --> 00:02:57,190
+所以你最终会变得非常不一致和怪异
+So you end up with very inconsistent and weird
+
+66
+00:02:57,190 --> 00:03:00,786
+缩进当你使用制表符和空格的混合时。
+indentation when using you're using a mix of tab and spaces.
+
+67
+00:03:00,786 --> 00:03:03,670
+最好的做法是配置程序编辑器。
+The best thing to do is to configure your program editor.
+
+68
+00:03:03,670 --> 00:03:08,120
+在Eclipse中，您可以在preferences中这样做
+And in Eclipse, you can do this in preferences
+
+69
+00:03:08,120 --> 00:03:12,620
+所以，与其允许制表符和空格，
+so that, instead of allowing tabs and spaces,
+
+70
+00:03:12,620 --> 00:03:15,090
+你只使用空格。
+you're using spaces only.
+
+71
+00:03:15,090 --> 00:03:21,120
+然后，即使我按Tab键--让我来这里
+Then, even if I press the Tab key-- so let me just go here
+
+72
+00:03:21,120 --> 00:03:25,390
+然后按Tab键——Eclipse将实际执行的操作
+and press the Tab key-- what Eclipse will actually do
+
+73
+00:03:25,390 --> 00:03:28,760
+是插入空格而不是制表符。
+is insert spaces instead of a tab character.
+
+74
+00:03:28,760 --> 00:03:30,420
+它会以一种聪明的方式做到这一点。
+And it'll do that in a smart way.
+
+75
+00:03:30,420 --> 00:03:34,580
+如果我选择这里的所有内容，我可以修正缩进，
+And if I select everything here, I can correct the indentation,
+
+76
+00:03:34,580 --> 00:03:37,230
+你会注意到它都变成了空间。
+and you'll notice that it all turns into spaces.
+
+77
+00:03:37,230 --> 00:03:39,660
+现在，如果我在浏览器中查看它，
+Now, if I view it in the browser,
+
+78
+00:03:39,660 --> 00:03:42,240
+这些空间被视为单个空间，
+those spaces are treated as single spaces,
+
+79
+00:03:42,240 --> 00:03:44,260
+它会以同样的方式缩进。
+and it's going to indent exactly the same way.
+
+81
+00:03:48,150 --> 00:03:50,260
+所以一定要设置程序编辑器插入
+So always set your programming editor inserts
+
+82
+00:03:50,260 --> 00:03:53,070
+当然，除非，
+to space characters unless, of course,
+
+83
+00:03:53,070 --> 00:03:55,280
+你所在的团队
+the team you're working with has exactly
+
+84
+00:03:55,280 --> 00:03:57,370
+相反的政策，在这种情况下
+the opposite policy, in which case
+
+85
+00:03:57,370 --> 00:03:59,170
+你应该做他们做的任何事。
+you should do whatever they do.
+
+86
+00:03:59,170 --> 00:04:01,260
+但如果你自己做决定，
+But if you're making the decision yourself,
+
+87
+00:04:01,260 --> 00:04:05,210
+我的建议是使用空间。
+my advice is to use spaces.
+

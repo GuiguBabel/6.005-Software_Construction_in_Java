@@ -1,0 +1,395 @@
+1
+00:00:02,190 --> 00:00:06,290
+好的，我们有计算冰雹序列的代码
+OK, so we've got our code that computes a hailstone sequence
+
+2
+00:00:06,290 --> 00:00:07,524
+并将其放入列表中。
+and puts it into a list.
+
+3
+00:00:07,524 --> 00:00:10,190
+现在为了使它成为一个完整的Java程序
+Now in order to make this a full Java program there's a few more
+
+4
+00:00:10,190 --> 00:00:11,080
+我们需要补充的东西。
+things we need to add.
+
+5
+00:00:11,080 --> 00:00:12,970
+因为每一句话，所有这些话
+Because every statement, all these statements
+
+6
+00:00:12,970 --> 00:00:15,840
+需要在方法声明中，
+need to be inside a method declaration,
+
+7
+00:00:15,840 --> 00:00:18,545
+每个方法都需要在某个类中。
+and every method needs to be in some class.
+
+8
+00:00:18,545 --> 00:00:20,170
+所以这是最简单的方法
+So this is the simplest way that we can
+
+9
+00:00:20,170 --> 00:00:21,336
+写我们的冰雹计划。
+write our hailstone program.
+
+10
+00:00:21,336 --> 00:00:23,080
+我们接受这个密码。
+We take this code.
+
+11
+00:00:23,080 --> 00:00:25,690
+我们把它包在一个方法里。
+We wrap it inside a method.
+
+12
+00:00:25,690 --> 00:00:28,000
+下面是这种方法的外观。
+And here's how the outside of that method looks.
+
+13
+00:00:28,000 --> 00:00:30,210
+所以这是一种叫做冰雹序列的方法。
+So it's a method named Hailstone Sequence.
+
+14
+00:00:30,210 --> 00:00:33,670
+接受一个必须具有声明类型的参数。
+Takes one argument that has to have a declared type.
+
+15
+00:00:33,670 --> 00:00:36,290
+在这种情况下，我们开始的是整数n
+In this case, it's the integer n that we're starting
+
+16
+00:00:36,290 --> 00:00:37,840
+冰雹序列。
+the hailstone sequence with.
+
+17
+00:00:37,840 --> 00:00:40,440
+它必须有一个声明的返回类型。
+And it has to have a declared return type.
+
+18
+00:00:40,440 --> 00:00:42,885
+在本例中，是整数列表
+In this case, it's the list of integers that
+
+19
+00:00:42,885 --> 00:00:44,070
+是冰雹序列吗。
+is that hailstone sequence.
+
+20
+00:00:44,070 --> 00:00:46,810
+我一会儿再谈这两个关键词。
+And I'll talk about these two key words in a moment.
+
+21
+00:00:46,810 --> 00:00:50,659
+但是函数还需要返回一些
+But then the function also needs to return something
+
+22
+00:00:50,659 --> 00:00:52,075
+这与报税表相符
+that's compatible with that return
+
+23
+00:00:52,075 --> 00:00:53,910
+类型，它有正确的类型。
+type, that has the right type.
+
+24
+00:00:53,910 --> 00:00:57,750
+所以我们将返回我们创建的列表。
+So we're going to return this list that we've created.
+
+25
+00:00:57,750 --> 00:01:02,190
+然后这个方法需要在一个类中。
+And then that method needs to be inside a class.
+
+26
+00:01:02,190 --> 00:01:05,440
+我们叫我们班冰雹。
+And we're calling our class hailstone.
+
+27
+00:01:05,440 --> 00:01:07,290
+这就是我们申报的方式。
+And this is how we declare it.
+
+28
+00:01:07,290 --> 00:01:08,850
+我们把所有东西都放在大括号里
+We put everything in curly braces
+
+29
+00:01:08,850 --> 00:01:10,822
+为了展示街区。
+in order to show the blocks.
+
+30
+00:01:10,822 --> 00:01:12,530
+现在这里有什么新鲜事？
+Now what are some of the new things here?
+
+31
+00:01:12,530 --> 00:01:15,729
+公开一个类和方法
+So public with a class and in the method
+
+32
+00:01:15,729 --> 00:01:17,520
+意味着程序中的任何代码
+means that any code anywhere in the program
+
+33
+00:01:17,520 --> 00:01:20,500
+允许引用此方法或此类。
+is allowed to refer to this method or this class.
+
+34
+00:01:20,500 --> 00:01:23,600
+我们将看到其他一些访问修饰符，如private
+We're going to see some other access modifiers like private
+
+35
+00:01:23,600 --> 00:01:25,770
+我们可以用它来保证程序的安全性
+that we can use to get more safety in a program
+
+36
+00:01:25,770 --> 00:01:28,470
+在我们需要的时候保证不变性
+and to guarantee immutability when we want
+
+37
+00:01:28,470 --> 00:01:30,000
+编写不可变类型。
+to write an immutable type.
+
+38
+00:01:30,000 --> 00:01:33,460
+但我们将在接下来的阅读中讨论更多。
+But we'll talk about that more in upcoming readings.
+
+39
+00:01:33,460 --> 00:01:36,170
+其他的新东西，静态的，意味着
+Other new thing here, static, means
+
+40
+00:01:36,170 --> 00:01:39,200
+这个方法，冰雹序列方法，
+that this method, this hailstone sequence method,
+
+41
+00:01:39,200 --> 00:01:41,550
+不会被调用对象，不会
+doesn't get called on an object, doesn't
+
+42
+00:01:41,550 --> 00:01:43,380
+需要有一个自参数。
+need to have a self-parameter.
+
+43
+00:01:43,380 --> 00:01:47,200
+顺便说一下，self是Java中Python中的单词。
+By the way self is the word in Python in Java.
+
+44
+00:01:47,200 --> 00:01:49,950
+这叫这个。
+This is called this.
+
+45
+00:01:49,950 --> 00:01:53,130
+因此不能对对象调用静态方法。
+So static methods can't be called on an object.
+
+46
+00:01:53,130 --> 00:01:55,560
+例如，与列表相比，
+Contrast that with the list, for example,
+
+47
+00:01:55,560 --> 00:01:57,500
+这里的list add方法。
+the list add method here.
+
+48
+00:01:57,500 --> 00:02:02,490
+我们调用的是一个列表的特定值。
+Which we're calling on a particular value of a list.
+
+49
+00:02:02,490 --> 00:02:04,310
+当我们调用冰雹序列时，
+When we'd call a hailstone sequence,
+
+50
+00:02:04,310 --> 00:02:06,730
+我们不会以任何特定的价值来衡量
+we wouldn't call it on any particular value
+
+51
+00:02:06,730 --> 00:02:08,030
+冰雹级的。
+of the hailstone class.
+
+52
+00:02:08,030 --> 00:02:09,979
+我们不会制造一个新的价值冰雹类。
+We wouldn't make a new value hailstone class.
+
+53
+00:02:09,979 --> 00:02:12,430
+我们会用类名来表示
+We would just use the class name to say
+
+54
+00:02:12,430 --> 00:02:14,440
+我们得去看冰雹课
+we need to go and look in the hailstone class
+
+55
+00:02:14,440 --> 00:02:17,530
+找到冰雹序列的方法。
+and find the hailstone sequence method inside there.
+
+56
+00:02:17,530 --> 00:02:20,420
+事实上如果这段代码是
+In fact if this code were written
+
+57
+00:02:20,420 --> 00:02:23,010
+在冰雹层里，我们甚至
+inside this hailstone class, we wouldn't even
+
+58
+00:02:23,010 --> 00:02:25,330
+需要提到类本身。
+need to mention the class itself.
+
+59
+00:02:25,330 --> 00:02:26,660
+因为我们早就到了。
+Because we'd already be there.
+
+60
+00:02:26,660 --> 00:02:30,190
+它就可以搜索冰雹序列
+It would just be able to search for hailstone sequence
+
+61
+00:02:30,190 --> 00:02:32,987
+在我们现在所在的班级里。
+within the class we're currently in.
+
+62
+00:02:32,987 --> 00:02:34,570
+还有一件事我想指出
+Another thing I want to point out here
+
+63
+00:02:34,570 --> 00:02:36,999
+这个注释在方法之前吗。
+is this comment right before the method.
+
+64
+00:02:36,999 --> 00:02:38,290
+因为这很重要。
+Because this is very important.
+
+65
+00:02:38,290 --> 00:02:41,720
+这个评论就是这个方法的规范，
+This comment is the specification of that method,
+
+66
+00:02:41,720 --> 00:02:48,000
+描述输入和输出
+describes the inputs and the output
+
+67
+00:02:48,000 --> 00:02:50,520
+在某种程度上，一个人在看这个代码
+in ways that a human being looking at this code
+
+68
+00:02:50,520 --> 00:02:51,630
+很容易理解。
+can easily understand.
+
+69
+00:02:51,630 --> 00:02:53,850
+所以他们不必研究代码本身
+So they don't have to study the code itself
+
+70
+00:02:53,850 --> 00:02:56,940
+为了弄清楚这到底是怎么回事。
+in order to figure out what this actually does.
+
+71
+00:02:56,940 --> 00:03:00,110
+但也有一些限制，
+But also providing some constraints,
+
+72
+00:03:00,110 --> 00:03:05,090
+一些假设，代码本身没有显示。
+some assumptions, that the code itself does not show.
+
+73
+00:03:05,090 --> 00:03:07,530
+所以这实际上需要冰雹序列
+So this actually requires, the hailstone sequence
+
+74
+00:03:07,530 --> 00:03:10,184
+要求我们从正整数开始。
+requires that we're starting with a positive integer.
+
+75
+00:03:10,184 --> 00:03:12,600
+因为如果我们不从一个正整数开始
+Because if we don't start with a positive integer actually
+
+76
+00:03:12,600 --> 00:03:13,550
+坏事会发生。
+bad things can happen.
+
+77
+00:03:13,550 --> 00:03:16,680
+我们可以永远跑下去。
+And we can definitely run forever.
+
+78
+00:03:16,680 --> 00:03:18,960
+所以这个注释被称为规范。
+So this comment is called the specification.
+
+79
+00:03:18,960 --> 00:03:23,010
+我们将在以后的课上更多地讨论这个问题。
+We're going to talk a lot more about that in future classes.
+

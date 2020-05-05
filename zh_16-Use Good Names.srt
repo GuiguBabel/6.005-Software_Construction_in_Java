@@ -1,0 +1,330 @@
+1
+00:00:00,500 --> 00:00:02,930
+我们的下一个原则是用好名字
+Our next principle is using good names
+
+2
+00:00:02,930 --> 00:00:05,410
+用于方法、变量和类。
+for your methods, variables, and classes.
+
+3
+00:00:05,410 --> 00:00:08,442
+最好的名字是长的，而且是自我描述的。
+Best names are long and self-descriptive.
+
+4
+00:00:08,442 --> 00:00:09,900
+事实上，如果你有好名字，你
+In fact if you have good names, you
+
+5
+00:00:09,900 --> 00:00:12,782
+通常可以完全避免写评论
+can often avoid writing a comment entirely
+
+6
+00:00:12,782 --> 00:00:14,740
+因为名称、方法和变量
+because the names and the methods and variables
+
+7
+00:00:14,740 --> 00:00:17,690
+你用的是说出代码的作用。
+you are using say what the code does.
+
+8
+00:00:17,690 --> 00:00:20,930
+这里有一个坏方法的例子。
+So here's an example of a bad way to do it.
+
+9
+00:00:20,930 --> 00:00:22,280
+变量名为temp。
+The variable is named temp.
+
+10
+00:00:22,280 --> 00:00:24,970
+所以你必须用评论来描述它
+And so you have to describe it with a comment explaining
+
+11
+00:00:24,970 --> 00:00:26,050
+它的作用。
+what it does.
+
+12
+00:00:26,050 --> 00:00:29,050
+最好给它起个名字
+Much, much better would be to give it a name that actually
+
+13
+00:00:29,050 --> 00:00:30,750
+描述它的功能。
+describes what it does.
+
+14
+00:00:30,750 --> 00:00:32,369
+因为这不仅更短，
+Because not only is this shorter,
+
+15
+00:00:32,369 --> 00:00:34,410
+但这意味着这个变量在任何地方都会发生
+but it means that everywhere this variable occurs
+
+16
+00:00:34,410 --> 00:00:38,490
+在剩下的代码中，会很清楚
+in the rest of the code, it will be clear
+
+17
+00:00:38,490 --> 00:00:40,460
+它应该代表什么。
+what it's supposed to represent.
+
+18
+00:00:40,460 --> 00:00:42,490
+如果你只是发表评论，
+Whereas if you're just putting in a comment,
+
+19
+00:00:42,490 --> 00:00:43,906
+你要依靠程序员
+you're depending on the programmer
+
+20
+00:00:43,906 --> 00:00:48,410
+注意并记住这条评论。
+to notice this comment and memorize it.
+
+21
+00:00:48,410 --> 00:00:54,510
+一般来说，这类名称TEMP，TempData，
+In general, these kinds of names TEMP, TempData,
+
+22
+00:00:54,510 --> 00:00:56,520
+它们只是懒惰的症状。
+they're just symptoms of laziness.
+
+23
+00:00:56,520 --> 00:00:58,590
+每个程序，每个变量都是临时的。
+Every program, every variable is temporary.
+
+24
+00:00:58,590 --> 00:01:00,110
+每个变量都有数据。
+Every variable has data in it.
+
+25
+00:01:00,110 --> 00:01:01,790
+所以这些名字基本上
+So these kinds of names are basically
+
+26
+00:01:01,790 --> 00:01:03,390
+一个人没有意义。
+meaningless by themselves.
+
+27
+00:01:03,390 --> 00:01:06,160
+你应该使用更长，更具描述性的名字
+You should aim to use longer, more descriptive names so
+
+28
+00:01:06,160 --> 00:01:09,502
+你的代码能自己读清楚。
+that your code reads clearly all by itself.
+
+29
+00:01:09,502 --> 00:01:11,210
+命名的一部分是确保
+Part of naming is making sure that you're
+
+30
+00:01:11,210 --> 00:01:14,340
+遵循编程语言的惯例
+following the conventions of the programming language
+
+31
+00:01:14,340 --> 00:01:15,190
+你在用的。
+that you're using.
+
+32
+00:01:15,190 --> 00:01:18,690
+所以在Python中，您可能已经注意到类通常是
+So in Python you may have noticed classes typically
+
+33
+00:01:18,690 --> 00:01:20,800
+以大写字母开头。
+start with a capital letter.
+
+34
+00:01:20,800 --> 00:01:22,809
+变量通常都是小写的。
+Variables are typically all lowercase.
+
+35
+00:01:22,809 --> 00:01:24,600
+当你在一个名字里有多个词的时候，
+And when you have multiple words in a name,
+
+36
+00:01:24,600 --> 00:01:27,790
+在Python中，您要做的是用下划线分隔它们。
+in Python what you do is you separate them by underscores.
+
+37
+00:01:27,790 --> 00:01:30,490
+在Java中，情况有点不同。
+In Java things are a little bit different.
+
+38
+00:01:30,490 --> 00:01:34,340
+所以我们不用下划线
+So instead of using underscores, we
+
+39
+00:01:34,340 --> 00:01:38,870
+使用camelCase，这意味着每个单词的第一个字母
+use camelCase, which means that the first letter of each word
+
+40
+00:01:38,870 --> 00:01:39,520
+是大写的。
+is capitalized.
+
+42
+00:01:42,990 --> 00:01:44,590
+我们仍然采用小写方法。
+We still lower case methods.
+
+43
+00:01:44,590 --> 00:01:46,310
+我们还降低了大小写变量，
+And we still lower case variables,
+
+44
+00:01:46,310 --> 00:01:47,950
+就像你在Python中做的那样。
+just as you did in Python.
+
+45
+00:01:47,950 --> 00:01:52,200
+当您有一个常量时，Java中的标准
+When you have a constant, the standard in Java
+
+46
+00:01:52,200 --> 00:01:53,920
+就是把所有的大写字母都写进去。
+is to put in all capital letters.
+
+47
+00:01:53,920 --> 00:01:55,440
+骆驼壳不起作用，
+And there camelCase doesn't work,
+
+48
+00:01:55,440 --> 00:01:58,150
+所以你必须用下划线把单词分开
+so you have to separate the words in it with an underscore
+
+49
+00:01:58,150 --> 00:01:58,940
+相反。
+instead.
+
+50
+00:01:58,940 --> 00:02:02,560
+类仍然是大写的，尽管有camelCase。
+Classes are still capitalized, although with camelCase.
+
+51
+00:02:02,560 --> 00:02:07,820
+当我们谈到包的时候，包是小写的
+And when we talk about packages, packages are in lowercase
+
+52
+00:02:07,820 --> 00:02:10,810
+它们被点隔开。
+and they're separated by dots.
+
+53
+00:02:10,810 --> 00:02:13,330
+最好让你的方法命名为动词短语，
+It's good to make your method names verb phrases,
+
+54
+00:02:13,330 --> 00:02:15,590
+像是什么？获取数据？]是大写的。
+things like [? getdata ?] is upper case.
+
+55
+00:02:15,590 --> 00:02:18,740
+变量和类名通常是名词。
+Variable and class names are typically nouns.
+
+56
+00:02:18,740 --> 00:02:21,100
+你要选择简短的词，要简洁。
+You want to choose short words and be concise.
+
+57
+00:02:21,100 --> 00:02:23,770
+但要避免缩写。
+But avoid abbreviations.
+
+58
+00:02:23,770 --> 00:02:26,710
+所以没有理由在
+So there's no reason to type msg when
+
+59
+00:02:26,710 --> 00:02:29,630
+信息也同样清晰。
+message would be just as clear.
+
+60
+00:02:29,630 --> 00:02:32,380
+同时也要记住一些开发人员
+Also keep in mind that some of the developers who
+
+61
+00:02:32,380 --> 00:02:35,100
+和你一起工作可能不是以英语为母语，
+work with you may not be native English speakers,
+
+62
+00:02:35,100 --> 00:02:40,200
+所以缩写可能更难理解。
+so abbreviations may be even harder for them to understand.
+
+63
+00:02:40,200 --> 00:02:42,820
+所以我们一直在研究的这种[听不见的]跳跃方法
+So this [INAUDIBLE] leap method that we've been working on
+
+64
+00:02:42,820 --> 00:02:47,170
+里面有一些坏名字，方法，参数，
+has a few bad names in it, the method, parameter,
+
+65
+00:02:47,170 --> 00:02:48,220
+局部变量。
+the local variable.
+
+66
+00:02:48,220 --> 00:02:49,820
+你怎么称呼他们呢？
+What would you call them instead?
+
+67
+00:02:49,820 --> 00:02:52,720
+让我们在下面的练习中看看。
+Let's look at it in the exercises next.
+

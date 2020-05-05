@@ -1,0 +1,1210 @@
+1
+00:00:00,170 --> 00:00:02,020
+现在我们正在编写规范和思考
+Now that we're writing specifications and thinking
+
+2
+00:00:02,020 --> 00:00:03,644
+关于客户如何使用我们的方法，
+about how clients will use our methods,
+
+3
+00:00:03,644 --> 00:00:06,900
+我们来谈谈如何处理特殊情况
+let's talk about how to handle exceptional cases
+
+4
+00:00:06,900 --> 00:00:09,710
+在某种程度上，这是安全的，从错误和容易理解。
+in a way that's safe from bugs and easy to understand.
+
+5
+00:00:09,710 --> 00:00:12,040
+记住一个方法的签名——它的名字，
+So remember that a method's signature-- its name,
+
+6
+00:00:12,040 --> 00:00:14,470
+它的参数类型和返回类型--
+its parameter types, and its return type--
+
+7
+00:00:14,470 --> 00:00:17,460
+都是其规范的核心部分。
+are all a core part of its specification.
+
+8
+00:00:17,460 --> 00:00:19,960
+在Java和许多其他语言中的签名
+And that signature in Java and in many other languages
+
+9
+00:00:19,960 --> 00:00:24,112
+也可以包含方法可能触发的异常。
+can also include exceptions that the method might trigger.
+
+10
+00:00:24,112 --> 00:00:26,070
+所以你可能已经看到了一些例外
+So you've already seen some exceptions probably
+
+11
+00:00:26,070 --> 00:00:28,320
+在Java编程或Python编程中
+in your Java programming or in your Python programming
+
+12
+00:00:28,320 --> 00:00:29,790
+在那之前。
+before that.
+
+13
+00:00:29,790 --> 00:00:31,780
+常见异常的几个例子
+Couple of examples of common exceptions
+
+14
+00:00:31,780 --> 00:00:33,760
+数组索引超出了
+are array index out of bounds which
+
+15
+00:00:33,760 --> 00:00:36,060
+当您尝试使用
+you'll get when you try to index into an array using
+
+16
+00:00:36,060 --> 00:00:38,900
+超出有效范围的索引，
+an index that's outside of its valid range,
+
+17
+00:00:38,900 --> 00:00:41,230
+或发生空指针异常
+or null pointer exception which happens
+
+18
+00:00:41,230 --> 00:00:43,760
+当试图对空对象引用调用方法时。
+when you try to call a method on a null object reference.
+
+19
+00:00:43,760 --> 00:00:46,530
+我们在这篇文章的前面讨论过这个问题。
+We talked about that a little earlier in this reading.
+
+21
+00:00:49,802 --> 00:00:51,176
+这类异常--数组
+These kinds of exceptions-- array
+
+22
+00:00:51,176 --> 00:00:53,180
+越界和空指针异常--
+out of bounds and null pointer exceptions--
+
+23
+00:00:53,180 --> 00:00:55,114
+通常是代码中的错误。
+are generally bugs in your code.
+
+24
+00:00:55,114 --> 00:00:57,030
+它们是你不希望发生的事情
+They're things that you don't expect to happen
+
+25
+00:00:57,030 --> 00:00:59,054
+也不想发生。
+and don't want to happen.
+
+26
+00:00:59,054 --> 00:01:00,470
+Java显示的信息，
+The information displayed by Java,
+
+27
+00:01:00,470 --> 00:01:03,420
+抛出异常时显示的堆栈跟踪，
+the stack trace that is shown when the exception is thrown,
+
+28
+00:01:03,420 --> 00:01:05,510
+可以帮助你找到并修复
+can help you find and fix the bug that
+
+29
+00:01:05,510 --> 00:01:10,960
+导致错误的数组索引或使用空指针。
+led to that wrong array index or to using that null pointer.
+
+30
+00:01:10,960 --> 00:01:13,740
+数组索引和空指针可能是最常见的异常
+Array index and null pointer are probably most common exceptions
+
+31
+00:01:13,740 --> 00:01:15,240
+你会看到这种情况的。
+you'll see of this kind.
+
+32
+00:01:15,240 --> 00:01:17,690
+其他的例子是算术异常，
+Other examples are arithmetic exception,
+
+33
+00:01:17,690 --> 00:01:21,200
+当你除以0，更多的数字格式时
+which can happen when you divide by zero, more number format
+
+34
+00:01:21,200 --> 00:01:25,260
+异常，当您试图解析一个实际上不是
+exception, when you try to parse a string that is not actually
+
+35
+00:01:25,260 --> 00:01:27,110
+一个数字。
+a number.
+
+36
+00:01:27,110 --> 00:01:29,760
+所以这些是典型的错误例子，
+So those are typically examples of bugs,
+
+37
+00:01:29,760 --> 00:01:34,170
+但是有另一种使用异常的方法，
+but there's another way that exceptions are used,
+
+38
+00:01:34,170 --> 00:01:37,950
+不仅仅是为了给错误发信号和帮助你找到它们，还有更多
+not just for signaling bugs and helping you find them, but more
+
+39
+00:01:37,950 --> 00:01:40,410
+有意地，更多地作为你设计的一部分
+intentionally, more as part of your design
+
+40
+00:01:40,410 --> 00:01:42,890
+帮助改进代码结构
+to help improve the structure of your code
+
+41
+00:01:42,890 --> 00:01:46,120
+还有程序，让你的方法表明
+and have procedures, have your methods signal that they
+
+42
+00:01:46,120 --> 00:01:49,390
+有特殊的结果。
+have special results.
+
+43
+00:01:49,390 --> 00:01:52,710
+现在我们将对比特殊情况下使用异常
+Now we're going to contrast using exceptions for special
+
+44
+00:01:52,710 --> 00:01:56,420
+与处理特殊结果的另一种常见方法相反的结果
+results against another common way of handling special results
+
+45
+00:01:56,420 --> 00:02:00,650
+其实可以追溯到很多很多年前
+that actually dates back many, many years ago to earlier
+
+46
+00:02:00,650 --> 00:02:03,620
+没有异常处理的编程语言，
+programming languages that did not have exception handling,
+
+47
+00:02:03,620 --> 00:02:06,845
+通常是C，在C++的旧版本上。
+typically C, on old versions of C++.
+
+49
+00:02:09,440 --> 00:02:13,450
+这种方法仍然存在，这里是你通常看到的。
+And this approach persists and here's what you typically see.
+
+50
+00:02:13,450 --> 00:02:18,800
+所以一个方法返回一个int，然后得到一个特殊的值，
+So a method returns an int and you get a special value,
+
+51
+00:02:18,800 --> 00:02:23,440
+就像消极的，当出了问题。
+like negative one, when something has gone wrong.
+
+52
+00:02:23,440 --> 00:02:26,140
+或者当方法
+Or you get a null reference when the method
+
+53
+00:02:26,140 --> 00:02:28,920
+应该返回一个对象而不是返回
+is supposed to return an object instead of returning
+
+54
+00:02:28,920 --> 00:02:31,160
+一个普通的物体。
+an ordinary object.
+
+55
+00:02:31,160 --> 00:02:33,130
+所以如果你谨慎使用这种方法是可以的，
+So this approach is OK if you use it sparingly,
+
+56
+00:02:33,130 --> 00:02:35,310
+但在实践中并没有得到很好的应用
+but it's not used very sparingly in practice
+
+57
+00:02:35,310 --> 00:02:37,150
+它有两个问题。
+and it has two problems.
+
+58
+00:02:37,150 --> 00:02:39,630
+首先，它强制程序员
+First of all, it forces the programmer
+
+59
+00:02:39,630 --> 00:02:42,970
+记住要检查返回值，
+to remember to check that return value,
+
+60
+00:02:42,970 --> 00:02:46,410
+不幸的是，对于程序员来说
+and unfortunately, it's very easy for the programmer
+
+61
+00:02:46,410 --> 00:02:49,400
+忘记做那件事。
+to forget to do that.
+
+62
+00:02:49,400 --> 00:02:52,100
+例如，如果你打电话给find
+So for example, if you're calling find
+
+63
+00:02:52,100 --> 00:02:54,024
+当它不能
+and it's error behavior when it can't
+
+64
+00:02:54,024 --> 00:02:55,440
+找到你要找的东西
+find the thing that you're looking
+
+65
+00:02:55,440 --> 00:02:59,140
+为了返回一个负数，程序员
+for is to return a negative one, the programmer
+
+66
+00:02:59,140 --> 00:03:01,150
+可能只是想，哦，我有一个索引回来了。
+may just think, oh, I got an index back.
+
+67
+00:03:01,150 --> 00:03:04,050
+我将继续使用这个索引。
+I'm going to go ahead and use that index.
+
+68
+00:03:04,050 --> 00:03:06,644
+然后那个负数在程序中传播
+And then that negative one is propagating through the program
+
+69
+00:03:06,644 --> 00:03:09,060
+也许在离他们实际所在地很远的地方
+and maybe somewhere very far away from where they actually
+
+70
+00:03:09,060 --> 00:03:13,755
+称为find，它实际上会抛出一个超出界限的索引
+called find, it will actually throw an index out of bounds
+
+71
+00:03:13,755 --> 00:03:14,777
+在那里。
+there.
+
+72
+00:03:14,777 --> 00:03:16,360
+或者它可能永远不会抛出任何错误
+Or it may never throw any error at all
+
+73
+00:03:16,360 --> 00:03:17,830
+只会产生一个错误的答案。
+and simply produce a wrong answer.
+
+74
+00:03:17,830 --> 00:03:19,770
+所以我们以前也讨论过这个问题。
+So we've talked about that problem before.
+
+75
+00:03:19,770 --> 00:03:24,980
+这就是快速失败的问题。
+That's the failure to fail fast problem.
+
+76
+00:03:24,980 --> 00:03:28,980
+所以这是一个用特殊值作为方法的问题
+So that's one problem with using special values as a way
+
+77
+00:03:28,980 --> 00:03:32,319
+发出异常情况的信号。
+to signal unusual cases.
+
+78
+00:03:32,319 --> 00:03:33,110
+这是另一种方法。
+Here's another way.
+
+79
+00:03:33,110 --> 00:03:34,068
+还有一个问题。
+Here's another problem.
+
+80
+00:03:34,068 --> 00:03:37,340
+找到这种特殊的价值并不总是容易的。
+It may not always be easy to find that special value.
+
+81
+00:03:37,340 --> 00:03:42,010
+所以假设我们有一本关于生日的书
+So suppose we have, for example, a book of the birthdates
+
+82
+00:03:42,010 --> 00:03:44,910
+所以这是一节课
+of your friends and so this is a class
+
+83
+00:03:44,910 --> 00:03:46,977
+它应该代表那本书。
+and it's supposed to represent that book.
+
+84
+00:03:46,977 --> 00:03:48,810
+你给它一个你朋友的名字。
+You give it the name of one of your friends.
+
+85
+00:03:48,810 --> 00:03:51,900
+它应该会返回那个人的生日。
+It's supposed to return that person's birthdate.
+
+86
+00:03:51,900 --> 00:03:54,075
+这个本地日期类是Java的一部分
+This local date class is part of the Java
+
+87
+00:03:54,075 --> 00:03:56,920
+API，那就把它当成约会吧，
+API, so just think of it as being a date,
+
+88
+00:03:56,920 --> 00:03:58,007
+但它是个物体。
+but it's an object.
+
+89
+00:03:58,007 --> 00:03:59,590
+如果生日那天我们该怎么办
+Well what should we do if the birthday
+
+90
+00:03:59,590 --> 00:04:02,500
+书上没有名字的条目？
+book doesn't have an entry for the person whose name is given?
+
+91
+00:04:02,500 --> 00:04:04,180
+好吧，我们可以回个特别的日期
+Well, we could return some special date
+
+92
+00:04:04,180 --> 00:04:06,674
+我们不会把它当作真正的约会对象。
+that we're not going to use as a real date.
+
+93
+00:04:06,674 --> 00:04:08,090
+事实上，糟糕的程序员
+In fact, bad programmers have been
+
+94
+00:04:08,090 --> 00:04:10,870
+做了很长一段时间。
+doing that for a long time.
+
+95
+00:04:10,870 --> 00:04:13,600
+在上个世纪，在20世纪，
+In the last century, in the 20th century,
+
+96
+00:04:13,600 --> 00:04:17,329
+像这样的约会回来并不少见
+it was not uncommon to return a date like this
+
+97
+00:04:17,329 --> 00:04:20,690
+因为很明显1960年没有程序
+since it was obvious that no program written in 1960
+
+98
+00:04:20,690 --> 00:04:23,570
+仍将在1999年运行。
+would still be running in 1999.
+
+99
+00:04:23,570 --> 00:04:28,160
+所以这是一个非常安全的事情，作为一个不约会回来。
+So this was a perfectly safe thing to return as not a date.
+
+100
+00:04:28,160 --> 00:04:29,759
+结果发现那些人错了
+Turns out those people were wrong
+
+101
+00:04:29,759 --> 00:04:31,800
+当我们翻车的时候
+and this caused a big problem when we rolled over
+
+102
+00:04:31,800 --> 00:04:36,060
+从1999年到2000年。
+from 1999 to 2000.
+
+103
+00:04:36,060 --> 00:04:37,590
+这里有一个更好的方法。
+Here's a better approach.
+
+104
+00:04:37,590 --> 00:04:39,590
+这个查找功能，当它不能
+This look up function, when it can't
+
+105
+00:04:39,590 --> 00:04:43,160
+查找此人的姓名会引发异常。
+find the person's name can throw an exception.
+
+106
+00:04:43,160 --> 00:04:44,450
+这是故意的例外。
+It's an intentional exception.
+
+107
+00:04:44,450 --> 00:04:47,830
+在很多情况下，我们都希望能得到它。
+It's one that we're expecting to get in many cases.
+
+108
+00:04:47,830 --> 00:04:49,420
+这对我们来说并不罕见
+It's not going to be unusual for us
+
+109
+00:04:49,420 --> 00:04:53,050
+试着把名字传给这本生日书
+to try to pass a name to this birthday book
+
+110
+00:04:53,050 --> 00:04:56,160
+发现他们不在里面。
+and find that they're not in there.
+
+111
+00:04:56,160 --> 00:04:58,760
+所以这个签名，方法声明
+So this signature, the method declares
+
+112
+00:04:58,760 --> 00:05:00,920
+除了返回本地日期，
+that in addition to returning local date,
+
+113
+00:05:00,920 --> 00:05:02,900
+一种可能的方法
+one of the possible ways that it can return
+
+114
+00:05:02,900 --> 00:05:05,100
+就是抛出这个异常。
+is by throwing this exception.
+
+115
+00:05:05,100 --> 00:05:07,110
+这里有一个关于
+And here's sort of a sketch of how
+
+116
+00:05:07,110 --> 00:05:09,540
+它会看到这个函数的内部。
+it would look inside the body of that function.
+
+117
+00:05:09,540 --> 00:05:11,580
+但从来电者的角度来看，
+But from the caller's point of view,
+
+118
+00:05:11,580 --> 00:05:13,910
+他们首先假设，
+what they do is they first assume,
+
+119
+00:05:13,910 --> 00:05:15,380
+一切都会好起来的
+well, everything's going to go fine
+
+120
+00:05:15,380 --> 00:05:17,640
+我们会在书中找到艾莉莎
+and we're going to find Alyssa in the book
+
+121
+00:05:17,640 --> 00:05:19,612
+它将返回一个本地日期
+and it's going to return a local date
+
+122
+00:05:19,612 --> 00:05:21,570
+我们可以把它赋给生日并使用它。
+and we can assign that to birthdate and use it.
+
+123
+00:05:21,570 --> 00:05:25,060
+但在某些情况下，我们可能找不到艾莉莎
+But in some cases, we may not find Alyssa, in which case
+
+124
+00:05:25,060 --> 00:05:27,970
+我们有一个单独的catch子句
+we have this separate catch clause that
+
+125
+00:05:27,970 --> 00:05:31,610
+处理没有找到艾莉莎生日的案子。
+deals with the case where Alyssa's birthday is not found.
+
+126
+00:05:31,610 --> 00:05:34,320
+所以现在不需要任何特别的价值。
+So there's no need now for any special value.
+
+127
+00:05:34,320 --> 00:05:37,280
+这段代码周围没有空值。
+We don't have any nulls floating around this code.
+
+128
+00:05:37,280 --> 00:05:39,810
+我们没有任何可能传播的负面影响。
+We don't have any negative ones that might propagate.
+
+129
+00:05:39,810 --> 00:05:43,580
+我们没有任何无效日期
+We don't have any invalid dates that might someday actually
+
+130
+00:05:43,580 --> 00:05:45,010
+有效。
+be valid.
+
+131
+00:05:45,010 --> 00:05:46,910
+编译器实际上在帮助
+And the compiler is actually helping
+
+132
+00:05:46,910 --> 00:05:51,240
+我们检查所有这些案子。
+us check that we're handling all of these cases.
+
+133
+00:05:51,240 --> 00:05:54,070
+我们现在谈谈这个。
+Let's talk about that now.
+
+134
+00:05:54,070 --> 00:05:56,230
+所以我们看到了两个不同的目的
+So we've seen two different purposes
+
+135
+00:05:56,230 --> 00:05:59,130
+例外情况——特别的结果，比如在生日那天
+for exceptions-- special results, like in the birthday
+
+136
+00:05:59,130 --> 00:06:01,440
+我们刚看到的书，还有窃听器，
+book we just saw, and bug detection,
+
+137
+00:06:01,440 --> 00:06:03,970
+类似于空指针异常。
+like null pointer exceptions.
+
+138
+00:06:03,970 --> 00:06:07,300
+一般来说，您需要使用选中的异常
+As a general rule, you'll want to use checked exceptions
+
+139
+00:06:07,300 --> 00:06:10,940
+向信号发送特殊结果和未经检查的异常
+to signal special results and unchecked exceptions to signal
+
+140
+00:06:10,940 --> 00:06:11,524
+漏洞。
+bugs.
+
+141
+00:06:11,524 --> 00:06:13,690
+我们将讨论什么是检查和未检查
+We're going to talk about what checked and unchecked
+
+142
+00:06:13,690 --> 00:06:15,740
+现在是例外。
+exceptions are right now.
+
+143
+00:06:15,740 --> 00:06:17,790
+这是一般规则，但在下一节中
+This is a general rule, but in the next section
+
+144
+00:06:17,790 --> 00:06:20,373
+在这篇文章中，我们将对它进行一些改进，因为
+of this reading, we're going to refine this a bit because it's
+
+145
+00:06:20,373 --> 00:06:24,060
+在某些方面会有点过于严格。
+going to be a little bit too strict for some purposes.
+
+146
+00:06:24,060 --> 00:06:27,300
+而且Java库确实违反了这个一般规则。
+And the Java library does violate this general rule.
+
+147
+00:06:27,300 --> 00:06:28,604
+我们来谈谈原因。
+We'll talk about why.
+
+148
+00:06:28,604 --> 00:06:30,770
+但首先，什么是检查异常和未检查
+But first, what are checked exceptions and unchecked
+
+149
+00:06:30,770 --> 00:06:31,370
+例外情况？
+exceptions?
+
+150
+00:06:31,370 --> 00:06:33,710
+所以checked异常称为checked
+So checked exceptions are called checked
+
+151
+00:06:33,710 --> 00:06:37,520
+因为编译器会在编译时检查它们。
+because the compiler will check them at compile time.
+
+152
+00:06:37,520 --> 00:06:40,510
+也就是说，它将确保如果一个方法可能抛出
+That is, it will make sure that if a method might throw
+
+153
+00:06:40,510 --> 00:06:43,870
+一个选中的异常——如果它的主体中有
+a checked exception-- if it has in its body
+
+154
+00:06:43,870 --> 00:06:48,390
+诸如此类的事情——而且没有发现例外
+something like this-- and NotFoundException
+
+155
+00:06:48,390 --> 00:06:50,430
+是已检查的异常之一，
+is one of the checked exceptions,
+
+156
+00:06:50,430 --> 00:06:55,780
+然后编译器将确保我们声明
+then the compiler is going to ensure that we declared
+
+157
+00:06:55,780 --> 00:06:59,310
+在查找的方法签名中引发NotFoundException
+throws NotFoundException in the method signature of the lookup
+
+158
+00:06:59,310 --> 00:07:01,240
+方法。
+method.
+
+159
+00:07:01,240 --> 00:07:03,864
+因此，NotFoundException是我们将其设为checked异常
+So NotFoundException is we would make it a checked exception
+
+160
+00:07:03,864 --> 00:07:06,280
+这就是签名中有抛出子句的原因。
+and that's why the signature has that throws clause in it.
+
+161
+00:07:06,280 --> 00:07:08,240
+如果我们这里没有这个，那么
+And if we didn't have this here, then
+
+162
+00:07:08,240 --> 00:07:11,350
+编译器会给我们一个错误并告诉我们
+the compiler would give us an error and tell us
+
+163
+00:07:11,350 --> 00:07:12,720
+我们得把它放在那里。
+we have to put that there.
+
+164
+00:07:12,720 --> 00:07:17,400
+检查的第二部分是如果一个方法调用
+Second part of the checking is that if a method calls
+
+165
+00:07:17,400 --> 00:07:21,015
+另一个可能抛出checked异常的方法——所以
+another method that might throw checked exception-- so
+
+166
+00:07:21,015 --> 00:07:22,810
+这里，这里的代码，这里的客户端代码
+here, this code here, this client code that
+
+167
+00:07:22,810 --> 00:07:25,780
+正在调用birthdays.lookup刚刚声明
+is calling birthdays.lookup just declared that it
+
+168
+00:07:25,780 --> 00:07:28,500
+引发NotFoundException。
+throws a NotFoundException.
+
+169
+00:07:28,500 --> 00:07:31,380
+编译器将确保
+The compiler's going to ensure that we
+
+170
+00:07:31,380 --> 00:07:34,939
+在这段代码中以某种方式处理可能的异常。
+deal with that possible exception somehow in this code.
+
+171
+00:07:34,939 --> 00:07:36,480
+有两种方法可以解决这个问题。
+And there's two ways to deal with it.
+
+172
+00:07:36,480 --> 00:07:38,080
+要么我们就在这里抓住它，
+Either we're catching it right here,
+
+173
+00:07:38,080 --> 00:07:40,230
+这就是代码现在所做的。
+and that's what this code is doing right now.
+
+174
+00:07:40,230 --> 00:07:44,740
+或者另一种方法是声明异常
+Or the other way to do it is to declare the exception
+
+175
+00:07:44,740 --> 00:07:46,290
+在它自己的签名里。
+in its own signature.
+
+176
+00:07:46,290 --> 00:07:49,390
+所以包含此代码的方法
+So the method that contains this code here
+
+177
+00:07:49,390 --> 00:07:53,030
+可能会引发NotFoundException本身
+might throw NotFoundException itself
+
+178
+00:07:53,030 --> 00:07:56,090
+如果它没有抓住它。
+if it wasn't catching it.
+
+179
+00:07:56,090 --> 00:07:57,770
+那是因为例外的方式
+And that's because the way exceptions
+
+180
+00:07:57,770 --> 00:07:59,920
+工作是如果他们不是真的被抓在这里，
+work is if they're not actually caught here,
+
+181
+00:07:59,920 --> 00:08:02,330
+然后他们就会跳出这个方法
+then they will jump out of this method
+
+182
+00:08:02,330 --> 00:08:04,010
+传播到调用方。
+and propagate up to the caller.
+
+183
+00:08:04,010 --> 00:08:07,540
+所以检查异常，我们让编译器确保
+So checked exceptions, we have the compiler making sure
+
+184
+00:08:07,540 --> 00:08:11,644
+在某种程度上，我们正在处理这个例外。
+that at some point we are dealing with that exception.
+
+185
+00:08:11,644 --> 00:08:13,310
+这非常有用，因为它可以确保
+This is really useful because it ensures
+
+186
+00:08:13,310 --> 00:08:15,440
+我们期望发生的例外--
+that exceptions that we expect to occur--
+
+187
+00:08:15,440 --> 00:08:17,920
+换句话说，这些特殊的结果
+in other words, these special results that
+
+188
+00:08:17,920 --> 00:08:20,880
+是该方法的有效可能结果，
+are a valid possible result of the method,
+
+189
+00:08:20,880 --> 00:08:24,740
+即使没有可能发生的错误
+even in the absence of bugs that could happen-- they
+
+190
+00:08:24,740 --> 00:08:28,052
+将确保这些都得到处理。
+will ensure that those are handled.
+
+191
+00:08:28,052 --> 00:08:29,510
+另一类例外
+Now the other category of exception
+
+192
+00:08:29,510 --> 00:08:30,551
+是未经检查的异常。
+are unchecked exceptions.
+
+193
+00:08:30,551 --> 00:08:32,600
+我们用这些信号来通知虫子，然后
+And we use these to signal bugs, and we
+
+194
+00:08:32,600 --> 00:08:35,309
+不必在整个链条上申报
+don't have to declare them all the way up the chain
+
+195
+00:08:35,309 --> 00:08:39,672
+因为我们不希望它们在正确的程序中发生。
+because we don't expect them to happen in a correct program.
+
+196
+00:08:39,672 --> 00:08:41,880
+我们不希望调用链上的每个方法都有
+We don't want every method up that call chain to have
+
+197
+00:08:41,880 --> 00:08:44,338
+声明它可能抛出与
+to declare that it might throw all the kinds of bug related
+
+198
+00:08:44,338 --> 00:08:46,870
+可能发生的异常，如索引越界、空
+exceptions that can happen, like index out of bounds, null
+
+199
+00:08:46,870 --> 00:08:49,620
+指针异常、合法参数、断言失败。
+pointer exceptions, legal arguments, assertion failures.
+
+200
+00:08:49,620 --> 00:08:52,270
+任何一种都有可能发生在虫子的情况下。
+Any one of those could happen in the case of a bug.
+
+201
+00:08:52,270 --> 00:08:55,525
+所以我们想让他们传播
+And so we actually want them to propagate up
+
+202
+00:08:55,525 --> 00:08:58,570
+尽可能的合理，然后抓住他们并报告
+as far as is reasonable and then catch them and report them
+
+203
+00:08:58,570 --> 00:09:01,029
+给程序员。
+to the programmer.
+
+204
+00:09:01,029 --> 00:09:02,820
+所以对于未检查的异常，编译器
+So for an unchecked exception, the compiler
+
+205
+00:09:02,820 --> 00:09:04,320
+不会检查尝试捕获。
+will not check for a try catch.
+
+206
+00:09:04,320 --> 00:09:06,070
+它不需要抛出声明。
+It won't require a throws declaration.
+
+207
+00:09:06,070 --> 00:09:08,710
+你仍然可以写一个抛出声明
+You can still write a throws declaration
+
+208
+00:09:08,710 --> 00:09:11,350
+在未检查异常的方法签名上，
+on your method signature for unchecked exceptions,
+
+209
+00:09:11,350 --> 00:09:13,870
+但这一点也不好笑。
+but this has no effect at bit funny.
+
+210
+00:09:13,870 --> 00:09:16,690
+我们不建议这样做，有些编译器实际上
+We don't recommend doing it and some compilers will actually
+
+211
+00:09:16,690 --> 00:09:17,797
+警告你。
+warn you about it.
+
+213
+00:09:20,215 --> 00:09:22,090
+现在当你抛出一个异常，一个异常
+Now when you throw an exception, an exception
+
+214
+00:09:22,090 --> 00:09:23,780
+可能有与之相关的消息
+may have a message associated with them
+
+215
+00:09:23,780 --> 00:09:26,750
+写一点详细的信息是个好主意
+and it's a good idea to write a bit of a detailed message
+
+216
+00:09:26,750 --> 00:09:29,570
+所以程序的用户
+there so that the user of the program
+
+217
+00:09:29,570 --> 00:09:31,490
+明白发生了什么。
+understands what's going on.
+
+218
+00:09:31,490 --> 00:09:34,170
+所以我们说——我们把
+So we've said-- we've made the distinction between checked
+
+219
+00:09:34,170 --> 00:09:35,555
+未经检查。
+and unchecked.
+
+220
+00:09:35,555 --> 00:09:38,550
+这在Java中是如何表示的？
+How is that actually represented inside Java?
+
+221
+00:09:38,550 --> 00:09:40,050
+如何判断是否有例外
+How do we say whether an exception
+
+222
+00:09:40,050 --> 00:09:42,020
+应该检查还是不检查？
+should be checked or unchecked?
+
+223
+00:09:42,020 --> 00:09:44,120
+好吧，这是通过说哪门课来完成的--
+Well it's done by saying which class--
+
+224
+00:09:44,120 --> 00:09:47,790
+哪种异常类--您的异常是
+which kind of exception class-- your exception is
+
+225
+00:09:47,790 --> 00:09:50,010
+会延伸的。
+going to extend.
+
+226
+00:09:50,010 --> 00:09:53,230
+这里是Java异常的类层次结构。
+And here is the class hierarchy of Java exceptions.
+
+227
+00:09:53,230 --> 00:09:57,810
+所以在顶部，投掷物是可以投掷的物体
+So at the top, throwables are objects that can be thrown
+
+228
+00:09:57,810 --> 00:09:59,370
+会被抓住的。
+and can be caught.
+
+229
+00:09:59,370 --> 00:10:01,430
+有两种可抛。
+And there are two kinds of throwable.
+
+230
+00:10:01,430 --> 00:10:05,100
+一个是例外，比如一个类，
+One is an exception, such as a class,
+
+231
+00:10:05,100 --> 00:10:09,900
+这是我们用于检查异常的普通类。
+that is the normal class that we use for checked exceptions.
+
+232
+00:10:09,900 --> 00:10:11,680
+错误是未经检查的异常，
+And errors are unchecked exceptions,
+
+233
+00:10:11,680 --> 00:10:14,570
+但它们应该留给编译器使用
+but they should be reserved for the compiler
+
+234
+00:10:14,570 --> 00:10:15,540
+在运行时系统中。
+in the runtime system.
+
+235
+00:10:15,540 --> 00:10:18,690
+所以错误属于Java，程序员不应该
+So error belongs to Java and programmers should not
+
+236
+00:10:18,690 --> 00:10:20,830
+子类错误。
+subclass error.
+
+237
+00:10:20,830 --> 00:10:25,310
+然后运行时异常是超级类
+And then runtime exception is the super class
+
+238
+00:10:25,310 --> 00:10:29,564
+未经检查的异常。
+of unchecked exceptions.
+
+239
+00:10:29,564 --> 00:10:31,563
+所以我们区分
+So the way that we distinguish between a checked
+
+240
+00:10:31,563 --> 00:10:33,021
+一个未经检查的异常
+and an unchecked exception, the way
+
+241
+00:10:33,021 --> 00:10:35,179
+我们创建checked和unchecked异常是
+that we create checked and unchecked exceptions is
+
+242
+00:10:35,179 --> 00:10:36,720
+如果我们想要检查异常，我们
+if we want a checked exception, we're
+
+243
+00:10:36,720 --> 00:10:38,220
+将扩展异常。
+going to extend exception.
+
+244
+00:10:38,220 --> 00:10:40,030
+如果我们想要一个未经检查的异常，
+If we want an unchecked exception,
+
+245
+00:10:40,030 --> 00:10:43,450
+我们将扩展运行时异常。
+we're going to extend runtime exception.
+

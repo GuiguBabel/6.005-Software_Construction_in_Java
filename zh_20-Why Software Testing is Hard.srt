@@ -1,0 +1,615 @@
+1
+00:00:01,340 --> 00:00:03,690
+测试更一般流程的示例
+Testing the example of a more general process
+
+2
+00:00:03,690 --> 00:00:06,530
+称为验证，它是关于发现问题
+called validation, which is about uncovering problems
+
+3
+00:00:06,530 --> 00:00:08,880
+希望能增加你的信心
+in your program and hopefully increasing your confidence
+
+4
+00:00:08,880 --> 00:00:10,540
+这是正确的。
+that it's correct.
+
+5
+00:00:10,540 --> 00:00:13,870
+其他类型的验证包括形式推理，
+Some other kinds of validation include formal reasoning,
+
+6
+00:00:13,870 --> 00:00:16,420
+也被称为验证，其中
+which is also called verification, where
+
+7
+00:00:16,420 --> 00:00:18,960
+你所做的是试图建立一个正式的证据
+what you're doing is trying to construct a formal proof
+
+8
+00:00:18,960 --> 00:00:21,080
+程序是正确的。
+that the program is correct.
+
+9
+00:00:21,080 --> 00:00:23,450
+这可能是非常乏味的手工操作，特别是
+This can be very tedious to do by hand, particularly
+
+10
+00:00:23,450 --> 00:00:25,150
+有更大的程序。
+with larger programs.
+
+11
+00:00:25,150 --> 00:00:28,170
+验证的自动化工具支持即将到来，
+Automated tool support for verification is coming,
+
+12
+00:00:28,170 --> 00:00:29,920
+但它仍然是一个活跃的研究领域，
+but it's still an active area of research,
+
+13
+00:00:29,920 --> 00:00:32,720
+但你可能还是会发现那些关键的小碎片
+but you may still find that small, crucial pieces
+
+14
+00:00:32,720 --> 00:00:34,680
+一个程序的
+of a program might be formally verified
+
+15
+00:00:34,680 --> 00:00:36,810
+就像操作系统调度器
+like an operating system scheduler
+
+16
+00:00:36,810 --> 00:00:39,230
+或者字节码解释器甚至文件
+or a bytecode interpreter or even the file
+
+17
+00:00:39,230 --> 00:00:42,816
+操作系统中的系统。
+system in an operating system.
+
+18
+00:00:42,816 --> 00:00:45,180
+第二种验证是代码检查
+The second kind of validation is code review
+
+19
+00:00:45,180 --> 00:00:48,811
+我们已经在之前的阅读中讨论过了。
+and we've already talked about that in a previous reading.
+
+20
+00:00:48,811 --> 00:00:51,310
+基本上，代码审查就是让其他人仔细阅读
+Basically code review is having somebody else carefully read
+
+21
+00:00:51,310 --> 00:00:53,260
+你的代码，随便想想，
+your code, think about it informally,
+
+22
+00:00:53,260 --> 00:00:54,890
+试着去寻找虫子。
+and try to look for bugs.
+
+23
+00:00:54,890 --> 00:00:56,750
+就像有人校对
+It's a lot like having somebody proofread
+
+24
+00:00:56,750 --> 00:00:59,364
+你写的一篇文章。
+an essay that you've written.
+
+25
+00:00:59,364 --> 00:01:00,780
+第三种验证我们
+The third kind of validation we're
+
+26
+00:01:00,780 --> 00:01:03,070
+我们要谈谈今天，这是考验。
+going to talk about the day, which is testing.
+
+27
+00:01:03,070 --> 00:01:05,560
+测试基本上是运行程序，并且非常小心
+Testing is basically running the program and very carefully
+
+28
+00:01:05,560 --> 00:01:09,720
+选择输入并检查其是否正确。
+selected inputs and checking that it does the right thing.
+
+29
+00:01:09,720 --> 00:01:13,440
+现在有一个警告——即使是最好的验证，
+Now a note of warning-- even with the very best validation,
+
+30
+00:01:13,440 --> 00:01:15,090
+这三种技术
+all three of these techniques, it's
+
+31
+00:01:15,090 --> 00:01:17,530
+在软件方面很难达到完美的质量。
+very hard to achieve perfect quality in software.
+
+32
+00:01:17,530 --> 00:01:20,920
+你永远也找不到所有的虫子。
+You're never going to find all the bugs.
+
+33
+00:01:20,920 --> 00:01:23,700
+一些研究——一些残余缺陷率，
+Some studies here-- some residual defect rates,
+
+34
+00:01:23,700 --> 00:01:27,010
+这是软件运行后遗留的错误数
+that is the number of bugs left over after the software has
+
+35
+00:01:27,010 --> 00:01:30,700
+作为代码行数的函数提供
+shipped as a function of the number of lines of code
+
+36
+00:01:30,700 --> 00:01:32,540
+在那个软件里。
+in that software.
+
+37
+00:01:32,540 --> 00:01:36,950
+对于典型的行业实践，通常使用测试
+For typical industry practices, usually using testing
+
+38
+00:01:36,950 --> 00:01:40,540
+在代码评审中，最终会出现1到10个错误
+in code review, you end up with 1 to 10 bugs
+
+39
+00:01:40,540 --> 00:01:42,940
+每1000行代码。
+per 1,000 lines of code.
+
+40
+00:01:42,940 --> 00:01:45,100
+像你这样的高质量验证
+With very high quality validation like you
+
+41
+00:01:45,100 --> 00:01:48,070
+可能在库代码中找到，例如，
+might find in library code, for example,
+
+42
+00:01:48,070 --> 00:01:51,360
+你可以做的比那好10倍
+you can do about 10 times better than that and with very
+
+43
+00:01:51,360 --> 00:01:53,690
+最佳任务关键型验证，
+best mission critical kinds of validation,
+
+44
+00:01:53,690 --> 00:01:55,920
+你还可以再做10次。
+you might do another 10 times better than that.
+
+45
+00:01:55,920 --> 00:01:59,132
+但结果是你永远不会去
+But the result is you're never going
+
+46
+00:01:59,132 --> 00:02:00,590
+除掉所有的虫子
+to get rid of all the bugs and this
+
+47
+00:02:00,590 --> 00:02:02,006
+如果你
+can be very discouraging if you're
+
+48
+00:02:02,006 --> 00:02:03,220
+建立一个非常大的系统。
+building a very large system.
+
+49
+00:02:03,220 --> 00:02:05,780
+所以如果你有一百万行——典型的行业代码
+So if you ship a million lines-- typical industry code, which
+
+50
+00:02:05,780 --> 00:02:10,690
+是目前典型的大型桌面应用程序
+is typical large desktop application these days-- at one
+
+51
+00:02:10,690 --> 00:02:12,730
+每1000行代码有一个bug，意思是
+bug per 1,000 lines of code, it means
+
+52
+00:02:12,730 --> 00:02:15,711
+你所发布的代码中有1000个bug
+you've got 1,000 bugs in the code that you've shipped
+
+53
+00:02:15,711 --> 00:02:17,960
+随着时间的推移你会逐渐发现
+and you're going to gradually discover those over time
+
+54
+00:02:17,960 --> 00:02:21,060
+当用户遇到他们时。
+as users run into them.
+
+55
+00:02:21,060 --> 00:02:23,780
+不幸的是，软件测试比
+Unfortunately, software testing is harder than
+
+56
+00:02:23,780 --> 00:02:27,280
+其他形式的工程测试。
+testing in other forms of engineering.
+
+57
+00:02:27,280 --> 00:02:30,530
+详尽的测试，即尝试所有可能的输入
+Exhaustive testing, that is trying all possible inputs
+
+58
+00:02:30,530 --> 00:02:33,680
+对于一个软件来说，往往是完全不可行的
+to a piece of software, tends to be completely infeasible
+
+59
+00:02:33,680 --> 00:02:38,280
+即使你想的是一个简单的水平
+even if you're thinking about something as simple as a level
+
+60
+00:02:38,280 --> 00:02:42,620
+涉及两个32位输入的乘法运算。
+multiply operation involving two 32-bit inputs.
+
+61
+00:02:42,620 --> 00:02:45,180
+好吧，32个可能值中有两个
+Well, there's two to the 32 possible values
+
+62
+00:02:45,180 --> 00:02:47,920
+对于a，b有2到32个可能值。
+for a, there's two to the 32 possible values for b.
+
+63
+00:02:47,920 --> 00:02:52,520
+所以对于a和b对，有2到64个可能的测试
+So for the pair a and b, there is 2 to the 64 possible test
+
+64
+00:02:52,520 --> 00:02:54,590
+如果你想的话你必须尝试的案例
+cases that you would have to try if you wanted
+
+65
+00:02:54,590 --> 00:02:57,090
+做详尽的测试
+to do exhaustive testing and that's more the number of atoms
+
+66
+00:02:57,090 --> 00:03:00,150
+在宇宙中。
+in the universe.
+
+67
+00:03:00,150 --> 00:03:02,110
+另一种测试是随机测试
+Another kind of testing is haphazard testing
+
+68
+00:03:02,110 --> 00:03:04,820
+你经常在新手和业余爱好者中看到这种情况
+and you often see this with novices and amateurs
+
+69
+00:03:04,820 --> 00:03:07,780
+那些正在学习编程的人
+and people who are just learning to program, where you just
+
+70
+00:03:07,780 --> 00:03:10,270
+向它抛出一些输入，看看它是否
+throw some inputs at it and see if it does
+
+71
+00:03:10,270 --> 00:03:13,320
+正确的事情，你没有
+the right thing, where you haven't
+
+72
+00:03:13,320 --> 00:03:17,040
+做了任何系统的尝试来仔细选择这些输入。
+made any systematic attempt to choose those inputs carefully.
+
+73
+00:03:17,040 --> 00:03:20,240
+除非程序真的
+That's not likely to find bugs unless the program is really
+
+74
+00:03:20,240 --> 00:03:23,850
+它并不能增加我们的信心
+buggy and it really doesn't increase our confidence
+
+75
+00:03:23,850 --> 00:03:25,700
+程序是正确的，所以我们没有
+that the program is correct, so we're not
+
+76
+00:03:25,700 --> 00:03:27,750
+我们来谈谈随机测试。
+going to talk about haphazard testing.
+
+77
+00:03:27,750 --> 00:03:30,360
+我们不会真的谈论随机或统计
+We're not really going to talk about random or statistical
+
+78
+00:03:30,360 --> 00:03:31,070
+也在测试。
+testing either.
+
+79
+00:03:31,070 --> 00:03:33,990
+这是一种非常常用的技术
+This is a very common technique used
+
+80
+00:03:33,990 --> 00:03:36,870
+其他工程学科--
+in other kinds of engineering disciplines--
+
+81
+00:03:36,870 --> 00:03:39,500
+制造业和土木工程。
+in manufacturing and civil engineering.
+
+82
+00:03:39,500 --> 00:03:43,480
+你要做的是随机抽取一个小样本，
+What you do is you pick a small, random sample-- let's say,
+
+83
+00:03:43,480 --> 00:03:45,580
+产品的，硬盘的
+of the product, of the hard drives coming off
+
+84
+00:03:45,580 --> 00:03:50,410
+你的生产线——测试它们，然后推断
+of your manufacturing line-- test them, and then infer
+
+85
+00:03:50,410 --> 00:03:52,620
+整批的错误率
+the bug rate for the entire lot that's
+
+86
+00:03:52,620 --> 00:03:54,670
+从你的生产基地出来
+coming out of your production based
+
+87
+00:03:54,670 --> 00:03:57,250
+关于那些测试的结果。
+on the results of those testing.
+
+88
+00:03:57,250 --> 00:03:58,930
+现在在物理工程领域
+Now in physical engineering, there's
+
+89
+00:03:58,930 --> 00:04:01,710
+你可以用很多技巧来加速这种测试。
+lots of tricks you can use to speed up this kind of testing.
+
+90
+00:04:01,710 --> 00:04:03,835
+你制造的机器会打开和关闭
+You build machines that are going to open and close
+
+91
+00:04:03,835 --> 00:04:09,000
+你的冰箱每天1000次而不是通常的10次
+your refrigerator 1,000 times in a day instead of the usual 10
+
+92
+00:04:09,000 --> 00:04:11,410
+他们的冰箱可能要花上好几年的时间
+years that it might take for their fridge
+
+93
+00:04:11,410 --> 00:04:14,020
+多次开放。
+to be opened many times.
+
+94
+00:04:14,020 --> 00:04:18,079
+而这些加速会导致可预见的已知故障
+And those speed ups give predictable, known failure
+
+95
+00:04:18,079 --> 00:04:20,380
+但问题是
+rates, but the problem is that they
+
+96
+00:04:20,380 --> 00:04:22,210
+假设存在某种连续性
+assume that there is some continuity
+
+97
+00:04:22,210 --> 00:04:25,780
+或是在可能的虫子空间中的一致性
+or uniformity across the space of possible bugs
+
+98
+00:04:25,780 --> 00:04:27,390
+在物质世界里是这样的，
+and that's true in the physical world,
+
+99
+00:04:27,390 --> 00:04:29,970
+但在软件上却不是这样。
+but it's not true in software.
+
+100
+00:04:29,970 --> 00:04:33,000
+软件往往会不连续地变化
+Software tends to vary discontinuously-- there's
+
+101
+00:04:33,000 --> 00:04:38,300
+一个突然失败而不是逐渐失败的地方
+an abrupt place where it fails rather than gradually failing
+
+102
+00:04:38,300 --> 00:04:41,060
+当它越来越接近
+as it gets closer and closer to the point where
+
+103
+00:04:41,060 --> 00:04:43,460
+他们的窃听器存在，它会突然
+their bug exists, it'll just suddenly
+
+104
+00:04:43,460 --> 00:04:47,020
+在某个边界点失败。
+fail at some single boundary point.
+
+105
+00:04:47,020 --> 00:04:51,220
+有一些著名的bug，比如奔腾分区bug
+There are some famous bugs like the Pentium division bug
+
+106
+00:04:51,220 --> 00:04:58,340
+影响了90亿分之一的浮点数
+that affected one in 9 billion floating point divides
+
+107
+00:04:58,340 --> 00:05:01,800
+也没有什么模式对它产生影响。
+and there wasn't much pattern to which ones it effected.
+
+108
+00:05:01,800 --> 00:05:04,480
+类似的堆栈溢出错误，out
+Similarly stack overflow errors, out
+
+109
+00:05:04,480 --> 00:05:06,800
+内存错误，数值溢出
+of memory errors, numeric overflow
+
+110
+00:05:06,800 --> 00:05:10,010
+bug——当软件命中时，这些bug往往会突然发生
+bugs-- these tend to happen abruptly when the software hits
+
+111
+00:05:10,010 --> 00:05:12,680
+一些它不期望的而且总是
+some input that it doesn't expect and always
+
+112
+00:05:12,680 --> 00:05:15,350
+以同样的方式，而不是一些概率变化
+in the same way, not with some probabilistic variation
+
+113
+00:05:15,350 --> 00:05:18,790
+这样我们就可以通过随机抽样找到它。
+that would allow us to find it with random sampling.
+
+114
+00:05:18,790 --> 00:05:21,410
+它们也不会逐渐显现出来
+And they also tend not to gradually show
+
+115
+00:05:21,410 --> 00:05:23,860
+当他们接近那一点时失败的证据。
+evidence of failure as they're approaching that point.
+
+116
+00:05:23,860 --> 00:05:26,720
+在那之前他们一直都很好
+They work fine all the way up until that one
+
+117
+00:05:26,720 --> 00:05:30,220
+会导致失败的90亿分之一。
+in 9 billion division that will cause failure.
+
+118
+00:05:30,220 --> 00:05:33,440
+所以随机测试有时是有用的，
+So random testing is sometimes useful,
+
+119
+00:05:33,440 --> 00:05:36,920
+但坦率地说，统计样本并非如此
+but frankly statistical samples are not that
+
+120
+00:05:36,920 --> 00:05:39,610
+在软件测试中很有用。
+useful in software testing.
+
+121
+00:05:39,610 --> 00:05:42,709
+所以我们要做的是仔细选择我们的测试用例
+So what we have to do instead is choose our test cases carefully
+
+122
+00:05:42,709 --> 00:05:45,000
+系统性的，下一步我们要做的
+and systematically and the next thing we're going to do
+
+123
+00:05:45,000 --> 00:05:47,500
+就是想办法做到这一点。
+is look at a way to do that.
+

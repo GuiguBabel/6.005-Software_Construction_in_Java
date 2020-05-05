@@ -1,0 +1,70 @@
+1
+00:00:00,640 --> 00:00:03,300
+今天我们继续讨论规格
+Today we're continuing our discussion of specifications
+
+2
+00:00:03,300 --> 00:00:06,030
+通过更多地讨论规范的属性
+by talking more about the properties of specs
+
+3
+00:00:06,030 --> 00:00:09,590
+是什么使一些规格比其他规格更好。
+and what makes some specs better than other ones.
+
+4
+00:00:09,590 --> 00:00:11,240
+读完这篇文章，你应该
+After this reading, you should be
+
+5
+00:00:11,240 --> 00:00:13,190
+能够理解不够坚决
+able to understand under determined
+
+6
+00:00:13,190 --> 00:00:17,270
+规范；能够识别和评估非决定论；
+specs; be able to identify and assess non-determinism;
+
+7
+00:00:17,270 --> 00:00:20,290
+应该理解声明性和操作性规范
+should understand declarative and operational specs
+
+8
+00:00:20,290 --> 00:00:22,850
+能够编写声明性规范；
+and be able to write declarative specs;
+
+9
+00:00:22,850 --> 00:00:25,070
+应该了解先决条件的强度，
+should understand the strength of preconditions,
+
+10
+00:00:25,070 --> 00:00:28,670
+岗位条件和规格；能够比较规格
+post-conditions, and specs; be able to compare specifications
+
+11
+00:00:28,670 --> 00:00:31,160
+优点；你应该能写
+strengths; you should be able to write
+
+12
+00:00:31,160 --> 00:00:35,150
+适当强度的连贯有用的规范。
+coherent useful specifications of appropriate strength.
+
+13
+00:00:35,150 --> 00:00:35,650
+好 啊。
+OK.
+
+14
+00:00:35,650 --> 00:00:37,560
+我们开始吧。
+Let's get started.
+

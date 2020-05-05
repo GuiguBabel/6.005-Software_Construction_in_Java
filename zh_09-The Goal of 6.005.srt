@@ -1,0 +1,555 @@
+1
+00:00:00,280 --> 00:00:01,849
+本课程的主要目标是
+Our primary goal in this course is
+
+2
+00:00:01,849 --> 00:00:03,390
+学习如何制作
+to learn how to produce software that
+
+3
+00:00:03,390 --> 00:00:05,690
+是安全的，容易理解，
+is safe from bugs, easy to understand,
+
+4
+00:00:05,690 --> 00:00:07,500
+准备好改变。
+and ready for change.
+
+5
+00:00:07,500 --> 00:00:08,690
+这是什么意思？
+And what do we mean by that?
+
+6
+00:00:08,690 --> 00:00:11,200
+好吧，免受虫害意味着它的行为是正确的
+Well, safe from bugs means that it behaves correctly
+
+7
+00:00:11,200 --> 00:00:14,390
+现在，但同时也是防御性的，
+right now, but also that it's defensive,
+
+8
+00:00:14,390 --> 00:00:18,260
+它能防止将来可能出现的虫子。
+that it guards against bugs that might crop up in the future.
+
+9
+00:00:18,260 --> 00:00:20,010
+容易理解意味着你
+Easy to understand means that you're
+
+10
+00:00:20,010 --> 00:00:22,520
+能够与未来的程序员沟通
+able to communicate to future programmers who
+
+11
+00:00:22,520 --> 00:00:24,520
+需要理解并修改代码，
+need to understand and make changes to the code,
+
+12
+00:00:24,520 --> 00:00:26,900
+比如修复错误或者添加新功能。
+like fixing bugs or adding new features.
+
+13
+00:00:26,900 --> 00:00:29,540
+未来的程序员可能就是你。
+A future programmer might actually be you.
+
+14
+00:00:29,540 --> 00:00:32,220
+如果你不写的话你会很惊讶你会忘记
+You'd be surprised how much you forget if you don't write it
+
+15
+00:00:32,220 --> 00:00:35,080
+对你未来的自己有多大的帮助
+down and how much it helps your own future self to have
+
+16
+00:00:35,080 --> 00:00:37,110
+一个好的代码设计。
+a good design in your code.
+
+17
+00:00:37,110 --> 00:00:40,740
+准备好改变意味着你的软件已经准备好了
+And ready for change means that your software is ready
+
+18
+00:00:40,740 --> 00:00:45,190
+对于新功能，请更改其周围的环境。
+for new features, changes in the environment around it.
+
+19
+00:00:45,190 --> 00:00:46,430
+软件总是变化的。
+Software always changes.
+
+20
+00:00:46,430 --> 00:00:48,730
+有些设计使这些改变变得容易。
+Some designs make it easy to make those changes.
+
+21
+00:00:48,730 --> 00:00:51,570
+另一些则需要扔掉并重写大量代码，
+Others require throwing away and rewriting a lot of code,
+
+22
+00:00:51,570 --> 00:00:53,292
+这不好。
+and that's not good.
+
+23
+00:00:53,292 --> 00:00:55,500
+现在软件还有其他重要的特性，
+Now there are other important properties of software,
+
+24
+00:00:55,500 --> 00:00:58,020
+比如它的运行速度，可用性
+like how fast it runs, how usable
+
+25
+00:00:58,020 --> 00:01:02,170
+对于最终用户来说，这是多么的安全。
+it is for end users, how secure it is against attackers.
+
+26
+00:01:02,170 --> 00:01:04,489
+他们可能会和这三个人交换。
+And they may trade off against these three.
+
+27
+00:01:04,489 --> 00:01:07,520
+但这是6005年我们关心的三大问题。
+But these are the big three that we care about in 6005.
+
+28
+00:01:07,520 --> 00:01:09,510
+我们会一遍又一遍地讨论这些问题。
+We'll come back to these over and over.
+
+29
+00:01:09,510 --> 00:01:11,940
+软件开发人员通常把这些放在首位
+Software developers generally put these foremost
+
+30
+00:01:11,940 --> 00:01:14,870
+在构建软件的实践中。
+in the practice of building software.
+
+31
+00:01:14,870 --> 00:01:16,860
+每种语言都值得思考
+It's worth thinking about every language
+
+32
+00:01:16,860 --> 00:01:19,220
+特性，每一个编程实践，每一个设计
+feature, every programming practice, and every design
+
+33
+00:01:19,220 --> 00:01:21,320
+模式，我们在这门课上学习的每一个想法
+pattern, every idea that we study in this course
+
+34
+00:01:21,320 --> 00:01:23,300
+了解他们与三巨头的关系。
+and understanding how they relate to the big three.
+
+35
+00:01:23,300 --> 00:01:25,216
+每次阅读结束后我们都会这么做。
+And we'll do that at the end of every reading.
+
+37
+00:01:27,500 --> 00:01:29,970
+为什么这门课是用Java教的
+Now why is this course taught in Java rather
+
+38
+00:01:29,970 --> 00:01:31,480
+而不是Python和JavaScript？
+than Python and JavaScript?
+
+39
+00:01:31,480 --> 00:01:33,170
+一个原因是安全。
+Well, one reason is safety.
+
+40
+00:01:33,170 --> 00:01:35,180
+Java有静态检查。
+Java has static checking.
+
+41
+00:01:35,180 --> 00:01:36,760
+主要是静态类型检查
+Primarily, it's static-type checking
+
+42
+00:01:36,760 --> 00:01:38,551
+但是还有其他类型的静态检查，
+but there are other kinds of static checks,
+
+43
+00:01:38,551 --> 00:01:41,600
+同样，你的代码必须从
+too, like your code has to return values from methods that
+
+44
+00:01:41,600 --> 00:01:43,597
+期望返回值。
+are expected to return values.
+
+45
+00:01:43,597 --> 00:01:45,930
+因为我们在这门课上学习软件工程
+Since we're studying software engineering in this course
+
+46
+00:01:45,930 --> 00:01:50,060
+安全性是这种方法的一个关键原则，
+and safety from bugs is a key tenet of that approach,
+
+47
+00:01:50,060 --> 00:01:52,465
+Java拨号安全性高达11，因此
+Java dials safety up to 11 so it makes
+
+48
+00:01:52,465 --> 00:01:55,090
+它是学习优秀软件工程的好语言
+it a good language for learning about good software engineering
+
+49
+00:01:55,090 --> 00:01:55,810
+实践。
+practices.
+
+50
+00:01:55,810 --> 00:01:57,860
+现在当然可以编写安全的代码了
+Now it's certainly possible to write safe code
+
+51
+00:01:57,860 --> 00:01:59,724
+在Python这样的动态语言中，
+in dynamic languages like Python,
+
+52
+00:01:59,724 --> 00:02:01,140
+但更容易理解
+but it's easier to understand what
+
+53
+00:02:01,140 --> 00:02:02,930
+如果你先学会如何
+you need to do if you first learn how
+
+54
+00:02:02,930 --> 00:02:06,830
+用一种安全的静态检查语言。
+in a safe statically-checked language.
+
+55
+00:02:06,830 --> 00:02:08,150
+另一个原因是无处不在。
+Another reason is ubiquity.
+
+56
+00:02:08,150 --> 00:02:11,120
+Java广泛应用于研究、教育和工业领域。
+Java's widely used in research, education, and industry.
+
+57
+00:02:11,120 --> 00:02:14,600
+它运行在许多平台上，不仅仅是Windows、Mac和Linux。
+It runs on many platforms, not just Windows, Mac, and Linux.
+
+58
+00:02:14,600 --> 00:02:16,100
+它可以用于网络编程，
+It can be used for web programming,
+
+59
+00:02:16,100 --> 00:02:17,480
+在服务器和客户端
+both in the server and the client
+
+60
+00:02:17,480 --> 00:02:19,634
+以及本地安卓程序。
+and for native Android programming.
+
+61
+00:02:19,634 --> 00:02:21,800
+尽管其他编程语言更好
+Although other programming languages are much better
+
+62
+00:02:21,800 --> 00:02:25,140
+适合于编程、Scheme和ML的教学
+suited to teaching programming, Scheme and ML
+
+63
+00:02:25,140 --> 00:02:27,780
+是优秀教学语言的好例子，
+are good examples of good teaching languages,
+
+64
+00:02:27,780 --> 00:02:29,430
+不幸的是，这些语言不是
+unfortunately these languages are not
+
+65
+00:02:29,430 --> 00:02:31,250
+广泛存在于现实世界中。
+widespread in the real world.
+
+66
+00:02:31,250 --> 00:02:33,010
+你简历上的Java将被识别
+Java on your resume will be recognized
+
+67
+00:02:33,010 --> 00:02:36,390
+作为一种可销售的技能，Scheme和ML不会。
+as a marketable skill, Scheme and ML will not.
+
+68
+00:02:36,390 --> 00:02:37,515
+不过，别误会我们。
+Don't get us wrong, though.
+
+69
+00:02:37,515 --> 00:02:39,306
+你从这门课上学到的真正技能
+The real skills you'll get from this course
+
+70
+00:02:39,306 --> 00:02:41,180
+不是Java特有的。
+are not Java-specific.
+
+71
+00:02:41,180 --> 00:02:44,140
+它们可以传递到任何你可以编程的语言中。
+They carry over to any language that you might program in.
+
+72
+00:02:44,140 --> 00:02:46,020
+这门课最重要的一课
+The most important lessons from this course
+
+73
+00:02:46,020 --> 00:02:48,250
+会在这些语言风潮中幸存下来，
+will survive these language fads,
+
+74
+00:02:48,250 --> 00:02:52,240
+安全、清晰、抽象和直觉
+safety, clarity, abstraction, and instinct
+
+75
+00:02:52,240 --> 00:02:53,934
+为了更好的工程。
+for good engineering.
+
+76
+00:02:53,934 --> 00:02:55,350
+无论如何，一个好的程序员
+And in any case, a good programmer
+
+77
+00:02:55,350 --> 00:02:56,375
+必须是多语言的。
+must be multilingual.
+
+78
+00:02:56,375 --> 00:02:58,380
+编程语言是工具。
+Programming languages are tools.
+
+79
+00:02:58,380 --> 00:03:00,344
+你必须使用正确的工具来做这项工作。
+You have to use the right tool for the job.
+
+80
+00:03:00,344 --> 00:03:01,760
+如果你是一个实践程序员，
+If you're a practicing programmer,
+
+81
+00:03:01,760 --> 00:03:03,843
+你一定要学其他程序
+you'll certainly have to pick up other programming
+
+82
+00:03:03,843 --> 00:03:04,940
+未来的语言。
+languages in the future.
+
+83
+00:03:04,940 --> 00:03:08,400
+所以现在就开始学习第二个吧。
+So get started now by learning a second one.
+
+84
+00:03:08,400 --> 00:03:09,980
+现在由于它的普遍性，Java
+Now as a result of its ubiquity, Java
+
+85
+00:03:09,980 --> 00:03:12,480
+有很多有趣和有用的库，
+has a wide array of interesting and useful libraries,
+
+86
+00:03:12,480 --> 00:03:14,434
+都在巨大的内置图书馆里
+both in its enormous built-in library
+
+87
+00:03:14,434 --> 00:03:16,100
+以及网上的其他图书馆。
+and also other libraries out on the net.
+
+88
+00:03:16,100 --> 00:03:18,100
+它有优秀的免费开发工具，
+And it has excellent free tools for development,
+
+89
+00:03:18,100 --> 00:03:21,270
+像Eclipse，我们将使用它。
+like Eclipse, which we'll be using.
+
+90
+00:03:21,270 --> 00:03:24,850
+即使是Python本身也有一个巨大的库，
+Even Python, which has an enormous library itself,
+
+91
+00:03:24,850 --> 00:03:28,430
+在丰富的生态系统方面仍然落后于Java。
+is still behind Java in the richness of its ecosystem.
+
+92
+00:03:28,430 --> 00:03:30,560
+现在有一些理由后悔使用Java。
+Now there's some reasons to regret using Java.
+
+93
+00:03:30,560 --> 00:03:33,050
+它非常冗长，这使得我们的例子写得更长
+It's very wordy, which makes our examples longer to write
+
+94
+00:03:33,050 --> 00:03:34,300
+更难阅读。
+and harder to read.
+
+95
+00:03:34,300 --> 00:03:36,030
+它像语言一样大。
+It's large as a language.
+
+96
+00:03:36,030 --> 00:03:37,460
+它有许多特点。
+It has many features.
+
+97
+00:03:37,460 --> 00:03:39,810
+内部矛盾。
+It's internally inconsistent.
+
+98
+00:03:39,810 --> 00:03:41,860
+例如，我们已经
+For example, the final keyword that we've already
+
+99
+00:03:41,860 --> 00:03:43,680
+谈论实际上意味着不同的事情
+talked about actually means different things
+
+100
+00:03:43,680 --> 00:03:44,596
+在不同的背景下。
+in different contexts.
+
+101
+00:03:44,596 --> 00:03:47,490
+静态关键字，我们还没说太多，
+And the static keyword, which we haven't said much about yet,
+
+102
+00:03:47,490 --> 00:03:51,220
+与静态检查无关。
+has nothing to do with static checking.
+
+103
+00:03:51,220 --> 00:03:53,850
+Java被旧语言的包袱压得喘不过气来，
+Java is weighted with the baggage of older languages,
+
+104
+00:03:53,850 --> 00:03:55,460
+像C和C++一样。
+like C and C++.
+
+105
+00:03:55,460 --> 00:03:57,560
+所以原始类型和switch语句
+So the primitive types and the switch statement
+
+106
+00:03:57,560 --> 00:04:00,010
+都是很好的例子。
+are good examples of that.
+
+107
+00:04:00,010 --> 00:04:02,990
+它没有像Python那样的解释器，我们可以简单地
+And it has no interpreter like Python's, where we can simply
+
+108
+00:04:02,990 --> 00:04:05,365
+输入一点代码，看看它们是怎么做的。
+type in little bits of code and see what they do.
+
+109
+00:04:05,365 --> 00:04:07,740
+但总的来说，Java是一种合理的语言选择
+But on the whole, Java is a reasonable choice of language
+
+110
+00:04:07,740 --> 00:04:10,800
+现在要学习如何编写安全的代码，
+right now to learn how to write code that is safe from bugs,
+
+111
+00:04:10,800 --> 00:04:13,690
+更容易理解，随时准备改变。
+easier to understand, and ready for change.
+
+112
+00:04:13,690 --> 00:04:16,100
+这将是我们的目标。
+And that's going to be our goal.
+

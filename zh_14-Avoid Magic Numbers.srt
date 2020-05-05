@@ -1,0 +1,205 @@
+1
+00:00:00,500 --> 00:00:03,850
+我们的下一个原则是避免使用神奇的数字。
+Our next principle is avoiding magic numbers.
+
+2
+00:00:03,850 --> 00:00:04,962
+那么什么是神奇数字？
+So what's a magic number?
+
+3
+00:00:04,962 --> 00:00:07,420
+在计算机科学中只有两个数字
+Well, there are really only two numbers in computer science
+
+4
+00:00:07,420 --> 00:00:08,210
+首先。
+to begin with.
+
+5
+00:00:08,210 --> 00:00:10,330
+0和1。
+0 and 1.
+
+6
+00:00:10,330 --> 00:00:11,970
+我们也可以允许2。
+We could also allow 2.
+
+7
+00:00:11,970 --> 00:00:16,100
+但是所有其他的数字和常数
+But all other numbers and constants in general
+
+8
+00:00:16,100 --> 00:00:20,060
+被称为魔法如果他们自己出现没有名字。
+are called magic if they appear by themselves without names.
+
+9
+00:00:20,060 --> 00:00:22,340
+所以一年中的每一天都充满了这些神奇的数字。
+So day of year is full of these magic numbers.
+
+10
+00:00:22,340 --> 00:00:25,970
+我们在这里看到2，在这里看到31，在这里看到3，
+We see a 2 here, we see a 31 here, we see a 3 here,
+
+11
+00:00:25,970 --> 00:00:28,410
+59号。
+59 there.
+
+12
+00:00:28,410 --> 00:00:32,438
+这些是魔法，因为代码无法解释它们的含义，
+These are magic because the code doesn't explain what they mean,
+
+13
+00:00:32,438 --> 00:00:34,354
+他们代表什么，来自哪里。
+what they represent, and where they came from.
+
+15
+00:00:37,020 --> 00:00:38,820
+修复幻数的一种方法是
+One way to fix magic number is to make
+
+16
+00:00:38,820 --> 00:00:42,790
+更可读的代码是替换那些未命名的常量
+code more readable is to replace those unnamed constants
+
+17
+00:00:42,790 --> 00:00:44,240
+使用命名常量。
+with named constants.
+
+18
+00:00:44,240 --> 00:00:46,480
+所以这个数字是2，因为它实际上
+So this number here, 2, because it actually
+
+19
+00:00:46,480 --> 00:00:48,320
+代表二月，
+is supposed to represent February,
+
+20
+00:00:48,320 --> 00:00:49,820
+如果它真的
+would be much clearer if it actually
+
+21
+00:00:49,820 --> 00:00:52,550
+是一个叫二月的常数。
+was a constant named February.
+
+22
+00:00:52,550 --> 00:00:57,540
+这些数字代表了一个月的几天，
+For these numbers that represent the days of the month,
+
+23
+00:00:57,540 --> 00:01:00,560
+实际上，最好将它们放入数组中。
+it would actually better to put them into an array.
+
+24
+00:01:00,560 --> 00:01:02,240
+一个命名数组，比如月长，
+A named array, like month's length,
+
+25
+00:01:02,240 --> 00:01:07,620
+然后你就可以索引这个月的数字。
+that you can then index on the number of the month.
+
+26
+00:01:07,620 --> 00:01:12,520
+这些神奇的数字特别糟糕，因为它们
+These magic numbers are particularly bad because they
+
+27
+00:01:12,520 --> 00:01:14,470
+由程序员手工计算
+are computed by hand by the programmer
+
+28
+00:01:14,470 --> 00:01:17,260
+在没有任何解释的情况下
+and just dropped into this code without any explanation of what
+
+29
+00:01:17,260 --> 00:01:19,900
+计算是产生它们的原因。
+the computation was that produced them.
+
+30
+00:01:19,900 --> 00:01:21,780
+这几乎不是个好主意。
+This is almost never a good idea.
+
+31
+00:01:21,780 --> 00:01:24,270
+不要用手工和硬计算常数
+Don't compute constants by hand and hard
+
+32
+00:01:24,270 --> 00:01:25,795
+把它们编码成你的代码。
+code them into your code.
+
+33
+00:01:25,795 --> 00:01:27,420
+首先，因为编程语言
+First, because the programming language
+
+34
+00:01:27,420 --> 00:01:29,878
+会比你更擅长算术的，
+is going to be much better at that arithmetic than you are,
+
+35
+00:01:29,878 --> 00:01:32,230
+所以你应该把算术放进去。
+so you should just put the arithmetic in there.
+
+36
+00:01:32,230 --> 00:01:34,090
+但是第二，因为它会更清晰
+But second, because it will be clearer
+
+37
+00:01:34,090 --> 00:01:37,070
+给你看完的维修人员
+to the maintainer coming after you reading it
+
+38
+00:01:37,070 --> 00:01:38,800
+59是从哪里来的。
+where that 59 came from.
+
+39
+00:01:38,800 --> 00:01:42,700
+实际上是一月份的总和
+That it's actually the sum of the length of January
+
+40
+00:01:42,700 --> 00:01:44,600
+还有二月的长度。
+and the length of February.
+
+41
+00:01:44,600 --> 00:01:48,050
+所以不要用魔法数字。
+So don't use magic numbers.
+
+42
+00:01:48,050 --> 00:01:50,188
+用名字好多了。
+It's much better to use names.
+

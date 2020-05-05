@@ -1,0 +1,255 @@
+1
+00:00:00,775 --> 00:00:02,150
+现在我们要区别对待
+Now we want to make a distinction
+
+2
+00:00:02,150 --> 00:00:05,170
+在两种不同的测试之间，黑盒
+between two different kinds of the testing, black box
+
+3
+00:00:05,170 --> 00:00:06,760
+还有白盒子。
+and white box.
+
+4
+00:00:06,760 --> 00:00:08,350
+所以请记住，规范是
+So remember that a specification is
+
+5
+00:00:08,350 --> 00:00:10,110
+函数行为的描述，
+a description of the function's behavior,
+
+6
+00:00:10,110 --> 00:00:11,770
+所以参数的类型
+so it's what the types of the parameter
+
+7
+00:00:11,770 --> 00:00:15,430
+返回值类型和约束
+are, the return value type, and the constraints
+
+8
+00:00:15,430 --> 00:00:18,050
+以及它们之间的关系。
+and relationships between those.
+
+9
+00:00:18,050 --> 00:00:19,710
+黑盒测试意味着你
+Black box testing means that you're
+
+10
+00:00:19,710 --> 00:00:21,810
+选择这些测试用例
+choosing these test cases only by looking
+
+11
+00:00:21,810 --> 00:00:23,769
+根据规格。
+at the specification.
+
+12
+00:00:23,769 --> 00:00:26,060
+这就是我们到目前为止在这个例子中所做的。
+And that's what we've been doing in the example so far.
+
+13
+00:00:26,060 --> 00:00:29,990
+所以我们进行了分区，寻找边界情况
+So we partitioned and we looked for boundary cases
+
+14
+00:00:29,990 --> 00:00:32,020
+在max函数的乘法函数中，
+in the multiply function of the max function,
+
+15
+00:00:32,020 --> 00:00:36,170
+只查看方法签名和文档
+looking only at the method signatures and documentation
+
+16
+00:00:36,170 --> 00:00:38,870
+这些函数的注释，而不是查看实际方法
+comments of those functions, not looking at the actual method
+
+17
+00:00:38,870 --> 00:00:41,370
+执行它们的机构。
+body that implemented them.
+
+18
+00:00:41,370 --> 00:00:44,310
+相反，白盒测试，也叫玻璃盒，
+In contrast, white box testing, which is also called glass box,
+
+19
+00:00:44,310 --> 00:00:46,704
+意思是你实际上在利用知识
+means that you are actually using knowledge
+
+20
+00:00:46,704 --> 00:00:48,120
+功能是如何实现的
+of how the function is implemented
+
+21
+00:00:48,120 --> 00:00:50,550
+选择你的测试用例。
+to choose your test cases.
+
+22
+00:00:50,550 --> 00:00:53,480
+例如，如果一个实现很复杂，
+So for example, if an implementation is tricky,
+
+23
+00:00:53,480 --> 00:00:55,360
+它在选择哪种算法
+and it's selecting which algorithm
+
+24
+00:00:55,360 --> 00:00:58,200
+它将用于实现方法依赖于
+it's going to use to implement the method depending
+
+25
+00:00:58,200 --> 00:01:00,740
+在输入的特性上，然后
+on the features of the input, then you
+
+26
+00:01:00,740 --> 00:01:04,760
+应该确保您有一个触发
+should make sure that you have a test case that triggers
+
+27
+00:01:04,760 --> 00:01:06,750
+每一种算法。
+each one of those algorithms.
+
+28
+00:01:06,750 --> 00:01:08,390
+类似地，如果有内部缓存
+Similarly, if there's an internal cache
+
+29
+00:01:08,390 --> 00:01:10,390
+在记住答案的实现中
+inside the implementation that remembers answers
+
+30
+00:01:10,390 --> 00:01:12,570
+对于以前的输入，那么您应该确保
+to previous inputs, then you should make sure
+
+31
+00:01:12,570 --> 00:01:15,670
+在测试用例中再次尝试相同的输入。
+that you try the same input again in your test cases.
+
+32
+00:01:15,670 --> 00:01:18,780
+这两样东西通常都看不见
+Both of these things would not be visible normally
+
+33
+00:01:18,780 --> 00:01:21,670
+在说明书中，只能看到，
+in the specification, it can only be seen,
+
+34
+00:01:21,670 --> 00:01:25,260
+或者你只能把它们当作分区
+or you can only think of using them as partitions if you
+
+35
+00:01:25,260 --> 00:01:27,524
+看看实施情况。
+look at the implementation.
+
+36
+00:01:27,524 --> 00:01:29,190
+现在当你做白盒测试时，
+Now when you're doing white box testing,
+
+37
+00:01:29,190 --> 00:01:31,900
+你还是要小心你的测试用例
+you have to still be careful that your test cases don't
+
+38
+00:01:31,900 --> 00:01:36,700
+需要实际不需要的特定实现行为
+require specific implementation behavior that isn't actually
+
+39
+00:01:36,700 --> 00:01:38,750
+规范要求的。
+called for by the spec.
+
+40
+00:01:38,750 --> 00:01:41,590
+例如，如果规范只是说抛出一个异常
+So for example, if the spec just says throw an exception
+
+41
+00:01:41,590 --> 00:01:43,130
+如果输入格式不正确，
+if the input is poorly formatted,
+
+42
+00:01:43,130 --> 00:01:46,400
+那么你的测试不应该特别检查
+then your test shouldn't check specifically
+
+43
+00:01:46,400 --> 00:01:49,670
+它是一个空指针异常，因为
+that it's a null pointer exception just because that's
+
+44
+00:01:49,670 --> 00:01:51,699
+当前方法体的作用。
+what the current method body does.
+
+45
+00:01:51,699 --> 00:01:53,490
+在这种情况下，规范更通用，
+The spec is much more general in this case,
+
+46
+00:01:53,490 --> 00:01:55,450
+只是说有什么例外。
+it just says any old exception.
+
+47
+00:01:55,450 --> 00:01:57,370
+所以你的测试用例同样需要
+So your test case needs to likewise
+
+48
+00:01:57,370 --> 00:02:00,606
+为了维护实施者的自由，必须保持一般性。
+be general in order to preserve the implementer's freedom.
+
+49
+00:02:00,606 --> 00:02:02,230
+我们还有很多话要说
+We'll have a lot more to say about this
+
+50
+00:02:02,230 --> 00:02:04,180
+在课堂上谈规格，但是基本的想法
+in the class on specs, but the basic idea
+
+51
+00:02:04,180 --> 00:02:08,830
+测试应该始终遵守规范。
+is that tests should always respect the specification.
+

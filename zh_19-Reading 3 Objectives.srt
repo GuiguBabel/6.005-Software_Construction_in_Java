@@ -1,0 +1,75 @@
+1
+00:00:00,520 --> 00:00:02,940
+在今天的阅读中，我们将讨论测试，
+In today's reading we'll talk about testing,
+
+2
+00:00:02,940 --> 00:00:06,100
+这是最广泛使用的制作技术
+which is the most widely used practical technique for making
+
+3
+00:00:06,100 --> 00:00:08,172
+代码安全。
+code safe from bugs.
+
+4
+00:00:08,172 --> 00:00:09,880
+读完这篇文章，你应该明白
+After this reading, you should understand
+
+5
+00:00:09,880 --> 00:00:12,190
+测试的价值，了解过程
+the value of testing, know the process
+
+6
+00:00:12,190 --> 00:00:14,210
+对于测试优先编程，您应该
+of test first programming, you should
+
+7
+00:00:14,210 --> 00:00:16,540
+能够为方法设计测试套件
+be able to design a test suite for a method
+
+8
+00:00:16,540 --> 00:00:18,980
+通过划分输入和输出空间
+by partitioning its input and output space
+
+9
+00:00:18,980 --> 00:00:21,340
+选择好的测试用例
+and choosing good test cases, you
+
+10
+00:00:21,340 --> 00:00:24,060
+应该能够通过测量测试套件的代码来判断它
+should be able to judge a test suite by measuring its code
+
+11
+00:00:24,060 --> 00:00:27,100
+覆盖范围，了解和了解
+coverage, and understand and know
+
+12
+00:00:27,100 --> 00:00:29,490
+何时使用黑盒和白盒测试，
+when to use black box and white box testing,
+
+13
+00:00:29,490 --> 00:00:31,530
+单元测试和集成测试，
+unit tests, and integration tests,
+
+14
+00:00:31,530 --> 00:00:33,910
+以及自动化回归测试。
+and automated regression testing.
+
+15
+00:00:33,910 --> 00:00:35,820
+我们开始吧。
+Let's get started.
+

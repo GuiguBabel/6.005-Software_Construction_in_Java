@@ -1,0 +1,200 @@
+1
+00:00:00,760 --> 00:00:03,214
+我们的下一个启发是快速失败，
+Our next heuristic is failing fast,
+
+2
+00:00:03,214 --> 00:00:04,630
+也就是说代码应该显示
+which means the code should reveal
+
+3
+00:00:04,630 --> 00:00:07,370
+它的虫子越早越好。
+its bugs as early as possible.
+
+4
+00:00:07,370 --> 00:00:09,090
+我们越早发现有虫子，
+The earlier we find out there's a bug,
+
+5
+00:00:09,090 --> 00:00:11,480
+越接近代码中的实际原因，
+the closer to its actual cause in the code,
+
+6
+00:00:11,480 --> 00:00:14,377
+越容易找到和修复。
+the easier it's going to find and fix.
+
+7
+00:00:14,377 --> 00:00:16,210
+我们在一读时看到了这种区别
+We saw in the first reading this distinction
+
+8
+00:00:16,210 --> 00:00:18,320
+在静态检查和动态检查之间
+between static checking and dynamic checking
+
+9
+00:00:18,320 --> 00:00:19,600
+不检查。
+and no checking.
+
+10
+00:00:19,600 --> 00:00:23,310
+这与快速失败有关，因为静态检查
+And this relates to fail fast, because static checking
+
+11
+00:00:23,310 --> 00:00:25,660
+是你失败的最快速度。
+is as fast as you can fail.
+
+12
+00:00:25,660 --> 00:00:28,070
+在运行代码之前，你会发现这个bug。
+You'll find the bug before you even run the code.
+
+13
+00:00:28,070 --> 00:00:29,860
+动态检查稍晚
+Dynamic checking is a little bit later
+
+14
+00:00:29,860 --> 00:00:31,440
+最糟糕的是节点检查，
+and node checking is worst of all,
+
+15
+00:00:31,440 --> 00:00:33,487
+因为这意味着你要
+because it means that you're going
+
+16
+00:00:33,487 --> 00:00:35,070
+产生一个错误的答案
+to produce a wrong answer that's going
+
+17
+00:00:35,070 --> 00:00:36,540
+破坏后续计算。
+to corrupt subsequent computation.
+
+18
+00:00:36,540 --> 00:00:38,710
+你可能要做很多调试才能真正发现
+And you may have to do a lot of debugging to actually find out
+
+19
+00:00:38,710 --> 00:00:39,418
+虫子在哪里。
+where the bug is.
+
+20
+00:00:39,418 --> 00:00:43,200
+所以快速失败是非常非常重要的。
+So fail fast is really, really important.
+
+21
+00:00:43,200 --> 00:00:47,390
+我给你举的例子不会很快失败。
+Our example I gave your method doesn't fail fast.
+
+22
+00:00:47,390 --> 00:00:49,320
+如果你的论点不对，
+If you give it the wrong arguments,
+
+23
+00:00:49,320 --> 00:00:51,950
+很容易把这些论点放错顺序，
+and it's very easy to put these arguments in the wrong order,
+
+24
+00:00:51,950 --> 00:00:54,660
+例如，Java静态检查
+for example, Java static checking
+
+25
+00:00:54,660 --> 00:00:57,960
+不会帮你的，因为这些都是智力。
+isn't going to help you because all of these are ints.
+
+26
+00:00:57,960 --> 00:01:00,660
+所以Java不在乎这些顺序是否错误。
+So Java doesn't care that these are in the wrong order.
+
+27
+00:01:00,660 --> 00:01:03,390
+里面的代码没有做任何动态检查
+And the code inside it isn't doing any dynamic checking
+
+28
+00:01:03,390 --> 00:01:06,160
+或者，为了确保这个月
+either, even to make sure that the month
+
+29
+00:01:06,160 --> 00:01:08,490
+一个月中的哪一天在合理的范围内。
+and the day of the month are in reasonable ranges.
+
+30
+00:01:08,490 --> 00:01:11,659
+它只是继续计算一些答案，如果你
+It just goes ahead and computes some answer, which if you
+
+31
+00:01:11,659 --> 00:01:13,200
+把论点放错顺序，
+put the arguments in the wrong order,
+
+32
+00:01:13,200 --> 00:01:14,860
+会是错误的答案。
+would be the wrong answer.
+
+33
+00:01:14,860 --> 00:01:16,857
+事实上，设计的方式，
+And in fact, the way this is designed,
+
+34
+00:01:16,857 --> 00:01:19,190
+它实际上假设月、日和年
+it's actually assuming that the month, day, and year are
+
+35
+00:01:19,190 --> 00:01:22,285
+在美国的秩序中
+in the American order, whereas most of the rest of the world
+
+36
+00:01:22,285 --> 00:01:24,910
+不是把月放在第一位，而是把它放在中间。
+doesn't put the month first, but instead puts it in the middle.
+
+37
+00:01:24,910 --> 00:01:27,340
+一天，一个月，一年，或者一年，一个月，一天。
+Either day, month, year or year, month, day.
+
+38
+00:01:27,340 --> 00:01:29,860
+所以这个函数，为了写得好，
+So this function, in order to be well written,
+
+39
+00:01:29,860 --> 00:01:31,480
+实际上需要更多的检查，
+actually needs a lot more checking,
+
+40
+00:01:31,480 --> 00:01:36,570
+使用类型进行静态检查或动态检查。
+either static checking using types or dynamic checking.
+

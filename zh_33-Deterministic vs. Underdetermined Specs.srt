@@ -1,0 +1,635 @@
+1
+00:00:00,030 --> 00:00:01,860
+这篇文章将讨论不同的规格
+This reading will look at different specs
+
+2
+00:00:01,860 --> 00:00:03,382
+对于类似的方法行为。
+for similar method behaviors.
+
+3
+00:00:03,382 --> 00:00:04,840
+我们来谈谈权衡
+And we'll talk about the trade-offs
+
+4
+00:00:04,840 --> 00:00:06,276
+在不同的规格之间。
+between those different specs.
+
+5
+00:00:06,276 --> 00:00:07,650
+特别是，我们要看看
+Particularly, we're going to look
+
+6
+00:00:07,650 --> 00:00:10,040
+在三维空间，三个标准
+at three dimensions, three criteria we
+
+7
+00:00:10,040 --> 00:00:12,090
+可用于比较规格。
+can use to compare specs.
+
+8
+00:00:12,090 --> 00:00:14,830
+首先，规范有多确定。
+First, how deterministic the spec is.
+
+9
+00:00:14,830 --> 00:00:16,560
+从这个意义上说，它是否定义了
+In the sense that, does it define
+
+10
+00:00:16,560 --> 00:00:19,124
+每个输入只有一个可能的输出？
+only a single possible output for every input?
+
+11
+00:00:19,124 --> 00:00:20,790
+或者它允许实现的自由
+Or does it allow the implemented freedom
+
+12
+00:00:20,790 --> 00:00:24,550
+为任何给定的输入从一组合法输出中选择？
+to choose from a set of legal outputs for any given input?
+
+13
+00:00:24,550 --> 00:00:26,380
+第二，是陈述性的。
+Second, is declarative it is.
+
+14
+00:00:26,380 --> 00:00:28,810
+它讨论输出应该是什么还是做什么
+Does it talk about what the output should be or does
+
+15
+00:00:28,810 --> 00:00:32,369
+它明确指出了应该如何计算输出？
+it say explicitly how the output should be computed?
+
+16
+00:00:32,369 --> 00:00:34,160
+这也影响了实施者的自由。
+That also affects the implementers freedom.
+
+17
+00:00:34,160 --> 00:00:36,610
+第三，它有多强大。
+And third, how strong it is.
+
+18
+00:00:36,610 --> 00:00:39,540
+规范是否有一套合法的实现
+So does the spec have a set of legal implementations
+
+19
+00:00:39,540 --> 00:00:41,510
+那能满足吗？
+that can satisfy it?
+
+20
+00:00:41,510 --> 00:00:45,462
+那套是小的还是大的？
+And is that the set small or is it large?
+
+21
+00:00:45,462 --> 00:00:47,420
+现在，并不是所有的规格我们可以为一个模块选择
+Now, not all specs we might choose for a module
+
+22
+00:00:47,420 --> 00:00:48,211
+同样有用。
+are equally useful.
+
+23
+00:00:48,211 --> 00:00:49,740
+在本书中，我们将探讨
+In this reading, we'll explore what
+
+24
+00:00:49,740 --> 00:00:52,610
+使一些规范比其他规范更好。
+makes some of the specifications better than others.
+
+25
+00:00:52,610 --> 00:00:55,610
+我们先来谈谈决定论。
+Let's start by talking about determinism.
+
+26
+00:00:55,610 --> 00:00:57,600
+所以请记住两个示例实现
+So remember the two example implementations
+
+27
+00:00:57,600 --> 00:01:01,340
+我们在之前的阅读中发现的。
+of find that we had in an earlier reading.
+
+28
+00:01:01,340 --> 00:01:04,746
+我们有一个，我们现在叫“先找到”。
+We had this one that we're now calling find first.
+
+29
+00:01:04,746 --> 00:01:06,620
+从数组开始搜索
+That searches from the beginning of the array
+
+30
+00:01:06,620 --> 00:01:10,630
+找到元素后立即返回。
+and returns as soon as it finds the element.
+
+31
+00:01:10,630 --> 00:01:13,140
+然后，我们有了另一个实现
+And then, we had this other implementation
+
+32
+00:01:13,140 --> 00:01:15,660
+我们现在要打电话给find last。
+that we're now going to call find last.
+
+33
+00:01:15,660 --> 00:01:19,570
+从数组的末尾开始向后。
+That starts at the end of the array and goes backwards.
+
+34
+00:01:19,570 --> 00:01:21,640
+所以它返回最后一次
+So it returns the last occurrence
+
+35
+00:01:21,640 --> 00:01:24,250
+最后一次出现的索引。
+of that value, the index of the last occurrence.
+
+36
+00:01:24,250 --> 00:01:27,540
+所以这些下标是第一个也是最后一个
+So these subscripts first and last
+
+37
+00:01:27,540 --> 00:01:29,210
+不是真正的Java语法。
+are not actual Java syntax.
+
+38
+00:01:29,210 --> 00:01:30,960
+我们只是用它们来区分
+We're just using them here to distinguish
+
+39
+00:01:30,960 --> 00:01:33,084
+这两个实现是为了讨论。
+the two implementations for the sake of discussion.
+
+40
+00:01:33,084 --> 00:01:36,610
+在实际的代码中，这个方法将被称为Find。
+In the actual code, this method would just be called Find.
+
+41
+00:01:36,610 --> 00:01:38,937
+你要么要这个要么要那个
+And you'd either have this one or that one
+
+42
+00:01:38,937 --> 00:01:39,895
+作为你的实现。
+as your implementation.
+
+44
+00:01:42,700 --> 00:01:46,820
+现在，这里有一个可能的发现规范。
+Now, here's one possible spec for Find.
+
+45
+00:01:46,820 --> 00:01:48,661
+我们称之为“找到一个”。
+We're going to call it find exactly one.
+
+46
+00:01:48,661 --> 00:01:49,660
+这是先决条件。
+And it's preconditioned.
+
+47
+00:01:49,660 --> 00:01:52,410
+上面写着你正在寻找的价值
+It says that the value you are looking for
+
+48
+00:01:52,410 --> 00:01:54,590
+必须在数组中恰好出现一次。
+must occur exactly once in the array.
+
+49
+00:01:54,590 --> 00:01:57,270
+它的后置条件是它将返回索引
+And its post-condition says it's going to return the index where
+
+50
+00:01:57,270 --> 00:01:59,120
+出现该值。
+that value occurs.
+
+51
+00:01:59,120 --> 00:02:02,160
+现在，这个规范是确定的。
+Now, this spec is deterministic.
+
+52
+00:02:02,160 --> 00:02:05,820
+对于每一个满足这一前提的国家，
+For every state that satisfies this precondition,
+
+53
+00:02:05,820 --> 00:02:07,420
+结果是完全确定的。
+the outcome is completely determined.
+
+54
+00:02:07,420 --> 00:02:10,229
+数组中只有一个值出现，
+There's only one occurrence of the value in the array,
+
+55
+00:02:10,229 --> 00:02:14,410
+所以只有一个索引值可能
+so there's only one index where that value could possibly
+
+56
+00:02:14,410 --> 00:02:16,220
+发生。
+occur.
+
+57
+00:02:16,220 --> 00:02:17,510
+而且没有有效的输入。
+And there are no valid inputs.
+
+58
+00:02:17,510 --> 00:02:23,170
+没有满足以下条件的输入
+No inputs that satisfy this precondition for which the find
+
+59
+00:02:23,170 --> 00:02:25,160
+只有一个方法会返回
+exactly one method is going to return
+
+60
+00:02:25,160 --> 00:02:26,520
+多个有效输出。
+more than one valid output.
+
+61
+00:02:26,520 --> 00:02:29,200
+这是确定性的。
+It's deterministic.
+
+62
+00:02:29,200 --> 00:02:33,970
+现在，find first和find last都满足这个规范。
+Now, both find first and find last satisfy this spec.
+
+63
+00:02:33,970 --> 00:02:37,220
+如果这是客户所依赖的规范
+So if this is a specification in which the clients are relying
+
+64
+00:02:37,220 --> 00:02:40,790
+当他们调用find时，这两个实现
+when they call find, then these two implementations
+
+65
+00:02:40,790 --> 00:02:43,570
+是等价的和可替代的。
+are equivalent and substitutable for one another.
+
+66
+00:02:43,570 --> 00:02:46,180
+我们可以用任何一个作为实现
+We could use either one as the implementation
+
+67
+00:02:46,180 --> 00:02:48,900
+这个发现方法。
+of this Find method.
+
+68
+00:02:48,900 --> 00:02:51,056
+现在，这里有一个稍微不同的规范。
+Now, here's a slightly different specification.
+
+69
+00:02:51,056 --> 00:02:54,910
+我们称之为在任何索引中查找一个或多个。
+We're going to call it find one or more at any index.
+
+70
+00:02:54,910 --> 00:02:56,900
+以及它的后状态，而不是说
+And its post-condition, instead of saying
+
+71
+00:02:56,900 --> 00:02:58,640
+这个值只出现一次
+the value occurs exactly once, it just
+
+72
+00:02:58,640 --> 00:03:00,919
+表示值至少出现一次。
+says the value occurs at least once.
+
+73
+00:03:00,919 --> 00:03:02,710
+它必须出现在数组中，但我们没有
+It has to occur in the array, but we're not
+
+74
+00:03:02,710 --> 00:03:06,170
+只说一次。
+saying it's exactly once.
+
+75
+00:03:06,170 --> 00:03:08,150
+后情况仍然显示
+And the post-condition still says
+
+76
+00:03:08,150 --> 00:03:12,250
+我们要返回一些索引，我，
+that we're going to return some index, i,
+
+77
+00:03:12,250 --> 00:03:14,240
+这个值出现的地方。
+where that value occurs.
+
+78
+00:03:14,240 --> 00:03:16,690
+这个规格是不确定的。
+This spec is not deterministic.
+
+79
+00:03:16,690 --> 00:03:18,320
+有一些输入。
+There are some inputs.
+
+80
+00:03:18,320 --> 00:03:19,960
+当元音出现不止一次时
+When the vowel occurs more than once
+
+81
+00:03:19,960 --> 00:03:23,880
+在数组中，实现可以选择
+in the array, for which the implementation has a choice
+
+82
+00:03:23,880 --> 00:03:26,010
+关于返回哪个索引。
+about which index to return.
+
+83
+00:03:26,010 --> 00:03:29,315
+该规范允许同一输入有多个有效输出。
+This spec allows multiple valid outputs for the same input.
+
+85
+00:03:31,970 --> 00:03:33,800
+现在，我们说它不是确定性的。
+Now, we say that it's not deterministic.
+
+86
+00:03:33,800 --> 00:03:37,270
+但我们要避免说不确定性。
+But we're going to avoid saying non-deterministic.
+
+87
+00:03:37,270 --> 00:03:40,080
+因为在计算机中这个词的通常意义
+Because the usual sense of that word in computer
+
+88
+00:03:40,080 --> 00:03:43,870
+科学意味着代码有时以一种方式运行
+science means that the code sometimes behaves in one way
+
+89
+00:03:43,870 --> 00:03:45,810
+有时在另一个——即使是
+and sometimes in another-- even if it's
+
+90
+00:03:45,810 --> 00:03:48,154
+在具有相同输入的同一程序中调用。
+called in the same program with the same inputs.
+
+91
+00:03:48,154 --> 00:03:50,320
+当代码的行为依赖于
+And this can happen when the code's behavior depends
+
+92
+00:03:50,320 --> 00:03:52,110
+在一个随机数上
+on a random number that is generating
+
+93
+00:03:52,110 --> 00:03:56,900
+或者取决于同时预言的时间。
+or when it depends on timing of concurrent prophecies.
+
+94
+00:03:56,900 --> 00:03:58,580
+但是一个不确定的规范
+But a spec which is not deterministic
+
+95
+00:03:58,580 --> 00:04:00,810
+不必有不确定性
+doesn't have to have a non-deterministic
+
+96
+00:04:00,810 --> 00:04:01,740
+实施。
+implementation.
+
+97
+00:04:01,740 --> 00:04:04,497
+它可以通过完全确定的实现来满足。
+It can be satisfied by a fully deterministic implementation.
+
+98
+00:04:04,497 --> 00:04:06,080
+换句话说，一个实现
+In other words, an implementation that
+
+99
+00:04:06,080 --> 00:04:09,080
+总是会做出同样的选择
+will always make the same choice when
+
+100
+00:04:09,080 --> 00:04:11,760
+你给它一个特殊的输入。
+you give it a particular input.
+
+101
+00:04:11,760 --> 00:04:15,910
+但客户不能说——不能指望。
+But the client can't tell-- can't bank on that.
+
+102
+00:04:15,910 --> 00:04:18,170
+所以我们要避免这种混乱
+So we're going to avoid this confusion
+
+103
+00:04:18,170 --> 00:04:20,050
+用不确定这个词
+with the word non-deterministic by saying
+
+104
+00:04:20,050 --> 00:04:23,060
+不确定的规格
+that specs that are not deterministic
+
+105
+00:04:23,060 --> 00:04:25,780
+决心不足。
+are underdetermined.
+
+106
+00:04:25,780 --> 00:04:27,670
+现在，这个不确定的发现规范，
+Now, this underdetermined find spec,
+
+107
+00:04:27,670 --> 00:04:31,010
+找到一个或多个任何索引，再次，满足于
+find one or more any index, is again, satisfied by both
+
+108
+00:04:31,010 --> 00:04:33,030
+先找后找。
+find first and find last.
+
+109
+00:04:33,030 --> 00:04:35,230
+每个人都解决了不确定性
+Each one resolves that underdeterminedness
+
+110
+00:04:35,230 --> 00:04:39,500
+以它自己完全确定的方式。
+in its own fully deterministic way.
+
+111
+00:04:39,500 --> 00:04:42,210
+但问题是，find一个或多个任意索引的客户端
+But the point is that a client of find one or more any index
+
+112
+00:04:42,210 --> 00:04:44,590
+不能依赖哪个实现
+can't rely on which implementation
+
+113
+00:04:44,590 --> 00:04:46,460
+他们真的得到了。
+they're actually getting.
+
+114
+00:04:46,460 --> 00:04:49,900
+它不能依赖于我的索引
+It can't rely on which index i they will actually get
+
+115
+00:04:49,900 --> 00:04:51,870
+如果Val出现不止一次。
+if Val appears more than once.
+
+116
+00:04:51,870 --> 00:04:52,720
+也许是第一个。
+Maybe the first one.
+
+117
+00:04:52,720 --> 00:04:53,540
+也许是最后一个。
+Maybe the last one.
+
+118
+00:04:53,540 --> 00:04:55,880
+也许中间有一个。
+Maybe one in the middle.
+
+119
+00:04:55,880 --> 00:04:57,750
+现在，规格也可以满足了
+Now, the spec could also be satisfied
+
+120
+00:04:57,750 --> 00:04:59,700
+通过不确定的实现。
+by a nondeterministic implementation.
+
+121
+00:04:59,700 --> 00:05:01,674
+掷硬币决定的人
+One that say tosses the coin to decide
+
+122
+00:05:01,674 --> 00:05:03,340
+是否开始搜索开头
+whether to start searching the beginning
+
+123
+00:05:03,340 --> 00:05:05,162
+或者数组的末尾。
+or the end of the array.
+
+124
+00:05:05,162 --> 00:05:07,370
+但在几乎所有的情况下，我们都会遇到它。
+But in almost all cases, we're going to encounter it.
+
+125
+00:05:07,370 --> 00:05:09,250
+这个不确定的[听不见的]事实上
+This underdetermined [INAUDIBLE] is actually
+
+126
+00:05:09,250 --> 00:05:11,990
+实现者在实现时所做的选择
+a choice that's made by the implementer at implementation
+
+127
+00:05:11,990 --> 00:05:12,950
+时间。
+time.
+
+128
+00:05:12,950 --> 00:05:14,640
+所以一个不确定的规格通常是
+So an underdetermined spec is typically
+
+129
+00:05:14,640 --> 00:05:18,476
+由完全确定的实现来实现。
+implemented by a fully deterministic implementation.
+

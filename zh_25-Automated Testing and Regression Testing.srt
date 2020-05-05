@@ -1,0 +1,455 @@
+1
+00:00:00,500 --> 00:00:03,750
+现在我们来谈谈自动化测试和回归测试。
+Now let's talk about automated testing and regression testing.
+
+2
+00:00:03,750 --> 00:00:05,880
+事实上，这两者的结合，
+And in fact, the combination of those two,
+
+3
+00:00:05,880 --> 00:00:07,430
+自动回归测试
+automated regression testing, which
+
+4
+00:00:07,430 --> 00:00:11,230
+是现代软件工程的最佳实践之一。
+is one of the best practices in modern software engineering.
+
+5
+00:00:11,230 --> 00:00:13,020
+没有什么能让测试更容易运行，
+Nothing makes tests easier to run,
+
+6
+00:00:13,020 --> 00:00:14,820
+对一般程序员来说
+and more likely for the average programmer
+
+7
+00:00:14,820 --> 00:00:18,205
+运行它们，然后让测试完全自动化。
+to run them, then having the test be completely automated.
+
+8
+00:00:18,205 --> 00:00:20,890
+这意味着你只要按下一个按钮，测试就会运行，
+It means that you can just push a button, the test will run,
+
+9
+00:00:20,890 --> 00:00:23,521
+他们会自动检查自己的结果。
+and they'll check their own results automatically.
+
+10
+00:00:23,521 --> 00:00:26,170
+测试不应是交互式程序
+The test should not be an interactive program
+
+11
+00:00:26,170 --> 00:00:29,386
+它会提示您输入并打印出结果
+that prompts you for its inputs and prints out its results
+
+12
+00:00:29,386 --> 00:00:31,260
+你可以用你的眼球手动检查。
+for you to manually check with your eyeballs.
+
+13
+00:00:31,260 --> 00:00:34,440
+相反，它应该做的是运行模块，运行
+Instead what it should do is run the module, run
+
+14
+00:00:34,440 --> 00:00:37,450
+方法本身，使用这些选定的固定测试用例
+the method itself, using these fixed test cases selected
+
+15
+00:00:37,450 --> 00:00:40,200
+我们在这篇文章中谈到的，
+in the ways that we've talked about in this reading,
+
+16
+00:00:40,200 --> 00:00:43,320
+然后自动检查结果是否正确。
+and then automatically check that the results are correct.
+
+17
+00:00:43,320 --> 00:00:45,320
+然后所有测试套件的结果
+And then the result of all of the test suite
+
+18
+00:00:45,320 --> 00:00:47,340
+应该是，嘿，所有的测试都可以。
+should be either, hey, all tests are OK.
+
+19
+00:00:47,340 --> 00:00:49,270
+或者，看，下面的测试失败了
+Or, look, the following tests failed
+
+20
+00:00:49,270 --> 00:00:52,630
+你应该去调查他们。
+and you should go and investigate them.
+
+21
+00:00:52,630 --> 00:00:55,080
+它们有多种语言，包括Java。
+They're in many languages, including Java.
+
+22
+00:00:55,080 --> 00:00:57,235
+很好的测试框架，使之更容易
+Great testing frameworks that make it easy
+
+23
+00:00:57,235 --> 00:00:59,110
+为您编写这些类型的测试驱动程序。
+for you to write these kinds of test drivers.
+
+24
+00:00:59,110 --> 00:01:02,720
+我们在这个类中使用的是JUnit。
+The one that we're using in this class is JUnit.
+
+25
+00:01:02,720 --> 00:01:04,780
+现在像JUnit这样的自动化测试框架
+Now automated testing frameworks like JUnit
+
+26
+00:01:04,780 --> 00:01:07,420
+使运行测试变得容易，但您仍然
+make easy to run the tests, but you still
+
+27
+00:01:07,420 --> 00:01:10,890
+必须自己提出测试用例。
+have to come up with the test cases yourself.
+
+28
+00:01:10,890 --> 00:01:13,226
+总有一天我们会自动生成测试，
+Someday we'll have automatic test generation,
+
+29
+00:01:13,226 --> 00:01:14,850
+但这仍然是个难题
+but it's still a hard problem and still
+
+30
+00:01:14,850 --> 00:01:17,925
+一种主观的、积极的计算机科学研究。
+a subjective, active computer science research.
+
+31
+00:01:17,925 --> 00:01:20,300
+所以我们在这里讨论的那种自动化测试
+So the kind of automated testing we're talking about here
+
+32
+00:01:20,300 --> 00:01:24,050
+只是在创建测试后运行测试。
+is just running the tests once you've created them.
+
+33
+00:01:24,050 --> 00:01:25,540
+一旦你有了测试自动化
+Now once you have a test automation
+
+34
+00:01:25,540 --> 00:01:28,090
+你应该尽可能频繁地运行它。
+you should run it as frequently as you can get away with.
+
+35
+00:01:28,090 --> 00:01:29,860
+重新运行测试非常重要
+It's really important to rerun your test
+
+36
+00:01:29,860 --> 00:01:31,612
+每当你改变你的代码。
+whenever you change your code.
+
+37
+00:01:31,612 --> 00:01:34,810
+这就是回归的概念。
+And this is where the idea of regression comes in.
+
+38
+00:01:34,810 --> 00:01:38,970
+回归意味着您引入了一个bug
+A regression means that you've introduced a bug
+
+39
+00:01:38,970 --> 00:01:41,670
+你曾经拥有的，你曾经确定的
+that you used to have and that you fixed once upon a time
+
+40
+00:01:41,670 --> 00:01:45,430
+无论何时进行更改或添加新功能。
+whenever you make a change or add a new feature.
+
+41
+00:01:45,430 --> 00:01:48,100
+回归测试，回归测试的概念
+So regression testing, the idea of regression testing
+
+42
+00:01:48,100 --> 00:01:52,750
+是用你的测试来防止自己倒退。
+is using your tests to prevent yourself from regressing.
+
+43
+00:01:52,750 --> 00:01:55,570
+所以每次更改后都要运行所有测试
+So run all your tests after every change
+
+44
+00:01:55,570 --> 00:02:00,450
+为了抓住这些倒退并解决它们。
+in order to catch those regressions and fix them.
+
+45
+00:02:00,450 --> 00:02:01,950
+现在我们如何进行回归测试？
+Now how do we do regression testing?
+
+46
+00:02:01,950 --> 00:02:03,830
+如何确保我们的测试套件
+How do we make sure that our test suite is
+
+47
+00:02:03,830 --> 00:02:05,380
+对回归测试有用吗？
+useful for regression testing?
+
+48
+00:02:05,380 --> 00:02:08,550
+首先我们要选择好的测试用例
+Well first of all we want to select good test cases
+
+49
+00:02:08,550 --> 00:02:11,009
+从规范开始使用分区
+from the spec in the first place using the partitioning
+
+50
+00:02:11,009 --> 00:02:13,202
+边界技术我们已经
+and boundary techniques we've already
+
+51
+00:02:13,202 --> 00:02:14,410
+在这篇文章里讨论过。
+talked about in this reading.
+
+52
+00:02:14,410 --> 00:02:19,910
+但是第二，每当我们发现一个虫子我们想做什么
+But second, whenever we find a bug what we want to do
+
+53
+00:02:19,910 --> 00:02:23,330
+就是输入一个引起那个bug的
+is take an input that elicits that bug that
+
+54
+00:02:23,330 --> 00:02:26,340
+使程序失败，根据那个错误，
+makes the program fail, according to that bug,
+
+55
+00:02:26,340 --> 00:02:28,780
+并将其添加到我们的测试套件中。
+and add it to our test suite.
+
+56
+00:02:28,780 --> 00:02:31,430
+所以我们实际上增加了测试
+So we're actually increasing the tests
+
+57
+00:02:31,430 --> 00:02:35,580
+当我们在软件生命周期中开发代码时。
+as we develop the code over the lifetime of the software.
+
+58
+00:02:35,580 --> 00:02:39,030
+所以一个因为错误而添加的测试用例
+So a test case that has been added because of a bug
+
+59
+00:02:39,030 --> 00:02:41,100
+称为回归测试。
+is called a regression test.
+
+60
+00:02:41,100 --> 00:02:43,850
+它的目的是能够找到
+And the purpose of it is to be able to find
+
+61
+00:02:43,850 --> 00:02:48,280
+如果它再次出现，如果你倒退的话。
+that bug if it ever crops up again, if you ever regress.
+
+62
+00:02:48,280 --> 00:02:50,930
+记住，考试很好
+Now remember, a test is good, it's
+
+63
+00:02:50,930 --> 00:02:52,810
+很好的测试发现了一个错误。
+a good test of it finds a bug.
+
+64
+00:02:52,810 --> 00:02:54,920
+回归测试的奇妙之处
+And the wonderful thing about regression tests
+
+65
+00:02:54,920 --> 00:02:58,410
+他们真的曾经发现过一个虫子，一个虫子
+is that they actually did find a bug once upon a time, a bug
+
+66
+00:02:58,410 --> 00:03:00,270
+你现在已经修好了。
+that you've now fixed.
+
+67
+00:03:00,270 --> 00:03:03,680
+但是通过保存这个测试，你就可以防止逆转。
+But by saving that test, you're protecting against reversions.
+
+68
+00:03:03,680 --> 00:03:06,620
+针对重新引入该错误的代码更改。
+Against changes to your code that reintroduce that bug.
+
+69
+00:03:06,620 --> 00:03:09,150
+这比你想象的要普遍。
+And that's more common than you might think.
+
+70
+00:03:09,150 --> 00:03:11,380
+一个错误很容易犯，
+A bug may be a very easy error to make,
+
+71
+00:03:11,380 --> 00:03:14,500
+因为它已经发生过一次了。
+because it already happened once already.
+
+72
+00:03:14,500 --> 00:03:17,940
+这也引出了先测试后调试的思想。
+And this leads us also to the idea of test first debugging.
+
+73
+00:03:17,940 --> 00:03:21,390
+也就是说，每当你有一个bug，你想做什么
+That is, whenever you have a bug, what you want to do
+
+74
+00:03:21,390 --> 00:03:23,720
+立即为它编写一个测试用例
+is immediately write a test case for it
+
+75
+00:03:23,720 --> 00:03:26,810
+并将该测试用例添加到您的测试套件中。
+and add that test case to your test suite.
+
+76
+00:03:26,810 --> 00:03:28,540
+从那以后你要做什么
+And then from then on what you're doing
+
+77
+00:03:28,540 --> 00:03:30,570
+想让考试通过。
+is trying to get that test to pass.
+
+78
+00:03:30,570 --> 00:03:33,430
+一旦你通过了测试，你就知道你已经修复了这个错误。
+Once you get that test to pass you know you've fixed that bug.
+
+79
+00:03:33,430 --> 00:03:36,840
+但是你也有这个bug的回归测试
+But also you have the regression test for that bug
+
+80
+00:03:36,840 --> 00:03:39,910
+已经在你的测试套件里了。
+already in your test suite.
+
+81
+00:03:39,910 --> 00:03:43,030
+现在在实践中，这两个想法，有了自动化测试
+Now in practice these two ideas, having automated testing
+
+82
+00:03:43,030 --> 00:03:47,280
+使用回归测试防止错误再次出现，
+and using regression test to keep bugs from reappearing,
+
+83
+00:03:47,280 --> 00:03:49,460
+几乎总是组合使用。
+are almost always used in combination.
+
+84
+00:03:49,460 --> 00:03:52,130
+所以用大量的数据做回归测试是非常实用的
+So it's really only practical to do regression testing with lots
+
+85
+00:03:52,130 --> 00:03:54,390
+如果您可以经常运行这些测试
+of regression tests if you can run those tests often
+
+86
+00:03:54,390 --> 00:03:55,617
+而且是自动的。
+and automatically.
+
+87
+00:03:55,617 --> 00:03:58,200
+相反，如果您已经有了自动化测试
+And conversely, if you already have automated testing in place
+
+88
+00:03:58,200 --> 00:03:59,675
+你还是经常跑吧
+you might as well run it frequently
+
+89
+00:03:59,675 --> 00:04:00,675
+防止倒退。
+to prevent a regression.
+
+90
+00:04:00,675 --> 00:04:03,340
+所以自动回归测试真的
+So automated regression testing really
+
+91
+00:04:03,340 --> 00:04:06,740
+是现代软件工程的最佳实践之一。
+is one of the best practices of modern software engineering.
+

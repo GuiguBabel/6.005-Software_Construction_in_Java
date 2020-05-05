@@ -1,0 +1,555 @@
+1
+00:00:00,960 --> 00:00:02,860
+代码审查是仔细系统的研究
+Code review is careful systematic study
+
+2
+00:00:02,860 --> 00:00:05,480
+不是原始作者的源代码
+of source code by somebody who is not the original author
+
+3
+00:00:05,480 --> 00:00:06,060
+密码的。
+of the code.
+
+4
+00:00:06,060 --> 00:00:09,790
+有点像校对英文文本，
+It's Kind of like proofreading English text,
+
+5
+00:00:09,790 --> 00:00:11,690
+就像学期论文一样。
+like a term paper.
+
+6
+00:00:11,690 --> 00:00:13,520
+但是代码审查有两个目的。
+But code review really has two purposes.
+
+7
+00:00:13,520 --> 00:00:15,380
+一是改进代码本身，
+One is improving the code itself,
+
+8
+00:00:15,380 --> 00:00:17,540
+比如发现错误，或者预测
+like finding bugs, or anticipating
+
+9
+00:00:17,540 --> 00:00:20,220
+以后可能出现的错误，或者检查它的清晰度，
+bugs that might appear later, or checking its clarity,
+
+10
+00:00:20,220 --> 00:00:23,130
+或者检查与样式标准的一致性。
+or checking for consistency with style standards.
+
+11
+00:00:23,130 --> 00:00:26,031
+但这也是为了提高程序员的水平。
+But it's also about improving the programmer.
+
+12
+00:00:26,031 --> 00:00:28,030
+代码审查是程序员
+Code review is an important way that programmers
+
+13
+00:00:28,030 --> 00:00:30,624
+互相学习和教导新的语言特点，
+learn and teach each other about new language features,
+
+14
+00:00:30,624 --> 00:00:32,790
+关于项目设计或其编码的更改
+about changes in design of the project or its coding
+
+15
+00:00:32,790 --> 00:00:35,300
+标准，关于新编程技术。
+standards, about new programming techniques.
+
+16
+00:00:35,300 --> 00:00:37,760
+尤其是在开源项目中
+In open source projects in particular
+
+17
+00:00:37,760 --> 00:00:42,240
+很多对话发生在代码评审的上下文中。
+a lot of conversation happens in the context of code reviews.
+
+18
+00:00:42,240 --> 00:00:44,980
+代码评审在开源spot项目中广泛应用
+Code review is widely practiced in open source spot projects
+
+19
+00:00:44,980 --> 00:00:48,899
+像Apache和Mozilla。
+like Apache and Mozilla.
+
+20
+00:00:48,899 --> 00:00:50,940
+代码评审在工业中也得到了广泛的应用。
+Code review is also widely practiced in industry.
+
+21
+00:00:50,940 --> 00:00:53,220
+例如，在Google，你不能推送任何代码
+At Google, for example, you can't push any code
+
+22
+00:00:53,220 --> 00:00:56,620
+进入主仓库直到另一个工程师签字
+into the main repository until another engineer has signed off
+
+23
+00:00:56,620 --> 00:00:59,130
+在代码评审中。
+on it in a code review.
+
+24
+00:00:59,130 --> 00:01:00,970
+现在大多数公司和大型项目
+Now most companies and large projects
+
+25
+00:01:00,970 --> 00:01:02,550
+有编码风格标准。
+have coding style standards.
+
+26
+00:01:02,550 --> 00:01:07,845
+一个例子是Google风格的Java指南。
+One example is the Google style guide for Java.
+
+27
+00:01:07,845 --> 00:01:09,220
+他们甚至可以得到相当详细的
+They can get pretty detailed even
+
+28
+00:01:09,220 --> 00:01:12,000
+到指定空白的程度，您应该
+to the point of specifying white space, how deep you should
+
+29
+00:01:12,000 --> 00:01:14,630
+缩进你的线，在哪里大括号
+indent your lines, and where curly braces
+
+30
+00:01:14,630 --> 00:01:16,110
+括号应该在后面。
+and parentheses should go.
+
+31
+00:01:16,110 --> 00:01:19,390
+有很多可能的变化。
+There are many possible variations for that.
+
+32
+00:01:19,390 --> 00:01:21,160
+不幸的是，这些问题，
+These kinds of questions, unfortunately,
+
+33
+00:01:21,160 --> 00:01:23,280
+经常导致神圣的战争。
+often lead to holy wars.
+
+34
+00:01:23,280 --> 00:01:26,260
+因为它们最终会成为品味和风格的问题。
+Because they end up being a matter of taste and style.
+
+35
+00:01:26,260 --> 00:01:28,672
+在6.005中，我们没有任何官方风格指南。
+In 6.005, we don't have any official style guide.
+
+36
+00:01:28,672 --> 00:01:31,130
+我们不会告诉你花括号放在哪里。
+We're not going to tell you where to put your curly braces.
+
+37
+00:01:31,130 --> 00:01:33,510
+这是你个人的决定。
+That's a personal decision that you should make.
+
+38
+00:01:33,510 --> 00:01:35,800
+保持自我一致是很重要的
+It's important to be self consistent, to always do it
+
+39
+00:01:35,800 --> 00:01:37,140
+你也一样。
+the same way yourself.
+
+40
+00:01:37,140 --> 00:01:39,100
+但更重要的是
+But it's even more important to follow
+
+41
+00:01:39,100 --> 00:01:41,680
+你正在做的项目的惯例。
+the conventions of the project you're working on.
+
+42
+00:01:41,680 --> 00:01:43,180
+如果你是那种
+If you're the kind of programmer who
+
+43
+00:01:43,180 --> 00:01:46,320
+重新设置每个模块的格式以符合您的个人风格，
+reformats every module you touch to match your personal style,
+
+44
+00:01:46,320 --> 00:01:48,590
+你的队友会恨你的，没错。
+your teammates are going to hate you, and rightly so.
+
+45
+00:01:48,590 --> 00:01:51,140
+你需要有团队精神。
+You need to be a team player.
+
+46
+00:01:51,140 --> 00:01:53,140
+但有些规则是相当合理的
+But there are some rules that are quite sensible
+
+47
+00:01:53,140 --> 00:01:55,235
+目标是我们三大酒店
+and that target our big three properties
+
+48
+00:01:55,235 --> 00:01:57,360
+我们在最后一次阅读结束时谈到的
+that we talked about at the end of the last reading
+
+49
+00:01:57,360 --> 00:01:59,887
+用比放大括号更有力的方式。
+in a stronger way than just placing curly braces.
+
+50
+00:01:59,887 --> 00:02:02,220
+接下来的阅读将讨论
+And the rest of this reading is going to talk about some
+
+51
+00:02:02,220 --> 00:02:03,440
+或者至少是那些
+of these rules, or at least the ones
+
+52
+00:02:03,440 --> 00:02:05,190
+与课程中的这一点相关
+that are relevant this point in the course
+
+53
+00:02:05,190 --> 00:02:07,790
+我们主要讨论的是编写基本Java。
+where we're mostly talking about writing basic Java.
+
+54
+00:02:07,790 --> 00:02:10,340
+这是我们今天要讨论的规则的摘要。
+Here's a summary of the rules we'll cover today.
+
+55
+00:02:10,340 --> 00:02:15,220
+不要重复你自己，经常被缩短为干燥。
+Don't repeat yourself, often shortened to dry.
+
+56
+00:02:15,220 --> 00:02:17,040
+在你需要的地方写评论。
+Write comments where you need them.
+
+57
+00:02:17,040 --> 00:02:19,780
+让你的代码快速失效。
+Make your code fail fast.
+
+58
+00:02:19,780 --> 00:02:21,370
+避免使用魔法数字。
+Avoid using magic numbers.
+
+59
+00:02:21,370 --> 00:02:23,750
+我们来说说什么是神奇数字。
+And we'll say what magic numbers are.
+
+60
+00:02:23,750 --> 00:02:27,280
+每个变量都有一个目的。
+Have one purpose for each variable.
+
+61
+00:02:27,280 --> 00:02:30,280
+对方法和变量使用好的名称。
+Use good names for methods and variables.
+
+62
+00:02:30,280 --> 00:02:32,490
+不要使用全局变量。
+Don't use global variables.
+
+63
+00:02:32,490 --> 00:02:34,390
+让你的方法返回结果，
+Have your methods return their results,
+
+64
+00:02:34,390 --> 00:02:36,740
+而不是打印出来。
+rather than printing them.
+
+65
+00:02:36,740 --> 00:02:39,572
+并使用空白来帮助读者阅读您的代码。
+And use white space to help the reader read your code.
+
+66
+00:02:39,572 --> 00:02:41,030
+所以你应该
+So these are some things you should
+
+67
+00:02:41,030 --> 00:02:42,600
+在代码检查时开始查找
+start to look for when your code reviewing
+
+68
+00:02:42,600 --> 00:02:43,900
+本班其他同学
+other students in this class and when
+
+69
+00:02:43,900 --> 00:02:45,900
+您正在查看自己的代码以进行改进。
+you're looking at your own code for improvement.
+
+70
+00:02:45,900 --> 00:02:47,709
+不要认为这是一个详尽的清单。
+Don't consider it an exhaustive list.
+
+71
+00:02:47,709 --> 00:02:49,250
+在这学期中我们将
+Over the course of the semester we'll
+
+72
+00:02:49,250 --> 00:02:51,639
+谈论更多的事情，比如规格
+talk about a lot more things like specifications
+
+73
+00:02:51,639 --> 00:02:53,930
+以及具有表示不变量的抽象数据类型，
+and abstract data types with representation invariants,
+
+74
+00:02:53,930 --> 00:02:55,680
+并发性和线程安全性。
+concurrency, and thread safety.
+
+75
+00:02:55,680 --> 00:03:00,789
+这些也将成为代码评审的素材。
+And those will then become fodder for code review as well.
+
+76
+00:03:00,789 --> 00:03:02,080
+所以让我们从一个例子开始。
+So let's start with an example.
+
+77
+00:03:02,080 --> 00:03:03,829
+这将是我们的第一个例子。
+And this is going to be our first example.
+
+78
+00:03:03,829 --> 00:03:06,050
+我们叫它臭是因为程序员经常
+And we call it smelly because programmers often
+
+79
+00:03:06,050 --> 00:03:08,750
+把糟糕的代码描述为
+describe bad code as having a bad smell that
+
+80
+00:03:08,750 --> 00:03:10,450
+需要移除。
+needs to be removed.
+
+81
+00:03:10,450 --> 00:03:14,420
+代码卫生是这个的积极版本。
+Code hygiene is the positive version of this.
+
+82
+00:03:14,420 --> 00:03:16,080
+所以让我们从一些难闻的代码开始。
+So let's start with some smelly code.
+
+83
+00:03:16,080 --> 00:03:20,080
+这是一个每年的方法日
+Here is a method day of year that takes
+
+84
+00:03:20,080 --> 00:03:22,780
+三个整数参数，表示月、日
+three integer parameters, representing the month, the day
+
+85
+00:03:22,780 --> 00:03:24,380
+一个月，一年。
+of the month, and the year.
+
+86
+00:03:24,380 --> 00:03:27,940
+它应该在一年中的某一天
+And it's supposed to return the day of the year
+
+87
+00:03:27,940 --> 00:03:30,290
+那个日期对应的。
+that that date corresponds to.
+
+88
+00:03:30,290 --> 00:03:33,920
+这里是这个方法的主体。
+And here is the body of this method.
+
+89
+00:03:33,920 --> 00:03:35,680
+接下来的几节和练习
+Next few sections and the exercises
+
+90
+00:03:35,680 --> 00:03:38,370
+会挑出特殊的气味
+are going to pick out the particular smells
+
+91
+00:03:38,370 --> 00:03:40,830
+在这段代码中。
+in the body of this code here.
+
+92
+00:03:40,830 --> 00:03:44,070
+首先是不要重复你自己。
+First one is don't repeat yourself.
+
+93
+00:03:44,070 --> 00:03:47,130
+重复的代码会给安全带来隐患。
+Duplicated code is a risk to safety from bugs.
+
+94
+00:03:47,130 --> 00:03:50,446
+如果你在两个地方有相同或非常相似的代码，
+If you have identical or very similar code in two places,
+
+95
+00:03:50,446 --> 00:03:52,070
+那么根本的风险在于
+then the fundamental risk is that there
+
+96
+00:03:52,070 --> 00:03:54,760
+可能是两个副本中的错误。
+may be a bug in both copies.
+
+97
+00:03:54,760 --> 00:03:56,670
+但是后来一些维修人员发现
+But then some maintainer who discovers
+
+98
+00:03:56,670 --> 00:03:59,150
+那个错误并修复了它，只修复了一个
+that bug and fixes it, fixes it in only one
+
+99
+00:03:59,150 --> 00:04:02,850
+但不是另一个。
+place but not the other.
+
+100
+00:04:02,850 --> 00:04:06,080
+优秀的程序员以同样的方式避免重复代码
+Good programmers avoid duplicated code in the same way
+
+101
+00:04:06,080 --> 00:04:09,480
+聪明的成年人不看就过马路。
+that smart adults avoid crossing the street without looking.
+
+102
+00:04:09,480 --> 00:04:11,390
+编程时复制和粘贴
+Copy and paste when you're programming
+
+103
+00:04:11,390 --> 00:04:13,780
+是一个非常诱人的工具。
+is an enormously tempting tool.
+
+104
+00:04:13,780 --> 00:04:17,110
+但是你应该感到一种危险的感觉顺着你的脊柱往下跑
+But you should feel a frisson of danger run down your spine
+
+105
+00:04:17,110 --> 00:04:18,600
+每次你用它。
+every time you use it.
+
+106
+00:04:18,600 --> 00:04:22,540
+你复制的区块越长，风险就越大。
+The longer the block you're copying is, the riskier it is.
+
+107
+00:04:22,540 --> 00:04:28,050
+所以不要重复你自己，或者开车，简而言之，
+So don't repeat yourself, or drive, for short,
+
+108
+00:04:28,050 --> 00:04:31,370
+已经成为程序员的口头禅。
+has become a programmer's mantra.
+
+109
+00:04:31,370 --> 00:04:35,940
+现在，一年中的这个例子充满了重复的代码。
+Now this day of year example is full of repeated code.
+
+110
+00:04:35,940 --> 00:04:37,870
+你怎么把它弄干？
+How would you dry it out?
+
+111
+00:04:37,870 --> 00:04:40,990
+让我们在下面的练习中看看。
+Let's look at that in the exercises next.
+

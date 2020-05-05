@@ -1,0 +1,200 @@
+1
+00:00:00,295 --> 00:00:02,420
+我们一直在做的事情之一
+One of the things that we've been doing while we've
+
+2
+00:00:02,420 --> 00:00:04,360
+一直在写代码
+been writing the code in this reading
+
+3
+00:00:04,360 --> 00:00:08,020
+我们一直在记录我们的假设。
+is we've been documenting our assumptions.
+
+4
+00:00:08,020 --> 00:00:10,580
+其中一些文档是Java所必需的，
+Some of these documentations are required by Java,
+
+5
+00:00:10,580 --> 00:00:15,707
+所以写下变量的类型，比如int n，
+so writing the type of a variable down, like int n,
+
+6
+00:00:15,707 --> 00:00:18,290
+意味着n总是指一个整数——实际上
+means that n will always refer to an integer-- you're actually
+
+7
+00:00:18,290 --> 00:00:19,970
+在程序中明确声明--
+stating that explicitly in the program--
+
+8
+00:00:19,970 --> 00:00:22,469
+不能引用字符串、列表或任何其他类型。
+and can never refer to a string or a list or any other type.
+
+9
+00:00:22,469 --> 00:00:25,640
+Java实际上需要这种形式的文档，
+And Java actually requires this form of documentation,
+
+10
+00:00:25,640 --> 00:00:28,080
+它在编译时检查并保证
+and it checks it at compile time and guarantees
+
+11
+00:00:28,080 --> 00:00:30,080
+在你的程序中没有位置
+that there's no place in your program
+
+12
+00:00:30,080 --> 00:00:33,130
+你违反了这个假设。
+where you violated this assumption.
+
+13
+00:00:33,130 --> 00:00:34,860
+也可以声明变量final，
+You can also declare variables final,
+
+14
+00:00:34,860 --> 00:00:36,580
+这是另一种文件。
+and that's another kind of documentation.
+
+15
+00:00:36,580 --> 00:00:38,450
+基本上是说如果你
+It's basically claiming that if you
+
+16
+00:00:38,450 --> 00:00:41,607
+假设这个列表是最后一个变量，那么那个列表
+say that this list is the final variable, then that list
+
+17
+00:00:41,607 --> 00:00:43,690
+变量总是指向同一个列表
+variable is always going to point to the same list
+
+18
+00:00:43,690 --> 00:00:45,350
+对象的初始分配之后。
+object after it's initially assigned.
+
+19
+00:00:45,350 --> 00:00:48,384
+Java也会检查这一点——同样是静态的。
+And Java checks that, too-- again, statically.
+
+20
+00:00:48,384 --> 00:00:50,300
+不幸的是，有很多假设，
+There are a lot of assumptions, unfortunately,
+
+21
+00:00:50,300 --> 00:00:52,820
+Java不会自动检查我们。
+that Java doesn't check for us automatically.
+
+22
+00:00:52,820 --> 00:00:55,530
+这是我们写下的一个例子
+Here was with an example of one that we wrote down
+
+23
+00:00:55,530 --> 00:00:59,785
+在冰雹序列方法的评述中。
+in the comment about the hailstone sequence method.
+
+24
+00:00:59,785 --> 00:01:01,660
+为什么我们需要写下我们的假设？
+Why do we need to write down our assumptions?
+
+25
+00:01:01,660 --> 00:01:02,930
+因为编程充满了它们。
+Because programming is full of them.
+
+26
+00:01:02,930 --> 00:01:05,319
+如果我们不把它们写下来，我们就不会记住它们。
+If we don't write them down, we aren't going to remember them.
+
+27
+00:01:05,319 --> 00:01:07,120
+其他需要阅读或更改我们节目的人
+Other people who need to read or change our programs
+
+28
+00:01:07,120 --> 00:01:08,060
+以后就不认识他们了。
+later won't know them.
+
+29
+00:01:08,060 --> 00:01:10,290
+他们得猜猜我们脑子里想的是什么。
+They'll have to guess what was in our head.
+
+30
+00:01:10,290 --> 00:01:13,610
+这就是导致不一致和错误的原因。
+And that's what leads to inconsistency and bugs.
+
+31
+00:01:13,610 --> 00:01:15,027
+所以这里的一个重要信息是
+So one of the big messages here is
+
+32
+00:01:15,027 --> 00:01:16,526
+你必须写你的程序
+that you have to write your programs
+
+33
+00:01:16,526 --> 00:01:18,520
+有两个目标——不仅仅是交流
+with two goals in mind-- not just communicating
+
+34
+00:01:18,520 --> 00:01:22,027
+使用计算机，不仅仅是说服Java
+with the computer, not just persuading Java
+
+35
+00:01:22,027 --> 00:01:24,360
+你遵守了它的规则
+that you're following its rules and that your program is
+
+36
+00:01:24,360 --> 00:01:27,540
+句法正确，语义正确，
+syntactically correct and semantically correct,
+
+37
+00:01:27,540 --> 00:01:29,690
+同时也和其他人交流。
+but also communicating with other people.
+
+38
+00:01:29,690 --> 00:01:32,320
+你必须使你的程序易于理解，以便
+You have to make your program easy to understand so that when
+
+39
+00:01:32,320 --> 00:01:34,530
+总得有人来修理、改进或适应它
+somebody has to fix it or improve it or adapt it
+
+40
+00:01:34,530 --> 00:01:39,260
+在未来，他们可以做到这一点而不引入bug。
+in the future, they can do so without introducing bugs.
+

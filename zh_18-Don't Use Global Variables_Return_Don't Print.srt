@@ -1,0 +1,340 @@
+1
+00:00:01,060 --> 00:00:02,740
+下面是臭味代码的第三个例子
+Here's the third example of smelly code
+
+2
+00:00:02,740 --> 00:00:04,406
+这将说明剩下的
+that's going to illustrate the remaining
+
+3
+00:00:04,406 --> 00:00:05,940
+阅读要点。
+points of this reading.
+
+4
+00:00:05,940 --> 00:00:09,642
+所以Count Log Words是一个获取字符串列表的函数，
+So Count Log Words is a function that takes a list of strings,
+
+5
+00:00:09,642 --> 00:00:11,100
+它将要做什么
+and what its going to do it's going
+
+6
+00:00:11,100 --> 00:00:12,940
+数数单词的数目
+to count the number of words, the number
+
+7
+00:00:12,940 --> 00:00:15,240
+列表中的字符串
+of strings in that list, that are
+
+8
+00:00:15,240 --> 00:00:17,130
+超过一定长度的。
+longer than a certain length.
+
+9
+00:00:17,130 --> 00:00:22,100
+这个长度是由这个长字长的名字给出的。
+And that length is given by this long word length name here.
+
+10
+00:00:22,100 --> 00:00:25,750
+它会跟踪变量n中的计数。
+And it's going to keep track of that count in this variable n.
+
+11
+00:00:25,750 --> 00:00:27,740
+然后它也会跟踪
+And then it's also going to keep track
+
+12
+00:00:27,740 --> 00:00:29,836
+最长的单词是什么。
+of what the longest word is.
+
+13
+00:00:29,836 --> 00:00:32,460
+每当它找到一个比当前最长的词
+Whenever it finds a word that's longer than the current longest
+
+14
+00:00:32,460 --> 00:00:34,770
+单词，它会记住最长的单词
+word, it's going to remember that in it's longest word
+
+15
+00:00:34,770 --> 00:00:35,740
+变量。
+variable.
+
+16
+00:00:35,740 --> 00:00:40,080
+它会打印到系统输出
+And it's going to print to System Out, which
+
+17
+00:00:40,080 --> 00:00:45,871
+只是控制台，它找到的长单词数。
+is just the console, the number of long words to that it found.
+
+18
+00:00:45,871 --> 00:00:47,870
+这段代码有几个问题。
+There's a couple of things wrong with this code.
+
+19
+00:00:47,870 --> 00:00:50,290
+其中之一是它使用全局变量。
+One of them is that it uses global variables.
+
+20
+00:00:50,290 --> 00:00:53,067
+这里有两个，长单词长度最长的单词。
+There's two of them here, long word length the longest word.
+
+21
+00:00:53,067 --> 00:00:54,900
+我们知道它们是全球性的
+And the way that we know that they're global
+
+22
+00:00:54,900 --> 00:00:57,420
+是因为他们面前有公众这个词
+is that they have the word public in front of them, which
+
+23
+00:00:57,420 --> 00:01:00,049
+意味着可以在代码中的任何地方访问它们。
+means they can be accessed anywhere in the code.
+
+24
+00:01:00,049 --> 00:01:01,840
+他们面前有“静”这个词，
+They have the word static in front of them,
+
+25
+00:01:01,840 --> 00:01:04,459
+这意味着它们与物体无关，
+which means that they're not associated with an object,
+
+26
+00:01:04,459 --> 00:01:08,730
+但实际上——这只是一个变量
+but are instead-- this is just one single variable
+
+27
+00:01:08,730 --> 00:01:11,370
+表示此值。
+representing this value.
+
+28
+00:01:11,370 --> 00:01:13,530
+最后，我们知道它们是变量，
+And finally, we know that they're variables,
+
+29
+00:01:13,530 --> 00:01:16,600
+他们可以改变因为他们没有
+that they can change because they don't have
+
+30
+00:01:16,600 --> 00:01:19,150
+属性final在这里，我们讨论过
+the attribute final in here, which we talked
+
+31
+00:01:19,150 --> 00:01:21,270
+在先前的阅读中。
+about in an earlier reading.
+
+32
+00:01:21,270 --> 00:01:28,600
+所以当你有一个变量和全局的东西时，
+So any time you have a thing that is variable and global,
+
+33
+00:01:28,600 --> 00:01:30,050
+你在为自己冒险。
+you're making risks for yourself.
+
+34
+00:01:30,050 --> 00:01:33,480
+这个网页的全局变量是坏的
+And this web page Global Variables Are Bad
+
+35
+00:01:33,480 --> 00:01:35,610
+很好地总结了许多原因
+has a nice summary of many of the reasons
+
+36
+00:01:35,610 --> 00:01:39,150
+为什么全局变量对于良好的编程是危险的。
+why global variables are dangerous for good programming.
+
+37
+00:01:39,150 --> 00:01:41,350
+在Java中，可以检测全局变量
+In Java you can detect a global variable
+
+38
+00:01:41,350 --> 00:01:44,670
+注意到它被宣布为公共静电，
+by noticing that it is declared as public static,
+
+39
+00:01:44,670 --> 00:01:47,202
+也没有决赛。
+and it doesn't have a final.
+
+40
+00:01:47,202 --> 00:01:49,390
+公共修饰符使它可以在任何地方访问，
+A public modifier makes it accessible anywhere,
+
+41
+00:01:49,390 --> 00:01:53,735
+静态意味着它与一个对象没有关联。
+and the static means that it's not associated with an object.
+
+42
+00:01:53,735 --> 00:01:56,110
+一般来说，你想去掉这些全局变量，
+Generally, you want to get rid of these global variables,
+
+43
+00:01:56,110 --> 00:01:59,670
+所以在这种情况下，最长的单词是一个全局变量
+so in this case longest word is a global variable
+
+44
+00:01:59,670 --> 00:02:04,680
+因为那是它储存一个结果的地方。
+because that's where it's storing one of its results.
+
+45
+00:02:04,680 --> 00:02:06,700
+但你真的应该把这个结果还给我。
+But you should really return this result.
+
+46
+00:02:06,700 --> 00:02:09,169
+你应该想办法，而不是储存东西
+You should find a way, instead of storing things
+
+47
+00:02:09,169 --> 00:02:11,780
+在一个全局变量中，供代码的其余部分访问，
+in a global variable for the rest of your code to access,
+
+48
+00:02:11,780 --> 00:02:14,150
+相反，您应该将内容作为参数传递
+you should instead be passing things as parameters
+
+49
+00:02:14,150 --> 00:02:15,800
+并将它们作为返回值返回。
+and returning them as return values.
+
+50
+00:02:15,800 --> 00:02:19,559
+我们将在未来看到许多这样做的技术。
+And we'll see many techniques for doing that in the future.
+
+51
+00:02:19,559 --> 00:02:21,850
+还有一件事，这看起来很小，但是很多人
+Another thing-- and this may seem minor but many people
+
+52
+00:02:21,850 --> 00:02:23,580
+一开始犯这样的错误
+make mistakes like this at first-- is
+
+53
+00:02:23,580 --> 00:02:25,580
+当你写方法的时候，
+that when you're writing a method,
+
+54
+00:02:25,580 --> 00:02:27,800
+考虑让它返回结果
+think about having it return its results
+
+55
+00:02:27,800 --> 00:02:31,670
+而不是把它们打印出来放在控制台上。
+rather than print them out to the console for human eyeballs.
+
+56
+00:02:31,670 --> 00:02:34,380
+如果你把东西打印出来，那么你写的代码
+If you're printing things out, then the code your writing
+
+57
+00:02:34,380 --> 00:02:35,740
+还没准备好改变。
+isn't really ready for change.
+
+58
+00:02:35,740 --> 00:02:38,670
+它还没有准备好在其他上下文中重用。
+It isn't ready for reuse in some other context.
+
+59
+00:02:38,670 --> 00:02:43,522
+这是打印它的计数，而不是返回它。
+This is printing its count instead of returning it.
+
+60
+00:02:43,522 --> 00:02:45,730
+一般来说，只有程序的最高级别部分
+In general, only the highest level parts your program
+
+61
+00:02:45,730 --> 00:02:47,000
+应该与人类用户交互
+should interact with the human user
+
+62
+00:02:47,000 --> 00:02:48,458
+或者把东西打印到控制台上。
+or print things out to the console.
+
+63
+00:02:48,458 --> 00:02:50,850
+可以打印调试信息
+It's OK to print debugging information
+
+64
+00:02:50,850 --> 00:02:53,030
+当你开发它的时候，但是那个窃听器
+while you're developing it, but that bugging
+
+65
+00:02:53,030 --> 00:02:55,190
+信息不应该是你设计的一部分。
+information shouldn't be a part of your design.
+
+66
+00:02:55,190 --> 00:02:57,760
+它不应该是功能的一部分
+It shouldn't be a part of how the function is
+
+67
+00:02:57,760 --> 00:02:59,260
+应该有用的。
+supposed to work.
+
+68
+00:02:59,260 --> 00:03:02,470
+它应该只是调试设计的一部分。
+It should only be a part of how you debug your design.
+

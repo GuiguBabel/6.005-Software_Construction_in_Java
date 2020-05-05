@@ -1,0 +1,150 @@
+1
+00:00:00,840 --> 00:00:03,035
+欢迎使用Java进行软件构建。
+Welcome to software construction in Java.
+
+2
+00:00:03,035 --> 00:00:04,410
+在我们的第一次朗读中，我们将
+In this first reading we're going
+
+3
+00:00:04,410 --> 00:00:06,240
+来谈谈Java的一个重要特性，即
+to talk about an important feature of Java that
+
+4
+00:00:06,240 --> 00:00:08,365
+使其有别于其他编程语言
+makes it different from other programming languages
+
+5
+00:00:08,365 --> 00:00:10,850
+您可能已经学过了，比如Python和JavaScript。
+you may have learned, like Python and JavaScript.
+
+6
+00:00:10,850 --> 00:00:13,660
+该功能称为静态类型。
+That feature is called static typing.
+
+7
+00:00:13,660 --> 00:00:16,930
+接下来，我们将介绍本课程的三大目标。
+From there, we'll introduce the three big goals of this course.
+
+8
+00:00:16,930 --> 00:00:20,180
+因为这门课程并不是真正的Java编程课程，
+Because this course isn't really a Java programming course,
+
+9
+00:00:20,180 --> 00:00:21,900
+我们想学习如何编写好的代码
+we want to learn how to write good code
+
+10
+00:00:21,900 --> 00:00:24,380
+用任何语言和三大理念
+in any language and the three big ideas
+
+11
+00:00:24,380 --> 00:00:26,940
+是关于我们所说的好代码的意思。
+are about what we mean by good code.
+
+12
+00:00:26,940 --> 00:00:29,410
+首先，它应该是安全的，不会有错误--或者换句话说，它应该是安全的
+First it should be safe from bugs-- or in other words
+
+13
+00:00:29,410 --> 00:00:32,409
+正确--第二，应该很容易理解
+correct-- two, it should be easy to understand
+
+14
+00:00:32,409 --> 00:00:34,540
+由其他程序员，第三，它
+by other programmers, and three, it
+
+15
+00:00:34,540 --> 00:00:37,240
+应该准备好在未来被改变。
+should be ready to be changed in the future.
+
+16
+00:00:37,240 --> 00:00:41,180
+本课程中的每个想法都将有助于实现这些目标。
+Every idea in this course is going to help with these goals.
+
+17
+00:00:41,180 --> 00:00:44,160
+让我来介绍一下这门课程的阅读材料。
+Let me also say something about the readings for this course.
+
+18
+00:00:44,160 --> 00:00:46,520
+阅读的每个部分都有一个正文部分
+Each section of a reading has a text part
+
+19
+00:00:46,520 --> 00:00:48,470
+外加一个视频部分，在这个部分里，我基本上
+plus a video part in which I basically
+
+20
+00:00:48,470 --> 00:00:50,060
+把课文通读一遍。
+read through the text.
+
+21
+00:00:50,060 --> 00:00:52,750
+文本和视频在其中都具有相同的信息，
+The text and the video both have the same information in them,
+
+22
+00:00:52,750 --> 00:00:54,690
+所以你可以忘了录像带
+so you can just forget about the video
+
+23
+00:00:54,690 --> 00:00:56,954
+如果你愿意的话，只要读课文就行了
+and just read the text if you prefer to do that
+
+24
+00:00:56,954 --> 00:00:58,870
+或者您可以在滚动的同时收听视频
+or you can listen to the video while scrolling
+
+25
+00:00:58,870 --> 00:01:01,360
+或者你可以直接看视频
+through the text or you can just watch the video
+
+26
+00:01:01,360 --> 00:01:02,795
+并在开始时忽略文本。
+and ignore the text at first.
+
+27
+00:01:02,795 --> 00:01:04,920
+但如果您稍后需要参考该部分，
+But if you need to refer back to the section later,
+
+28
+00:01:04,920 --> 00:01:06,610
+你可能会发现课文部分更容易些
+you may find the text part easier
+
+29
+00:01:06,610 --> 00:01:09,100
+浏览、搜索和评论。
+to skim and search and review.
+
+30
+00:01:09,100 --> 00:01:11,360
+好了，我们开始吧。
+OK, let's get started.
+

@@ -1,0 +1,1290 @@
+1
+00:00:00,650 --> 00:00:02,640
+现在是冰雹计算
+Now it's kind of hailstone computation
+
+2
+00:00:02,640 --> 00:00:05,190
+所以它朝向序列号和数据
+so that it's towards the sequence numbers and the data
+
+3
+00:00:05,190 --> 00:00:07,982
+结构，而不是打印出来。
+structure, instead of just printing it out.
+
+4
+00:00:07,982 --> 00:00:09,690
+因为Java有两种类型的列表
+As Java has two kinds of lists like types
+
+5
+00:00:09,690 --> 00:00:11,910
+我们可以使用数组和列表。
+that we can use-- arrays and lists.
+
+6
+00:00:11,910 --> 00:00:14,250
+让我们从数组开始。
+Let's start by looking at arrays.
+
+7
+00:00:14,250 --> 00:00:17,830
+数组是其他类型的固定长度序列，
+An array is a fixed length sequence of some other type,
+
+8
+00:00:17,830 --> 00:00:21,840
+例如，t——t可能是int。
+t-- t might be int, for example.
+
+9
+00:00:21,840 --> 00:00:24,510
+下面是我们声明数组变量的方法。
+So here's how we might declare an array variable.
+
+10
+00:00:24,510 --> 00:00:31,250
+这说明a是一个类型为整数数组的变量。
+This says that a is a variable whose type is integer array.
+
+11
+00:00:31,250 --> 00:00:35,420
+然后构造一个分配给它的新数组值。
+And then construct a new array value that gets assigned to it.
+
+12
+00:00:35,420 --> 00:00:38,910
+这里，我们正在构造一个100个整数的数组，
+Here, we're constructing an array of 100 ints,
+
+13
+00:00:38,910 --> 00:00:41,595
+把它赋给那个变量。
+and assigning that to that variable.
+
+14
+00:00:41,595 --> 00:00:42,970
+所以现在重要的是要记住
+So now it's important to remember
+
+15
+00:00:42,970 --> 00:00:47,140
+类型的定义是一组值，
+that the definition of a type is it's a set of values,
+
+16
+00:00:47,140 --> 00:00:49,650
+加上可以对这些值执行的操作。
+plus the operations you can do on those values.
+
+17
+00:00:49,650 --> 00:00:53,180
+好吧，int数组类型包括所有可能的数组
+Well, the int array type includes all possible array
+
+18
+00:00:53,180 --> 00:01:00,010
+所有可能长度的整数的值--100，10，1，
+values of integers of all possible lengths-- 100, 10, 1,
+
+19
+00:01:00,010 --> 00:01:02,040
+55岁，0岁。
+55, 0.
+
+20
+00:01:02,040 --> 00:01:05,220
+但是我们创建的任何特定数组值，比如这个，
+But any particular array value that we create, like this one,
+
+21
+00:01:05,220 --> 00:01:08,390
+一旦它被创造，就永远无法改变它的长度。
+can never change its length once it's created.
+
+22
+00:01:08,390 --> 00:01:10,880
+所以要记住这一点。
+So keep that distinction in mind.
+
+23
+00:01:10,880 --> 00:01:13,747
+现在可以对数组执行的操作
+Now the operations you can do on arrays
+
+24
+00:01:13,747 --> 00:01:15,330
+你可能很熟悉
+are probably familiar to you from what
+
+25
+00:01:15,330 --> 00:01:17,210
+你在Python的列表中见过，所以
+you've seen on lists in Python, so you
+
+26
+00:01:17,210 --> 00:01:20,380
+可以索引到一个数组中，即找到
+can index into an array, that is find the value that's
+
+27
+00:01:20,380 --> 00:01:23,860
+在某个索引处——这将得到第三个元素
+at a certain index-- this gets the third element out
+
+28
+00:01:23,860 --> 00:01:24,450
+在阵列中。
+of the array.
+
+29
+00:01:24,450 --> 00:01:27,124
+这将分配数组的第三个元素。
+This assigns the third element of the array.
+
+30
+00:01:27,124 --> 00:01:29,040
+你可以得到数组的长度
+And you can get the length of the array, which
+
+31
+00:01:29,040 --> 00:01:33,880
+记住，是固定的，但是对于不同的数组可能不同，
+remember, is fixed, but might be different for different arrays,
+
+32
+00:01:33,880 --> 00:01:35,790
+使用点长度。
+by using dot length.
+
+33
+00:01:35,790 --> 00:01:39,250
+所以请再次注意，这些操作都是
+So notice again that these operations are all written
+
+34
+00:01:39,250 --> 00:01:41,140
+以稍微不同的方式。
+in slightly different ways.
+
+35
+00:01:41,140 --> 00:01:44,942
+它们不是简单的方法，也不是简单的函数。
+They're not all simply methods, or simply functions.
+
+36
+00:01:44,942 --> 00:01:46,650
+但基本上还是在运作--
+But they are still basically operations--
+
+37
+00:01:46,650 --> 00:01:49,020
+这是一个需要数组的操作，
+this is an operation that takes an array,
+
+38
+00:01:49,020 --> 00:01:53,180
+并返回一个整数，这是该数组的长度。
+and returns an integer, which is the length of that array.
+
+39
+00:01:53,180 --> 00:01:56,680
+这里有一个使用数组编写冰雹代码的技巧。
+So here's a crack at writing the hailstone code using an array.
+
+40
+00:01:56,680 --> 00:01:58,610
+我们开始，首先，这里
+We start, well first of all, here's
+
+41
+00:01:58,610 --> 00:02:00,870
+冰雹密码的核心我们已经有了。
+the core of the hailstone code we already had.
+
+42
+00:02:00,870 --> 00:02:03,220
+所以它从一些数字开始，n，然后
+So it starts with some number, n, and then
+
+43
+00:02:03,220 --> 00:02:06,830
+只要序列没有达到1，
+as long as that sequence hasn't reached 1,
+
+44
+00:02:06,830 --> 00:02:10,080
+它根据规则更新n。
+it updates n according to the rule.
+
+45
+00:02:10,080 --> 00:02:12,890
+好吧，我们在这里插入，
+Well, we're going to insert in here,
+
+46
+00:02:12,890 --> 00:02:15,140
+保存它遇到的每一个数字，
+saving each of the numbers that it encounters,
+
+47
+00:02:15,140 --> 00:02:17,090
+作为数组的元素。
+as an element of the array.
+
+48
+00:02:17,090 --> 00:02:20,220
+所以这是它存储当前端的地方
+So here's where it stores the current end
+
+49
+00:02:20,220 --> 00:02:24,280
+进入数组的当前索引。
+into the current index into the array.
+
+50
+00:02:24,280 --> 00:02:26,910
+它使用了一个附加变量
+And it's using an additional variable, i, in order
+
+51
+00:02:26,910 --> 00:02:28,660
+穿过那个阵列。
+to step through that array.
+
+52
+00:02:28,660 --> 00:02:32,770
+所以它从index开始，0，然后递增
+So it's starting with index, 0, and then incrementing
+
+53
+00:02:32,770 --> 00:02:35,770
+每次我们在数组中存储一个数字。
+each time we store a number into the array.
+
+54
+00:02:35,770 --> 00:02:39,390
+你会注意到这里，我加上——这个
+And you'll notice here, i plus plus-- this
+
+55
+00:02:39,390 --> 00:02:44,840
+是Java中增加整数变量的运算符。
+is an operator in Java that increments an integer variable.
+
+56
+00:02:44,840 --> 00:02:46,930
+这是我常用的速记法
+And that's very common shorthand for i
+
+57
+00:02:46,930 --> 00:02:50,724
+等于i加1，你可能在其他语言中看到过。
+equals i plus 1, which you may have seen in other languages.
+
+58
+00:02:50,724 --> 00:02:52,640
+最后，我们还要确保
+And then at the end, we also have to make sure
+
+59
+00:02:52,640 --> 00:02:55,720
+我们把最后一个数字，永远是1，
+that we put the last number, which will always be 1,
+
+60
+00:02:55,720 --> 00:02:57,280
+进入那个阵型。
+into that array.
+
+61
+00:02:57,280 --> 00:02:59,710
+现在，有件事很危险
+Now, there's something immediately very dangerous
+
+62
+00:02:59,710 --> 00:03:02,230
+这里——代码中有一个神奇的数字，
+here-- there's a magic number in this code,
+
+63
+00:03:02,230 --> 00:03:04,640
+我们要多谈谈这些数字
+and we're going to talk more about these kinds of numbers
+
+64
+00:03:04,640 --> 00:03:07,010
+后来——这个神秘的常数，
+later-- this mysterious constant,
+
+65
+00:03:07,010 --> 00:03:08,700
+为什么我们在这里选100？
+why did we choose 100 here?
+
+66
+00:03:08,700 --> 00:03:11,180
+事实上，这可能是个错误的选择，
+And in fact, this was probably a bad choice,
+
+67
+00:03:11,180 --> 00:03:14,590
+因为我们不知道冰雹序列有多长
+because we don't know how long a hailstone sequence is
+
+68
+00:03:14,590 --> 00:03:15,630
+很可能得到。
+likely to get.
+
+69
+00:03:15,630 --> 00:03:17,901
+如果我们试着结束
+What would happen if we tried an end that
+
+70
+00:03:17,901 --> 00:03:19,650
+碰巧有一个冰雹序列
+happened to have a hailstone sequence that
+
+71
+00:03:19,650 --> 00:03:24,240
+在它降到1之前反弹了100多次？
+bounced around more than 100 times before it got down to 1?
+
+72
+00:03:24,240 --> 00:03:26,972
+它不适合这个长度为100的数组。
+Well, it wouldn't fit into this length 100 array.
+
+73
+00:03:26,972 --> 00:03:29,700
+事实上，就在这里，只要我们
+And in fact, right here, as soon as we
+
+74
+00:03:29,700 --> 00:03:33,560
+到达一个比我们能适应的更大的i--
+reached an i that was greater than what we can fit in here--
+
+75
+00:03:33,560 --> 00:03:36,630
+长度为100的数组基本上
+member that length 100 array will basically
+
+76
+00:03:36,630 --> 00:03:38,640
+从0到99建立索引。
+be indexed from 0 through 99.
+
+77
+00:03:38,640 --> 00:03:43,055
+所以当我100岁的时候
+So as soon as i is 100 here, this statement
+
+78
+00:03:43,055 --> 00:03:44,180
+会有问题的。
+is going to have a problem.
+
+79
+00:03:44,180 --> 00:03:46,140
+一个问题是，Java是否
+And one question is, would Java be
+
+80
+00:03:46,140 --> 00:03:49,770
+能够静态或动态地捕获这个bug？
+able to catch this bug statically, or dynamically?
+
+81
+00:03:49,770 --> 00:03:52,032
+还是根本抓不到？
+Or will it not catch it at all?
+
+82
+00:03:52,032 --> 00:03:53,990
+答案是它会动态地捕捉它。
+And the answer is it will catch it dynamically.
+
+83
+00:03:53,990 --> 00:03:56,690
+首先，因为它不能静态地知道
+First of all, because it can't know it statically
+
+84
+00:03:56,690 --> 00:04:00,730
+数组a的大小，或者我的大小。
+what size array a points to, or just how large i is.
+
+85
+00:04:00,730 --> 00:04:03,320
+所以Java编译器，看看这段代码，
+So the Java compiler, looking at this code,
+
+86
+00:04:03,320 --> 00:04:06,110
+目前没有足够的信息
+doesn't have enough information at this point
+
+87
+00:04:06,110 --> 00:04:09,520
+弄清楚这是否会是个问题。
+to figure out whether this is going to be a problem.
+
+88
+00:04:09,520 --> 00:04:11,470
+相反，它会遇到这个问题
+Instead, it's going to encounter that problem
+
+89
+00:04:11,470 --> 00:04:16,004
+当它试图索引这个数组时，i等于100。
+as soon as it tries to index this array with i equal to 100.
+
+90
+00:04:16,004 --> 00:04:17,920
+在那一点上，它会抛出一个异常，
+And at that point, it will throw an exception,
+
+91
+00:04:17,920 --> 00:04:19,540
+程序将停止。
+and the program will stop.
+
+92
+00:04:19,540 --> 00:04:22,123
+在Python中，如果您尝试
+That's the same thing that would happen in Python if you tried
+
+93
+00:04:22,123 --> 00:04:24,720
+用更大的数字索引列表
+to index a list with a number that was larger
+
+94
+00:04:24,720 --> 00:04:26,570
+比名单的长度还要长。
+than the length of the list.
+
+95
+00:04:26,570 --> 00:04:29,360
+不幸的是，其他语言尤其不安全
+Other languages, unfortunately, particularly less safe
+
+96
+00:04:29,360 --> 00:04:33,000
+像C和C++这样的语言，甚至不做那种级别的检查。
+languages like C and C++, don't even do that level of checking.
+
+97
+00:04:33,000 --> 00:04:35,760
+他们会让你进入这个数组，
+They will just let you go ahead and index into this array,
+
+98
+00:04:35,760 --> 00:04:38,240
+你会得到垃圾。
+and you will actually get garbage.
+
+99
+00:04:38,240 --> 00:04:40,470
+不幸的是，
+And that's responsible for, unfortunately,
+
+100
+00:04:40,470 --> 00:04:43,290
+大量网络安全漏洞，以及互联网
+a large number of network security breaches, and internet
+
+101
+00:04:43,290 --> 00:04:46,190
+虫子——它们利用这样的虫子，
+worms-- they take advantage of bugs like that,
+
+102
+00:04:46,190 --> 00:04:48,760
+为了进入系统。
+in order to break into systems.
+
+103
+00:04:48,760 --> 00:04:50,640
+所以这可能是一个非常危险的虫子。
+So that can be a very dangerous bug.
+
+104
+00:04:50,640 --> 00:04:52,660
+在Java中，它只会使程序崩溃。
+In Java, it just crashes your program.
+
+105
+00:04:52,660 --> 00:04:56,202
+但在其他语言中，这是非常危险的。
+But in other kinds of languages, it can be very dangerous.
+
+106
+00:04:56,202 --> 00:04:57,660
+所以不是固定长度的数组，
+So instead of a fixed length array,
+
+107
+00:04:57,660 --> 00:04:59,880
+我们改用列表类型吧。
+let's try using the list type instead.
+
+108
+00:04:59,880 --> 00:05:01,770
+可变长度序列列表
+Lists of variable length sequences
+
+109
+00:05:01,770 --> 00:05:04,144
+其他类型的，t。
+of some other type, t.
+
+110
+00:05:04,144 --> 00:05:05,560
+他们更像你
+They're much more like what you're
+
+111
+00:05:05,560 --> 00:05:07,851
+熟悉，概率，来自Python和JavaScript。
+familiar with, probability, from Python and JavaScript.
+
+112
+00:05:07,851 --> 00:05:10,080
+下面我们来声明一个列表变量。
+So here's how we declare a list variable.
+
+113
+00:05:10,080 --> 00:05:15,160
+我们说，这个名为list的变量具有类型list angle
+We say, that this variable named list has type list angle
+
+114
+00:05:15,160 --> 00:05:17,870
+整型括号，闭合尖括号。
+bracket integer, close angle bracket.
+
+115
+00:05:17,870 --> 00:05:22,060
+下面是我们如何构造列表的新实例--
+And then here's how we construct a new instance of a list--
+
+116
+00:05:22,060 --> 00:05:24,330
+我们将讨论一些区别
+and we'll talk about some of the distinctions
+
+117
+00:05:24,330 --> 00:05:25,650
+请稍等。
+here in just a moment.
+
+118
+00:05:25,650 --> 00:05:28,200
+但是在这里，请记住类型是一组值--
+But here, remember that a type is a set of values--
+
+119
+00:05:28,200 --> 00:05:29,930
+所以这是一组列表值。
+so it's a set of list values.
+
+120
+00:05:29,930 --> 00:05:33,220
+下面是可以对列表值执行的操作。
+And then here are the operations that you can do on list values.
+
+121
+00:05:33,220 --> 00:05:35,250
+同样，您可以索引到它们，但是
+Again, you can index into them, but instead
+
+122
+00:05:35,250 --> 00:05:38,810
+在使用方括号语法时，此操作表示为
+of using square brackets syntax, this operation is represented
+
+123
+00:05:38,810 --> 00:05:41,730
+通过方法调用，获取。
+by a method call, get.
+
+124
+00:05:41,730 --> 00:05:45,130
+要赋值，调用方法set。
+And to assign, you call the method, set.
+
+125
+00:05:45,130 --> 00:05:47,550
+要得到列表的长度，可以调用size。
+And to get the length of a list, you call size.
+
+126
+00:05:47,550 --> 00:05:49,260
+这些都是不幸的矛盾
+These are unfortunate inconsistencies
+
+127
+00:05:49,260 --> 00:05:51,910
+在Java中，相对的内部不一致，
+in Java, relative internal inconsistencies,
+
+128
+00:05:51,910 --> 00:05:52,850
+相对于自身。
+relative to itself.
+
+129
+00:05:52,850 --> 00:05:55,260
+Python在这方面做得更好。
+Python does this sort of thing much better.
+
+130
+00:05:55,260 --> 00:05:58,090
+这是Java的缺点之一。
+That's one of the drawbacks of Java.
+
+131
+00:05:58,090 --> 00:05:59,840
+现在，这里还有别的事情。
+Now, there's something else going on here.
+
+132
+00:05:59,840 --> 00:06:03,930
+所以事实上你在申报单上有单子，
+So the fact that you have list over here in the declaration,
+
+133
+00:06:03,930 --> 00:06:06,480
+当你真的
+and array list over here when you're actually
+
+134
+00:06:06,480 --> 00:06:08,547
+构建价值。
+constructing the value.
+
+135
+00:06:08,547 --> 00:06:10,880
+原因是我们会
+And the reason for that is something that we'll actually
+
+136
+00:06:10,880 --> 00:06:13,710
+在以后的阅读中谈论更多，
+talk about lot more in later readings,
+
+137
+00:06:13,710 --> 00:06:19,270
+是因为它分离了类型的概念--
+is that it's separating the notion of the type--
+
+138
+00:06:19,270 --> 00:06:23,400
+所以它是一个列表类型——来自特定的实现
+so it's a list type-- from the particular Implementation
+
+139
+00:06:23,400 --> 00:06:27,170
+它实际上是一个数组。
+of that type, which is actually as an array.
+
+140
+00:06:27,170 --> 00:06:29,400
+所以在Java中，列表称为接口，
+So in Java, a list is called an interface,
+
+141
+00:06:29,400 --> 00:06:33,120
+而且没有任何实际的Java代码。
+and doesn't have any actual Java code in it.
+
+142
+00:06:33,120 --> 00:06:37,780
+相反，它有一组操作声明，
+What it has instead is a set of declarations of the operations,
+
+143
+00:06:37,780 --> 00:06:41,790
+比如get、set和size，一个列表实现
+like get and set and size, that a list implementation
+
+144
+00:06:41,790 --> 00:06:43,432
+必须提供。
+must provide.
+
+145
+00:06:43,432 --> 00:06:46,000
+然而，数组列表实际上是一个类--
+Array list, however, is actually a class--
+
+146
+00:06:46,000 --> 00:06:47,640
+这是一个普通的班级
+it's an ordinary class that actually
+
+147
+00:06:47,640 --> 00:06:50,120
+提供这些操作的实现。
+provides the implementations of those operations.
+
+148
+00:06:50,120 --> 00:06:51,860
+数组列表不是唯一的实现
+Array list isn't the only implementation
+
+149
+00:06:51,860 --> 00:06:54,610
+你可以使用的列表中--这是最常用的一个，
+of the list you could use-- it's the most commonly used one,
+
+150
+00:06:54,610 --> 00:06:57,250
+但链接列表是另一个。
+but link list is another.
+
+151
+00:06:57,250 --> 00:06:59,520
+实际上，现在让我们深入了解一下Java API
+Let's dig in now, actually, to the Java API
+
+152
+00:06:59,520 --> 00:07:04,170
+让你明白我的意思。
+so that you can see what I mean by this.
+
+153
+00:07:04,170 --> 00:07:06,410
+我要做的是googleforjavaapi--
+What I'm going to do is Google for Java API--
+
+154
+00:07:06,410 --> 00:07:10,300
+事实上，我注意到我得到了Java7，
+and in fact, I'm noticing here that I'm getting Java 7,
+
+155
+00:07:10,300 --> 00:07:12,220
+我们在这个类中使用Java8，
+and we're using Java 8 in this class,
+
+156
+00:07:12,220 --> 00:07:15,490
+所以我要稍微改变一下我的谷歌搜索。
+so I'm going to change my Google search a little bit.
+
+157
+00:07:15,490 --> 00:07:18,360
+这个界面向你展示了什么
+And what this interface shows you
+
+158
+00:07:18,360 --> 00:07:21,240
+是所有的类和接口
+is all of the classes and interfaces
+
+159
+00:07:21,240 --> 00:07:23,590
+已经内置到Java中。
+that have built into Java.
+
+160
+00:07:23,590 --> 00:07:25,540
+这里有很多很棒的东西--
+There's a lot of great stuff in here--
+
+161
+00:07:25,540 --> 00:07:28,500
+我特别想深入研究一下这个清单。
+I'm particularly going to dig into list.
+
+162
+00:07:28,500 --> 00:07:30,670
+你会注意到它被称为接口，
+You'll notice that it's called an interface,
+
+163
+00:07:30,670 --> 00:07:35,200
+是一种类型，它是您要放在这里的任何类型的列表。
+and is a type that is a list of any type you want to put here.
+
+164
+00:07:35,200 --> 00:07:37,240
+我们把整数放在这里。
+We've been putting integer here.
+
+165
+00:07:37,240 --> 00:07:39,320
+它代表一个有序的集合。
+And it represents an ordered collection.
+
+166
+00:07:39,320 --> 00:07:42,290
+如果我们向下滚动，就会看到所有的操作，
+If we scroll down, we'll see all the operations,
+
+167
+00:07:42,290 --> 00:07:50,530
+比如get，set和size，你可以在列表中执行。
+like get, and like set and size, that you can perform on a list.
+
+168
+00:07:50,530 --> 00:07:54,990
+但是列表本身不足以使用列表。
+But a list is not, by itself, enough to be able to use lists.
+
+169
+00:07:54,990 --> 00:07:58,000
+我们必须得到这个清单的一个实现--
+We have to get an implementation of this list--
+
+170
+00:07:58,000 --> 00:08:00,820
+我们常用的是数组列表。
+a common one that we use is an array list.
+
+171
+00:08:00,820 --> 00:08:04,750
+实际上在这个列表中有一个可调整大小的数组。
+And that's a resizable array actually inside this list.
+
+172
+00:08:04,750 --> 00:08:08,560
+这个数组列表类只是使用一个数组
+This array list class is just using an array
+
+173
+00:08:08,560 --> 00:08:13,450
+代表你的价值序列。
+to represent your sequence of values.
+
+174
+00:08:13,450 --> 00:08:17,130
+这个类提供所有这些操作
+And this class provides all of those operations
+
+175
+00:08:17,130 --> 00:08:20,310
+这份名单要求它提供。
+that list asked it to provide.
+
+176
+00:08:20,310 --> 00:08:21,900
+所以这是我们的第一次尝试，真的，
+So this is our first taste, really,
+
+177
+00:08:21,900 --> 00:08:25,590
+这门课的核心思想是什么
+of what very key idea in this class
+
+178
+00:08:25,590 --> 00:08:29,830
+将是抽象数据类型——list是抽象数据类型。
+will be abstract data types-- list is an abstract data type.
+
+179
+00:08:29,830 --> 00:08:32,257
+我想让你从中得到的另一件事是
+The other thing I wanted you to get from that is it's
+
+180
+00:08:32,257 --> 00:08:33,840
+知道如何搜索真的很重要
+really important to know how to search
+
+181
+00:08:33,840 --> 00:08:35,850
+用于Java API文档。
+for Java API documentation.
+
+182
+00:08:35,850 --> 00:08:37,820
+我刚才做的有点
+And what I just did shows a little bit
+
+183
+00:08:37,820 --> 00:08:39,600
+关于怎么做。
+about how to do that.
+
+184
+00:08:39,600 --> 00:08:42,460
+现在，这里还有一个重要的调整
+Now, another important tweak here
+
+185
+00:08:42,460 --> 00:08:46,090
+当我们写这些声明的时候
+is that when we were writing these declarations, saying
+
+186
+00:08:46,090 --> 00:08:51,460
+这是一个整数列表，我们使用大写字母i，integer，而不是
+that it's a list of integers, we used capital i, integer, rather
+
+187
+00:08:51,460 --> 00:08:53,810
+比小写int。
+than lowercase int.
+
+188
+00:08:53,810 --> 00:08:58,260
+这是Java的另一个小怪癖。
+And this is another little quirk of Java.
+
+189
+00:08:58,260 --> 00:09:02,780
+这些可参数化的类型，比如list，
+These parameterizable types, like list,
+
+190
+00:09:02,780 --> 00:09:05,740
+很遗憾不能使用基元类型
+unfortunately can't use primitive types
+
+191
+00:09:05,740 --> 00:09:09,470
+作为他们的价值类型。
+as their value type.
+
+192
+00:09:09,470 --> 00:09:10,930
+请记住，原始类型是
+Remember that primitive types are
+
+193
+00:09:10,930 --> 00:09:14,340
+用小写字母拼写——比如int、long和float，
+spelled in lowercase-- like int, and long, and float,
+
+194
+00:09:14,340 --> 00:09:15,470
+再加倍。
+and double.
+
+195
+00:09:15,470 --> 00:09:19,720
+这些基本类型中的每一个都有一个对应的对象
+Each of these primitive types has a corresponding object
+
+196
+00:09:19,720 --> 00:09:22,770
+类型，这基本上是一个包裹在单个值上的对象
+type, that's basically an object wrapped around a single value
+
+197
+00:09:22,770 --> 00:09:25,210
+原始类型的。
+of that primitive type.
+
+198
+00:09:25,210 --> 00:09:28,200
+因此capital I integer是对应的对象类型
+And so capital I integer is the corresponding object type
+
+199
+00:09:28,200 --> 00:09:30,320
+内景。
+for int.
+
+200
+00:09:30,320 --> 00:09:33,470
+在Java中，如果我们要从这个角度
+And in Java, if we're going to put something in these angle
+
+201
+00:09:33,470 --> 00:09:35,530
+可以在集合中使用它的括号，
+brackets to be able to use it in a collection,
+
+202
+00:09:35,530 --> 00:09:37,530
+像一张单子，一套或一张地图，我们
+like a list or a set or a map, we
+
+203
+00:09:37,530 --> 00:09:40,720
+必须使用对象类型，如大写i整数。
+have to use the object type, like capital i integer.
+
+204
+00:09:40,720 --> 00:09:43,310
+幸运的是，Java自动在小写之间转换
+Fortunately, Java automatically converts between lower case
+
+205
+00:09:43,310 --> 00:09:46,650
+整数和大写I整数，所以我们可以简单地编写
+ints and capital I integers, so we can just simply write
+
+206
+00:09:46,650 --> 00:09:52,260
+比如整数I等于5，或者我们可以在代码中写入
+something like integer I equals 5, or we can write in the code
+
+207
+00:09:52,260 --> 00:09:56,180
+我们即将看到，我们可以简单地写下list.add of n，
+that we're about to see, we can simply write list.add of n,
+
+208
+00:09:56,180 --> 00:09:59,810
+即使n是一个int，list包含整数，
+even though n is an int, and list contains integers,
+
+209
+00:09:59,810 --> 00:10:04,000
+Java将自动在它们之间转换。
+Java will automatically convert between them.
+
+210
+00:10:04,000 --> 00:10:07,570
+现在让我们看看用列表编写的hailstone代码。
+So let's look at the hailstone code written with lists now.
+
+211
+00:10:07,570 --> 00:10:09,460
+再说一遍，它的心脏还是一样的--
+Again, the heart of it is still the same--
+
+212
+00:10:09,460 --> 00:10:11,415
+我们有这个起始号码，n，
+we've got this starting number, n,
+
+213
+00:10:11,415 --> 00:10:13,740
+一直循环到1。
+and we're looping as long until we get to 1.
+
+214
+00:10:13,740 --> 00:10:16,060
+更新规则还是一样的，
+And the update rule is still the same,
+
+215
+00:10:16,060 --> 00:10:18,720
+但我们现在已经创建了一个列表变量。
+but we've now created a list variable.
+
+216
+00:10:18,720 --> 00:10:22,957
+我们已将其初始化为新的空数组列表。
+We've initialized it to a new empty array list.
+
+217
+00:10:22,957 --> 00:10:24,540
+每次循环，我们
+And every time through the loop, we're
+
+218
+00:10:24,540 --> 00:10:27,930
+只需调用add将这个新号码添加到列表的末尾。
+simply calling add to add this new number to the end of list.
+
+219
+00:10:27,930 --> 00:10:32,900
+名单会按需要增加，直到我们
+And that list will just grow as it needs to, until we've
+
+220
+00:10:32,900 --> 00:10:34,262
+所有的号码都在里面。
+got all the numbers in there.
+
+221
+00:10:34,262 --> 00:10:35,720
+然后在循环的最后，我们
+And then at the end of the loop, we
+
+222
+00:10:35,720 --> 00:10:39,430
+确保我们添加1作为最后一个元素
+make sure that we add 1 as the final element that
+
+223
+00:10:39,430 --> 00:10:40,340
+冰雹序列。
+hailstone sequence.
+
+224
+00:10:40,340 --> 00:10:42,830
+所以这不仅简单，而且更安全，
+So this is not only simpler, but it's also safer from bugs,
+
+225
+00:10:42,830 --> 00:10:44,330
+因为这个列表是自动的
+because this list is automatically
+
+226
+00:10:44,330 --> 00:10:46,399
+要放大以容纳尽可能多的数字
+going to enlarge to fit as many numbers
+
+227
+00:10:46,399 --> 00:10:47,440
+因为你需要增加。
+as you need to add to it.
+
+228
+00:10:47,440 --> 00:10:49,410
+你也注意到我们不再
+And you also notice that we no longer
+
+229
+00:10:49,410 --> 00:10:52,799
+有一个索引变量
+have that i index variable, which
+
+230
+00:10:52,799 --> 00:10:54,340
+是另一个潜在的虫子来源。
+was another potential source of bugs.
+
+231
+00:10:54,340 --> 00:10:56,370
+如果我们忘记增加i，
+If we'd forgotten to increment that i,
+
+232
+00:10:56,370 --> 00:10:59,070
+我们会有麻烦的。
+we would have had a problem.
+
+233
+00:10:59,070 --> 00:11:03,260
+在我们离开列表和数组之前还有一件事，
+One more thing before we leave the lists and arrays,
+
+234
+00:11:03,260 --> 00:11:06,460
+在Python中你也应该很熟悉，
+which also should be familiar to you from Python,
+
+235
+00:11:06,460 --> 00:11:08,764
+可以使用for循环遍历元素
+you can use a for loop to step through the elements
+
+236
+00:11:08,764 --> 00:11:09,680
+数组或列表的。
+of an array or a list.
+
+237
+00:11:09,680 --> 00:11:12,500
+语法与Python略有不同——这里
+The syntax is a little different than Python-- here
+
+238
+00:11:12,500 --> 00:11:14,080
+就是它的样子。
+is what it looks like.
+
+239
+00:11:14,080 --> 00:11:15,930
+你有一个for循环
+You have a for loop in which you have
+
+240
+00:11:15,930 --> 00:11:19,080
+声明要获取的变量
+to declare the variable that is going to take
+
+241
+00:11:19,080 --> 00:11:20,640
+在列表中的每个值上。
+on each value inside the list.
+
+242
+00:11:20,640 --> 00:11:22,810
+你必须给它一个类型
+And you have to give it a type that
+
+243
+00:11:22,810 --> 00:11:24,174
+与列表兼容。
+is compatible with the list.
+
+244
+00:11:24,174 --> 00:11:25,590
+如果这是一个整数列表--
+So if this is a list of integers--
+
+245
+00:11:25,590 --> 00:11:26,820
+这可以是大写i整数，
+this could either be capital i integer,
+
+246
+00:11:26,820 --> 00:11:29,040
+或者是小写的int，记住
+or it could be lowercase int, remember those
+
+247
+00:11:29,040 --> 00:11:33,120
+是可以互换的——那么基本上我
+are interchangeable-- then basically I
+
+248
+00:11:33,120 --> 00:11:38,080
+对该列表中的每个整数元素运行此循环。
+run this loop for each of the integer elements on that list.
+
+249
+00:11:38,080 --> 00:11:40,207
+你可以遍历数组和列表，
+You can iterate through arrays, as well as lists,
+
+250
+00:11:40,207 --> 00:11:42,290
+如果这个列表是
+so the same code would work if this list here were
+
+251
+00:11:42,290 --> 00:11:44,610
+替换为数组。
+replaced by an array instead.
+
+252
+00:11:44,610 --> 00:11:47,220
+我还想指出math.max--我们提到过
+I also want to point out that math.max-- we've mentioned
+
+253
+00:11:47,220 --> 00:11:49,320
+以前是math.sine，但这是一个方便的函数
+math.sine before, but this is a handy function
+
+254
+00:11:49,320 --> 00:11:50,190
+从Java API。
+from the Java API.
+
+255
+00:11:50,190 --> 00:11:56,470
+记住，你可以简单地用谷歌搜索Java数学API，
+And remember that you can simply Google for Java math API,
+
+256
+00:11:56,470 --> 00:11:58,930
+确保你得到了正确的Java版本，
+and make sure you're getting the right version of Java,
+
+257
+00:11:58,930 --> 00:12:06,020
+你就能找到[？最大值？]
+and you will be able to find the documentation for [? max. ?]
+
+258
+00:12:06,020 --> 00:12:08,180
+就在这里。
+And there it is.
+

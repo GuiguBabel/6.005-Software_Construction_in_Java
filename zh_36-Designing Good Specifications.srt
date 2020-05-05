@@ -1,0 +1,1445 @@
+1
+00:00:00,970 --> 00:00:02,890
+我们来谈谈什么是好方法，
+Let's talk about what makes a good method,
+
+2
+00:00:02,890 --> 00:00:05,220
+什么是好的规格。
+what makes a good spec.
+
+3
+00:00:05,220 --> 00:00:09,120
+所以它显然应该简洁，简短，清晰，
+So it should obviously be succinct, short, clear,
+
+4
+00:00:09,120 --> 00:00:10,690
+结构良好。
+and well-structured.
+
+5
+00:00:10,690 --> 00:00:13,350
+但它的内容有点难开。
+But the content of it is a little harder to prescribe.
+
+6
+00:00:13,350 --> 00:00:17,320
+没有绝对正确的规则，但这里有一些准则。
+There are no infallible rules, but here are some guidelines.
+
+7
+00:00:17,320 --> 00:00:19,670
+首先，规范应该是一致的。
+First of all, the spec should be coherent.
+
+8
+00:00:19,670 --> 00:00:21,890
+也就是说不应该有很多不同的案子
+That means it shouldn't have a lot of different cases
+
+9
+00:00:21,890 --> 00:00:24,100
+彼此没有关系。
+that aren't related to each other.
+
+10
+00:00:24,100 --> 00:00:27,170
+如果你有很多参数或者你有很深的
+If you have a lot of parameters or if you have deeply
+
+11
+00:00:27,170 --> 00:00:30,580
+在其行为描述中嵌套if语句
+nested if statements in the description of its behavior
+
+12
+00:00:30,580 --> 00:00:33,500
+或者如果您传递的布尔标志
+or if you're passing Boolean flags that drastically
+
+13
+00:00:33,500 --> 00:00:35,700
+改变它的作用，这些都是迹象
+change what it does, these are all signs
+
+14
+00:00:35,700 --> 00:00:37,740
+一个不连贯的规范。
+of an incoherent spec.
+
+15
+00:00:37,740 --> 00:00:39,430
+所以让我们看看这个，例如--
+So let's look at this one, for example--
+
+16
+00:00:39,430 --> 00:00:42,920
+有人发现它应该返回所有指数的总和
+some find that says it should return the sum of all indices
+
+17
+00:00:42,920 --> 00:00:45,645
+在出现该值的数组a和b中。
+in the arrays a and b at which that value appears.
+
+18
+00:00:45,645 --> 00:00:47,190
+这是精心设计的吗？
+Is this well-designed?
+
+19
+00:00:47,190 --> 00:00:48,030
+可能不是。
+Probably not.
+
+20
+00:00:48,030 --> 00:00:50,280
+它试图同时做几件事。
+It's trying to do several things at once.
+
+21
+00:00:50,280 --> 00:00:51,970
+它在a中寻找指数。
+It's looking for indices in a.
+
+22
+00:00:51,970 --> 00:00:54,000
+它在b中寻找指数。
+It's looking for indices in b.
+
+23
+00:00:54,000 --> 00:00:56,650
+然后，把它们加在一起。
+And then, it's summing them all together.
+
+24
+00:00:56,650 --> 00:00:59,150
+最好写两个独立的过程--
+It would really be better to write two separate procedures--
+
+25
+00:00:59,150 --> 00:01:01,357
+在一个数组中查找索引的人
+one that finds indices in one array
+
+26
+00:01:01,357 --> 00:01:03,440
+一个想用这种东西的客户
+that a client who wants to use something like this
+
+27
+00:01:03,440 --> 00:01:08,700
+可以打两次电话，然后打另一个。
+can call twice, and then the other one that sums.
+
+28
+00:01:08,700 --> 00:01:09,750
+这是另一个例子。
+Here's another example.
+
+29
+00:01:09,750 --> 00:01:12,380
+所以这是一个规格，我们实际上
+So this is a spec that we've actually
+
+30
+00:01:12,380 --> 00:01:16,010
+在代码回顾阅读中看到。
+seen before in the code reviewing reading.
+
+31
+00:01:16,010 --> 00:01:18,870
+那么长单词的作用是什么呢，需要一个单词列表
+So what count long words does, takes a list of words
+
+32
+00:01:18,870 --> 00:01:23,090
+它存储了列表中最长的单词
+and it stores the longest word on that list
+
+33
+00:01:23,090 --> 00:01:25,820
+在这个全局变量中最长的单词。
+in this global variable longest word.
+
+34
+00:01:25,820 --> 00:01:27,650
+它还计算元素的数量，
+And it also counts the number of elements,
+
+35
+00:01:27,650 --> 00:01:29,390
+列表中的单词数
+number of words in the list that are
+
+36
+00:01:29,390 --> 00:01:33,450
+大于另一个全局变量，长字长，
+greater than another global variable, long word length,
+
+37
+00:01:33,450 --> 00:01:35,090
+到控制台。
+to the console.
+
+38
+00:01:35,090 --> 00:01:37,205
+所以这又是两件不同的事情。
+So this is doing, again, two different things.
+
+39
+00:01:37,205 --> 00:01:40,714
+它在数单词，它在寻找最长的单词。
+It's counting words, and it's finding the longest word.
+
+40
+00:01:40,714 --> 00:01:43,130
+但它也在做坏事，我们指出
+But it's also doing bad things, things that we pointed out
+
+41
+00:01:43,130 --> 00:01:46,910
+以前都不是很好的方法设计规范。
+before are not good design for a specification for a method.
+
+42
+00:01:46,910 --> 00:01:50,150
+它使用全局变量作为参数
+It's using global variables for a parameter
+
+43
+00:01:50,150 --> 00:01:53,180
+以及返回值的全局变量。
+and a global variable for a return value.
+
+44
+00:01:53,180 --> 00:01:56,350
+它还把东西打印到控制台上
+And it's also printing things to the console
+
+45
+00:01:56,350 --> 00:01:57,980
+而不是退回。
+instead of returning them.
+
+46
+00:01:57,980 --> 00:02:00,640
+所以最好我们在这里分别写两个方法
+So it would be better if we wrote two separate methods here
+
+47
+00:02:00,640 --> 00:02:03,380
+如果我们避免使用这些全局变量。
+again and if we avoided use of these global variables.
+
+49
+00:02:05,990 --> 00:02:09,139
+现在，方法的结果也应该是信息性的。
+Now, the result of a method should also be informative.
+
+50
+00:02:09,139 --> 00:02:14,750
+这里有一个不好的规范没有做到这一点的例子。
+And here's an example of a bad spec that doesn't do that.
+
+51
+00:02:14,750 --> 00:02:18,340
+所以这是一个put方法
+So this is a put method that takes
+
+52
+00:02:18,340 --> 00:02:21,982
+一张地图，一个键和一个值。
+a map and a key and a value.
+
+53
+00:02:21,982 --> 00:02:24,930
+实际上，我们使用的是严格的参数
+And we're using, actually, tight parameters here
+
+54
+00:02:24,930 --> 00:02:27,480
+允许k和v变化。
+that allow k and v to vary.
+
+55
+00:02:27,480 --> 00:02:29,030
+它本质上可以是任何类型的。
+It could essentially be any types.
+
+56
+00:02:29,030 --> 00:02:33,640
+所以k可以是弦。例如，v可以是整数。
+So k could be string. v could be integer, for example.
+
+57
+00:02:33,640 --> 00:02:37,030
+前提条件允许值为空
+And the precondition allows the value to be null
+
+58
+00:02:37,030 --> 00:02:41,100
+并允许映射包含空值。
+and allows the map to contain null values.
+
+59
+00:02:41,100 --> 00:02:45,140
+但它也在其后条件中使用
+But it also in its postcondition uses
+
+60
+00:02:45,140 --> 00:02:46,716
+空值作为特殊返回值。
+null as a special return value.
+
+61
+00:02:46,716 --> 00:02:48,340
+我们之前讨论过
+And we talked about this before when we
+
+62
+00:02:48,340 --> 00:02:50,610
+在谈论例外情况。
+were talking about exceptions.
+
+63
+00:02:50,610 --> 00:02:53,440
+所以这个规格的问题是
+So the problem with this spec is that it's
+
+64
+00:02:53,440 --> 00:02:56,360
+客户无法区分案件
+impossible for the client to distinguish between the case
+
+65
+00:02:56,360 --> 00:02:58,980
+在地图上根本找不到钥匙的地方
+where the key wasn't found in the map at all, in which case
+
+66
+00:02:58,980 --> 00:03:01,413
+由于这个子句，它返回null
+it's returning null as a result of this clause
+
+67
+00:03:01,413 --> 00:03:06,330
+或者在地图上找到钥匙的地方，
+of the postcondition, or where the key was found in the map,
+
+68
+00:03:06,330 --> 00:03:10,830
+但放进去的值是空的。
+but the value that had been put in there was null.
+
+69
+00:03:10,830 --> 00:03:12,550
+所以这将是一个糟糕的设计。
+So this is going to be a bad design.
+
+70
+00:03:12,550 --> 00:03:14,160
+我们真的应该另辟蹊径
+We should really find a different way
+
+71
+00:03:14,160 --> 00:03:18,580
+表示钥匙不在地图上。
+to signal that the key is not in the map.
+
+72
+00:03:18,580 --> 00:03:23,460
+或者更好的是，我们根本不应该使用nulls。
+Or even better, we shouldn't really be using nulls at all.
+
+73
+00:03:23,460 --> 00:03:26,180
+我们要确保我们的规格足够坚固，
+We want to make sure that our specs are strong enough,
+
+74
+00:03:26,180 --> 00:03:29,050
+他们向客户提供足够有力的保证
+that they give a strong enough guarantee to the client
+
+75
+00:03:29,050 --> 00:03:34,752
+在一般情况下，这样客户可以做一些有用的事情。
+in the general case so that the client can do something useful.
+
+76
+00:03:34,752 --> 00:03:36,960
+例如，当
+For example, we don't want to throw an exception when
+
+77
+00:03:36,960 --> 00:03:40,140
+我们有一个错误的论点，但是允许任意的突变
+we get a bad argument, but allow arbitrary mutations
+
+78
+00:03:40,140 --> 00:03:41,660
+直到我们抛出那个例外。
+until we throw that exception.
+
+79
+00:03:41,660 --> 00:03:44,170
+客户将无法确定哪些突变
+The client won't be able to determine what mutations
+
+80
+00:03:44,170 --> 00:03:47,170
+可能是在我们抛出异常之前。
+might have actually been made before we threw the exception.
+
+81
+00:03:47,170 --> 00:03:50,620
+例如，假设我们有一个add all方法
+So, for example, let's say we have an add all method that
+
+82
+00:03:50,620 --> 00:03:53,860
+应该把清单2的元素
+is supposed to take the elements on list 2
+
+83
+00:03:53,860 --> 00:03:55,530
+并将它们附加到列表1中。
+and append them to list 1.
+
+84
+00:03:55,530 --> 00:04:00,870
+所以它对列表1进行了修改，但是附加了
+So it's mutating list 1, but with the additional proviso
+
+85
+00:04:00,870 --> 00:04:03,225
+如果它在列表2中遇到空元素，
+that if it ever encounters a null element in list 2,
+
+86
+00:04:03,225 --> 00:04:05,100
+它将抛出一个空指针异常。
+it's going to throw a null pointer exception.
+
+87
+00:04:05,100 --> 00:04:07,870
+问题是当函数
+And the problem with this is that when the function does
+
+88
+00:04:07,870 --> 00:04:09,400
+抛出空指针异常，
+throw that null pointer exception,
+
+89
+00:04:09,400 --> 00:04:11,750
+它将添加一些任意数量的元素
+it will have added some arbitrary number of elements
+
+90
+00:04:11,750 --> 00:04:12,575
+列表1。
+to list 1.
+
+91
+00:04:12,575 --> 00:04:15,150
+而客户却被忽略了
+And the client is left figure out
+
+92
+00:04:15,150 --> 00:04:19,050
+列表1在列表之前是如何被弄乱的--
+how list 1 might have been messed up before the list--
+
+93
+00:04:19,050 --> 00:04:21,490
+在add之前，all最终抛出了那个异常。
+before add all finally threw that exception.
+
+94
+00:04:21,490 --> 00:04:23,427
+所以这个规格真的不够强，
+So this spec is really not strong enough,
+
+95
+00:04:23,427 --> 00:04:25,010
+没有足够的保证
+doesn't give a strong enough guarantee
+
+96
+00:04:25,010 --> 00:04:28,050
+给愿意接受交易的客户
+to the client that will let it deal
+
+97
+00:04:28,050 --> 00:04:30,850
+除了这个例外。
+with this exception sensibly.
+
+98
+00:04:30,850 --> 00:04:34,170
+一个更好的规范会说如果这些元素中的任何一个
+A better spec would instead say if any of these elements
+
+99
+00:04:34,170 --> 00:04:36,280
+为空，将引发空指针异常
+are null, it will throw a null pointer exception
+
+100
+00:04:36,280 --> 00:04:38,330
+不修改列表1。
+without modifying list 1.
+
+101
+00:04:38,330 --> 00:04:41,630
+这将是一个更强大的规范，但更有用的一个。
+And that will be a stronger spec, but a more useful one.
+
+102
+00:04:41,630 --> 00:04:43,240
+规格也必须足够弱
+The spec also has to be weak enough
+
+103
+00:04:43,240 --> 00:04:48,160
+处理不可避免的情况。
+have deal with situations that will inevitably arise.
+
+104
+00:04:48,160 --> 00:04:50,160
+例如，假设我们有一个开放的方法
+For example, suppose we have an open method that
+
+105
+00:04:50,160 --> 00:04:52,368
+接受一个文件名并返回一个字符串。
+takes a file name and is supposed to return a string.
+
+106
+00:04:52,368 --> 00:04:54,240
+后条件只是说
+And the postcondition simply says
+
+107
+00:04:54,240 --> 00:04:56,420
+它打开一个名为file name的文件。
+it opens a file named file name.
+
+108
+00:04:56,420 --> 00:04:58,730
+这是一个不够强烈的后置条件。
+This is not a strong enough postcondition.
+
+109
+00:04:58,730 --> 00:05:01,250
+它告诉我们的还不够多
+It's not telling us enough about what
+
+110
+00:05:01,250 --> 00:05:03,530
+文件--文件的打开方式。
+file-- how the file was opened.
+
+111
+00:05:03,530 --> 00:05:06,070
+它不能告诉我们发生了什么——无论
+It doesn't tell us what happens when-- whether or not
+
+112
+00:05:06,070 --> 00:05:09,960
+文件存在，如果不存在，是否创建该文件。
+the file exists, whether it gets created if it doesn't exist.
+
+113
+00:05:09,960 --> 00:05:12,084
+事实上，它太强了
+And in fact, it's actually too strong
+
+114
+00:05:12,084 --> 00:05:14,500
+因为它无法保证
+since there's no way that it can guarantee that it's going
+
+115
+00:05:14,500 --> 00:05:16,080
+成功打开文件。
+to succeed at opening a file.
+
+116
+00:05:16,080 --> 00:05:19,340
+当您试图打开真正的文件系统时，它们可能会失败。
+Real file systems can fail when you try to open them.
+
+117
+00:05:19,340 --> 00:05:23,064
+他们可能——你可能没有打开那个文件的权限。
+They may-- you may not have permission to open that file.
+
+118
+00:05:23,064 --> 00:05:24,230
+文件系统可能已满。
+The file system may be full.
+
+119
+00:05:24,230 --> 00:05:25,855
+可能还有其他问题
+There may be some other problem with it
+
+120
+00:05:25,855 --> 00:05:28,710
+这基本上是实现者无法控制的
+that is basically beyond control of the implementer
+
+121
+00:05:28,710 --> 00:05:29,790
+这种公开的方法。
+of this open method.
+
+122
+00:05:29,790 --> 00:05:32,480
+所以这个规格真的要说一些更弱的东西。
+So this spec really has to say something much weaker.
+
+123
+00:05:32,480 --> 00:05:35,151
+它不得不说它试图打开一个文件。
+It has to say something like it attempts to open a file.
+
+124
+00:05:35,151 --> 00:05:37,775
+如果成功，则它打开的文件具有某些属性。
+If it succeeds, the file that it opened had certain properties.
+
+126
+00:05:41,722 --> 00:05:45,650
+规范也应该在Java中使用抽象类型
+A spec should also in Java use abstract types
+
+127
+00:05:45,650 --> 00:05:47,230
+只要可能。
+wherever possible.
+
+128
+00:05:47,230 --> 00:05:50,980
+记住在Java中，我们可以使用这些接口，
+So remember in Java, we can either use these interfaces,
+
+129
+00:05:50,980 --> 00:05:55,140
+比如列表和集合，或者特定的实现，
+like list and set, or specific implementations,
+
+130
+00:05:55,140 --> 00:05:57,480
+比如数组列表和散列集。
+like array list and hash set.
+
+131
+00:05:57,480 --> 00:06:00,640
+如果我们使用接口，抽象接口类型
+If we use the interfaces, the abstract interface types
+
+132
+00:06:00,640 --> 00:06:05,150
+将给客户端和实现者更多的自由。
+will give more freedom to both the client and the implementer.
+
+133
+00:06:05,150 --> 00:06:06,655
+所以这将是一个糟糕的选择。
+So this would be a bad choice.
+
+134
+00:06:06,655 --> 00:06:09,360
+所以这个规范颠倒了一个列表。
+So this spec reverses a list.
+
+135
+00:06:09,360 --> 00:06:14,740
+它接受，它要求调用者向它传递一个数组列表
+And it takes in, it requires the caller to pass it an array list
+
+136
+00:06:14,740 --> 00:06:19,149
+并要求实现者返回数组列表。
+and requires the implementer to return an array list.
+
+137
+00:06:19,149 --> 00:06:20,690
+它们比我们真正的
+And these are stronger than we really
+
+138
+00:06:20,690 --> 00:06:22,690
+必须这样做，因为可能有其他选择--
+need to do because there might be alternatives--
+
+139
+00:06:22,690 --> 00:06:25,000
+有列表的替代实现
+there are alternative implementations of the list
+
+140
+00:06:25,000 --> 00:06:27,740
+客户端可能要传入的接口。
+interface that the client might want to pass in here.
+
+141
+00:06:27,740 --> 00:06:30,844
+这迫使他们把它们转换成一个数组列表
+And this is forcing them to convert them into an array list
+
+142
+00:06:30,844 --> 00:06:31,760
+在归还之前。
+before returning them.
+
+143
+00:06:31,760 --> 00:06:35,290
+同样，实现者是
+And similarly, the implementer is
+
+144
+00:06:35,290 --> 00:06:38,300
+必须在结果中使用数组列表。
+obligated to use an array list in its result.
+
+145
+00:06:38,300 --> 00:06:40,420
+因为这里的行为不取决于
+Since the behavior here doesn't depend
+
+146
+00:06:40,420 --> 00:06:43,100
+关于数组列表工作方式的任何细节--
+on anything specific about the way array list works--
+
+147
+00:06:43,100 --> 00:06:45,770
+这完全取决于事实
+it really only depends on the fact
+
+148
+00:06:45,770 --> 00:06:49,380
+它是一系列有序的物体--
+that it's an ordered sequence of objects--
+
+149
+00:06:49,380 --> 00:06:53,610
+我们可以用这里的t列表和这里的t列表。
+we could use list of t here and list of t here.
+
+150
+00:06:53,610 --> 00:06:56,795
+这将是一个更好的规格。
+And that would be a better spec.
+
+151
+00:06:56,795 --> 00:06:58,590
+另一个设计问题是
+Now, another design issue is whether we
+
+152
+00:06:58,590 --> 00:07:01,210
+想用一个先决条件，如果是，
+want to use a precondition and, if so,
+
+153
+00:07:01,210 --> 00:07:03,650
+方法是否应该实际尝试确保
+whether the method should actually attempt to make sure
+
+154
+00:07:03,650 --> 00:07:06,050
+先决条件在它实际尝试之前就已经满足了
+the precondition has been met before it actually tries
+
+155
+00:07:06,050 --> 00:07:07,866
+做该做的事。
+to do what it's supposed to do.
+
+156
+00:07:07,866 --> 00:07:09,890
+最常用的先决条件
+The most common use of preconditions
+
+157
+00:07:09,890 --> 00:07:13,290
+就是要求一个客户满足
+is to demand a property-- demand that a client satisfy
+
+158
+00:07:13,290 --> 00:07:15,530
+正是因为它会
+a property precisely because it would
+
+159
+00:07:15,530 --> 00:07:19,760
+实现者很难检查它。
+be hard for the implementer to check it.
+
+160
+00:07:19,760 --> 00:07:23,230
+现在，在我们要求
+Now, we have to think carefully before we require
+
+161
+00:07:23,230 --> 00:07:24,960
+一个非常重要的先决条件，因为
+a non-trivial precondition because it's
+
+162
+00:07:24,960 --> 00:07:26,330
+给客户带来不便。
+an inconvenience to the client.
+
+163
+00:07:26,330 --> 00:07:27,470
+他们必须确保
+They have to ensure that they don't
+
+164
+00:07:27,470 --> 00:07:29,150
+调用处于错误状态的方法
+call the method in that bad state that
+
+165
+00:07:29,150 --> 00:07:30,950
+违反了先决条件。
+violates the precondition.
+
+166
+00:07:30,950 --> 00:07:33,940
+因为如果他们这样做了，记住，所有的赌注都是不可能的。
+Because if they do, remember, all bets are off.
+
+167
+00:07:33,940 --> 00:07:35,990
+方法实现可以做任何事情。
+The method implementation can do anything.
+
+168
+00:07:35,990 --> 00:07:37,940
+客户不可能
+There's no predictable way that the client
+
+169
+00:07:37,940 --> 00:07:39,320
+可以从错误中恢复。
+can recover from that error.
+
+170
+00:07:39,320 --> 00:07:42,140
+所以如果他们不满足的话就会变成一个虫子。
+So it would become a bug if they didn't satisfy.
+
+171
+00:07:42,140 --> 00:07:45,260
+所以方法的客户实际上并不喜欢先决条件。
+So clients of methods don't actually like preconditions.
+
+172
+00:07:45,260 --> 00:07:48,000
+如果您查看Java API，公共类和方法
+If you look at the Java API, the public classes and methods
+
+173
+00:07:48,000 --> 00:07:51,460
+在Java API中，他们倾向于不使用前置条件，
+in the Java API, they tend not to use preconditions,
+
+174
+00:07:51,460 --> 00:07:54,190
+但是指定为后置条件
+but instead specify as postconditions
+
+175
+00:07:54,190 --> 00:07:56,520
+当争论不好的时候
+that when the arguments are bad, they're going
+
+176
+00:07:56,520 --> 00:07:59,350
+抛出某些例外。
+to throw certain exceptions.
+
+177
+00:07:59,350 --> 00:08:01,300
+这种方法更容易失败。
+This approach makes it much easier to fail.
+
+178
+00:08:01,300 --> 00:08:03,250
+快让我们更容易找到
+Fast makes it easier for us to find
+
+179
+00:08:03,250 --> 00:08:06,100
+调用方代码中的错误或错误假设，
+bugs or incorrect assumptions in caller code,
+
+180
+00:08:06,100 --> 00:08:10,230
+而不是让那些坏的值通过程序传播。
+rather than let those bad values propagate through the program.
+
+181
+00:08:10,230 --> 00:08:13,230
+但有时检查病情是不可行的
+But sometimes it's not feasible to check a condition
+
+182
+00:08:13,230 --> 00:08:15,080
+没有使方法变得令人无法接受的缓慢。
+without making a method unacceptably slow.
+
+183
+00:08:15,080 --> 00:08:17,910
+那是我们想要先决条件的时候。
+And that's when we want to use a precondition.
+
+184
+00:08:17,910 --> 00:08:21,240
+例如，如果我们想使用
+So, for example, if we wanted to implement the find method using
+
+185
+00:08:21,240 --> 00:08:23,250
+二进制搜索而不是线性搜索，
+binary search instead of linear search,
+
+186
+00:08:23,250 --> 00:08:26,745
+我们需要对数组进行排序。
+we would have to require that the array be sorted.
+
+187
+00:08:26,745 --> 00:08:29,120
+如果我们强制使用find方法
+And if we forced the find method-- the implementer of the
+
+188
+00:08:29,120 --> 00:08:31,411
+find方法来实际检查数组是否已排序，
+find method to actually check that the array is sorted,
+
+189
+00:08:31,411 --> 00:08:34,909
+这将挫败二进制搜索的全部目的。
+that would defeat the entire purpose of the binary search.
+
+190
+00:08:34,909 --> 00:08:37,890
+我们必须——二进制搜索的目的是
+We would have to-- the purpose of the binary search is to get
+
+191
+00:08:37,890 --> 00:08:39,260
+对数时间的结果。
+the result in logarithmic time.
+
+192
+00:08:39,260 --> 00:08:41,510
+并检查数组是否已排序
+And checking that the array is sorted
+
+193
+00:08:41,510 --> 00:08:44,131
+需要线性时间搜索。
+would require a linear time search.
+
+194
+00:08:44,131 --> 00:08:46,320
+所以我们想用一个先决条件
+So we would want to use a precondition
+
+195
+00:08:46,320 --> 00:08:48,852
+为了那种寻找方法。
+for that kind of find method.
+
+196
+00:08:48,852 --> 00:08:50,810
+现在，决定是否使用先决条件
+Now, the decision whether to use a precondition
+
+197
+00:08:50,810 --> 00:08:52,226
+是一个工程判断。
+is really an engineering judgment.
+
+198
+00:08:52,226 --> 00:08:56,480
+关键的因素是检查的成本
+The key factors are the cost of the check in both the execution
+
+199
+00:08:56,480 --> 00:08:58,690
+在这里是相关的
+of the code, which is what is relevant here
+
+200
+00:08:58,690 --> 00:09:01,980
+在二进制的查找方法中，也在编写成本中
+in the find method of binary, but also in the cost of writing
+
+201
+00:09:01,980 --> 00:09:06,340
+代码并在客户端上维护
+the code and maintaining it both on the client's
+
+202
+00:09:06,340 --> 00:09:08,350
+一方和实施者的一方。
+side and the implementer's side.
+
+203
+00:09:08,350 --> 00:09:11,410
+判断的另一部分是程序的多少
+Another part of the judgment is how much of the program
+
+204
+00:09:11,410 --> 00:09:13,030
+使用这种方法。
+uses that method.
+
+205
+00:09:13,030 --> 00:09:15,080
+如果它只在类中本地调用，
+If it's only called locally in a class,
+
+206
+00:09:15,080 --> 00:09:18,590
+事实上，如果这是一个班级的隐私，
+in fact, if it's private to a class,
+
+207
+00:09:18,590 --> 00:09:20,030
+然后我们可以检查它的前提条件
+then we can check its precondition
+
+208
+00:09:20,030 --> 00:09:22,810
+仔细观察所有调用该方法的地方。
+by looking carefully at all the places that call the method.
+
+209
+00:09:22,810 --> 00:09:26,060
+我们可以推断前提条件会得到满足。
+And we can reason that the precondition will be satisfied.
+
+210
+00:09:26,060 --> 00:09:28,640
+但如果方法是公开的
+But if the method is public and if it
+
+211
+00:09:28,640 --> 00:09:31,080
+可供同一程序中的其他开发人员使用
+could be used by other developers in the same program
+
+212
+00:09:31,080 --> 00:09:34,600
+或者即使它在一个库中，而其他开发人员可能
+or even if it's in a library and the other developers might
+
+213
+00:09:34,600 --> 00:09:36,257
+写他们自己的程序，然后
+be writing their own programs, then it
+
+214
+00:09:36,257 --> 00:09:38,340
+使用先决条件可能不太明智。
+would probably be less wise to use a precondition.
+
+215
+00:09:38,340 --> 00:09:41,372
+我们应该使用Java API类方法
+And we should instead use the Java API class approach
+
+216
+00:09:41,372 --> 00:09:42,330
+抛出异常。
+of throwing exceptions.
+
+218
+00:09:45,454 --> 00:09:47,870
+现在，我们几乎所有的方法都在使用public
+Now, we've been using public for almost all of our methods
+
+219
+00:09:47,870 --> 00:09:49,080
+没有认真考虑过。
+without really thinking about it.
+
+220
+00:09:49,080 --> 00:09:51,625
+决定一个方法是公开的还是私有的
+The decision about whether to make a method public or private
+
+221
+00:09:51,625 --> 00:09:54,410
+实际上是关于合同的决定
+is actually a decision about the contract
+
+222
+00:09:54,410 --> 00:09:56,640
+整个班级的规格
+of the whole class, the specification
+
+223
+00:09:56,640 --> 00:09:58,205
+在全班同学中。
+of the whole class.
+
+224
+00:09:58,205 --> 00:10:00,330
+其他部门可以自由使用公共方法
+Public methods are freely accessible to other parts
+
+225
+00:10:00,330 --> 00:10:01,040
+计划的一部分。
+of the program.
+
+226
+00:10:01,040 --> 00:10:03,490
+如果你把它公之于众，那就是把它作为一种服务来做广告。
+If you make it public, you're advertising it as a service.
+
+227
+00:10:03,490 --> 00:10:06,240
+你承诺提供这项服务
+And you're committing to providing that service
+
+228
+00:10:06,240 --> 00:10:08,190
+从这里开始。
+from here on out.
+
+229
+00:10:08,190 --> 00:10:10,160
+如果你把你所有的方法都公之于众--
+If you make all of your methods public--
+
+230
+00:10:10,160 --> 00:10:12,760
+这不是个好主意——包括
+this is not a great idea-- including helper methods that
+
+231
+00:10:12,760 --> 00:10:14,370
+只在本地使用，
+are really only meant for local use,
+
+232
+00:10:14,370 --> 00:10:17,160
+然后程序的其他部分可能会依赖于它们。
+then other parts of the program may come to depend on them.
+
+233
+00:10:17,160 --> 00:10:18,210
+那会让你更难
+And that will make it harder for you
+
+234
+00:10:18,210 --> 00:10:19,876
+内部实施的变化
+to change in the internal implementation
+
+235
+00:10:19,876 --> 00:10:21,150
+你将来的班级。
+of your class in the future.
+
+236
+00:10:21,150 --> 00:10:23,630
+你的代码还没准备好修改
+Your code won't be as ready for change
+
+237
+00:10:23,630 --> 00:10:26,590
+如果你只是一味地公开一切。
+if you just blindly make everything public.
+
+238
+00:10:26,590 --> 00:10:28,810
+同时公开内部助手方法
+Making internal helper methods public also
+
+239
+00:10:28,810 --> 00:10:32,250
+为类提供的接口添加混乱。
+adds clutter to the interface your class offers.
+
+240
+00:10:32,250 --> 00:10:34,136
+如果你把那些内在的东西保密，
+If you keep those internal things private,
+
+241
+00:10:34,136 --> 00:10:35,510
+你的类的公共接口将
+your class' public interface will
+
+242
+00:10:35,510 --> 00:10:37,070
+更小更连贯
+be smaller and more coherent, which
+
+243
+00:10:37,070 --> 00:10:39,190
+意味着对其他程序员来说
+means it will be easier for other programmers
+
+244
+00:10:39,190 --> 00:10:41,059
+去理解。
+to understand.
+
+245
+00:10:41,059 --> 00:10:43,350
+我们会看到一些更有力的理由
+We're going to see some stronger reasons to use private
+
+246
+00:10:43,350 --> 00:10:45,162
+当我们谈到抽象数据类型时，
+when we talk about abstract data types,
+
+247
+00:10:45,162 --> 00:10:46,620
+当我们开始编写
+when we start to write classes that
+
+248
+00:10:46,620 --> 00:10:49,020
+具有持久的内部状态。
+have persistent internal state.
+
+249
+00:10:49,020 --> 00:10:51,520
+保护这个国家
+Protecting this state using private
+
+250
+00:10:51,520 --> 00:10:54,230
+将有助于保护我们的程序不受错误的影响。
+is going to help keep our programs safe from bugs.
+
+251
+00:10:54,230 --> 00:10:56,680
+所以访问控制对这三件事都有好处
+So access control is good for all three things
+
+252
+00:10:56,680 --> 00:10:59,972
+我们在这堂课上所关心的。
+that we care about in this class.
+
+253
+00:10:59,972 --> 00:11:02,430
+我们几乎所有的方法都使用了static，
+We've also been using static for almost all of our methods,
+
+254
+00:11:02,430 --> 00:11:04,550
+再说一次，没有太多的讨论。
+again, without much discussion about it.
+
+255
+00:11:04,550 --> 00:11:06,220
+静态方法没有关联
+Static methods are not associated
+
+256
+00:11:06,220 --> 00:11:08,240
+一个类的任何特定实例。
+with any particular instance of a class.
+
+257
+00:11:08,240 --> 00:11:09,870
+你叫他们上课
+You call them on the class itself
+
+258
+00:11:09,870 --> 00:11:13,040
+while实例方法，它们是
+while instance methods, which are the ones that are declared
+
+259
+00:11:13,040 --> 00:11:15,360
+没有静态关键字，必须是
+without a static keyword, must be
+
+260
+00:11:15,360 --> 00:11:16,670
+对特定对象调用。
+called on a particular object.
+
+261
+00:11:16,670 --> 00:11:19,045
+这就是静态方法和实例之间的区别
+That's the difference between static methods and instance
+
+262
+00:11:19,045 --> 00:11:19,806
+方法。
+methods.
+
+263
+00:11:19,806 --> 00:11:22,180
+现在，实例方法的规范是同样编写的
+Now, specs for instance methods are written just the same
+
+264
+00:11:22,180 --> 00:11:24,360
+作为静态方法的规范，但是
+as specs for static methods, but they'll often
+
+265
+00:11:24,360 --> 00:11:26,500
+引用实例的属性
+refer to properties of the instance on which they
+
+266
+00:11:26,500 --> 00:11:31,640
+我们通常用这个词。
+were called, which we usually talk about using the word this.
+
+267
+00:11:31,640 --> 00:11:33,040
+在Python中，它是self。
+In Python, it would be self.
+
+268
+00:11:33,040 --> 00:11:35,290
+在Java中，我们使用this这个词。
+In Java, we use the word this.
+
+269
+00:11:35,290 --> 00:11:37,800
+所以考虑一下我们的find规范
+So thinking about our find specification
+
+270
+00:11:37,800 --> 00:11:40,010
+它接受一个整数数组和一个整数值
+that takes an integer array and an integer value
+
+271
+00:11:40,010 --> 00:11:44,556
+在数组中搜索它，这是一个静态方法。
+and searches for it in the array, that's a static method.
+
+272
+00:11:44,556 --> 00:11:46,430
+所以不需要对对象调用它。
+So it doesn't need to be called on an object.
+
+273
+00:11:46,430 --> 00:11:48,660
+所有参数都在这里。
+All of its parameters are right here.
+
+274
+00:11:48,660 --> 00:11:51,410
+但是如果相反，我们的班级乱七八糟
+But what if, instead, we had a class intArray
+
+275
+00:11:51,410 --> 00:11:54,230
+我们用来存储整数数组的。
+that we were using for storing that array of integers.
+
+276
+00:11:54,230 --> 00:11:57,500
+那么，那个intArray类可能有一个实例方法。
+Then that intArray class might have an instance method.
+
+277
+00:11:57,500 --> 00:11:59,670
+注意，它没有静态关键字
+Notice, it doesn't have the static keyword
+
+278
+00:11:59,670 --> 00:12:01,800
+开始的时候。
+at the start of it.
+
+279
+00:12:01,800 --> 00:12:05,670
+还要注意，它不再使用显式数组
+And notice also that it's no longer taking an explicit array
+
+280
+00:12:05,670 --> 00:12:06,170
+参数。
+parameter.
+
+281
+00:12:06,170 --> 00:12:09,040
+原因是它将被一个对象类型调用
+And the reason is it's going to be called on an object type
+
+282
+00:12:09,040 --> 00:12:11,990
+提供整数数组的无序。
+intArray that will provide the array of integers.
+
+283
+00:12:11,990 --> 00:12:16,060
+所以我们在这里看到的只是剩下的参数--
+So all that we're seeing here is the remaining parameters--
+
+284
+00:12:16,060 --> 00:12:17,950
+在这种情况下，int val。
+in this case, int val.
+
+285
+00:12:17,950 --> 00:12:19,640
+现在，我们谈谈先决条件
+And now, we talk about the precondition
+
+286
+00:12:19,640 --> 00:12:23,900
+就这个对象和后条件而言
+in terms of this object and the postcondition
+
+287
+00:12:23,900 --> 00:12:25,575
+就这个目标而言。
+in terms of this object.
+
+288
+00:12:25,575 --> 00:12:27,670
+再说一遍，这个词“this”就是
+And again, this word "this" is what
+
+289
+00:12:27,670 --> 00:12:29,770
+Java用来谈论
+Java uses to talk about the object on which you're
+
+290
+00:12:29,770 --> 00:12:31,749
+调用实例方法。
+calling the instance method.
+
+291
+00:12:31,749 --> 00:12:33,790
+关于规格我们还有很多话要说
+We'll have a lot more to say about specifications
+
+292
+00:12:33,790 --> 00:12:37,300
+例如，当我们讨论抽象数据类型时的方法。
+for instance methods when we talk about abstract data types.
+

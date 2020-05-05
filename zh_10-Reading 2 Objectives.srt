@@ -1,0 +1,45 @@
+1
+00:00:00,499 --> 00:00:03,280
+在今天的阅读中，我们将练习代码评审
+In today's reading, we're going to practice code review, which
+
+2
+00:00:03,280 --> 00:00:06,760
+意思是阅读和讨论别人写的代码。
+means reading and discussing code written by somebody else.
+
+3
+00:00:06,760 --> 00:00:09,570
+我们还将讨论良好编码的一般原则。
+We'll also talk about general principles of good coding.
+
+4
+00:00:09,570 --> 00:00:11,450
+你可以在每次代码评审中寻找的东西，
+Things you can look for in every code review,
+
+5
+00:00:11,450 --> 00:00:14,940
+不管编程语言或程序用途。
+regardless of programming language or program purpose.
+
+6
+00:00:14,940 --> 00:00:17,710
+我们将看到代码复查有助于实现我们的三大目标
+We'll see that code review helps with all three of our big goals
+
+7
+00:00:17,710 --> 00:00:21,660
+为了获得好的代码，使它不受错误的影响，易于理解，
+for good code, making it safe from bugs, easy to understand,
+
+8
+00:00:21,660 --> 00:00:23,110
+准备好改变。
+and ready for change.
+
+9
+00:00:23,110 --> 00:00:24,980
+我们开始吧。
+Let's get started.
+

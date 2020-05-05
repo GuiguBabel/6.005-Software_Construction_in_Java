@@ -1,0 +1,670 @@
+1
+00:00:01,040 --> 00:00:02,740
+一个经过良好测试的程序将进行测试
+A well-tested program will have tests
+
+2
+00:00:02,740 --> 00:00:05,810
+对于程序中的每个模块，
+for every individual module in the program,
+
+3
+00:00:05,810 --> 00:00:09,770
+其中模块可能是方法，也可能是类。
+where a module might be a method or it might be a class.
+
+4
+00:00:09,770 --> 00:00:12,720
+单独测试单个模块的测试
+A test that tests an individual module in isolation
+
+5
+00:00:12,720 --> 00:00:15,260
+称为单元测试。
+is called a unit test.
+
+6
+00:00:15,260 --> 00:00:18,000
+单独测试模块会让您更轻松
+Testing modules in isolation gives you a much easier time
+
+7
+00:00:18,000 --> 00:00:18,847
+调试。
+of debugging.
+
+8
+00:00:18,847 --> 00:00:20,680
+因为当一个模块的单元测试失败时，
+Because when a unit test for a module fails,
+
+9
+00:00:20,680 --> 00:00:22,055
+你可以确信
+you can be confident that the bug
+
+10
+00:00:22,055 --> 00:00:27,390
+在那个模块中，而不是程序中的其他地方。
+is in that module, rather than somewhere else in the program.
+
+11
+00:00:27,390 --> 00:00:29,510
+单元测试的对偶
+The dual counterpart of a unit test
+
+12
+00:00:29,510 --> 00:00:32,000
+是一个集成测试，不仅仅是
+is an integration test, which just doesn't just
+
+13
+00:00:32,000 --> 00:00:34,960
+测试一个模块——它实际上测试模块的组合
+test one module-- it actually tests a combination of modules
+
+14
+00:00:34,960 --> 00:00:37,940
+甚至可能是整个计划。
+or even perhaps the entire program.
+
+15
+00:00:37,940 --> 00:00:40,180
+现在如果你只有集成测试——嗯，
+Now if all you have are integration tests-- well,
+
+16
+00:00:40,180 --> 00:00:42,360
+首先，这总比什么都没有好。
+first of all, that's better than nothing.
+
+17
+00:00:42,360 --> 00:00:44,690
+但是只有集成测试的问题
+But the problem of having only integration tests
+
+18
+00:00:44,690 --> 00:00:48,370
+或者只有整个程序测试是当一个测试失败时，
+or only entire program tests is that when a test fails,
+
+19
+00:00:48,370 --> 00:00:49,590
+你得去找虫子。
+you have to hunt for the bug.
+
+20
+00:00:49,590 --> 00:00:53,290
+你在整个程序中都在寻找
+And you're stuck looking through the entire program for where
+
+21
+00:00:53,290 --> 00:00:54,230
+它失败了。
+it failed.
+
+22
+00:00:54,230 --> 00:00:56,272
+集成测试仍然非常重要。
+An integration test is still really important.
+
+23
+00:00:56,272 --> 00:00:58,230
+除了单元测试之外，你还想拥有它们，
+You want to have them in addition to unit test,
+
+24
+00:00:58,230 --> 00:01:00,140
+因为程序在连接时可能会失败
+because a program can fail at the connections
+
+25
+00:01:00,140 --> 00:01:01,760
+模块之间。
+between modules.
+
+26
+00:01:01,760 --> 00:01:05,065
+在一个模块工作的一个编码器可能会做出假设
+One coder working at one module may make assumptions
+
+27
+00:01:05,065 --> 00:01:06,440
+关于另一个模块
+about another module that they're
+
+28
+00:01:06,440 --> 00:01:09,730
+使用那是不正确的。
+using that aren't correct.
+
+29
+00:01:09,730 --> 00:01:12,300
+所以你仍然需要那些集成测试。
+So you'd still need those integration tests.
+
+30
+00:01:12,300 --> 00:01:14,751
+但是如果你也有一套完整的单元测试
+But if you also have a thorough set of unit tests
+
+31
+00:01:14,751 --> 00:01:16,750
+让你对正确性充满信心
+that give you that confidence in the correctness
+
+32
+00:01:16,750 --> 00:01:18,360
+在各个模块中
+of the individual modules, then you'll
+
+33
+00:01:18,360 --> 00:01:20,090
+当
+have a lot less searching to do when
+
+34
+00:01:20,090 --> 00:01:22,110
+你得找个虫子——因为你会
+you have to look for a bug-- because you'll
+
+35
+00:01:22,110 --> 00:01:23,943
+如果单元测试失败，它们将
+have unit tests that are failing and they'll
+
+36
+00:01:23,943 --> 00:01:27,715
+说这里可能有个虫子。
+say that there's probably a bug here.
+
+37
+00:01:27,715 --> 00:01:28,590
+这里有一个例子。
+So here's an example.
+
+38
+00:01:28,590 --> 00:01:30,423
+假设你正在建立一个网络搜索引擎。
+Suppose you're building a web search engine.
+
+39
+00:01:30,423 --> 00:01:31,870
+可能是两个低级模块
+Maybe two of the low level modules
+
+40
+00:01:31,870 --> 00:01:34,660
+你得到的网页
+that you've got are get web page which
+
+41
+00:01:34,660 --> 00:01:39,210
+获取一个URL并下载它并返回
+takes a URL and downloads it and returns
+
+42
+00:01:39,210 --> 00:01:42,220
+其内容为字符串。
+its contents as a string.
+
+43
+00:01:42,220 --> 00:01:45,040
+另一个模块可能需要一个字符串
+Another module might take a string
+
+44
+00:01:45,040 --> 00:01:48,050
+它是由get web page生成的，比方说，
+that was produced by get web page, let's say,
+
+45
+00:01:48,050 --> 00:01:50,520
+从中提取单词。
+and extract the words from it.
+
+46
+00:01:50,520 --> 00:01:55,180
+因此，找出单词是相邻的所有单词
+So find all the words where word is a contiguous
+
+47
+00:01:55,180 --> 00:01:57,710
+非空白字符和非虚字符的序列。
+sequence of nonwhite space and nonpunctuation characters.
+
+48
+00:01:57,710 --> 00:02:00,900
+这个例子的细节并不重要，
+The details of that doesn't really matter for this example,
+
+49
+00:02:00,900 --> 00:02:02,709
+但它将它们作为字符串列表返回。
+but it returns them as a list of strings.
+
+50
+00:02:02,709 --> 00:02:04,500
+所以我们有这两个模块
+So we've got these two modules, and they're
+
+51
+00:02:04,500 --> 00:02:05,710
+打算一起工作。
+intended to work together.
+
+52
+00:02:05,710 --> 00:02:08,800
+事实上，我们还有一个更高级的模块
+And in fact, we have another higher level module that
+
+53
+00:02:08,800 --> 00:02:10,350
+实际上两者都在使用。
+is actually using them both.
+
+54
+00:02:10,350 --> 00:02:12,310
+所以它叫“让网页转动”
+So it's calling get web page to turn
+
+55
+00:02:12,310 --> 00:02:15,390
+字符串中包含
+a URL into the string that contains
+
+56
+00:02:15,390 --> 00:02:16,730
+网页的内容。
+the contents of the web page.
+
+57
+00:02:16,730 --> 00:02:18,960
+然后调用字符串上的提取单词，
+And then it's calling extract words on that string,
+
+58
+00:02:18,960 --> 00:02:22,570
+以便从网页中提取单词。
+in order to get the words out of the web page.
+
+59
+00:02:22,570 --> 00:02:24,520
+如果我们写一个测试套件
+Now if we were writing a test suite
+
+60
+00:02:24,520 --> 00:02:27,737
+对于这个包含三个模块的简单程序，
+for this simple program with three modules in it,
+
+61
+00:02:27,737 --> 00:02:28,820
+这是我们想要的。
+here's what we would want.
+
+62
+00:02:28,820 --> 00:02:32,630
+我们希望得到的网页单元测试
+We would want unit tests for get web page that
+
+63
+00:02:32,630 --> 00:02:35,870
+确保它在不同的url上正常工作。
+make sure it works correctly on various URLs.
+
+64
+00:02:35,870 --> 00:02:39,130
+我们希望单元测试只针对
+We would want unit tests just for extract words that
+
+65
+00:02:39,130 --> 00:02:42,430
+在不同的弦上测试，有些甚至
+tested on various strings, some which might not even
+
+66
+00:02:42,430 --> 00:02:45,000
+成为网页——因为你注意到
+be web pages-- because you notice that extract words
+
+67
+00:02:45,000 --> 00:02:47,690
+它本身并没有说明这个东西是否
+itself doesn't say anything about whether the thing is
+
+68
+00:02:47,690 --> 00:02:48,300
+网页。
+a web page.
+
+69
+00:02:48,300 --> 00:02:50,790
+只是一根绳子。
+It's just a string.
+
+70
+00:02:50,790 --> 00:02:53,170
+然后对make索引进行单元测试
+And then unit test for make index
+
+71
+00:02:53,170 --> 00:02:55,060
+在不同的url集上测试的
+that tested on various sets of URLs
+
+72
+00:02:55,060 --> 00:02:57,800
+看看它是否构造了这个索引
+to see whether it constructs this index that it's
+
+73
+00:02:57,800 --> 00:03:00,660
+应该能正常返回。
+supposed to return properly.
+
+74
+00:03:00,660 --> 00:03:02,690
+程序员有时会犯一个错误
+Now one mistake that programmers sometimes
+
+75
+00:03:02,690 --> 00:03:05,120
+当你为某个东西编写单元测试时
+make when you're writing unit tests for something
+
+76
+00:03:05,120 --> 00:03:09,840
+比如提取单词，在get网页的下游，
+like extract words, which is downstream of get web page,
+
+77
+00:03:09,840 --> 00:03:12,340
+他们是以这样的方式编写这些测试用例的
+is that they write those test cases in such a way
+
+78
+00:03:12,340 --> 00:03:15,460
+他们依赖于网页的正确性。
+that they depend on get web page to be correct.
+
+79
+00:03:15,460 --> 00:03:18,940
+换句话说，当构造
+In other words, when constructing
+
+80
+00:03:18,940 --> 00:03:21,070
+用于提取单词的输入，它们是
+an input for extract words, they're
+
+81
+00:03:21,070 --> 00:03:24,480
+调用get web page以获取
+calling get web page to get a web page that they
+
+82
+00:03:24,480 --> 00:03:26,780
+可以通过提取单词。
+can pass to extract words.
+
+83
+00:03:26,780 --> 00:03:28,140
+这不是个好办法。
+That's not a great approach.
+
+84
+00:03:28,140 --> 00:03:30,030
+原因是这取决于
+The reason is that it's depending
+
+85
+00:03:30,030 --> 00:03:32,900
+论作为单元一部分的网页获取的正确性
+on the correctness of get web page as part of the unit
+
+86
+00:03:32,900 --> 00:03:34,245
+测试提取单词。
+test for extract words.
+
+87
+00:03:34,245 --> 00:03:36,100
+如果get web page中有错误，
+If there's a bug in get web page,
+
+88
+00:03:36,100 --> 00:03:39,100
+它可能会在提取单词时错误地失败，
+it might falsely fail on extract words,
+
+89
+00:03:39,100 --> 00:03:41,890
+即使抽取的单词没有那个缺陷。
+even if extract words doesn't have that bug.
+
+90
+00:03:41,890 --> 00:03:44,980
+最好考虑并测试抽取的单词
+It's much better to think about and test extract words really
+
+91
+00:03:44,980 --> 00:03:48,530
+隔离，并划分其输入空间
+in isolation, and partition its input space
+
+92
+00:03:48,530 --> 00:03:50,660
+不太注意发生了什么
+without paying much attention to what's happening
+
+93
+00:03:50,660 --> 00:03:52,980
+在程序的其余部分。
+in the rest of the program.
+
+94
+00:03:52,980 --> 00:03:56,329
+使用分区和改进web页面可能是有意义的
+It might make sense to use partitions and evolve web page
+
+95
+00:03:56,329 --> 00:03:58,870
+内容，因为这就是你实际使用它的方式。
+content, because that's how you actually are going to use it.
+
+96
+00:03:58,870 --> 00:04:01,650
+但不要从那个测试用例调用get web page，
+But don't call get web page from that test case,
+
+97
+00:04:01,650 --> 00:04:03,730
+因为获取网页可能有问题。
+because get web page might be buggy.
+
+98
+00:04:03,730 --> 00:04:06,840
+相反，您应该存储该网页内容
+Instead, you should store that web page content
+
+99
+00:04:06,840 --> 00:04:08,750
+作为测试用例中的文本字符串，
+as a literal string in your test case,
+
+100
+00:04:08,750 --> 00:04:10,875
+直接传出来提取单词。
+and pass it directly to extract words.
+
+101
+00:04:10,875 --> 00:04:13,060
+这样你就编写了一个独立的单元测试。
+So that way you're writing an isolated unit test.
+
+102
+00:04:13,060 --> 00:04:14,620
+如果失败了，你可以自信
+And if it fails, you can be confident
+
+103
+00:04:14,620 --> 00:04:16,860
+窃听器实际上是在提取单词，
+that the bug is actually in extract words,
+
+104
+00:04:16,860 --> 00:04:19,310
+而不是在获取网页中
+rather than maybe in get web page
+
+105
+00:04:19,310 --> 00:04:23,010
+也许是在摘录文字。
+and maybe in extract words.
+
+106
+00:04:23,010 --> 00:04:26,510
+现在对于更高级别的单元测试——对于这个，使索引
+Now for the higher level unit test-- for this make index that
+
+107
+00:04:26,510 --> 00:04:28,800
+同时使用get web page和extract words--
+uses both get web page and extract words--
+
+108
+00:04:28,800 --> 00:04:31,220
+这样就很难把它隔离开来。
+it's harder to isolate it that way.
+
+109
+00:04:31,220 --> 00:04:35,026
+当您为此调用make index到单元测试用例中时，
+When you call make index into unit test case for that,
+
+110
+00:04:35,026 --> 00:04:36,650
+你实际上是在测试正确性
+you're actually testing the correctness
+
+111
+00:04:36,650 --> 00:04:40,160
+不仅是make index中的代码，还包括
+of not only the code in make index, but also the methods it
+
+112
+00:04:40,160 --> 00:04:41,100
+电话。
+calls.
+
+113
+00:04:41,100 --> 00:04:44,960
+如果测试失败，它可能在这三个测试中的任何一个中
+If the test fails, it might be in any one of these three
+
+114
+00:04:44,960 --> 00:04:46,222
+地方。
+places.
+
+115
+00:04:46,222 --> 00:04:48,680
+所以我们需要一套好的独立测试
+So that's why we actually want a good set of separate tests
+
+116
+00:04:48,680 --> 00:04:51,690
+为了增加我们的信心
+for these to increase our confidence that those two
+
+117
+00:04:51,690 --> 00:04:53,800
+低级模块工作正常。
+low level modules work correctly.
+
+118
+00:04:53,800 --> 00:04:56,650
+如果一个测试在make索引处失败了——好吧，
+Then if a test fails up at make index-- well,
+
+119
+00:04:56,650 --> 00:04:59,860
+那么问题可能是make index中的代码
+then the problem is probably the code in make index
+
+120
+00:04:59,860 --> 00:05:04,210
+那就是把这两个模块连接在一起。
+that is connecting those two modules together.
+
+121
+00:05:04,210 --> 00:05:07,290
+可以隔离更高级别的模块，如make
+It is possible to isolate the higher level module like make
+
+122
+00:05:07,290 --> 00:05:10,810
+索引如果我们写的是所谓的存根版本
+index if we write what are called stub versions
+
+123
+00:05:10,810 --> 00:05:12,590
+它调用的模块。
+of the modules that it calls.
+
+124
+00:05:12,590 --> 00:05:14,760
+例如，get web page的存根
+So for example, a stub for get web page
+
+125
+00:05:14,760 --> 00:05:16,650
+可能根本无法上网，
+might not even access the internet at all,
+
+126
+00:05:16,650 --> 00:05:19,950
+但是返回一个模拟网页
+but instead return a mock web page
+
+127
+00:05:19,950 --> 00:05:22,180
+内容，不管传递给它的是什么URL，
+content, no matter what URL was passed to it,
+
+128
+00:05:22,180 --> 00:05:25,460
+只是一个肯定的回答。
+just a canned answer.
+
+129
+00:05:25,460 --> 00:05:29,496
+整个类的存根通常称为模拟对象。
+A stub for a whole class is often called a mock object.
+
+130
+00:05:29,496 --> 00:05:32,289
+你可以在维基百科上了解更多。
+You can learn more about that on Wikipedia.
+
+131
+00:05:32,289 --> 00:05:34,080
+当
+Stubs are a really important technique when
+
+132
+00:05:34,080 --> 00:05:35,329
+你在建造大型系统。
+you're building large systems.
+
+133
+00:05:35,329 --> 00:05:38,170
+你可能不会用这种小方法来做。
+You probably wouldn't do them for small methods like this.
+
+134
+00:05:38,170 --> 00:05:40,878
+我们一般不会在课堂上使用它们。
+And we're generally not going to use them in this class.
+
