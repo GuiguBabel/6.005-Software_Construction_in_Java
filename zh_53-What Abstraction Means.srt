@@ -1,0 +1,530 @@
+1
+00:00:02,640 --> 00:00:04,210
+抽象数据类型是一个实例
+Abstract data types are an instance
+
+2
+00:00:04,210 --> 00:00:06,418
+软件工程的一般原理
+of a general principle in software engineering, which
+
+3
+00:00:06,418 --> 00:00:09,740
+有很多名字的意思略有不同。
+goes by many names with slightly different shades of meaning.
+
+4
+00:00:09,740 --> 00:00:12,200
+以下是我们为这个想法使用的一些名称。
+Here are some of the names we use for this idea.
+
+5
+00:00:12,200 --> 00:00:13,880
+抽象意味着省略或
+Abstraction means omitting or the
+
+6
+00:00:13,880 --> 00:00:18,220
+隐藏一些细节，但更简单的更高层次的想法。
+hiding little details, but the simpler higher level idea.
+
+7
+00:00:18,220 --> 00:00:20,030
+模块化意味着您想划分
+Modularity means you want to divide
+
+8
+00:00:20,030 --> 00:00:22,370
+将系统分成若干个组件或模块，每个组件或模块
+the system into components or modules, each of which
+
+9
+00:00:22,370 --> 00:00:25,290
+可以设计，实现，测试，推理，
+can be designed, implemented, tested, reasoned about,
+
+10
+00:00:25,290 --> 00:00:29,170
+与系统其他部分分开使用。
+and re-used separately from the rest of the system.
+
+11
+00:00:29,170 --> 00:00:31,360
+封装是相似的，但是
+Encapsulation is similar, but that's
+
+12
+00:00:31,360 --> 00:00:35,070
+关于在每个模块周围建造墙壁就像一个硬壳
+about building walls around each module like a hard shell
+
+13
+00:00:35,070 --> 00:00:37,120
+或者是一个密封舱
+or a capsule so that the module is
+
+14
+00:00:37,120 --> 00:00:39,720
+对自己的内部行为负责。
+responsible for its own internal behavior.
+
+15
+00:00:39,720 --> 00:00:41,560
+系统其他部分的错误
+And bugs in other parts of the system
+
+16
+00:00:41,560 --> 00:00:46,170
+不能破坏内部行为的完整性。
+can't damage the integrity of that internal behavior.
+
+17
+00:00:46,170 --> 00:00:47,910
+信息隐藏就像抽象。
+Information hiding is like abstraction.
+
+18
+00:00:47,910 --> 00:00:51,030
+它是关于隐藏模块实现的细节
+It's about hiding the details of a module's implementation
+
+19
+00:00:51,030 --> 00:00:53,490
+从系统的其他部分，以便这些细节可以
+from the rest of the system so that those details can
+
+20
+00:00:53,490 --> 00:00:55,170
+以后更改而不更改
+be changed later without changing
+
+21
+00:00:55,170 --> 00:00:56,800
+系统的其他部分。
+the rest of the system.
+
+22
+00:00:56,800 --> 00:00:59,200
+最后，关注点的分离
+And finally, separation of concerns
+
+23
+00:00:59,200 --> 00:01:02,320
+意味着对你的系统做一个特性
+means making a feature of your system, which
+
+24
+00:01:02,320 --> 00:01:04,739
+可能被称为一个问题，责任
+might be called a concern, the responsibility
+
+25
+00:01:04,739 --> 00:01:07,640
+一个模块而不是广泛传播
+of a single module rather than spreading it widely
+
+26
+00:01:07,640 --> 00:01:09,545
+在你的程序中。
+across your program.
+
+27
+00:01:09,545 --> 00:01:10,920
+现在，作为一名软件工程师
+Now, as a software engineer, it's
+
+28
+00:01:10,920 --> 00:01:13,128
+了解这些术语很重要，因为
+important to know these terms because you'll actually
+
+29
+00:01:13,128 --> 00:01:16,060
+经常碰到他们或他们的变种。
+run into them or variations of them frequently.
+
+30
+00:01:16,060 --> 00:01:18,405
+但所有这些想法的根本目的
+But the fundamental purpose of all of these ideas
+
+31
+00:01:18,405 --> 00:01:21,120
+是为了实现我们所关心的三个重要属性
+is to help achieve the three important properties we care
+
+32
+00:01:21,120 --> 00:01:24,920
+大约在6.005年-安全，易于理解，
+about in the 6.005-- safety from bugs, ease of understanding,
+
+33
+00:01:24,920 --> 00:01:26,035
+准备好改变。
+and readiness for change.
+
+34
+00:01:26,035 --> 00:01:29,660
+抽象数据类型将帮助我们做到这一点。
+And abstract data types are going to help us do that.
+
+35
+00:01:29,660 --> 00:01:31,160
+现在，在计算的早期，
+Now, in the early days of computing,
+
+36
+00:01:31,160 --> 00:01:33,830
+一种内置类型的编程语言
+a programming language came with built-in types
+
+37
+00:01:33,830 --> 00:01:37,120
+像整数、布尔字符串和内置过程
+like integers, Boolean strings, and built-in procedures
+
+38
+00:01:37,120 --> 00:01:38,870
+比如输入和输出。
+like for input and output.
+
+39
+00:01:38,870 --> 00:01:41,170
+用户可以定义自己的过程。
+Users could define their own procedures.
+
+40
+00:01:41,170 --> 00:01:42,750
+这就是大型程序的构建方式。
+That's how large programs were built.
+
+41
+00:01:42,750 --> 00:01:44,660
+但他们并没有提供设施
+But they didn't really provide facilities
+
+42
+00:01:44,660 --> 00:01:46,990
+用于定义新类型。
+for defining new types.
+
+43
+00:01:46,990 --> 00:01:48,760
+软件开发的重大进展
+So a major advance in software development
+
+44
+00:01:48,760 --> 00:01:51,890
+抽象类型的概念是否允许--
+was the idea of abstract types allowing--
+
+45
+00:01:51,890 --> 00:01:55,290
+设计一种编程语言，允许用户定义类型为
+designing a programming language to allow user-defined types as
+
+46
+00:01:55,290 --> 00:01:56,642
+好。
+well.
+
+47
+00:01:56,642 --> 00:01:59,100
+这个想法出自许多研究人员的工作，特别是
+This idea came out of the work of many researchers, notably
+
+48
+00:01:59,100 --> 00:02:02,194
+Dahl发明了Simula，Tony Hoare发明了许多
+Dahl, who invented Simula, and Tony Hoare, who developed many
+
+49
+00:02:02,194 --> 00:02:03,610
+我们使用的技术
+of the techniques that we're using
+
+50
+00:02:03,610 --> 00:02:05,660
+为了解释抽象类型，
+to reason about the abstract types,
+
+51
+00:02:05,660 --> 00:02:08,910
+还有大卫·帕纳斯，他创造了信息隐藏这个词
+and David Parnas, who coined the term information hiding
+
+52
+00:02:08,910 --> 00:02:11,260
+首先阐述了组织的概念
+and first articulated the idea of organizing
+
+53
+00:02:11,260 --> 00:02:14,620
+围绕它们封装的秘密编程模块。
+program modules around the secrets they encapsulated.
+
+54
+00:02:14,620 --> 00:02:16,860
+在麻省理工学院，芭芭拉·利斯科夫和约翰·古塔格
+Here at MIT, Barbara Liskov and John Guttag
+
+55
+00:02:16,860 --> 00:02:20,060
+在抽象类型的规范方面做了开创性的工作
+did seminal work in the specification of abstract types
+
+56
+00:02:20,060 --> 00:02:22,760
+以及编程语言对它们的支持。
+and in programming languages' support for them.
+
+57
+00:02:22,760 --> 00:02:24,690
+他们还开发了原始的6170，
+They also developed the original 6170,
+
+58
+00:02:24,690 --> 00:02:27,350
+这是本课程的前身。
+which is the predecessor to this course.
+
+59
+00:02:27,350 --> 00:02:29,402
+芭芭拉·利斯科夫获得了图灵奖，
+Barbara Liskov earned the Turing Award,
+
+60
+00:02:29,402 --> 00:02:31,860
+计算机科学相当于诺贝尔奖
+which is the computer science equivalent of the Nobel Prize
+
+61
+00:02:31,860 --> 00:02:33,860
+因为她对抽象类型的研究。
+for her work on abstract types.
+
+62
+00:02:33,860 --> 00:02:36,940
+所以这是一个重要的想法。
+So this is an important idea.
+
+63
+00:02:36,940 --> 00:02:39,470
+现在，抽象数据的数据抽象的关键思想
+Now, the key idea of data abstraction of abstract data
+
+64
+00:02:39,470 --> 00:02:42,910
+类型是一个类型只具有特征
+types is that a type is characterized only
+
+65
+00:02:42,910 --> 00:02:45,760
+通过对其执行的操作--
+by the operations that can perform on it--
+
+66
+00:02:45,760 --> 00:02:49,090
+您可以对其执行操作，而不是通过数据结构
+you can perform on it, and not by the data structure
+
+67
+00:02:49,090 --> 00:02:51,330
+你用来代表它。
+you use to represent it.
+
+68
+00:02:51,330 --> 00:02:53,810
+例如，一个数字，一个整数，
+So for example, a number, an integer for instance,
+
+69
+00:02:53,810 --> 00:02:55,780
+是你可以加和乘的东西。
+is something that you can add and multiply.
+
+70
+00:02:55,780 --> 00:02:58,310
+这些是我们可以对一个数字做的操作。
+Those are the operations we can do on a number.
+
+71
+00:02:58,310 --> 00:02:59,850
+绳子是你能做的
+A string is something that you can
+
+72
+00:02:59,850 --> 00:03:02,150
+获取concatenate和take子字符串并获取
+take concatenate and take substrings and get
+
+73
+00:03:02,150 --> 00:03:03,770
+单个字符。
+individual characters out of.
+
+74
+00:03:03,770 --> 00:03:06,350
+这些是可以对字符串执行的操作。
+Those are the operations you can do on a string.
+
+75
+00:03:06,350 --> 00:03:10,840
+布尔值是可以否定的，等等。
+A Boolean is something you can negate, and so on.
+
+76
+00:03:10,840 --> 00:03:12,869
+所以在某种意义上，用户已经可以定义
+So in a sense, users could already define, even
+
+77
+00:03:12,869 --> 00:03:14,410
+在早期的编程语言中，
+in those early programming languages,
+
+78
+00:03:14,410 --> 00:03:18,780
+他们可以通过创建记录数据来定义自己的类型
+they could define their own types by creating a record data
+
+79
+00:03:18,780 --> 00:03:22,060
+类型，例如，具有日期、月份和，
+type, for example, that had integer fields for day, month,
+
+80
+00:03:22,060 --> 00:03:25,070
+然后定义
+and year and then define procedures that were
+
+81
+00:03:25,070 --> 00:03:27,320
+对那个类型的操作。
+the operations on that type.
+
+82
+00:03:27,320 --> 00:03:29,720
+那么是什么让抽象类型变得新奇和不同
+So what made abstract types new and different
+
+83
+00:03:29,720 --> 00:03:31,340
+这是对行动的关注。
+was this focus on operations.
+
+84
+00:03:31,340 --> 00:03:32,970
+类型的用户不需要
+The user of the type would not need
+
+85
+00:03:32,970 --> 00:03:35,450
+担心它的价值
+to worry about how its values were
+
+86
+00:03:35,450 --> 00:03:38,790
+事实上，我们可以避免
+actually stored and, in fact, would be able to avoid
+
+87
+00:03:38,790 --> 00:03:40,620
+就看这个了。
+depending on that.
+
+88
+00:03:40,620 --> 00:03:42,510
+就像程序员可以忽略的那样
+In the same way that a programmer can ignore
+
+89
+00:03:42,510 --> 00:03:45,150
+编译器——编译器实际上存储
+the compiler-- compiler actually stores
+
+90
+00:03:45,150 --> 00:03:48,490
+像整数这样的原始类型
+primitive types like integers, all that matters
+
+91
+00:03:48,490 --> 00:03:53,480
+是什么操作以及这些操作的规格。
+is what operations there are and the specs of those operations.
+
+92
+00:03:53,480 --> 00:03:55,750
+现在，在Java中，就像在许多现代编程语言中一样，
+Now, in Java, as in many modern programming languages,
+
+93
+00:03:55,750 --> 00:03:58,740
+内置类型和用户定义类型之间的分离
+the separation between built-in types and user-defined types
+
+94
+00:03:58,740 --> 00:04:00,680
+实际上有点模糊。
+is actually a bit blurry.
+
+95
+00:04:00,680 --> 00:04:04,585
+java.lang包中有一些类，如capital
+There are classes in the java.lang package like capital
+
+96
+00:04:04,585 --> 00:04:07,490
+I整数和大写I布尔值，在技术上是
+I Integer and capital I Boolean that are technically
+
+97
+00:04:07,490 --> 00:04:09,390
+被认为是内置的。
+considered built-in.
+
+98
+00:04:09,390 --> 00:04:11,410
+但不管你是否重视所有的收藏
+But whether you regard all of the collection
+
+99
+00:04:11,410 --> 00:04:14,590
+内置java.util中的类不太清楚，也不太清楚
+classes in java.util as built-in is less clear and not very
+
+100
+00:04:14,590 --> 00:04:16,260
+无论如何都很重要。
+important anyway.
+
+101
+00:04:16,260 --> 00:04:17,910
+Java使问题进一步复杂化
+Java complicates the issue further
+
+102
+00:04:17,910 --> 00:04:19,970
+通过具有不均匀的原始类型
+by having primitive types that are not even
+
+103
+00:04:19,970 --> 00:04:22,620
+像int和Boolean这样的对象。
+objects like int and Boolean.
+
+104
+00:04:22,620 --> 00:04:25,010
+这组类型，原始类型，
+This set of types, primitive types,
+
+105
+00:04:25,010 --> 00:04:26,820
+用户无法扩展。
+cannot be extended by the user.
+
+106
+00:04:26,820 --> 00:04:31,190
+我们只能创建新类，而不能创建新的基元类型。
+We can only create new classes, not new primitive types.
+

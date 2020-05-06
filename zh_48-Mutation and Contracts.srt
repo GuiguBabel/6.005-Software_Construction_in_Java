@@ -1,0 +1,1250 @@
+1
+00:00:01,080 --> 00:00:03,060
+现在，我们一直在谈论的这个虫子
+Now, this bug that we've been talking about
+
+2
+00:00:03,060 --> 00:00:06,960
+不仅仅是迭代器中的一个bug，迭代器的版本
+isn't just a bug in my iterator, version of the iterator
+
+3
+00:00:06,960 --> 00:00:08,320
+我们一直在谈论的。
+that we've been talking about.
+
+4
+00:00:08,320 --> 00:00:11,580
+ArrayList提供的内置迭代器
+And the built-in iterator that ArrayList provides actually
+
+5
+00:00:11,580 --> 00:00:12,590
+有同样的问题。
+has the same problem.
+
+6
+00:00:12,590 --> 00:00:14,990
+for循环也会隐式地
+And so does the for-loop that implicitly
+
+7
+00:00:14,990 --> 00:00:16,630
+使用内置迭代器。
+uses that built-in iterator.
+
+8
+00:00:16,630 --> 00:00:20,210
+这个问题只是有一个不同的症状。
+The problem just turns out to have a different symptom.
+
+9
+00:00:20,210 --> 00:00:21,720
+所以，如果你用这个代码--
+So, if you use this code instead--
+
+10
+00:00:21,720 --> 00:00:23,170
+注意我们只是在使用for循环
+notice we're just using a for-loop
+
+11
+00:00:23,170 --> 00:00:26,140
+在这里，在封面下，创建一个迭代器
+here that, under the covers, is creating an iterator
+
+12
+00:00:26,140 --> 00:00:28,270
+在这个主题的列表上。
+over this subject's list.
+
+13
+00:00:28,270 --> 00:00:32,549
+然后我们在同一个列表中调用一个变异器
+And then we are calling a mutator on the same list
+
+14
+00:00:32,549 --> 00:00:34,510
+我们有迭代器。
+that we have the iterator on.
+
+15
+00:00:34,510 --> 00:00:36,500
+那么你得到的不是一个错误的答案，
+Then what you get instead of a wrong answer,
+
+16
+00:00:36,500 --> 00:00:39,030
+会出现并发修改异常。
+you get a concurrent modification exception.
+
+17
+00:00:39,030 --> 00:00:40,740
+所以内置迭代器实际上
+So the built-in iterator actually
+
+18
+00:00:40,740 --> 00:00:44,110
+检测到您正在更改其脚下的列表。
+detects that you're changing the list under its feet.
+
+19
+00:00:44,110 --> 00:00:47,680
+当它检测到这个异常时就会抛出这个异常。
+And it throws this exception when it detects that.
+
+20
+00:00:47,680 --> 00:00:50,320
+你可以考虑如何实施或改变
+You might think about how you would implement or change
+
+21
+00:00:50,320 --> 00:00:55,330
+我的迭代器，所以它可以检测到。
+my iterator so it would be able to detect that.
+
+22
+00:00:55,330 --> 00:00:56,660
+那你怎么解决这个问题呢？
+So how do you fix this problem?
+
+23
+00:00:56,660 --> 00:00:59,640
+在这种情况下，我们如何能够删除元素
+In this case, how would we be able to remove elements
+
+24
+00:00:59,640 --> 00:01:01,790
+当我们在这个列表上迭代的时候。
+from this list while we're iterating over it.
+
+25
+00:01:01,790 --> 00:01:04,629
+事实证明迭代器
+Well, it turns out that iterator does
+
+26
+00:01:04,629 --> 00:01:07,160
+除了下一个
+have an additional method, in addition to next
+
+27
+00:01:07,160 --> 00:01:10,762
+并且有下一个内置迭代器有这个remove方法
+and has next, built-in iterators have this remove method that
+
+28
+00:01:10,762 --> 00:01:12,220
+允许你说，我想摆脱
+allow you to say, I want to get rid
+
+29
+00:01:12,220 --> 00:01:15,790
+在基础集合中的这个特定元素中，
+of this particular element in the underlying collection,
+
+30
+00:01:15,790 --> 00:01:17,830
+调整迭代器的位置
+and adjust the iterator's position
+
+31
+00:01:17,830 --> 00:01:21,294
+这样就不会出错。
+so that it doesn't make errors.
+
+32
+00:01:21,294 --> 00:01:22,960
+这实际上也更有效，
+This is actually more efficient as well,
+
+33
+00:01:22,960 --> 00:01:24,900
+因为迭代器已经删除了
+as it turns out, because iterator remove already
+
+34
+00:01:24,900 --> 00:01:26,566
+知道它应该移除的元素
+knows where the element it should remove
+
+35
+00:01:26,566 --> 00:01:28,150
+是，当主题实际移除时
+is, while subject remove actually
+
+36
+00:01:28,150 --> 00:01:30,040
+必须搜索此主题的列表
+has to search through this subject's list
+
+37
+00:01:30,040 --> 00:01:34,750
+以便再次找到此特定字符串。
+in order to find this particular string again.
+
+38
+00:01:34,750 --> 00:01:37,350
+但事实上，这并不能解决整个问题，
+But in fact, it doesn't fix the whole problem,
+
+39
+00:01:37,350 --> 00:01:40,820
+因为密码里可能还有别的地方，
+because there might be, somewhere else in the code,
+
+40
+00:01:40,820 --> 00:01:43,830
+可能在堆栈的上面
+maybe higher up on the stack in a piece of code
+
+41
+00:01:43,830 --> 00:01:45,700
+这就是所谓的代码。
+that's calling this code.
+
+42
+00:01:45,700 --> 00:01:50,650
+这个列表上可能还有另一个迭代器
+There might be another iterator on this very list that's
+
+43
+00:01:50,650 --> 00:01:52,230
+当前处于活动状态。
+currently active.
+
+44
+00:01:52,230 --> 00:01:54,950
+迭代器将抛出一个并发的修改
+And that iterator is going to throw a concurrent modification
+
+45
+00:01:54,950 --> 00:01:56,910
+异常，甚至可能返回
+exception, or perhaps even return
+
+46
+00:01:56,910 --> 00:02:01,430
+一个错误的答案，因为你在这里说不出来。
+a wrong answer because you weren't able to tell it here.
+
+47
+00:02:01,430 --> 00:02:02,780
+他们不会都知道的。
+They won't all get informed.
+
+48
+00:02:02,780 --> 00:02:06,500
+最根本的问题是我们有多个别名
+The fundamental problem again is that we have multiple aliases
+
+49
+00:02:06,500 --> 00:02:08,250
+在这个主题的列表中。
+to this subject's list.
+
+50
+00:02:08,250 --> 00:02:10,305
+现在别名在迭代器中。
+Now the aliases are inside iterators.
+
+52
+00:02:13,820 --> 00:02:15,330
+所以从根本上说，不可变的对象
+So fundamentally, immutable objects
+
+53
+00:02:15,330 --> 00:02:17,820
+可以订立简单的合同，
+can make what were simple contract,
+
+54
+00:02:17,820 --> 00:02:21,670
+简单的规格，突然变得非常复杂。
+simple specifications, suddenly very complex.
+
+55
+00:02:21,670 --> 00:02:25,420
+程序多个部分中的别名
+Aliases in multiple parts of your program
+
+56
+00:02:25,420 --> 00:02:28,290
+可能被广泛分离的依赖于物体
+that may be widely separated rely on the object
+
+57
+00:02:28,290 --> 00:02:30,460
+保持一致。
+to remain consistent.
+
+58
+00:02:30,460 --> 00:02:33,010
+所以合同不能只在一个地方执行
+So the contracts can't be enforced in just one place
+
+59
+00:02:33,010 --> 00:02:34,880
+就像在一个类的客户端之间
+anymore like between the client of a class
+
+60
+00:02:34,880 --> 00:02:36,700
+以及类的实现者。
+and implementer of a class.
+
+61
+00:02:36,700 --> 00:02:39,470
+你现在依赖于每个人的良好行为
+You now depend on the good behavior of everyone
+
+62
+00:02:39,470 --> 00:02:43,510
+他引用了可变对象。
+who has a reference to the mutable object.
+
+63
+00:02:43,510 --> 00:02:47,500
+所以合同变得非常非本地的。
+So contracts become very non-local.
+
+64
+00:02:47,500 --> 00:02:49,630
+所以让我们考虑一下Java集合类，
+So let's think about the Java collections classes,
+
+65
+00:02:49,630 --> 00:02:51,380
+例如，通常有文件记录
+for example, which are normally documented
+
+66
+00:02:51,380 --> 00:02:53,120
+客户的合同很清楚
+with very clear contracts in the client
+
+67
+00:02:53,120 --> 00:02:56,220
+以及方法的实现者。
+and the implementer of a method.
+
+68
+00:02:56,220 --> 00:02:59,170
+现在，尝试查找Java集合文档的位置
+Now, try to find where Java collections documents
+
+69
+00:02:59,170 --> 00:03:00,970
+对客户的关键要求
+the crucial requirement on a client
+
+70
+00:03:00,970 --> 00:03:04,360
+我们刚刚发现，你不能修改集合
+that we've just discovered, that you can't modify a collection
+
+71
+00:03:04,360 --> 00:03:06,280
+当你在迭代的时候。
+while you're iterating over it.
+
+72
+00:03:06,280 --> 00:03:07,940
+谁来负责？
+Who takes responsibility?
+
+73
+00:03:07,940 --> 00:03:09,223
+是迭代器吗？
+It is the iterator?
+
+75
+00:03:12,470 --> 00:03:13,320
+是单子吗？
+Is it the list?
+
+77
+00:03:19,000 --> 00:03:22,360
+更广泛地说，是收藏品吗？
+Is it, more broadly, collections?
+
+78
+00:03:22,360 --> 00:03:25,410
+尝试查看这些api并查看
+Try looking through these APIs and see
+
+79
+00:03:25,410 --> 00:03:28,246
+你能不能找到任何关于这个的讨论。
+whether you can find any discussion of this.
+
+80
+00:03:28,246 --> 00:03:31,150
+需要对这样的全局属性进行推理，
+And the need to reason about global properties like this,
+
+81
+00:03:31,150 --> 00:03:34,150
+关于迭代器是否
+about whether iterators, whether a list
+
+82
+00:03:34,150 --> 00:03:37,370
+允许在迭代器运行时进行更改，
+is allowed to be changed while an iterator is running over it,
+
+83
+00:03:37,370 --> 00:03:39,510
+使代码更难理解
+make it much harder to understand the code
+
+84
+00:03:39,510 --> 00:03:43,120
+并对你的程序的正确性充满信心。
+and be confident in the correctness of your program.
+
+85
+00:03:43,120 --> 00:03:44,482
+现在我们还得这么做。
+Now we still have to do that.
+
+86
+00:03:44,482 --> 00:03:46,190
+我们仍然需要培养这种信心。
+We still have to develop that confidence.
+
+87
+00:03:46,190 --> 00:03:49,510
+我们仍然需要不时地使用可变对象
+We still have to use mutable objects from time
+
+88
+00:03:49,510 --> 00:03:51,215
+为了表演和方便，
+to time for performance and convenience,
+
+89
+00:03:51,215 --> 00:03:56,570
+但这样做的话，我们要付出很大的错误安全代价。
+but we pay a big cost in bug safety when we do that.
+
+90
+00:03:56,570 --> 00:03:59,820
+现在这些非本地合同的另一个影响
+Now another effect of these non-local contracts
+
+91
+00:03:59,820 --> 00:04:04,620
+是他们让我们的代码更难改变。
+is that they make our code far harder to change.
+
+92
+00:04:04,620 --> 00:04:06,550
+因为合同比较复杂，
+Because the contract is more complicated,
+
+93
+00:04:06,550 --> 00:04:10,040
+我们在客户之间的自由度较低
+we have less freedom between the client, for each of the client
+
+94
+00:04:10,040 --> 00:04:11,290
+以及要改变的实施者。
+and the implementer to change.
+
+95
+00:04:11,290 --> 00:04:14,200
+我们在前面的阅读中看到了这个例子
+And we saw that example a little earlier in this reading
+
+96
+00:04:14,200 --> 00:04:16,100
+有日期。
+with date.
+
+97
+00:04:16,100 --> 00:04:19,000
+换句话说，使用允许更改的对象
+In other words, using objects that are allowed to change
+
+98
+00:04:19,000 --> 00:04:23,070
+实际上会使代码本身更难更改。
+actually makes the code itself harder to change.
+
+99
+00:04:23,070 --> 00:04:27,030
+这里还有一个例子说明了这一点。
+Here's one more example that illustrates that point.
+
+100
+00:04:27,030 --> 00:04:29,120
+我们例子的关键是
+The crux of our example is going to be
+
+101
+00:04:29,120 --> 00:04:32,790
+这个方法应该查找用户名。
+this method that is supposed to look up a user name.
+
+102
+00:04:32,790 --> 00:04:37,070
+假设是[？卑鄙小人？]在麻省理工的用户数据库中。
+Let's say it's [? bitdiddle ?] in MIT'S user database.
+
+103
+00:04:37,070 --> 00:04:40,830
+它应该返回一个九位数的标识符。
+And it's supposed to return a nine digit identifier.
+
+104
+00:04:40,830 --> 00:04:45,470
+九个数字作为字符数组返回。
+So nine numbers that it returns as a character array.
+
+105
+00:04:45,470 --> 00:04:48,160
+如果它找不到那个用户，它就会抛出一个异常。
+And if it can't find that user, well it throws an exception.
+
+106
+00:04:48,160 --> 00:04:52,510
+所以这是一个定义良好的规范
+So this is a nicely defined spec that
+
+107
+00:04:52,510 --> 00:04:54,726
+似乎很简单也很合理。
+seems to be very simple and reasonable.
+
+108
+00:04:54,726 --> 00:04:56,100
+现在假设我们有一个客户
+Now suppose we have a client that
+
+109
+00:04:56,100 --> 00:04:59,796
+使用此方法打印出用户的标识符。
+uses this method to print out a user's identifiers.
+
+110
+00:04:59,796 --> 00:05:03,260
+所以它把bitdiddle作为用户名，
+So it passes bitdiddle in as the username,
+
+111
+00:05:03,260 --> 00:05:07,240
+返回一个九位数字，表示为字符
+gets a nine digit number back, represented as a character
+
+112
+00:05:07,240 --> 00:05:08,809
+排列，然后打印出来。
+array, and prints it.
+
+113
+00:05:08,809 --> 00:05:10,600
+现在客户机和实现者
+And now both the client and the implementer
+
+114
+00:05:10,600 --> 00:05:13,320
+分别决定做出改变。
+separately decide to make a change.
+
+115
+00:05:13,320 --> 00:05:15,000
+在这种情况下，客户担心
+In this case, the client is worried
+
+116
+00:05:15,000 --> 00:05:16,520
+关于用户的隐私。
+about the user's privacy.
+
+117
+00:05:16,520 --> 00:05:19,590
+在打印之前，他们决定做什么
+And before printing it, what they decide to do
+
+118
+00:05:19,590 --> 00:05:24,200
+正在覆盖ID的前五位
+is overwrite the first five digits of the ID
+
+119
+00:05:24,200 --> 00:05:26,460
+带星号，所以它显示的
+with asterisks, so that all it's displaying
+
+120
+00:05:26,460 --> 00:05:29,902
+是最后四位数字。
+is the last four digits.
+
+121
+00:05:29,902 --> 00:05:32,110
+同时，实施者担心速度
+Same time, the implementer is worried about the speed
+
+122
+00:05:32,110 --> 00:05:33,901
+并加载到数据库中，以便实现者
+and load in the database so the implementer
+
+123
+00:05:33,901 --> 00:05:36,280
+引入一个缓存，它可以记住
+introduces a cache that remember user names that
+
+124
+00:05:36,280 --> 00:05:37,940
+已经查过了。
+have been looked up.
+
+125
+00:05:37,940 --> 00:05:39,790
+所以现在当我们得到一个用户名，我们
+So now when we get a username, we
+
+126
+00:05:39,790 --> 00:05:42,350
+看看这个缓存
+will look and see whether this cache, which
+
+127
+00:05:42,350 --> 00:05:46,020
+是将字符串映射到这些ID的映射，
+is a map that maps strings to these IDs,
+
+128
+00:05:46,020 --> 00:05:48,311
+不管它是否已经包含那个字符串，
+whether it contains that string already,
+
+129
+00:05:48,311 --> 00:05:50,310
+是否有人已经查过了。
+whether anybody has already looked it up before.
+
+130
+00:05:50,310 --> 00:05:54,740
+如果是，我们只需返回缓存的ID。
+And if so, we simply return the ID that we cached.
+
+131
+00:05:54,740 --> 00:05:57,880
+否则，我们用通常的方式查找名称
+Otherwise, we look up the name in the usual way
+
+132
+00:05:57,880 --> 00:06:01,660
+通过访问数据库并将其存储在缓存中
+by going to the database and store it in the cache
+
+133
+00:06:01,660 --> 00:06:03,640
+供以后参考。
+for future reference.
+
+134
+00:06:03,640 --> 00:06:05,880
+这两个变化造成了一个微妙的错误。
+These two changes have created a subtle bug.
+
+135
+00:06:05,880 --> 00:06:07,880
+当客户查到bitdiddle回来的时候
+When the client looks up bitdiddle and gets back
+
+136
+00:06:07,880 --> 00:06:10,830
+一个字符数组，现在是客户端，
+a character array, now both the client,
+
+137
+00:06:10,830 --> 00:06:17,260
+这里的ID引用，这里的缓存，这里的映射，
+both this ID reference here, and the cache, this map here,
+
+138
+00:06:17,260 --> 00:06:19,220
+特别是一些特殊的元素，
+in particular, some particular element,
+
+139
+00:06:19,220 --> 00:06:21,250
+地图上有一对特别的
+some particular pair in that map are pointing
+
+140
+00:06:21,250 --> 00:06:22,530
+到同一个字符数组。
+to the same character array.
+
+141
+00:06:22,530 --> 00:06:24,740
+是化名的。
+It's aliased.
+
+142
+00:06:24,740 --> 00:06:26,440
+这意味着客户的代码
+That means that the client's code
+
+143
+00:06:26,440 --> 00:06:28,080
+会让这里变得模糊
+that is going to do this obscuring here
+
+144
+00:06:28,080 --> 00:06:32,020
+实际上正在重写缓存中的标识符。
+is actually overwriting the identifier in the cache.
+
+145
+00:06:32,020 --> 00:06:35,060
+所以以后再打电话给我
+So future calls to get MID with bitdiddle
+
+146
+00:06:35,060 --> 00:06:37,490
+不会返回正确的九位数，
+will not return the right nine digit number,
+
+147
+00:06:37,490 --> 00:06:40,880
+但是会返回这个损坏的号码
+but instead will return this corrupted number
+
+148
+00:06:40,880 --> 00:06:42,790
+因为客户的变化。
+caused by the client's change.
+
+149
+00:06:42,790 --> 00:06:45,800
+共享可变对象会使契约复杂化。
+Sharing a mutable object complicates a contract.
+
+150
+00:06:45,800 --> 00:06:47,650
+如果我们
+It could be very contentious if we
+
+151
+00:06:47,650 --> 00:06:50,520
+必须讨论客户机还是实现者
+had to debate whether the client or the implementer
+
+152
+00:06:50,520 --> 00:06:52,930
+在这里是罪魁祸首。
+was to blame here.
+
+153
+00:06:52,930 --> 00:06:56,420
+客户有没有义务不修改它取回的对象？
+Was the client obliged not to modify the object it got back?
+
+154
+00:06:56,420 --> 00:06:59,250
+实现者是否有义务不抓住对象
+Was the implementer obliged not to hold onto the object
+
+155
+00:06:59,250 --> 00:07:02,060
+它回来了？
+that it returned?
+
+156
+00:07:02,060 --> 00:07:03,940
+我们以前没想过
+Now we didn't think about this before when
+
+157
+00:07:03,940 --> 00:07:05,640
+我们在讨论约会的例子，
+we were talking about the date example,
+
+158
+00:07:05,640 --> 00:07:07,140
+但现在让我们想想
+but now let's think about whether we
+
+159
+00:07:07,140 --> 00:07:10,540
+可以澄清此规范以允许
+can clarify this spec in order to allow
+
+160
+00:07:10,540 --> 00:07:13,110
+其中一些行为。
+some of these behaviors.
+
+161
+00:07:13,110 --> 00:07:15,110
+或者，明确表示不应该发生。
+Or, to make it clear that they shouldn't happen.
+
+162
+00:07:15,110 --> 00:07:19,310
+例如，我们可以说
+So for example, we might say, in order
+
+163
+00:07:19,310 --> 00:07:22,680
+为了让实现者有自由进行缓存，
+to give the implementer the freedom to do the caching,
+
+164
+00:07:22,680 --> 00:07:26,250
+调用方可能永远不会修改返回的数组。
+that the caller may never modify the array that gets returned.
+
+165
+00:07:26,250 --> 00:07:29,870
+所以这将禁止来电者做这样的事情。
+So this would forbid the caller from doing something like this.
+
+166
+00:07:29,870 --> 00:07:31,930
+他们必须复制阵列
+They would have to make a copy of the array
+
+167
+00:07:31,930 --> 00:07:34,020
+在他们这么做之前。
+before they did that.
+
+168
+00:07:34,020 --> 00:07:35,580
+结果发现这是个坏办法，
+Turns out this is a bad way to do it,
+
+169
+00:07:35,580 --> 00:07:37,413
+因为这种方法的问题是
+because the problem with this approach, this
+
+170
+00:07:37,413 --> 00:07:39,560
+意味着合同必须执行
+means the contract has to be enforced
+
+171
+00:07:39,560 --> 00:07:41,250
+整个节目剩下的部分，
+for the whole rest of the program,
+
+172
+00:07:41,250 --> 00:07:44,070
+对于程序的所有下游部分
+for all the downstream parts of the program that are going
+
+173
+00:07:44,070 --> 00:07:47,150
+要使用返回的字符数组，
+to use this character array that gets returned,
+
+174
+00:07:47,150 --> 00:07:50,570
+他们都必须有合同，
+they all have to have that contract,
+
+175
+00:07:50,570 --> 00:07:52,780
+他们可能永远不会修改返回的数组。
+they may never modify that returned array.
+
+177
+00:07:55,046 --> 00:07:56,420
+剩下的就只能这样了
+And that has to last for the rest
+
+178
+00:07:56,420 --> 00:07:57,165
+节目的生命。
+of the life of the program.
+
+179
+00:07:57,165 --> 00:07:58,540
+还有你写的其他合同
+And the other contracts you wrote
+
+180
+00:07:58,540 --> 00:08:00,530
+范围要窄得多。
+have been much narrower in scope.
+
+181
+00:08:00,530 --> 00:08:02,680
+你可以先考虑一下先决条件
+You can think about precondition just before you
+
+182
+00:08:02,680 --> 00:08:04,490
+打这个电话和邮政条件
+make this call and the post-condition
+
+183
+00:08:04,490 --> 00:08:06,420
+是你打电话后的状态，
+is the state just after you make this call,
+
+184
+00:08:06,420 --> 00:08:10,730
+你不必为这个物体
+and you don't have to reason about how that object will
+
+185
+00:08:10,730 --> 00:08:15,530
+在整个节目的余生中都要接受治疗。
+be treated for the whole rest of the lifetime of the program.
+
+186
+00:08:15,530 --> 00:08:18,590
+这是一个有类似问题的规范。
+Here's a spec that has a similar problem.
+
+187
+00:08:18,590 --> 00:08:20,780
+这是为了让客户更满意。
+And this is trying to be more client-favorable.
+
+188
+00:08:20,780 --> 00:08:24,430
+这意味着实现者
+This is saying that the implementer has
+
+189
+00:08:24,430 --> 00:08:27,840
+返回包含9位数字的新数组
+to return a new array that contains the nine digit number
+
+190
+00:08:27,840 --> 00:08:28,840
+标识符。
+identifier.
+
+191
+00:08:28,840 --> 00:08:30,880
+但是，这也不能解决问题。
+But, this doesn't really fix the problem either.
+
+192
+00:08:30,880 --> 00:08:33,500
+它至少说阵列必须是新鲜的，
+It at least says that the array has to be fresh,
+
+193
+00:08:33,500 --> 00:08:35,875
+但它并没有说明实现者
+but it doesn't say anything about whether the implementer
+
+194
+00:08:35,875 --> 00:08:38,142
+可以保留新数组的别名。
+can hold onto an alias to that fresh array.
+
+195
+00:08:38,142 --> 00:08:39,600
+它并没有保留实现者
+And it doesn't keep the implementer
+
+196
+00:08:39,600 --> 00:08:41,183
+从更改数组或重用它
+from changing that array or reusing it
+
+197
+00:08:41,183 --> 00:08:44,880
+在未来的某件事上。
+in the future for something else.
+
+198
+00:08:44,880 --> 00:08:48,630
+所以这两种方法几乎不能解决任何问题
+So these two approaches don't fix a problem anywhere nearly
+
+199
+00:08:48,630 --> 00:08:52,310
+以及使用不可变类型，如字符串。
+as well as using an immutable type, like string.
+
+200
+00:08:52,310 --> 00:08:54,522
+因为这提供了一个保证
+Because that provides a guarantee
+
+201
+00:08:54,522 --> 00:08:55,980
+客户机和实现者
+that the client and the implementer
+
+202
+00:08:55,980 --> 00:08:57,550
+不能在路上互相踩
+can never step on each other the way
+
+203
+00:08:57,550 --> 00:08:59,510
+他们可以使用字符数组。
+they can with character arrays.
+
+204
+00:08:59,510 --> 00:09:03,010
+不依赖于程序员阅读这个规范注释
+Doesn't depend on the programmer reading this spec comment very
+
+205
+00:09:03,010 --> 00:09:05,700
+小心并确保所有其他代码
+carefully and guaranteeing that all the rest of the code
+
+206
+00:09:05,700 --> 00:09:07,320
+在程序中满足它。
+in the program satisfies it.
+
+207
+00:09:07,320 --> 00:09:11,470
+字符串是不可变的，因此它提供了这些保证
+String is immutable, so it provides these guarantees
+
+208
+00:09:11,470 --> 00:09:12,250
+是故意的。
+by design.
+
+209
+00:09:12,250 --> 00:09:14,870
+实际上，另外，给实现者
+And actually, in addition, gives the implementer
+
+210
+00:09:14,870 --> 00:09:17,570
+引入缓存的自由
+the freedom to introduce that cache, which
+
+211
+00:09:17,570 --> 00:09:22,320
+可以显著提高性能。
+can be a significant performance improvement.
+
+212
+00:09:22,320 --> 00:09:26,019
+既然这些陷阱中有那么多是不可改变的，
+Now since immutable types of void so many of these pitfalls,
+
+213
+00:09:26,019 --> 00:09:28,060
+让我们看看一些常用的不可变
+let's look at some of the commonly used immutable
+
+214
+00:09:28,060 --> 00:09:30,980
+输入Java API。
+types in the Java API.
+
+215
+00:09:30,980 --> 00:09:34,400
+Java越来越趋向于不变性，
+Java has been more and more been moving towards immutability,
+
+216
+00:09:34,400 --> 00:09:36,710
+就像许多语言一样。
+as many languages have.
+
+217
+00:09:36,710 --> 00:09:38,830
+原始类型如int和double
+The primitive types like int and double
+
+218
+00:09:38,830 --> 00:09:40,880
+以及这些类型的原始包装
+and the primitive wrappers for those types
+
+219
+00:09:40,880 --> 00:09:46,260
+比如，大写I整数，大写D双精度，都是不可变的。
+like, capital I Integer, capital D Double, are all immutable.
+
+220
+00:09:46,260 --> 00:09:48,600
+如果你需要用非常大的数字来计算，
+And if you need to compute with very big numbers,
+
+221
+00:09:48,600 --> 00:09:53,480
+BigInteger和BigDecimal也是不可变的。
+BigInteger and BigDecimal are also immutable.
+
+222
+00:09:53,480 --> 00:09:55,830
+现在我们看到了日期对象
+Now we looked at the date object and saw
+
+223
+00:09:55,830 --> 00:09:58,520
+它很容易出错，但是有适当的不可变
+that it was error-prone, but there are appropriate immutable
+
+224
+00:09:58,520 --> 00:10:04,370
+Java时代的类型，您可以也应该使用这些类型
+types from Java Time that you can and should use instead
+
+225
+00:10:04,370 --> 00:10:06,830
+在那个变化无常的日子。
+of that mutable date.
+
+226
+00:10:06,830 --> 00:10:09,480
+现在Java集合，比如List、Set和Map，
+Now the Java collections like List, Set, and Map,
+
+227
+00:10:09,480 --> 00:10:12,560
+默认情况下都是可变的，因此数组列表和哈希
+are all by default mutable, so array list and hash
+
+228
+00:10:12,560 --> 00:10:17,490
+map和HashSet等等，但是有一些实用方法
+map and HashSet, so forth, but there are utility methods
+
+229
+00:10:17,490 --> 00:10:21,460
+这将允许您创建不可修改的视图
+that will allow you to create unmodifiable views
+
+230
+00:10:21,460 --> 00:10:23,570
+这些可变的集合。
+of these mutable collections.
+
+231
+00:10:23,570 --> 00:10:26,830
+所以集合点未修改的列表，
+So collections dot unmodified list,
+
+232
+00:10:26,830 --> 00:10:29,310
+获取一个可能是可变列表的列表，
+takes a list which is probably a mutable list,
+
+233
+00:10:29,310 --> 00:10:34,350
+把它包装成一个特殊的列表
+and wraps it in a special list that does not actually
+
+234
+00:10:34,350 --> 00:10:38,350
+允许变异，至少不能通过这个引用。
+allow mutation, at least not through this reference.
+
+235
+00:10:38,350 --> 00:10:40,540
+它是像append和set这样的mutator方法
+It's mutator methods like append and set
+
+236
+00:10:40,540 --> 00:10:43,700
+等等，都抛出异常，而不是
+and so forth, all throw exceptions, instead of
+
+237
+00:10:43,700 --> 00:10:45,350
+实际功能。
+actually function.
+
+238
+00:10:45,350 --> 00:10:47,080
+所以你可以把它当作包装纸
+So you can think of it like a wrapper
+
+239
+00:10:47,080 --> 00:10:49,152
+在你传递给它的底层列表周围。
+around the underlying list that you pass to it.
+
+240
+00:10:49,152 --> 00:10:51,610
+所以如果你有一个客户引用了那个包装器
+So if you have a client who has a reference to that wrapper
+
+241
+00:10:51,610 --> 00:10:54,710
+试图进行变异，但他们做不到。
+and tries to perform mutations, they can't do it.
+
+242
+00:10:54,710 --> 00:10:56,430
+所以在传递可变集合之前
+So before you pass a mutable collection
+
+243
+00:10:56,430 --> 00:10:57,846
+对于程序的另一部分，它是
+to another part of a program, it's
+
+244
+00:10:57,846 --> 00:11:00,340
+把它包在这些东西里是个好主意
+a great idea to wrap it in one of these
+
+245
+00:11:00,340 --> 00:11:02,570
+在不可修改的包装上。
+on unmodifiable wrappers.
+
+246
+00:11:02,570 --> 00:11:04,290
+但在那一点上你必须小心
+But you have to be careful at that point
+
+247
+00:11:04,290 --> 00:11:07,280
+忘记对可变集合的引用
+to forget about the reference to the mutable collection
+
+248
+00:11:07,280 --> 00:11:14,680
+或者你会有浮动的可变部分的别名。
+or you will have aliases to the mutable part floating around.
+
+249
+00:11:14,680 --> 00:11:16,120
+集合也有一些方法
+Collections also has some methods
+
+250
+00:11:16,120 --> 00:11:18,769
+让您获得不可变的空集合，
+that let you obtain immutable empty collections,
+
+251
+00:11:18,769 --> 00:11:21,060
+因为没有什么比发现你
+because there's nothing worse than discovering what you
+
+252
+00:11:21,060 --> 00:11:23,920
+思想绝对是空的，突然
+thought was definitely empty, has suddenly
+
+253
+00:11:23,920 --> 00:11:27,000
+由于其他部分的别名而变为非空
+been made not empty because of an alias in some other part
+
+254
+00:11:27,000 --> 00:11:28,710
+你的计划。
+of your program.
+

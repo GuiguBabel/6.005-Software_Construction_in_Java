@@ -1,0 +1,165 @@
+1
+00:00:00,980 --> 00:00:03,930
+现在，让我们尝试使用迭代器来完成一个简单的工作。
+Now, let's try using our iterator for a simple job.
+
+2
+00:00:03,930 --> 00:00:06,100
+假设我们有一份麻省理工学院的课程表
+Suppose we have a list of MIT subjects represented
+
+3
+00:00:06,100 --> 00:00:10,590
+作为字符串，比如6005803900。
+as strings, like 6005, 803, 900.
+
+4
+00:00:10,590 --> 00:00:14,200
+我们想要一个方法删除课程6，删除课程6
+We want a method drop course 6 that will delete the course 6
+
+5
+00:00:14,200 --> 00:00:16,940
+列表中的主题，比如这个，
+subjects from the list, like this one,
+
+6
+00:00:16,940 --> 00:00:19,550
+但把其他的话题抛在脑后。
+but leave the other subjects behind.
+
+7
+00:00:19,550 --> 00:00:23,550
+现在，遵循好的实践，我们首先编写规范。
+Now, following good practices, we first write the spec.
+
+8
+00:00:23,550 --> 00:00:26,160
+请注意，本规范在其合同中有一个条款
+Notice that this spec has a clause in its contract
+
+9
+00:00:26,160 --> 00:00:31,680
+这会警告客户机其列表参数将发生变化。
+that warns the client that its list argument will be mutated.
+
+10
+00:00:31,680 --> 00:00:33,340
+然后按照测试优先编程，
+Then following test first programming,
+
+11
+00:00:33,340 --> 00:00:35,020
+我们设计了一个测试策略
+we devise a testing strategy that
+
+12
+00:00:35,020 --> 00:00:37,270
+划分输入空间。
+partitions the input space.
+
+13
+00:00:37,270 --> 00:00:40,620
+然后我们选择测试用例来覆盖这个分区。
+And then we choose test cases to cover that partition.
+
+14
+00:00:40,620 --> 00:00:43,580
+最后，我们实现了它。
+And then finally, we implement it.
+
+15
+00:00:43,580 --> 00:00:46,260
+所以我们使用迭代器
+And so we're using the iterator that we've just
+
+16
+00:00:46,260 --> 00:00:49,370
+创建以迭代主题数组列表
+created to iterate over the array list of subjects
+
+17
+00:00:49,370 --> 00:00:50,800
+我们得到的。
+that we've been given.
+
+18
+00:00:50,800 --> 00:00:54,800
+对于每个元素，我们检查该元素是否
+And for each element, we check whether that element
+
+19
+00:00:54,800 --> 00:00:56,442
+从6点开始。
+starts with 6 dot.
+
+20
+00:00:56,442 --> 00:00:58,470
+如果是的话，我们就把它移走
+And if it does, then we remove it
+
+21
+00:00:58,470 --> 00:01:01,390
+从基础集合。
+from the underlying collection.
+
+22
+00:01:01,390 --> 00:01:02,990
+现在我们运行测试用例。
+Now we run our test cases.
+
+23
+00:01:02,990 --> 00:01:06,130
+注意我们写的是为了让他们工作，对吧？
+And notice we wrote them so that they ought to work, right?
+
+24
+00:01:06,130 --> 00:01:07,920
+他们要么把名单单独留下
+They are either leaving the list alone
+
+25
+00:01:07,920 --> 00:01:12,580
+或者他们正从6开始删除主题。
+or they're removing exactly the subjects that start with 6.
+
+26
+00:01:12,580 --> 00:01:14,880
+但我们发现最后一次测试
+But we discover that this last test
+
+27
+00:01:14,880 --> 00:01:18,320
+你应该把它们都移走的箱子，失败了。
+case, which you're supposed to remove them all, fails.
+
+28
+00:01:18,320 --> 00:01:21,950
+它留下了一个它应该删除的主题。
+It leaves behind a subject that it should have removed.
+
+29
+00:01:21,950 --> 00:01:23,375
+为什么？
+Why?
+
+30
+00:01:23,375 --> 00:01:24,750
+让我们追查到底发生了什么。
+Let's trace through what happens.
+
+31
+00:01:24,750 --> 00:01:27,690
+使用快照图来显示我的迭代器可能会有帮助
+It may help to use a snapshot diagram showing the My Iterator
+
+32
+00:01:27,690 --> 00:01:30,930
+对象和数组列表对象并更新该关系图
+object and the Array List object and update that diagram
+
+33
+00:01:30,930 --> 00:01:33,510
+当你处理这些代码的时候。
+while you work through this code.
+

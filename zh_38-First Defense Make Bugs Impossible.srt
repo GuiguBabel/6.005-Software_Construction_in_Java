@@ -1,0 +1,330 @@
+1
+00:00:00,500 --> 00:00:02,570
+所以我们在讨论如何避免虫子。
+So we're talking about how to avoid bugs.
+
+2
+00:00:02,570 --> 00:00:04,750
+我们的第一道防线是
+And our first defense is to make them
+
+3
+00:00:04,750 --> 00:00:07,190
+根据我们的程序设计是不可能的
+impossible by the design of our program
+
+4
+00:00:07,190 --> 00:00:09,880
+或者是编程语言和运行时系统的设计
+or the design of the programming language and runtime system
+
+5
+00:00:09,880 --> 00:00:11,850
+写在里面的。
+that it's written in.
+
+6
+00:00:11,850 --> 00:00:14,510
+静态检查是我们已经讨论过的一种方法
+Static checking is one way that we've actually already talked
+
+7
+00:00:14,510 --> 00:00:15,010
+关于。
+about.
+
+8
+00:00:15,010 --> 00:00:17,590
+事实上，你会在一读的时候记得的。
+You'll remember this back in the first reading, in fact.
+
+9
+00:00:17,590 --> 00:00:20,710
+我们讨论了静态检查和动态检查。
+We talked about static checking and dynamic checking.
+
+10
+00:00:20,710 --> 00:00:23,130
+例如，Java防止您意外地
+Java prevents you, for instance, from accidentally passing
+
+11
+00:00:23,130 --> 00:00:25,380
+函数的整数值，需要严格的。
+an integer value to a function and expects a strict.
+
+12
+00:00:25,380 --> 00:00:26,880
+它甚至不会让你的代码编译，
+It won't even let your code compile,
+
+13
+00:00:26,880 --> 00:00:28,088
+它甚至不让你运行它。
+it won't even let you run it.
+
+14
+00:00:28,088 --> 00:00:30,070
+所以静态检查消除了很多错误
+So static checking eliminates a lot of bugs
+
+15
+00:00:30,070 --> 00:00:33,420
+通过在编译时很早地捕获它们。
+by catching them very early at compile time.
+
+16
+00:00:33,420 --> 00:00:36,320
+我们还看到了一些动态检查的例子
+We also saw some examples of dynamic checking
+
+17
+00:00:36,320 --> 00:00:38,540
+在之前的阅读中。
+in that earlier reading.
+
+18
+00:00:38,540 --> 00:00:41,500
+例如，Java会产生数组溢出错误
+For example, Java makes array overflow bugs
+
+19
+00:00:41,500 --> 00:00:43,286
+通过动态捕捉它们是可能的。
+possible by catching them dynamically.
+
+20
+00:00:43,286 --> 00:00:45,660
+如果试图使用数组边界之外的索引
+If you try to use an index outside the bounds of an array
+
+21
+00:00:45,660 --> 00:00:49,670
+列表中，Java将在运行时自动生成错误。
+list, Java will automatically produce an error at runtime.
+
+22
+00:00:49,670 --> 00:00:52,930
+像C和C++这样的老图书馆只是默默地允许这些类型
+Older libraries like C and C++ just silently allow those kinds
+
+23
+00:00:52,930 --> 00:00:56,450
+错误的访问，这导致一种非常常见的安全性
+of bad accesses, which leads to a very common kind of security
+
+24
+00:00:56,450 --> 00:00:58,080
+称为缓冲区溢出的漏洞。
+vulnerability called a buffer overflow.
+
+26
+00:01:01,060 --> 00:01:03,010
+不变性是另一个设计原则。
+Immutability is another design principle.
+
+27
+00:01:03,010 --> 00:01:04,551
+我们会经常讨论这个问题，
+We're going to talk about this a lot,
+
+28
+00:01:04,551 --> 00:01:06,560
+但这对防止虫子真的很好。
+but it's really great for preventing bugs.
+
+29
+00:01:06,560 --> 00:01:09,637
+因此，不可变类型是其值永远不能更改的类型
+So an immutable type is the type whose values can never change
+
+30
+00:01:09,637 --> 00:01:10,720
+一旦它们被创造出来。
+once they've been created.
+
+31
+00:01:10,720 --> 00:01:13,636
+字符串是不可变类型的一个很好的例子。
+String is a good example of an immutable type.
+
+32
+00:01:13,636 --> 00:01:15,010
+没有可以调用的方法
+There are no methods you can call
+
+33
+00:01:15,010 --> 00:01:17,218
+在将更改字符序列的字符串上
+on string that will change the sequence of characters
+
+34
+00:01:17,218 --> 00:01:18,570
+它所代表的。
+that it represents.
+
+35
+00:01:18,570 --> 00:01:20,560
+你可以把绳子传来传去
+You can pass the string around and share it
+
+36
+00:01:20,560 --> 00:01:23,100
+与你的程序的其他部分没有任何恐惧
+with other parts of your program without any fear
+
+37
+00:01:23,100 --> 00:01:25,800
+其他部分可以修改它。
+that those other parts will be able to modify it.
+
+38
+00:01:25,800 --> 00:01:30,780
+这样就避免了一整类常见的错误。
+And that avoids an entire class of common bugs.
+
+39
+00:01:30,780 --> 00:01:33,260
+Java实际上也给了我们不可变的引用。
+Java actually also gives us immutable references.
+
+40
+00:01:33,260 --> 00:01:35,010
+这是您声明的变量
+That is variables that you declare
+
+41
+00:01:35,010 --> 00:01:37,530
+使用关键字final，可以指定一次
+with the keyword final, which can be assigned once
+
+42
+00:01:37,530 --> 00:01:38,670
+但从未被重新分配。
+but never reassigned.
+
+43
+00:01:38,670 --> 00:01:42,007
+尽可能多地使用final是个好习惯。
+It's good practice to use final as much as you can.
+
+44
+00:01:42,007 --> 00:01:43,590
+因为就像变量的类型一样，
+Because like the type of the variable,
+
+45
+00:01:43,590 --> 00:01:46,270
+就像叫它实习生字符串，那个声明
+like calling it intern string, that declaration
+
+46
+00:01:46,270 --> 00:01:49,430
+这是最后的重要文件。
+that it's final is important documentation.
+
+47
+00:01:49,430 --> 00:01:50,850
+所以考虑这个例子。
+So consider this example.
+
+48
+00:01:50,850 --> 00:01:54,930
+我们有一个变量值，它的类型是字符数组。
+We've got a variable values, whose type is Character array.
+
+49
+00:01:54,930 --> 00:01:56,680
+这被宣布为最终结果
+And that is declared final, which
+
+50
+00:01:56,680 --> 00:01:59,197
+意味着values变量不能
+means that the values variable can't ever
+
+51
+00:01:59,197 --> 00:02:01,530
+指向除第一个分配给它的对象以外的任何对象。
+point to anything other than what its first assigned to.
+
+52
+00:02:01,530 --> 00:02:06,100
+它的第一个分配给这个字符数组。
+And its first assigned to this character array.
+
+53
+00:02:06,100 --> 00:02:07,280
+这是文件变量。
+So this is files variable.
+
+54
+00:02:07,280 --> 00:02:11,130
+它被宣布为决赛，但这真的是一成不变的。
+It's declared final, but this is really unchanging.
+
+55
+00:02:11,130 --> 00:02:13,940
+所以问题是，这两个陈述中的哪一个，
+So the question is, which of these two statements,
+
+56
+00:02:13,940 --> 00:02:16,870
+这个给一个新的字符数组赋值，
+this one that assigns values to a new character array,
+
+57
+00:02:16,870 --> 00:02:20,170
+一个完全不同的物体，或者这个
+a completely different object, or this one that
+
+58
+00:02:20,170 --> 00:02:23,250
+改变字符数组的一个元素
+mutates one element of the character array
+
+59
+00:02:23,250 --> 00:02:25,560
+价值指向什么？
+that value points to?
+
+60
+00:02:25,560 --> 00:02:28,540
+哪一个，或者两者都有，或者两者都没有
+Which of these, or both, or neither
+
+61
+00:02:28,540 --> 00:02:30,000
+Java编译器允许吗？
+are allowed by the Java compiler?
+
+62
+00:02:30,000 --> 00:02:31,720
+你将在下一个练习中找到答案。
+You'll find the answers in the next exercise.
+
+63
+00:02:31,720 --> 00:02:33,300
+但是你应该从那次练习中学到什么
+But what you should learn from that exercise
+
+64
+00:02:33,300 --> 00:02:35,470
+你真的要小心决赛
+is you have to be careful about what final actually
+
+65
+00:02:35,470 --> 00:02:36,290
+意思是在Java中。
+means in Java.
+
+66
+00:02:36,290 --> 00:02:40,560
+它只会使这个变量不可变，不一定
+It only makes this variable immutable, not necessarily
+
+67
+00:02:40,560 --> 00:02:44,170
+变量指向的对象。
+the object that the variable points to.
+

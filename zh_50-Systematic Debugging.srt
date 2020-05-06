@@ -1,0 +1,480 @@
+1
+00:00:00,660 --> 00:00:03,220
+今天课的主题是系统调试。
+The topic of today's class is systematic debugging.
+
+2
+00:00:03,220 --> 00:00:05,480
+有时你别无选择，只能调试。
+Sometimes you have no choice but to debug.
+
+3
+00:00:05,480 --> 00:00:08,630
+我们讨论了避免在早期的类中进行调试。
+We talked about avoiding debugging in an earlier class.
+
+4
+00:00:08,630 --> 00:00:10,784
+但是当你有一个虫子，而且它只被发现
+But when you have a bug and it's found only
+
+5
+00:00:10,784 --> 00:00:12,450
+当你把整个系统连接起来，
+when you plug the whole system together,
+
+6
+00:00:12,450 --> 00:00:14,575
+或者当你使用一个报告[听不见]系统
+or when you use a reports [INAUDIBLE] the system is
+
+7
+00:00:14,575 --> 00:00:18,580
+部署，然后你必须找到它在哪里。
+deployed, then you have to find where it is.
+
+8
+00:00:18,580 --> 00:00:21,230
+对于这些情况，我们有一个系统的策略
+For those situations, we have a systematic strategy
+
+9
+00:00:21,230 --> 00:00:23,820
+这可以使调试更加有效。
+that can make debugging more effective.
+
+10
+00:00:23,820 --> 00:00:26,760
+第一步是复制它。
+First step is reproducing it.
+
+11
+00:00:26,760 --> 00:00:30,730
+这意味着确保你能看到同样的错误
+That means making sure that you can actually see the same bug
+
+12
+00:00:30,730 --> 00:00:33,300
+您的用户已报告的。
+that your user has reported.
+
+13
+00:00:33,300 --> 00:00:35,840
+事实上，最好你能复制它
+And in fact, it's best if you can reproduce it
+
+14
+00:00:35,840 --> 00:00:40,122
+一个小的可重复的测试用例。
+with a small and repeatable test case.
+
+15
+00:00:40,122 --> 00:00:42,080
+如果你通过回归测试发现了这个错误，
+Now if you found the bug by regression testing,
+
+16
+00:00:42,080 --> 00:00:44,350
+那么你已经有了那个测试用例。
+then you already have that test case.
+
+17
+00:00:44,350 --> 00:00:46,922
+这是测试套件中失败的测试用例。
+That's the failing test case in your test suite.
+
+18
+00:00:46,922 --> 00:00:48,630
+如果用户报告[听不见]，
+If it was [INAUDIBLE] reported by a user,
+
+19
+00:00:48,630 --> 00:00:52,120
+可能需要一些努力，首先要得到相同的行为--
+it may take some effort, first to get the same behavior--
+
+20
+00:00:52,120 --> 00:00:55,170
+用户看到的同样的不良行为。
+the same bad behavior that the user is seeing.
+
+21
+00:00:55,170 --> 00:00:57,130
+事实上，在某些情况下，
+Then in fact, with some situations,
+
+22
+00:00:57,130 --> 00:00:59,590
+像图形用户界面或多线程程序，
+like graphical user interfaces or multi-threaded programs,
+
+23
+00:00:59,590 --> 00:01:02,592
+可能很难持续复制，
+it may actually be hard to reproduce it consistently,
+
+24
+00:01:02,592 --> 00:01:04,800
+如果这取决于事件发生的时间--
+if it depends on timing of events--
+
+25
+00:01:04,800 --> 00:01:07,410
+当你点击按钮的时候--
+precisely when you click the button--
+
+26
+00:01:07,410 --> 00:01:10,850
+或者这取决于线程的交织方式。
+or if it depends on how threads interleave.
+
+27
+00:01:10,850 --> 00:01:14,090
+但你能做的任何努力
+But any effort you can make in making that test
+
+28
+00:01:14,090 --> 00:01:19,500
+小而可重复的情况——也就是说，每次你
+case small and repeatable-- that is, always fail every time you
+
+29
+00:01:19,500 --> 00:01:22,065
+运行它——会有回报的，因为你可能
+run it-- will pay off, because you'll probably
+
+30
+00:01:22,065 --> 00:01:24,440
+在你搜索的时候必须一遍又一遍地运行这个测试用例
+have to run that test case over and over while you search
+
+31
+00:01:24,440 --> 00:01:26,640
+去解决这个错误。
+for the bug and try to fix it.
+
+32
+00:01:26,640 --> 00:01:28,505
+一旦你成功修复了这个错误，
+And once you successfully fix the bug,
+
+33
+00:01:28,505 --> 00:01:31,270
+然后这个小的，可重复的测试用例
+then this small, repeatable test case
+
+34
+00:01:31,270 --> 00:01:34,720
+会做一个很好的回归测试
+will make a great regression test
+
+35
+00:01:34,720 --> 00:01:36,540
+你只需要做个测试
+that you'll just put in your test
+
+36
+00:01:36,540 --> 00:01:41,262
+如果虫子再出现就会找到它的套房。
+suite that will find that bug if it ever crops up again.
+
+37
+00:01:41,262 --> 00:01:42,970
+所以一旦你有了这个bug的测试用例，
+So once you have a test case for the bug,
+
+38
+00:01:42,970 --> 00:01:45,130
+那么你的目标就是做这个测试
+then your goal is simply to make that test
+
+39
+00:01:45,130 --> 00:01:47,526
+工作——让它变成绿色，这非常令人满意。
+work-- to make it turn green, and that's very satisfying.
+
+40
+00:01:47,526 --> 00:01:48,400
+这里有一个例子。
+So here's an example.
+
+41
+00:01:48,400 --> 00:01:50,140
+假设你有这个功能。
+So suppose you have this function.
+
+42
+00:01:50,140 --> 00:01:53,300
+它应该在字符串中找到最常用的单词。
+It's supposed to find the most common word in a string.
+
+43
+00:01:53,300 --> 00:01:55,550
+所以它接受一个字符串作为输入。
+So it takes a string as an input.
+
+44
+00:01:55,550 --> 00:01:57,706
+以及字符串的前提条件
+And the precondition on that string
+
+45
+00:01:57,706 --> 00:01:59,330
+它包含零个或多个单词，
+is that it contains zero or more words,
+
+46
+00:01:59,330 --> 00:02:01,880
+其中一个单词是由字母数字字符组成的字符串
+where a word is a string of alphanumeric characters
+
+47
+00:02:01,880 --> 00:02:05,000
+以非字母数字字符为界。
+that's bounded by non-alphanumeric characters.
+
+48
+00:02:05,000 --> 00:02:07,880
+这个函数应该返回，
+And this function is supposed to return,
+
+49
+00:02:07,880 --> 00:02:11,530
+作为后置条件，一个出现频率最高的词
+as its postcondition, a word that occurs maximally often
+
+50
+00:02:11,530 --> 00:02:14,190
+在文本中，忽略字母大小写。
+in the text, ignoring alphabetic case.
+
+51
+00:02:14,190 --> 00:02:16,790
+换句话说，我们将处理大小写
+In other words, we're going to treat uppercase and lowercase
+
+52
+00:02:16,790 --> 00:02:20,490
+当我们比较单词时也是一样。
+as the same when we're comparing words.
+
+53
+00:02:20,490 --> 00:02:24,100
+所以现在假设一个用户把莎士比亚的
+So now suppose a user takes the entire text of Shakespeare's
+
+54
+00:02:24,100 --> 00:02:27,940
+播放并将其连接为字符串
+plays and concatenates that into a string
+
+55
+00:02:27,940 --> 00:02:31,130
+通过你的方法发现
+and passes it in your method and discovers
+
+56
+00:02:31,130 --> 00:02:33,360
+而不是返回一个可预见的
+that instead of returning a predictably
+
+57
+00:02:33,360 --> 00:02:35,634
+常用英语单词--“the”和“a”
+common English word-- "the" and "a"
+
+58
+00:02:35,634 --> 00:02:38,050
+是英语中最常见的词，
+are some of the most common words in the English language,
+
+59
+00:02:38,050 --> 00:02:40,630
+所以我们希望它们经常发生
+so we would expect them to occur very frequently
+
+60
+00:02:40,630 --> 00:02:43,050
+在莎士比亚的作品中，我们得到了一些
+in Shakespeare-- we instead get something that isn't even
+
+61
+00:02:43,050 --> 00:02:45,810
+一个词，比如“e”
+a word, like "e."
+
+62
+00:02:45,810 --> 00:02:48,100
+现在这是一个巨大的投入。
+Now this is an enormous input.
+
+63
+00:02:48,100 --> 00:02:53,450
+大约10万行文字，总共80万字。
+It's about 100,000 lines of text, 800,000 words total.
+
+64
+00:02:53,450 --> 00:02:56,480
+这个输入将很难去bug
+This input is going to be very difficult to de-bug
+
+65
+00:02:56,480 --> 00:02:57,620
+用正常的方法。
+by normal methods.
+
+66
+00:02:57,620 --> 00:03:00,580
+如果我们把打印的声明放在体内
+If we put print statements inside the body
+
+67
+00:03:00,580 --> 00:03:03,180
+在这个函数中，我们有几十万个
+of this function, we'd have hundreds of thousands
+
+68
+00:03:03,180 --> 00:03:05,970
+当它在细嚼细嚼的时候。
+of print statements as it was chewing through that string.
+
+69
+00:03:05,970 --> 00:03:08,140
+或者我们在这里设置断点，
+Or if we put breakpoints in here,
+
+70
+00:03:08,140 --> 00:03:10,100
+我们会在上百个断点
+we would be hitting those breakpoints hundreds
+
+71
+00:03:10,100 --> 00:03:11,980
+无数次。
+of thousands of times.
+
+72
+00:03:11,980 --> 00:03:14,300
+因此，如果我们改为
+So debugging would be much easier if we instead
+
+73
+00:03:14,300 --> 00:03:18,170
+将此输入的大小减小为可管理的
+reduce the size of this input to something manageable that
+
+74
+00:03:18,170 --> 00:03:22,260
+仍然显示相同或非常相似的错误。
+still exhibits the same, or a very similar, bug.
+
+75
+00:03:22,260 --> 00:03:25,090
+这里有一些你可以用来减少的策略。
+Here's some strategies you can use for that reduction.
+
+76
+00:03:25,090 --> 00:03:27,140
+你可以把输入分成两半。
+You can cut the input in half.
+
+77
+00:03:27,140 --> 00:03:30,730
+莎士比亚的前半部分也有同样的缺陷吗？
+Does the first half of Shakespeare show the same bug?
+
+78
+00:03:30,730 --> 00:03:32,370
+这是二进制搜索的一种形式
+It's a form of binary search, which
+
+79
+00:03:32,370 --> 00:03:34,770
+一直是计算机科学中的一项好技术。
+is always a good technique in computer science.
+
+80
+00:03:34,770 --> 00:03:36,670
+我们要多谈谈
+And we're going to talk more about it
+
+81
+00:03:36,670 --> 00:03:39,710
+稍后阅读。
+later on in this reading.
+
+82
+00:03:39,710 --> 00:03:42,100
+如果你只用一个剧本怎么办？
+What if you use just a single play?
+
+83
+00:03:42,100 --> 00:03:44,520
+有几十场戏。
+There is a couple dozen plays.
+
+84
+00:03:44,520 --> 00:03:46,110
+如果你只选一个剧本
+What if you pick just a single play
+
+85
+00:03:46,110 --> 00:03:47,890
+看看它是否也有同样的缺陷？
+and see whether it exhibits the same bug?
+
+86
+00:03:47,890 --> 00:03:50,620
+如果你只选一个演讲怎么办--
+What if you pick just a single speech--
+
+87
+00:03:50,620 --> 00:03:52,410
+只是一出戏的几句台词。
+just a few lines from a play.
+
+88
+00:03:52,410 --> 00:03:53,930
+那有相同的错误吗？
+Does that have the same bug?
+
+89
+00:03:53,930 --> 00:03:58,730
+所以我们可以减少输入直到得到一个小测试用例。
+So we can reduce the input until we get a small test case.
+
+90
+00:03:58,730 --> 00:04:01,240
+然后我们会有更多的运气使用技巧
+And then we'll have more luck using techniques
+
+91
+00:04:01,240 --> 00:04:05,680
+比如打印调试和断点调试。
+like print debugging and breakpoint debugging.
+
+92
+00:04:05,680 --> 00:04:08,740
+然后我们用那个小测试用例修复这个bug。
+Then we fix the bug using that small test case.
+
+93
+00:04:08,740 --> 00:04:11,810
+但我们还是想回到原来的马车上
+But then we still want to go back to the original buggy
+
+94
+00:04:11,810 --> 00:04:16,230
+输入100000-100000行，800000字--
+input-- to the 100,000-- 100,000 lines, 800,000 words--
+
+95
+00:04:16,230 --> 00:04:19,079
+并确认它确实修复了该输入
+and confirm that it actually fixes it for that input
+
+96
+00:04:19,079 --> 00:04:20,770
+也。
+as well.
+

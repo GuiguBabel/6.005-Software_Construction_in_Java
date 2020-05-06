@@ -1,0 +1,1260 @@
+1
+00:00:00,570 --> 00:00:03,014
+如果我们不能阻止虫子，我们的第二道防线
+Now if we can't prevent bugs, our second defense
+
+2
+00:00:03,014 --> 00:00:05,430
+试图将它们本地化到程序的一小部分，
+is to try to localize them to a small part of the program,
+
+3
+00:00:05,430 --> 00:00:07,138
+所以我们不必找太难
+so we don't have to look too hard to find
+
+4
+00:00:07,138 --> 00:00:08,750
+错误的原因。
+the cause of the bug.
+
+5
+00:00:08,750 --> 00:00:11,420
+当本地化为单个方法或小模块时，
+When localized to a single method or a small module,
+
+6
+00:00:11,420 --> 00:00:15,690
+只需研究程序文本就可以发现错误。
+bugs may be found simply by studying the program text.
+
+7
+00:00:15,690 --> 00:00:19,070
+现在我们已经谈到了快速失败。
+Now we've already talked about failing fast.
+
+8
+00:00:19,070 --> 00:00:21,070
+这就意味着我们观察到了先前的问题。
+That means that the earlier problem is observed.
+
+9
+00:00:21,070 --> 00:00:23,650
+越接近其原因，就越容易修复。
+The closer to its cause, the easier it's going to be to fix.
+
+10
+00:00:23,650 --> 00:00:25,983
+在本节中，我们将讨论一个[听不见的]
+In this section, we're going to talk about a [INAUDIBLE]
+
+11
+00:00:25,983 --> 00:00:27,910
+称为断言。
+called assertions.
+
+12
+00:00:27,910 --> 00:00:29,370
+让我们从一个简单的例子开始。
+Let's start with a simple example.
+
+13
+00:00:29,370 --> 00:00:31,190
+所以我们有一个平方根函数。
+So we have a square root function.
+
+14
+00:00:31,190 --> 00:00:34,100
+接受单双参数，并返回
+Takes in the single double argument, and returns
+
+15
+00:00:34,100 --> 00:00:36,720
+双重侮辱。需要这个论证
+a double insult. Requires that argument
+
+16
+00:00:36,720 --> 00:00:38,220
+大于或等于零，
+to be greater than or equal to zero,
+
+17
+00:00:38,220 --> 00:00:38,885
+否则，我们就不会
+because otherwise, we're not going to be
+
+18
+00:00:38,885 --> 00:00:40,134
+能够计算平方根。
+able to compute a square root.
+
+19
+00:00:40,134 --> 00:00:43,130
+它返回x的平方根的近似值。
+And it returns an approximation of the square root of x.
+
+20
+00:00:43,130 --> 00:00:45,230
+假设有人叫平方根
+Now suppose somebody does call square root
+
+21
+00:00:45,230 --> 00:00:47,950
+用否定的论点，打破这个前提。
+with a negative argument, breaking this precondition.
+
+22
+00:00:47,950 --> 00:00:50,589
+那么平方根的最佳行为是什么？
+Then what's the best behavior for square root?
+
+23
+00:00:50,589 --> 00:00:53,130
+因为调用方未能满足
+Since the caller has failed to satisfy the requirement that x
+
+24
+00:00:53,130 --> 00:00:54,360
+应该是非负的平方根
+should be non-negative, square root
+
+25
+00:00:54,360 --> 00:00:56,734
+实际上不再受合同条款的约束。
+is actually no longer bound by the terms of its contract.
+
+26
+00:00:56,734 --> 00:00:59,062
+所以从技术上讲，它可以随心所欲。
+So it's technically free to do whatever it wants.
+
+27
+00:00:59,062 --> 00:01:00,520
+它可以返回任意值。
+It could return an arbitrary value.
+
+28
+00:01:00,520 --> 00:01:02,610
+它可以进入一个无限循环，永远不会返回。
+It could enter an infinite loop and never return.
+
+29
+00:01:02,610 --> 00:01:05,280
+如果它想的话，它可以让CPU熔化。
+It can melt down the CPU if it wants.
+
+30
+00:01:05,280 --> 00:01:07,910
+因为那个错误的调用表明调用程序中有一个错误，
+Since that bad call indicates a bug in the caller,
+
+31
+00:01:07,910 --> 00:01:10,330
+然而，最有用的行为
+however, the most useful behavior
+
+32
+00:01:10,330 --> 00:01:14,370
+会尽早向客户指出错误
+would be to point out the bug to that client as early
+
+33
+00:01:14,370 --> 00:01:15,980
+尽可能的。
+as possible.
+
+34
+00:01:15,980 --> 00:01:19,350
+所以我们可以插入一个运行时断言
+So we can do this by inserting a runtime assertion that
+
+35
+00:01:19,350 --> 00:01:22,390
+在我们开始该方法之前测试先决条件。
+tests the precondition before we even start the method.
+
+36
+00:01:22,390 --> 00:01:26,050
+有一种方法我们可以写下这个断言。
+Here's one way we might write that assertion.
+
+37
+00:01:26,050 --> 00:01:28,499
+换言之，如果不满足先决条件，
+In other words, if the precondition is not satisfied,
+
+38
+00:01:28,499 --> 00:01:29,915
+我们将抛出一个例外。
+we're going to throw an exception.
+
+39
+00:01:29,915 --> 00:01:31,873
+我们将使用的特殊例外
+And the particular exception we're going to use
+
+40
+00:01:31,873 --> 00:01:36,280
+是Java中的一个内置错误，称为断言错误。
+is a built-in one in Java called Assertion Error.
+
+41
+00:01:36,280 --> 00:01:39,090
+这样，呼叫者的错误的影响，
+That way, the effects of the caller's bug,
+
+42
+00:01:39,090 --> 00:01:41,760
+在这里传递x的负值，
+passing a negative value here for x,
+
+43
+00:01:41,760 --> 00:01:45,050
+阻止在程序中进一步传播。
+are prevented from propagating further in the program.
+
+44
+00:01:45,050 --> 00:01:47,560
+检查这样的前提条件就是一个例子
+Checking preconditions like this is an example
+
+45
+00:01:47,560 --> 00:01:49,550
+防御性编程。
+of defensive programming.
+
+46
+00:01:49,550 --> 00:01:51,300
+真正的程序很少没有bug，
+Real programs are rarely bug-free,
+
+47
+00:01:51,300 --> 00:01:52,980
+所以防御性编程提供了一种方法
+so defensive programming offers a way
+
+48
+00:01:52,980 --> 00:01:54,620
+为了减轻这些虫子的影响，
+to mitigate the effects of those bugs,
+
+49
+00:01:54,620 --> 00:01:57,770
+即使你不知道他们在哪里。
+even if you don't know where they are.
+
+50
+00:01:57,770 --> 00:02:00,620
+现在定义一个程序是一种常见的做法，
+Now it's a common practice to define a procedure,
+
+51
+00:02:00,620 --> 00:02:02,800
+甚至是语言功能
+or even a language feature, for these kinds
+
+52
+00:02:02,800 --> 00:02:05,800
+防御性检查，通常称为断言。
+of defensive checks, usually called Assert.
+
+53
+00:02:05,800 --> 00:02:09,520
+Assert所做的是使用一个布尔表达式
+What Assert does is it takes a Boolean expression that
+
+54
+00:02:09,520 --> 00:02:11,970
+本质上是这样一种说法
+is essentially a claim that this expression should
+
+55
+00:02:11,970 --> 00:02:13,580
+在程序中的这一点上是正确的。
+be true at this point in the program.
+
+56
+00:02:13,580 --> 00:02:17,130
+如果不是真的，那么Assert将抛出一个异常
+And if it's not true, then Assert will throw an exception
+
+57
+00:02:17,130 --> 00:02:19,262
+停止程序。
+and stop the program.
+
+58
+00:02:19,262 --> 00:02:21,220
+尽管这种方法实际上是[？摘要？]
+Although this approach actually [? abstracts ?]
+
+59
+00:02:21,220 --> 00:02:23,840
+远离那个断言失败时发生的事情。
+away from exactly what happens when that assertion fails.
+
+60
+00:02:23,840 --> 00:02:25,070
+它可能会退出程序。
+It might exit the program.
+
+61
+00:02:25,070 --> 00:02:26,870
+它可能会将事件记录在日志文件中。
+It might record the event in the Log File.
+
+62
+00:02:26,870 --> 00:02:28,810
+它甚至可以向维护人员发送电子邮件或报告。
+It might even email or report to a maintainer.
+
+63
+00:02:28,810 --> 00:02:30,590
+这就是包装的美
+That's the beauty of just packaging
+
+64
+00:02:30,590 --> 00:02:32,375
+所有这些都在断言中。
+all that in an Assert.
+
+65
+00:02:32,375 --> 00:02:33,750
+断言有额外的好处
+Assertions have the added benefit
+
+66
+00:02:33,750 --> 00:02:35,590
+记录关于国家的假设
+of documenting an assumption about the state
+
+67
+00:02:35,590 --> 00:02:36,975
+在那一点上的程序。
+of the program at that point.
+
+68
+00:02:36,975 --> 00:02:40,080
+换句话说，这对人类程序员来说是可读的。
+In other words, this is readable to a human programmer.
+
+69
+00:02:40,080 --> 00:02:42,410
+它说，在这一点上，应该永远
+It says, at this point, should always
+
+70
+00:02:42,410 --> 00:02:44,800
+如果x大于或等于零，则为真。
+be true that x is greater than or equal to zero.
+
+71
+00:02:44,800 --> 00:02:49,220
+与注释不同，断言实际上是可执行代码。
+Unlike a comment, an assertion is actually executable code.
+
+72
+00:02:49,220 --> 00:02:53,290
+它在运行时执行该假设。
+It enforces that assumption at run time.
+
+73
+00:02:53,290 --> 00:02:56,060
+现在在Java中，运行时断言实际上是一个内置的特性
+Now in Java, runtime assertions are actually a built-in feature
+
+74
+00:02:56,060 --> 00:02:56,850
+关于语言。
+of the language.
+
+75
+00:02:56,850 --> 00:02:59,397
+这不是Java中的函数调用。
+This is not a function call in Java.
+
+76
+00:02:59,397 --> 00:03:00,480
+这实际上是一个声明。
+It's actually a statement.
+
+77
+00:03:00,480 --> 00:03:02,110
+Assert语句的最简单形式
+The simplest form of the Assert statement
+
+78
+00:03:02,110 --> 00:03:04,470
+只需要一个布尔表达式，正如上面所示。
+just takes a Boolean expression, exactly as shown above.
+
+79
+00:03:04,470 --> 00:03:06,428
+注意我们不需要给它加括号。
+Notice we don't need to give parentheses to it.
+
+80
+00:03:06,428 --> 00:03:08,984
+从这个意义上讲，它有点像一个return语句。
+It's kind of like a return statement in that sense.
+
+81
+00:03:08,984 --> 00:03:11,400
+如果布尔表达式
+And it throws an assertion error if the Boolean expression
+
+82
+00:03:11,400 --> 00:03:13,850
+计算结果为false。
+evaluates to false.
+
+83
+00:03:13,850 --> 00:03:15,570
+现在，Java中的Assert语句也可以
+Now an Assert statement in Java may also
+
+84
+00:03:15,570 --> 00:03:18,230
+有一个描述表达式，通常是一个字符串，
+have a description expression, which is usually a string,
+
+85
+00:03:18,230 --> 00:03:21,140
+也可以是基元类型或对对象的引用。
+may also be a primitive type or a reference to an object.
+
+86
+00:03:21,140 --> 00:03:23,450
+该描述将打印在错误消息中
+That description is printed in an error message
+
+87
+00:03:23,450 --> 00:03:24,950
+当断言失败时
+when the assertion fails so it can
+
+88
+00:03:24,950 --> 00:03:27,241
+用于向程序员提供其他详细信息
+be used to provide additional details to the programmer
+
+89
+00:03:27,241 --> 00:03:28,770
+关于失败的原因。
+about the cause of failure.
+
+90
+00:03:28,770 --> 00:03:31,020
+描述跟随断言表达式，
+The description follows the asserted expression,
+
+91
+00:03:31,020 --> 00:03:33,580
+由结肠分隔。
+separated by a colon.
+
+92
+00:03:33,580 --> 00:03:36,770
+所以如果x等于负数，当这个断言语句是
+So if x equals negative one when this assertion statement is
+
+93
+00:03:36,770 --> 00:03:39,210
+点击，则此断言将失败，并显示错误消息，
+hit, then this assertion will fail with the error message,
+
+94
+00:03:39,210 --> 00:03:42,340
+x是负的，还有一个堆栈跟踪，
+x is negative one, along with a stack trace,
+
+95
+00:03:42,340 --> 00:03:44,090
+这就是你能得到的每一个例外
+which is what you get with every exception
+
+96
+00:03:44,090 --> 00:03:45,690
+那个[听不见的]从未被抓住。
+that [INAUDIBLE] never caught.
+
+97
+00:03:45,690 --> 00:03:47,370
+它告诉您assert语句
+It tells you where the assert statement
+
+98
+00:03:47,370 --> 00:03:49,977
+在您的代码和调用序列中找到
+was found in your code and the sequence of calls that brought
+
+99
+00:03:49,977 --> 00:03:51,060
+到那一点的程序。
+the program to that point.
+
+100
+00:03:51,060 --> 00:03:53,300
+你可以得到很多信息
+That's a lot of information for you to get
+
+101
+00:03:53,300 --> 00:03:55,870
+开始寻找虫子。
+started in finding the bug.
+
+102
+00:03:55,870 --> 00:03:59,340
+但是，Java断言的一个严重问题
+However, a serious problem with Java assertions
+
+103
+00:03:59,340 --> 00:04:02,490
+默认情况下它们是关闭的。如果你只是
+is that they are turned off by default. If you just
+
+104
+00:04:02,490 --> 00:04:05,690
+像往常一样运行程序，没有任何断言
+run your program as usual, none of your assertions
+
+105
+00:04:05,690 --> 00:04:06,420
+将被检查。
+will be checked.
+
+106
+00:04:06,420 --> 00:04:09,330
+它会完全跳过这一行。
+It will just skip over this line entirely.
+
+107
+00:04:09,330 --> 00:04:11,830
+Java的设计人员做到了这一点——他们将此作为默认设置
+Java's designers did this-- they made this the default
+
+108
+00:04:11,830 --> 00:04:14,100
+行为——因为检查断言有时
+behavior-- because checking assertions can sometimes
+
+109
+00:04:14,100 --> 00:04:16,149
+性能昂贵。
+be costly to performance.
+
+110
+00:04:16,149 --> 00:04:19,019
+例如，一个使用
+So for example, a procedure that searches an array using
+
+111
+00:04:19,019 --> 00:04:21,870
+二进制搜索通常有一个先决条件
+binary search typically has a precondition
+
+112
+00:04:21,870 --> 00:04:25,170
+在调用数组之前对其进行排序。
+that the array be sorted before you call it.
+
+113
+00:04:25,170 --> 00:04:28,170
+断言此需求，测试
+Asserting this requirement, testing
+
+114
+00:04:28,170 --> 00:04:29,990
+不管数组是否被排序，
+whether the array actually is sorted,
+
+115
+00:04:29,990 --> 00:04:33,080
+需要扫描整个阵列
+would require scanning through the entire array, which
+
+116
+00:04:33,080 --> 00:04:34,510
+会改变一个应该
+would turn an operation that ought
+
+117
+00:04:34,510 --> 00:04:36,650
+在对数时间内运行——二进制搜索
+to run in logarithmic time-- binary search
+
+118
+00:04:36,650 --> 00:04:38,840
+是一个对数运算
+is a logarithmic operation-- to one that
+
+119
+00:04:38,840 --> 00:04:40,970
+需要线性时间，因为你
+takes linear time, just because you're
+
+120
+00:04:40,970 --> 00:04:43,990
+测试数组是否实际排序。
+testing whether the array actually is sorted.
+
+121
+00:04:43,990 --> 00:04:46,440
+现在你应该愿意，甚至是渴望，
+Now you should be willing, even eager,
+
+122
+00:04:46,440 --> 00:04:49,517
+在测试和开发过程中支付线性成本，
+to pay this linear cost during testing, during development,
+
+123
+00:04:49,517 --> 00:04:51,350
+因为这会让你的调试更容易
+since it makes your debugging so much easier
+
+124
+00:04:51,350 --> 00:04:53,500
+抓住你忘了的案子
+to catch that case where you forgot
+
+125
+00:04:53,500 --> 00:04:56,580
+在使用此二进制搜索之前对数组排序
+to sort the array before using this binary search
+
+126
+00:04:56,580 --> 00:05:00,570
+但不是在程序发布给用户之后。
+but not after the program is released to users.
+
+127
+00:05:00,570 --> 00:05:03,210
+但是，对于大多数应用程序--对于大多数断言，
+For most applications, however-- for most assertions,
+
+128
+00:05:03,210 --> 00:05:04,880
+相比之下，断言并不昂贵
+assertions are not expensive compared
+
+129
+00:05:04,880 --> 00:05:05,880
+其他代码。
+to the rest of the code.
+
+130
+00:05:05,880 --> 00:05:07,760
+以及它们在错误检查中提供的好处
+And the benefit they provide in bug checking
+
+131
+00:05:07,760 --> 00:05:11,470
+在性能上通常值得这么小的成本。
+is often worth that small cost in performance.
+
+132
+00:05:11,470 --> 00:05:14,150
+所以在Java中，必须显式地启用断言，
+So in Java, you have to enable assertions explicitly,
+
+133
+00:05:14,150 --> 00:05:16,540
+绕过dash EA，它代表启用断言
+bypassing dash EA, which stands for Enable Assertions
+
+134
+00:05:16,540 --> 00:05:18,770
+到Java虚拟机。
+to the Java virtual machine.
+
+135
+00:05:18,770 --> 00:05:20,380
+在Eclipse中，您可以启用断言
+In Eclipse, you can enable assertions
+
+136
+00:05:20,380 --> 00:05:21,960
+通过运行，运行配置，
+by going to Run, Run Configurations,
+
+137
+00:05:21,960 --> 00:05:24,380
+[? 论据？]，并将EA放入VM Arguments框中。
+[? Arguments ?], and putting EA in the VM Arguments Box.
+
+138
+00:05:24,380 --> 00:05:27,000
+实际上，最好默认启用它们
+In fact, it's best to enable them by default
+
+139
+00:05:27,000 --> 00:05:29,440
+转到Preferences Java Installed[？JREs？]，编辑，
+by going to Preferences Java Installed [? JREs ?], Edit,
+
+140
+00:05:29,440 --> 00:05:30,690
+默认值，VM参数。
+Default, VM Arguments.
+
+141
+00:05:30,690 --> 00:05:32,510
+我们建议你这样做
+And that's what we recommend you do
+
+142
+00:05:32,510 --> 00:05:35,879
+当你在本课程中设置习题集时。
+when you set up for the problem sets in this course.
+
+143
+00:05:35,879 --> 00:05:37,920
+转变主张总是个好主意
+It's always a good idea to have assertions turned
+
+144
+00:05:37,920 --> 00:05:39,500
+当你运行JUnit测试时，
+on when you're running JUnit tests,
+
+145
+00:05:39,500 --> 00:05:42,140
+因为这样你就知道你正处于发展的境地。
+because then you know you're in a development situation.
+
+146
+00:05:42,140 --> 00:05:45,410
+表现不应该是正确的。
+Performance shouldn't matter as much as getting it right.
+
+147
+00:05:45,410 --> 00:05:48,880
+所以您可以编写一个JUnit测试来确保
+So you can write a JUnit test that ensures
+
+148
+00:05:48,880 --> 00:05:51,130
+断言已启用。
+that assertions are enabled.
+
+149
+00:05:51,130 --> 00:05:55,960
+它所做的是创建一个断言，该断言应该始终
+What this does is it creates an assertion that should always
+
+150
+00:05:55,960 --> 00:05:56,460
+失败。
+fail.
+
+151
+00:05:56,460 --> 00:05:58,920
+这将始终引发断言错误。
+This should always throw an assertion error.
+
+152
+00:05:58,920 --> 00:06:02,650
+测试希望它抛出断言错误。
+And the test expects that it will throw an assertion error.
+
+153
+00:06:02,650 --> 00:06:05,050
+所以如果断言碰巧被开启，
+So if assertions happen to be turned on,
+
+154
+00:06:05,050 --> 00:06:06,970
+这次考试会通过的，因为
+this test is going to pass, because it's
+
+155
+00:06:06,970 --> 00:06:08,940
+将正确抛出断言错误。
+going to correctly throw an assertion error.
+
+156
+00:06:08,940 --> 00:06:11,590
+如果断言被关闭，则
+If assertions are turned off, it's
+
+157
+00:06:11,590 --> 00:06:16,326
+将愉快地流过这个断言语句。
+going to just flow happily past this assertion statement.
+
+158
+00:06:16,326 --> 00:06:18,200
+测试将不会看到断言错误
+And the test will not see the assertion error
+
+159
+00:06:18,200 --> 00:06:19,033
+它期待的。
+that it's expecting.
+
+161
+00:06:22,570 --> 00:06:24,050
+注意，Java assert语句
+Note that the Java assert statement
+
+162
+00:06:24,050 --> 00:06:26,410
+是一种不同于JUnit方法的机制，
+is a different mechanism than the JUnit method,
+
+163
+00:06:26,410 --> 00:06:29,126
+断言为真，断言等于，等等。
+assert true, assert equals, et cetera.
+
+164
+00:06:29,126 --> 00:06:31,670
+现在它们都断言一个关于代码的谓词，
+Now they all assert a predicate about your code,
+
+165
+00:06:31,670 --> 00:06:34,440
+但它们是为在不同的环境中使用而设计的。
+but they're designed for use in different contexts.
+
+166
+00:06:34,440 --> 00:06:36,100
+应该使用assert语句
+The assert statement should be used
+
+167
+00:06:36,100 --> 00:06:38,470
+防御检查的实现代码中
+in implementation code for defensive checks
+
+168
+00:06:38,470 --> 00:06:40,370
+在实现中。
+inside the implementation.
+
+169
+00:06:40,370 --> 00:06:44,450
+JUnit资产应该只在JUnit测试中使用
+The JUnit assertment should be used only in JUnit tests
+
+170
+00:06:44,450 --> 00:06:47,560
+检查测试结果。
+to check the results of a test.
+
+171
+00:06:47,560 --> 00:06:50,330
+现在assert语句不能在没有破折号EA的情况下运行
+Now the assert statements don't run without that dash EA
+
+172
+00:06:50,330 --> 00:06:51,050
+争论。
+argument.
+
+173
+00:06:51,050 --> 00:06:55,880
+但是JUnit断言方法将始终运行。
+But the JUnit assert methods will always run.
+
+174
+00:06:55,880 --> 00:06:57,380
+有些事情你应该
+There is some things that you should
+
+175
+00:06:57,380 --> 00:06:58,780
+在实现中断言。
+assert in your implementations.
+
+176
+00:06:58,780 --> 00:07:01,180
+坚持先决条件很好，
+It's great to assert preconditions,
+
+177
+00:07:01,180 --> 00:07:03,270
+就像我们在上面看到的平方根。
+like we saw for square root above.
+
+178
+00:07:03,270 --> 00:07:05,470
+很好的证明了后置条件，
+It's great to assert post-conditions,
+
+179
+00:07:05,470 --> 00:07:07,082
+返回值的要求。
+the requirements on return values.
+
+180
+00:07:07,082 --> 00:07:08,540
+这种断言有时
+This kind of assertion is sometimes
+
+181
+00:07:08,540 --> 00:07:10,242
+叫自我检查。
+called the self-check.
+
+182
+00:07:10,242 --> 00:07:11,700
+例如，平方根法
+For example, the square root method
+
+183
+00:07:11,700 --> 00:07:15,000
+可能会把结果平方来检查
+might square its result to check that it is actually
+
+184
+00:07:15,000 --> 00:07:21,060
+相当接近x并断言这是真的。
+reasonably close to x and assert that that's true.
+
+185
+00:07:21,060 --> 00:07:22,680
+如果条件或开关没有
+If a conditional or switch does not
+
+186
+00:07:22,680 --> 00:07:24,440
+把所有可能的案子都盖上
+cover all the possible cases, it's
+
+187
+00:07:24,440 --> 00:07:27,020
+使用断言的良好实践
+a good practice to use an assertion
+
+188
+00:07:27,020 --> 00:07:30,094
+阻止非法案件。
+to block the illegal cases.
+
+189
+00:07:30,094 --> 00:07:32,010
+此默认子句中的断言[？有？]
+The assertion in this default clause [? has ?]
+
+190
+00:07:32,010 --> 00:07:33,843
+断言val必须是
+the effect of asserting that val must be one
+
+191
+00:07:33,843 --> 00:07:37,280
+五个瓦尔[听不见]。
+of the five val [INAUDIBLE].
+
+192
+00:07:37,280 --> 00:07:39,867
+现在您应该何时插入这些运行时断言？
+Now when should you insert these runtime assertions?
+
+193
+00:07:39,867 --> 00:07:41,450
+你应该什么时候将它们添加到代码中？
+When should you add them to your code?
+
+194
+00:07:41,450 --> 00:07:43,033
+好吧，你应该把它们加上去
+Well, you should go ahead and add them
+
+195
+00:07:43,033 --> 00:07:46,007
+因为你在写代码，而不是事后，因为
+as you're writing the code, not after the fact, because it's
+
+196
+00:07:46,007 --> 00:07:47,840
+在你写代码的时候
+while you are writing the code that you have
+
+197
+00:07:47,840 --> 00:07:50,520
+这些重要的不变量，这些重要的性质
+these important invariants, these important properties that
+
+198
+00:07:50,520 --> 00:07:52,980
+一定是真的，在你脑子里。
+must be true, in your head.
+
+199
+00:07:52,980 --> 00:07:54,710
+如果你推迟写断言，
+If you postpone writing the assertions,
+
+200
+00:07:54,710 --> 00:07:56,091
+你不太可能这么做。
+you're less likely to do it.
+
+201
+00:07:56,091 --> 00:07:58,340
+你可能会忘记一些重要的不变量。
+And you're liable to forget some important invariants.
+
+203
+00:08:01,574 --> 00:08:03,240
+现在运行时演示不是免费的。
+Now runtime demonstrations are not free.
+
+204
+00:08:03,240 --> 00:08:05,739
+它们会使代码混乱，因此必须谨慎使用。
+They can clutter the code, so they must be used judiciously.
+
+205
+00:08:05,739 --> 00:08:07,550
+你应该避免琐碎的断言，
+You should avoid trivial assertions,
+
+206
+00:08:07,550 --> 00:08:10,550
+就像你要避免无信息的评论一样。
+just as you would avoid uninformative comments.
+
+207
+00:08:10,550 --> 00:08:12,975
+例如，如果你刚给y加1到x，
+For example, if you just assigned y plus 1 to x,
+
+208
+00:08:12,975 --> 00:08:15,590
+根本没有理由断言x现在是
+there is no reason at all to assert that x is now
+
+209
+00:08:15,590 --> 00:08:17,282
+等于y加1。
+equal to y plus 1.
+
+210
+00:08:17,282 --> 00:08:18,779
+它只是在编译器中发现错误
+It just finds bugs in the compiler
+
+211
+00:08:18,779 --> 00:08:21,070
+在Java虚拟机中，[？哪些是？]组件
+in the Java virtual machine, [? which are ?] components
+
+212
+00:08:21,070 --> 00:08:24,470
+你应该信任他们直到你有充分的理由怀疑他们。
+that you should trust until you have good reason to doubt them.
+
+213
+00:08:24,470 --> 00:08:27,690
+如果断言在其本地上下文中是显而易见的，
+If an assertion is obvious from its local context,
+
+214
+00:08:27,690 --> 00:08:32,380
+别说了，就像我们在评论中说的那样。
+leave it out, just like we've said with comments.
+
+215
+00:08:32,380 --> 00:08:35,429
+现在不要使用断言来测试外部条件
+Now never use assertions to test conditions that are external
+
+216
+00:08:35,429 --> 00:08:38,400
+[? 然后呢？]对你的程序来说，就是文件的存在，
+[? and ?] to your program, which is the existence of files,
+
+217
+00:08:38,400 --> 00:08:40,340
+网络的可用性、正确性
+the availability of the network, correctness
+
+218
+00:08:40,340 --> 00:08:43,456
+由人类用户输入的输入。
+of input typed by a human user.
+
+219
+00:08:43,456 --> 00:08:45,830
+断言应该测试程序的内部状态
+Assertions should test the internal state of your program
+
+220
+00:08:45,830 --> 00:08:48,849
+以确保它在其规范的范围内。
+to ensure that it's within the bounds of its specification.
+
+221
+00:08:48,849 --> 00:08:50,390
+当断言失败时，它指示
+When an assertion fails, it indicates
+
+222
+00:08:50,390 --> 00:08:52,820
+从某种意义上说，程序已经出轨了，
+that the program has run off the rails, in some sense,
+
+223
+00:08:52,820 --> 00:08:55,940
+进入一种不能正常工作的状态。
+into a state in which it was not designed to function properly.
+
+224
+00:08:55,940 --> 00:08:58,770
+断言失败应指示错误。
+Assertion failure should indicate bugs.
+
+225
+00:08:58,770 --> 00:09:00,562
+外部故障不是bug。
+External failures are not bugs.
+
+226
+00:09:00,562 --> 00:09:02,520
+你不能改变你的程序
+There is no change you can make to your program
+
+227
+00:09:02,520 --> 00:09:05,550
+比如说，这会提前阻止，
+in advance that will prevent, for example,
+
+228
+00:09:05,550 --> 00:09:07,460
+网络不会崩溃。
+the network from going down.
+
+229
+00:09:07,460 --> 00:09:09,310
+应处理外部故障
+External failures should be handled
+
+230
+00:09:09,310 --> 00:09:12,330
+而是使用异常。
+using exceptions instead.
+
+231
+00:09:12,330 --> 00:09:13,790
+现在有许多断言和机制
+Now many assertion and mechanisms
+
+232
+00:09:13,790 --> 00:09:15,090
+它们的设计使得断言
+are designed so that assertions are
+
+233
+00:09:15,090 --> 00:09:16,540
+仅在测试和调试期间执行
+executed only during testing and debugging
+
+234
+00:09:16,540 --> 00:09:18,740
+当程序发布给用户时关闭，
+and turned off when program is released to users,
+
+235
+00:09:18,740 --> 00:09:19,820
+正如我们在上面看到的。
+as we saw above.
+
+236
+00:09:19,820 --> 00:09:22,400
+Java的assert语句的行为是这样的。
+Java's assert statement behaves this way.
+
+237
+00:09:22,400 --> 00:09:26,220
+由于断言有时可能被禁用，
+Since assertions may be disabled sometimes,
+
+238
+00:09:26,220 --> 00:09:28,230
+程序的正确性永远不应该
+the correctness of your program should never
+
+239
+00:09:28,230 --> 00:09:31,010
+取决于断言表达式是否
+depend on whether or not the assertion expressions
+
+240
+00:09:31,010 --> 00:09:32,850
+被处决。
+are executed.
+
+241
+00:09:32,850 --> 00:09:34,460
+尤其是断言表达式
+In particular, asserted expressions
+
+242
+00:09:34,460 --> 00:09:36,914
+不应该有副作用。
+should not have side effects.
+
+243
+00:09:36,914 --> 00:09:39,330
+例如，如果要断言删除了一个元素
+For example, if you want to assert that an element removed
+
+244
+00:09:39,330 --> 00:09:42,390
+从列表中找到的列表中
+from a list that's actually found in the list, that's
+
+245
+00:09:42,390 --> 00:09:45,360
+列表点删除返回值--
+what list dot remove returns as its return value--
+
+246
+00:09:45,360 --> 00:09:48,020
+一个布尔值，它表示，x实际上在那里，
+a Boolean value that says, well, x actually was there,
+
+247
+00:09:48,020 --> 00:09:49,760
+而我呢？远离的？]它。
+and I [? removed ?] it.
+
+248
+00:09:49,760 --> 00:09:53,220
+但你不应该在这个断言中隐藏删除调用，
+But you should not bury that remove call in this assert,
+
+249
+00:09:53,220 --> 00:09:55,530
+因为如果断言被禁用，
+because if assertions are disabled,
+
+250
+00:09:55,530 --> 00:09:57,780
+整个表达式不运行。
+this entire expression doesn't run.
+
+251
+00:09:57,780 --> 00:10:01,130
+而x从未从列表中删除。
+And x is never removed from the list.
+
+252
+00:10:01,130 --> 00:10:04,220
+你得改成这样写。
+You have to write it like this instead. .
+
+253
+00:10:04,220 --> 00:10:07,890
+也就是说，打个电话把它移走，然后
+That is, make your call to remove, and then
+
+254
+00:10:07,890 --> 00:10:10,240
+断言找到的变量。
+assert the found variable.
+

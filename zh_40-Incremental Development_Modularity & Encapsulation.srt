@@ -1,0 +1,875 @@
+1
+00:00:00,040 --> 00:00:02,700
+将错误定位到程序的一小部分的好方法
+A great way to localize bugs to a tiny part of your program
+
+2
+00:00:02,700 --> 00:00:05,090
+是渐进式发展。
+is incremental development.
+
+3
+00:00:05,090 --> 00:00:07,660
+这意味着你只构建了一点程序
+That means you're building only a little bit of your program
+
+4
+00:00:07,660 --> 00:00:11,030
+在你继续之前，一次彻底地测试一下。
+at a time and testing that bit thoroughly before you move on.
+
+5
+00:00:11,030 --> 00:00:13,004
+因为这样当你发现一个虫子，
+Because that way when you discover a bug,
+
+6
+00:00:13,004 --> 00:00:14,420
+很有可能是这个角色
+it's very likely to be in the part
+
+7
+00:00:14,420 --> 00:00:16,500
+你只是在写而不是在任何地方
+that you just wrote rather than anywhere
+
+8
+00:00:16,500 --> 00:00:20,050
+在你可能写过的一大堆代码中。
+in the huge pile of code that you might have written.
+
+9
+00:00:20,050 --> 00:00:22,380
+所以我们的测试课讨论了两种技术
+So our class on testing talked about two techniques
+
+10
+00:00:22,380 --> 00:00:24,770
+这确实有助于增量调试。
+that really help with incremental debugging.
+
+11
+00:00:24,770 --> 00:00:25,870
+一是单元测试。
+One is unit testing.
+
+12
+00:00:25,870 --> 00:00:27,602
+当你单独测试一个模块时，
+When you test a module in isolation,
+
+13
+00:00:27,602 --> 00:00:30,830
+你可以确信你发现的任何错误都在那个单元中
+you can be confident that any bug you find is in that unit
+
+14
+00:00:30,830 --> 00:00:33,100
+或者在测试用例中。
+or maybe in the test cases themselves.
+
+15
+00:00:33,100 --> 00:00:35,950
+但它的代码量较小。
+But it's a smaller amount of code.
+
+16
+00:00:35,950 --> 00:00:37,380
+另一个是回归测试。
+Another is regression testing.
+
+17
+00:00:37,380 --> 00:00:39,810
+当你在一个大系统中添加新功能时，
+When you're adding a new feature to a big system,
+
+18
+00:00:39,810 --> 00:00:43,580
+尽可能频繁地运行回归测试套件。
+run the regression test suite as often as you can.
+
+19
+00:00:43,580 --> 00:00:45,250
+如果测试失败，那么错误可能是
+If a test fails, the bug is probably
+
+20
+00:00:45,250 --> 00:00:50,650
+在你最近修改的代码中。
+in the code you just changed very recently.
+
+21
+00:00:50,650 --> 00:00:53,540
+你也可以通过更好的软件设计来定位错误。
+You can also localize bugs by better software designs.
+
+22
+00:00:53,540 --> 00:00:55,570
+这里有两个关键原则。
+There are sort of two key principles here.
+
+23
+00:00:55,570 --> 00:00:56,910
+一是模块化。
+One is modularity.
+
+24
+00:00:56,910 --> 00:00:59,347
+这意味着把一个系统分成几个小部件
+That means dividing a system up into small components
+
+25
+00:00:59,347 --> 00:01:01,930
+或模块，每个模块都可以设计、实现、测试
+or modules, each of which can be designed, implemented, tested
+
+26
+00:01:01,930 --> 00:01:04,140
+分别论证和重复使用
+and reasoned about, and re-used separately
+
+27
+00:01:04,140 --> 00:01:06,010
+从系统的其他部分。
+from the rest of the system.
+
+28
+00:01:06,010 --> 00:01:09,420
+模块化系统的反面是单片系统。
+The opposite of a modular system is a monolithic system.
+
+29
+00:01:09,420 --> 00:01:12,850
+所以想想，比如，写下你所有的代码
+So think about, for example, writing all of your code
+
+30
+00:01:12,850 --> 00:01:15,440
+在一个单一的，巨大的函数中。
+in a single, giant function.
+
+31
+00:01:15,440 --> 00:01:16,260
+太大了。
+That's big.
+
+32
+00:01:16,260 --> 00:01:17,830
+所有的碎片都被缠住了
+It's got all of its pieces tangled up
+
+33
+00:01:17,830 --> 00:01:18,996
+相互依赖。
+and dependent on each other.
+
+34
+00:01:18,996 --> 00:01:22,260
+没有办法单独分离和测试
+And there's no way to individually separate and test
+
+35
+00:01:22,260 --> 00:01:26,220
+巨大功能的一小部分。
+small pieces of that giant function.
+
+36
+00:01:26,220 --> 00:01:28,500
+所以你真的应该把你的计划搞砸
+So you should really aim to break your programs up
+
+37
+00:01:28,500 --> 00:01:31,850
+分成更小的部分，更小的函数和类。
+into much smaller pieces, small functions and classes.
+
+38
+00:01:31,850 --> 00:01:33,870
+这将使它更加模块化。
+That will make it more modular.
+
+39
+00:01:33,870 --> 00:01:37,820
+这里的第二个关键思想是模块化，
+The second key idea here, which is related to modularity,
+
+40
+00:01:37,820 --> 00:01:40,830
+一旦有了模块，就可以封装它们。
+is once you have modules, you can encapsulate them.
+
+41
+00:01:40,830 --> 00:01:43,500
+所以你可以在他们周围筑墙--
+So that means you can build walls around them--
+
+42
+00:01:43,500 --> 00:01:45,260
+这就是名字的由来，
+and that's where the name comes from,
+
+43
+00:01:45,260 --> 00:01:48,590
+把它想象成硬壳或胶囊--
+think of it like a hard shell or a capsule--
+
+44
+00:01:48,590 --> 00:01:50,410
+使模块负责
+so that the module is responsible
+
+45
+00:01:50,410 --> 00:01:53,240
+因为它自己的内在行为。
+for its own internal behavior.
+
+46
+00:01:53,240 --> 00:01:57,540
+系统的其他部分不会威胁到它的完整性。
+And other parts of the system can't threaten its integrity.
+
+47
+00:01:57,540 --> 00:02:00,650
+你不能威胁模块里面的东西。
+You can't threaten what's inside that module.
+
+48
+00:02:00,650 --> 00:02:05,570
+所以像Java这样的语言提供了访问控制，
+So languages like Java give you access control,
+
+49
+00:02:05,570 --> 00:02:09,382
+关键字，如public、private和protected，
+keywords like public and private and protected,
+
+50
+00:02:09,382 --> 00:02:10,840
+让你控制能见度
+that let you control the visibility
+
+51
+00:02:10,840 --> 00:02:14,000
+以及模块中变量和方法的可访问性。
+and accessibility of variables and methods in a module.
+
+52
+00:02:14,000 --> 00:02:16,960
+任何代码都可以访问公共变量或方法。
+Public variable or method can be accessed by any code.
+
+53
+00:02:16,960 --> 00:02:18,960
+但是私有变量或方法只能
+But a private variable or method can only
+
+54
+00:02:18,960 --> 00:02:20,890
+由同一类中的代码访问。
+be accessed by code in the same class.
+
+55
+00:02:20,890 --> 00:02:23,300
+所以在太空舱里面。
+So that's inside the capsule.
+
+56
+00:02:23,300 --> 00:02:25,200
+尽量保密，
+Keeping things private as much as possible,
+
+57
+00:02:25,200 --> 00:02:29,230
+尤其是变量，限制了可能无意中
+especially variables, limits the code that could inadvertently
+
+58
+00:02:29,230 --> 00:02:30,020
+引起虫子。
+cause bugs.
+
+59
+00:02:30,020 --> 00:02:32,480
+这意味着如果这个变量值——如果一个私有变量
+It means if that variable value-- if a private variable's
+
+60
+00:02:32,480 --> 00:02:36,790
+值是错误的，那么您应该查找错误
+value is wrong, then you should look for the bug just
+
+61
+00:02:36,790 --> 00:02:38,210
+在这个班里。
+inside this class.
+
+62
+00:02:38,210 --> 00:02:42,370
+不可能是别的原因造成的。
+It can't be caused by somewhere else.
+
+63
+00:02:42,370 --> 00:02:43,910
+现在，另一种封装--
+Now, another kind of encapsulation--
+
+64
+00:02:43,910 --> 00:02:47,250
+这就是模块的封装。
+so that's encapsulation with respect to modules.
+
+65
+00:02:47,250 --> 00:02:50,440
+但可变范围是另一种。
+But variable scope is another kind.
+
+66
+00:02:50,440 --> 00:02:53,370
+所以变量的作用域是程序文本的一部分
+So the scope of a variable is the part of the program text
+
+67
+00:02:53,370 --> 00:02:55,420
+定义变量的位置
+over which that variable is defined
+
+68
+00:02:55,420 --> 00:02:58,040
+从某种意义上说，表达式和语句可以引用它，
+in the sense that expressions and statements can refer to it,
+
+69
+00:02:58,040 --> 00:03:00,930
+会读会写。
+can read and write it.
+
+70
+00:03:00,930 --> 00:03:05,150
+方法参数的范围是该方法的主体。
+The scope of a method parameter is the body of that method.
+
+71
+00:03:05,150 --> 00:03:05,650
+好吗？
+All right?
+
+72
+00:03:05,650 --> 00:03:09,105
+它只能在方法的主体中有意义。
+It can only have meaning inside the body of that method.
+
+73
+00:03:09,105 --> 00:03:14,790
+在Java中，局部变量作用域从其声明运行
+In Java, a local variable scope runs from its declaration
+
+74
+00:03:14,790 --> 00:03:16,790
+到下一个右大括号。
+to the next closing curly brace.
+
+75
+00:03:16,790 --> 00:03:20,282
+过了那个大括号，那个变量就没有意义了。
+Past that curly brace, that variable no longer has meaning.
+
+76
+00:03:20,282 --> 00:03:22,240
+实际上，Java会给您一个编译错误
+And in fact, Java will give you a compile error
+
+77
+00:03:22,240 --> 00:03:24,760
+如果你想用这个变量。
+if you try to use that variable.
+
+78
+00:03:24,760 --> 00:03:28,300
+使变量作用域尽可能小
+Keeping variable scopes as small as possible
+
+79
+00:03:28,300 --> 00:03:30,399
+是封装中一个非常重要的原则
+is a very important principle in encapsulation
+
+80
+00:03:30,399 --> 00:03:32,315
+因为这样很容易推断
+because it makes it easy to reason about where
+
+81
+00:03:32,315 --> 00:03:33,870
+程序中可能有错误。
+a bug might be in the program.
+
+82
+00:03:33,870 --> 00:03:36,810
+如果变量值错误，则
+If the variable value is wrong, the only place
+
+83
+00:03:36,810 --> 00:03:40,590
+它可能是在那个范围内的某个地方搞砸的。
+it could have been screwed up is somewhere in that scope.
+
+84
+00:03:40,590 --> 00:03:43,060
+所以如果它的作用域很小，那么代码就会少很多
+So if its scope is small, you have a lot less code
+
+85
+00:03:43,060 --> 00:03:46,750
+为了找出错误你必须学习。
+that you have to study in order to find the error.
+
+86
+00:03:46,750 --> 00:03:50,080
+例如，假设有一个这样的循环
+So for example, suppose you have a loop like this
+
+87
+00:03:50,080 --> 00:03:54,010
+从0开始一个整数变量i并运行
+that starts an integer variable i at 0 and runs
+
+88
+00:03:54,010 --> 00:03:56,520
+直到它达到100并递增
+until it reaches 100 and increments it
+
+89
+00:03:56,520 --> 00:03:58,410
+每一次循环。
+each time around the loop.
+
+90
+00:03:58,410 --> 00:04:00,660
+在这个循环中，你做了很多事情。
+And inside that loop, you're doing a number of things.
+
+91
+00:04:00,660 --> 00:04:04,010
+但是你也叫这个方法做一些事情。
+But you're also calling this method do some things.
+
+92
+00:04:04,010 --> 00:04:06,040
+现在，你发现你有一个虫子
+Now, you discover you have a bug where
+
+93
+00:04:06,040 --> 00:04:08,290
+这个循环永远在运行。
+this loop is running forever.
+
+94
+00:04:08,290 --> 00:04:10,910
+所以我从来没有达到100甚至
+So i never actually reaches 100 even
+
+95
+00:04:10,910 --> 00:04:13,390
+尽管看起来我们每次都在增加。
+though it looks like we're incrementing it each time.
+
+96
+00:04:13,390 --> 00:04:17,070
+所以在某个地方，有人在改变我。
+So somewhere, somebody else is changing i.
+
+97
+00:04:17,070 --> 00:04:23,080
+不仅仅是这部分循环改变了我。
+It's not just this part of the loop that is changing i.
+
+98
+00:04:23,080 --> 00:04:25,590
+问题是，在哪里？
+The question is, where?
+
+99
+00:04:25,590 --> 00:04:28,082
+现在，如果我被声明为全局变量--
+Now, if i were declared as a global variable--
+
+100
+00:04:28,082 --> 00:04:29,540
+我们讨论过全局变量
+we've talked about global variables
+
+101
+00:04:29,540 --> 00:04:31,720
+在之前的阅读中。
+in a previous reading.
+
+102
+00:04:31,720 --> 00:04:33,190
+全局变量是公共的。
+Global variables are public.
+
+103
+00:04:33,190 --> 00:04:34,870
+他们可以从任何地方进入。
+They can be accessed from anywhere.
+
+104
+00:04:34,870 --> 00:04:36,520
+静态意味着只有一个
+And static means that there's only one
+
+105
+00:04:36,520 --> 00:04:39,100
+此变量的实例。
+instance of this variable.
+
+106
+00:04:39,100 --> 00:04:41,320
+但是公共静态变量的问题
+But the problem with a public, static variable
+
+107
+00:04:41,320 --> 00:04:43,280
+全局变量的作用域是
+with a global variable is that its scope
+
+108
+00:04:43,280 --> 00:04:44,599
+是整个程序。
+is the entire program.
+
+109
+00:04:44,599 --> 00:04:46,390
+它可以在程序中的任何地方更改，
+It can be changed anywhere in your program,
+
+110
+00:04:46,390 --> 00:04:50,840
+不仅在这个循环中，而且在这个文件的其他地方
+not just inside this loop, but somewhere else in this file
+
+111
+00:04:50,840 --> 00:04:54,790
+或者是完全不同的文件。
+or in a completely different file.
+
+112
+00:04:54,790 --> 00:04:57,450
+但是如果我被声明为一个局部变量
+But if i is instead declared as a local variable
+
+113
+00:04:57,450 --> 00:05:00,170
+范围很窄，尤其是，
+with a narrow scope like this-- particularly,
+
+114
+00:05:00,170 --> 00:05:04,090
+注意这里的区别是我们确实做到了
+notice the difference here is that we have actually made this
+
+115
+00:05:04,090 --> 00:05:08,230
+变成我的宣言而不是我的任务
+into a declaration of i instead of just an assignment of i
+
+116
+00:05:08,230 --> 00:05:12,770
+把类型放在这里——这个声明
+by putting the type here-- this declaration of i
+
+117
+00:05:12,770 --> 00:05:16,480
+意思是现在我是一个局部变量，其作用域运行
+means that now i is a local variable whose scope runs
+
+118
+00:05:16,480 --> 00:05:19,860
+直到下一个右大括号--匹配的右括号
+until the next closing curly brace-- the matching closing
+
+119
+00:05:19,860 --> 00:05:23,470
+我应该说是花括号。
+curly brace, I should say.
+
+120
+00:05:23,470 --> 00:05:27,180
+所以我唯一可以改变的地方
+So the only place where i could possibly be changed
+
+121
+00:05:27,180 --> 00:05:30,320
+在这里面是为了陈述--事实上，
+is inside this for statement-- in fact,
+
+122
+00:05:30,320 --> 00:05:33,680
+只有在这些地方，这些点-点-点的代码位
+only in these places, these dot-dot-dot bits of code
+
+123
+00:05:33,680 --> 00:05:35,010
+我忽略了。
+that I've omitted.
+
+124
+00:05:35,010 --> 00:05:38,040
+会不会是在身体里做一些事情的方法？
+Could it be in the body of the do some things method?
+
+125
+00:05:38,040 --> 00:05:40,620
+不，因为那是在别的地方实现的
+No, because that's implemented somewhere else
+
+126
+00:05:40,620 --> 00:05:44,450
+不在该变量范围内的代码。
+in this code that is not in the scope of this variable.
+
+127
+00:05:44,450 --> 00:05:46,260
+所以它不能改变我。
+So it can't actually change i.
+
+128
+00:05:46,260 --> 00:05:49,470
+它无法访问或更改此局部变量。
+It can't access or change this local variable.
+
+129
+00:05:49,470 --> 00:05:53,300
+这样就大大降低了风险
+So that substantially reduces the risk
+
+130
+00:05:53,300 --> 00:05:55,920
+我们不小心改变了这个变量
+that we are accidentally changing this variable
+
+131
+00:05:55,920 --> 00:05:58,416
+在错误的地方。
+in the wrong place.
+
+132
+00:05:58,416 --> 00:05:59,790
+最小化变量范围
+Minimizing the scope of variables
+
+133
+00:05:59,790 --> 00:06:02,090
+是一个非常强大的缺陷定位实践。
+is a very powerful practice for bug localization.
+
+134
+00:06:02,090 --> 00:06:05,300
+下面是一些对Java有用的规则
+So here's a couple of rules that are useful for Java
+
+135
+00:06:05,300 --> 00:06:07,280
+使变量的范围最小化。
+for minimizing the scope of variables.
+
+136
+00:06:07,280 --> 00:06:10,527
+一个是你应该总是声明一个循环变量。
+One is you should always declare a loop variable.
+
+137
+00:06:10,527 --> 00:06:11,985
+当你在写for循环时
+When you're writing a for loop, you
+
+138
+00:06:11,985 --> 00:06:15,310
+应该在for循环的初始值设定项中声明循环变量。
+should declare the loop variable in the for loop's initializer.
+
+139
+00:06:15,310 --> 00:06:18,980
+所以与其在循环之上的某个地方声明我
+So rather than declaring i somewhere above the loop, which
+
+140
+00:06:18,980 --> 00:06:21,920
+意味着它的作用域也将包括循环
+means that its scope will include the loop as well
+
+141
+00:06:21,920 --> 00:06:25,750
+作为循环后的一些代码，您应该
+as some code after the loop, you should instead
+
+142
+00:06:25,750 --> 00:06:27,780
+一开始就声明
+declare it right there at the beginning
+
+143
+00:06:27,780 --> 00:06:30,700
+所以它的范围仅限于for循环，
+so that its scope is limited to just the for loop,
+
+144
+00:06:30,700 --> 00:06:34,077
+只是for循环的主体。
+just the body of the for loop.
+
+145
+00:06:34,077 --> 00:06:36,410
+另一个规则是只在您第一次
+Another rule is declaring a variable only when you first
+
+146
+00:06:36,410 --> 00:06:36,730
+需要它。
+need it.
+
+147
+00:06:36,730 --> 00:06:38,500
+这与for循环规则有关。
+And this is related to the for loop rule.
+
+148
+00:06:38,500 --> 00:06:40,840
+然后，把它放在最里面的卷发里
+And then, push it down inside the innermost curly
+
+149
+00:06:40,840 --> 00:06:43,550
+你可以用支撑块。
+brace block that you can.
+
+150
+00:06:43,550 --> 00:06:45,290
+不要声明所有变量
+Don't declare all of your variables
+
+151
+00:06:45,290 --> 00:06:46,670
+在函数开始时。
+at the start of the function.
+
+152
+00:06:46,670 --> 00:06:49,030
+这使得他们的范围不必要地大。
+It makes their scopes unnecessarily large.
+
+153
+00:06:49,030 --> 00:06:51,470
+一开始需要就申报
+Declare them as soon as you start needing them
+
+154
+00:06:51,470 --> 00:06:53,520
+在最里面的花括号里
+and in the innermost curly brace block
+
+155
+00:06:53,520 --> 00:06:55,384
+你能逃脱的。
+that you can get away with.
+
+156
+00:06:55,384 --> 00:06:57,800
+现在，我应该注意到Java和Java之间的区别
+Now, I should note here there is a difference between Java
+
+157
+00:06:57,800 --> 00:07:01,010
+以及其他语言，如Python和JavaScript。
+and other languages like Python and JavaScript.
+
+158
+00:07:01,010 --> 00:07:03,145
+许多语言没有静态类型
+Many of those languages that don't have static type
+
+159
+00:07:03,145 --> 00:07:04,770
+声明，变量的范围
+declarations, the scope of the variable
+
+160
+00:07:04,770 --> 00:07:06,550
+通常是整个函数。
+is normally the entire function anyway.
+
+161
+00:07:06,550 --> 00:07:09,450
+所以不能使用
+So you can't restrict the scope of the variable using
+
+162
+00:07:09,450 --> 00:07:12,080
+这样的花括号。
+curly braces in this way.
+
+163
+00:07:12,080 --> 00:07:14,720
+第三个原则是避免全局变量
+And the third principle is just avoid global variables
+
+164
+00:07:14,720 --> 00:07:15,830
+完全是。
+entirely.
+
+165
+00:07:15,830 --> 00:07:18,170
+它们是一个非常糟糕的主意，特别是作为程序
+They are a very bad idea, especially as programs
+
+166
+00:07:18,170 --> 00:07:21,191
+变大，因为当你有一个涉及
+get large, because when you have a bug that involves
+
+167
+00:07:21,191 --> 00:07:23,690
+全局变量，现在必须搜索整个程序
+a global variable, you now have to search the entire program
+
+168
+00:07:23,690 --> 00:07:26,020
+找出程序的哪个部分
+to figure out what part of the program
+
+169
+00:07:26,020 --> 00:07:28,730
+可能造成了这么大的损失。
+might have caused that big.
+
+170
+00:07:28,730 --> 00:07:31,060
+全局变量常常被不明智地用作快捷方式
+Global variables are often unwisely used as a shortcut
+
+171
+00:07:31,060 --> 00:07:33,393
+在程序的几个部分中提供参数。
+to provide a parameter in several parts of your program.
+
+172
+00:07:33,393 --> 00:07:36,430
+但最好把这个参数
+But it's a much better idea just to pass that parameter
+
+173
+00:07:36,430 --> 00:07:38,780
+在需要它的代码中
+into the code that needs it rather than putting it
+
+174
+00:07:38,780 --> 00:07:42,060
+在全球范围内，它有可能无意中
+in the global space where it is at risk of being inadvertently
+
+175
+00:07:42,060 --> 00:07:43,610
+重新分配。
+reassigned.
+

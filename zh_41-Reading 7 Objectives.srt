@@ -1,0 +1,50 @@
+1
+00:00:00,270 --> 00:00:02,470
+今天我们要多谈谈危险
+Today we're going to talk more about the dangers
+
+2
+00:00:02,470 --> 00:00:06,810
+可变数据类型和不变性的优点。
+of mutable data types and the advantages of immutability.
+
+3
+00:00:06,810 --> 00:00:08,390
+今天的阅读之后你应该
+After today's reading you should be
+
+4
+00:00:08,390 --> 00:00:11,570
+能够理解易变性和易变对象。
+able to understand mutability and mutable objects.
+
+5
+00:00:11,570 --> 00:00:14,340
+您应该能够识别别名并理解
+You should be able to identify aliasing and understand
+
+6
+00:00:14,340 --> 00:00:16,440
+易变性的危险。
+the dangers of mutability.
+
+7
+00:00:16,440 --> 00:00:18,560
+你应该能够使用不变性
+And you should be able to use immutability
+
+8
+00:00:18,560 --> 00:00:20,600
+为了提高正确性和清晰度，
+to improve the correctness, clarity,
+
+9
+00:00:20,600 --> 00:00:22,560
+以及代码的易变性。
+and changeability of your code.
+
+10
+00:00:22,560 --> 00:00:24,780
+好吧，我们开始吧。
+OK, let's get started.
+

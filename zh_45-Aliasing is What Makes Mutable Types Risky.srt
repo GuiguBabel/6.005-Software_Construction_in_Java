@@ -1,0 +1,575 @@
+1
+00:00:01,900 --> 00:00:04,390
+所以第二个例子的关键教训
+So the key lessons from this second example
+
+2
+00:00:04,390 --> 00:00:07,140
+再次涉及到6.005的大思想。
+again relate to the big ideas of 6.005.
+
+3
+00:00:07,140 --> 00:00:08,320
+这是安全的吗？
+Is this safe from bugs?
+
+4
+00:00:08,320 --> 00:00:09,030
+好吧，不。
+Well, no.
+
+5
+00:00:09,030 --> 00:00:11,800
+又一次，我们发现一只潜伏的虫子抬起了它丑陋的头。
+Again, we had a latent bug that reared its ugly head.
+
+6
+00:00:11,800 --> 00:00:14,480
+这是由于可变对象，可变日期
+And it was due to the mutable object, the mutable date
+
+7
+00:00:14,480 --> 00:00:16,379
+反对。
+object.
+
+8
+00:00:16,379 --> 00:00:17,940
+这个密码可以修改吗？
+Is this code ready for change?
+
+9
+00:00:17,940 --> 00:00:20,485
+很明显，突变本身就是一种改变。
+Well, obviously mutation is itself a change.
+
+10
+00:00:20,485 --> 00:00:21,860
+但这不是改变
+But that's not the kind of change
+
+11
+00:00:21,860 --> 00:00:23,970
+当我们说准备好改变的时候。
+we're talking about when we say ready for change.
+
+12
+00:00:23,970 --> 00:00:26,900
+我们的意思是程序的代码
+The change we mean is whether the code of the program
+
+13
+00:00:26,900 --> 00:00:29,500
+不需要重写很多内容就可以轻松更改
+can be easily changed without rewriting a lot of it
+
+14
+00:00:29,500 --> 00:00:31,630
+或者引入漏洞。
+or introducing bugs.
+
+15
+00:00:31,630 --> 00:00:33,295
+在这里我们有两个独立的改变
+And here we had two independent changes
+
+16
+00:00:33,295 --> 00:00:34,670
+在程序的不同部分
+in different parts of the program
+
+17
+00:00:34,670 --> 00:00:36,336
+由不同的程序员交互
+by different programmers that interacted
+
+18
+00:00:36,336 --> 00:00:38,999
+产生一种非常严重的虫子。
+to produce a very bad bug.
+
+19
+00:00:38,999 --> 00:00:41,540
+现在，在这两个示例中，列表示例和日期
+Now, in both of these examples, the list example and the date
+
+20
+00:00:41,540 --> 00:00:43,980
+这些问题本来是可以完全避免的
+example, the problems would have been completely avoided
+
+21
+00:00:43,980 --> 00:00:46,350
+如果列表和日期是不可变的类型。
+if the list and the date had been immutable types.
+
+22
+00:00:46,350 --> 00:00:49,990
+这些漏洞本来是设计上不可能的。
+The bugs would have been impossible by design.
+
+23
+00:00:49,990 --> 00:00:52,870
+事实上，现代Java程序员从不使用日期。
+And in fact, modern Java programmers never use date.
+
+24
+00:00:52,870 --> 00:00:59,680
+现在有一个班级--对不起，一个包裹
+There is now a class-- sorry a package
+
+25
+00:00:59,680 --> 00:01:03,900
+有更好的类来表示日期
+that has much better classes for representing dates
+
+26
+00:01:03,900 --> 00:01:06,300
+在Java中，比如ZoneDateTime，它
+in Java such as ZonedDateTime, which
+
+27
+00:01:06,300 --> 00:01:09,300
+保证您有一个不可变的表示
+guarantees that you have an immutable representation
+
+28
+00:01:09,300 --> 00:01:10,580
+约会的时间。
+of a date time.
+
+29
+00:01:10,580 --> 00:01:15,140
+所以date类实际上被弃用了。
+So the date class is actually deprecated.
+
+30
+00:01:15,140 --> 00:01:17,850
+顺便说一下，这个例子还说明了为什么可变对象
+This example, by the way, also illustrates why mutable objects
+
+31
+00:01:17,850 --> 00:01:19,950
+可能不利于性能，因为
+can be bad for performance because the simplest
+
+32
+00:01:19,950 --> 00:01:22,820
+避免更改任何步骤的bug解决方案
+solution to the bug that avoids changing any of the steps
+
+33
+00:01:22,820 --> 00:01:24,710
+或者方法签名是为了春天的开始
+or method signatures is for start of spring
+
+34
+00:01:24,710 --> 00:01:28,980
+总是返回缓存的土拨鼠答案的副本。
+to always return a copy of the cached groundhog answer.
+
+35
+00:01:28,980 --> 00:01:31,620
+所以与其直接返回这个对象，
+So instead of directly returning this object,
+
+36
+00:01:31,620 --> 00:01:35,285
+相反，我们创建一个新的日期来表示相同的日期
+instead, we make a new date that represents the same date
+
+37
+00:01:35,285 --> 00:01:37,540
+时间就是那个东西。
+and time as that object.
+
+38
+00:01:37,540 --> 00:01:39,196
+这种模式是防御性模仿。
+This pattern is defensive copying.
+
+39
+00:01:39,196 --> 00:01:40,570
+当我们
+We'll see much more of it when we
+
+40
+00:01:40,570 --> 00:01:42,662
+讨论抽象数据类型。
+talk about abstract data types.
+
+41
+00:01:42,662 --> 00:01:44,870
+你可能在以前的编程中自己做过
+You may have done it yourself in previous programming
+
+42
+00:01:44,870 --> 00:01:45,630
+就像蟒蛇一样。
+like in Python.
+
+43
+00:01:45,630 --> 00:01:48,300
+这种防御性的复制意味着党的计划，
+That defensive copy means that party planning,
+
+44
+00:01:48,300 --> 00:01:51,160
+表示返回此日期对象的调用方
+means the caller that gets this date object back
+
+45
+00:01:51,160 --> 00:01:53,660
+拥有一个全新的数据对象
+has a fresh data object all to itself that they can freely
+
+46
+00:01:53,660 --> 00:01:57,500
+在不影响这个缓存的约会土拨鼠的情况下跺脚
+stomp all over without affecting this cached dating Groundhog
+
+47
+00:01:57,500 --> 00:01:58,830
+回答。
+answer.
+
+48
+00:01:58,830 --> 00:02:01,210
+但是防御性复制的性能问题
+But the performance problem with defensive copying
+
+49
+00:02:01,210 --> 00:02:04,420
+春天的开始对每一个客户都有意义吗
+is that start of spring has to do it for every single client
+
+50
+00:02:04,420 --> 00:02:08,259
+即使大多数客户机不需要对数据进行变异。
+even if most of those clients never need to mutate the data.
+
+51
+00:02:08,259 --> 00:02:09,919
+因此，我们可能会有很多
+And we may end up, therefore, with lots
+
+52
+00:02:09,919 --> 00:02:13,030
+第一个春天的日期，春天价值的第一天，
+of copies of first date spring, this first day of spring value,
+
+53
+00:02:13,030 --> 00:02:13,790
+整个记忆。
+throughout memory.
+
+54
+00:02:13,790 --> 00:02:15,802
+如果我们改用不可变类型，
+If we used an immutable type instead,
+
+55
+00:02:15,802 --> 00:02:17,260
+然后程序的不同部分
+then different parts of the program
+
+56
+00:02:17,260 --> 00:02:19,510
+会在内存中安全地共享相同的值
+would safely share that same value in memory
+
+57
+00:02:19,510 --> 00:02:23,320
+因为复制会更少，所需的内存空间也更少。
+because there'd be less copying, less memory space required.
+
+58
+00:02:23,320 --> 00:02:24,840
+结果是不变性可以
+The upshot is that immutability can
+
+59
+00:02:24,840 --> 00:02:26,640
+比易变性更有效率
+be more efficient than mutability
+
+60
+00:02:26,640 --> 00:02:31,850
+因为不可变类型永远不需要进行防御性复制。
+because immutable types never need to be defensively copied.
+
+61
+00:02:31,850 --> 00:02:33,770
+从根本上说，这里发生了什么
+Now, fundamentally, what's going on here
+
+62
+00:02:33,770 --> 00:02:39,240
+我们有多个对可变对象的引用。
+is that we have multiple references to a mutable object.
+
+63
+00:02:39,240 --> 00:02:41,230
+如果我们只是在本地使用它们
+If we were just using them entirely locally
+
+64
+00:02:41,230 --> 00:02:43,790
+我们可以更容易地推理
+within a method where we can reason about them more easily
+
+65
+00:02:43,790 --> 00:02:46,340
+或者如果我们只提到一个物体，
+or if we had only one reference to an object,
+
+66
+00:02:46,340 --> 00:02:48,175
+我们不会有这种虫子。
+we wouldn't have these kinds of bugs.
+
+67
+00:02:48,175 --> 00:02:50,860
+问题是多个引用
+The problem is multiple references
+
+68
+00:02:50,860 --> 00:02:52,930
+在代码的不同部分。
+in different parts of the code.
+
+69
+00:02:52,930 --> 00:02:54,679
+这些叫做别名。
+And these are called aliases.
+
+70
+00:02:54,679 --> 00:02:56,220
+现在，如果你浏览一下这些例子
+Now, if you walk through the examples
+
+71
+00:02:56,220 --> 00:02:58,440
+画一张快照图
+and draw a snapshot diagram, it will be clear
+
+72
+00:02:58,440 --> 00:03:00,960
+我们从哪里得到这些多个参考。
+where we're getting these multiple references from.
+
+73
+00:03:00,960 --> 00:03:02,310
+但这里有一个粗略的轮廓。
+But here's a rough outline.
+
+74
+00:03:02,310 --> 00:03:05,160
+所以在列表示例中，相同的列表对象
+So in the list example, the same list object
+
+75
+00:03:05,160 --> 00:03:07,470
+由两个不同的变量指向--
+is pointed to by two different variables--
+
+76
+00:03:07,470 --> 00:03:11,810
+绝对值和方法中的列表参数
+a list parameter in the sum of the absolute values method
+
+77
+00:03:11,810 --> 00:03:15,600
+以及main中的myData局部变量。
+and the myData local variable in main.
+
+78
+00:03:15,600 --> 00:03:17,950
+这些变量是受控的
+And these variables are controlled
+
+79
+00:03:17,950 --> 00:03:19,030
+不同的程序员。
+by different programmers.
+
+80
+00:03:19,030 --> 00:03:21,860
+编写绝对值和的程序员
+The programmer who is writing sum of absolute values
+
+81
+00:03:21,860 --> 00:03:24,850
+认为可以修改列表。
+thinks it's OK to modify the list.
+
+82
+00:03:24,850 --> 00:03:26,910
+作为另一个程序，一个写主程序，
+As the other program, the one writing main,
+
+83
+00:03:26,910 --> 00:03:28,750
+希望列表保持不变。
+wants the list to stay the same.
+
+84
+00:03:28,750 --> 00:03:32,830
+但是由于别名，绝对值之和
+But because of the aliases, sum of absolute values
+
+85
+00:03:32,830 --> 00:03:36,246
+更改列表，main的程序员就输了。
+changes the list, and the main's programmer loses.
+
+86
+00:03:36,246 --> 00:03:38,855
+在日期示例中，有两个不同的变量名--
+In the date example, there are two different variable names--
+
+87
+00:03:38,855 --> 00:03:40,230
+还有两个不同的变量名
+also two different variable names
+
+88
+00:03:40,230 --> 00:03:41,479
+指向日期对象。
+that point to the date object.
+
+89
+00:03:41,479 --> 00:03:45,130
+一个是土拨鼠的答案，这个私有静态变量
+One is this groundhog answer, this private static variable
+
+90
+00:03:45,130 --> 00:03:46,830
+在春天的开始。
+inside start of spring.
+
+91
+00:03:46,830 --> 00:03:49,930
+另一个是party date，这个局部变量
+And the other is party date, this local variable
+
+92
+00:03:49,930 --> 00:03:51,950
+党内计划。
+inside party planning.
+
+93
+00:03:51,950 --> 00:03:54,450
+这些别名在代码的不同部分，
+These aliases are in completely different parts of the code,
+
+94
+00:03:54,450 --> 00:03:56,325
+同样，在不同程序的控制下
+again, under the control of different program
+
+95
+00:03:56,325 --> 00:03:59,964
+可能不知道对方在做什么。
+who may have no idea what the other is doing.
+
+96
+00:03:59,964 --> 00:04:01,780
+所以现在应该清楚了
+So at this point, it should be clear
+
+97
+00:04:01,780 --> 00:04:03,580
+当一个方法执行变异时，
+that when a method performs mutation,
+
+98
+00:04:03,580 --> 00:04:06,570
+在这个方法中提到这种变异是非常重要的
+it's really important to mention that mutation in the method
+
+99
+00:04:06,570 --> 00:04:09,872
+在方法之前的注释中，
+specification, in the comment before the method,
+
+100
+00:04:09,872 --> 00:04:12,330
+使用我们在前一篇文章中提到的结构
+using the structure we talked about in the previous reading
+
+101
+00:04:12,330 --> 00:04:14,329
+在规格上。
+on specs.
+
+102
+00:04:14,329 --> 00:04:16,829
+尽管如此，我们也看到，即使是在
+Although, we've also seen that even when a particular method
+
+103
+00:04:16,829 --> 00:04:20,149
+不会改变一个对象，那个对象是可变的
+doesn't mutate an object, that object's mutability
+
+104
+00:04:20,149 --> 00:04:23,740
+仍然可能是bug的来源。
+can still be a source of bugs.
+
+105
+00:04:23,740 --> 00:04:26,030
+下面是一个变异方法的规范示例。
+Here's an example of a spec for a mutating method.
+
+106
+00:04:26,030 --> 00:04:26,870
+这是效果保存。
+It's effect save.
+
+107
+00:04:26,870 --> 00:04:28,875
+它把列表放进去--然后它改变了列表
+And it puts the list-- and it changes the list
+
+108
+00:04:28,875 --> 00:04:31,050
+把它整理好。
+to put it in sorted order.
+
+109
+00:04:31,050 --> 00:04:35,120
+下面是一个非变异方法的例子
+And here's an example of a non-mutating method
+
+110
+00:04:35,120 --> 00:04:40,150
+这特别说明它返回一个新列表。
+that says specifically that it returns a new list.
+
+111
+00:04:40,150 --> 00:04:43,040
+至少在2005年，如果效应没有明确地说
+In 005, at least, if the effects do not explicitly say that
+
+112
+00:04:43,040 --> 00:04:46,580
+一个输入可以变异，然后在6.005中我们假设变异
+an input can be mutated, then in 6.005 we assume that mutation
+
+113
+00:04:46,580 --> 00:04:48,894
+隐式不允许输入。
+of that input is implicitly disallowed.
+
+114
+00:04:48,894 --> 00:04:51,310
+几乎所有的程序员都会做同样的事情。
+And virtually all programmers would assume the same thing.
+
+115
+00:04:51,310 --> 00:04:54,900
+突如其来的突变会导致非常可怕的虫子。
+Surprise mutations can lead to very terrible bugs.
+

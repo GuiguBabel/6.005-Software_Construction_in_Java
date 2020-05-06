@@ -1,0 +1,760 @@
+1
+00:00:00,670 --> 00:00:02,470
+所以我们看了名单和日期
+So we've looked at lists and dates
+
+2
+00:00:02,470 --> 00:00:03,930
+作为可变对象的示例。
+as examples of mutable objects.
+
+3
+00:00:03,930 --> 00:00:05,846
+我们要看的下一个可变对象
+The next mutable object we're going to look at
+
+4
+00:00:05,846 --> 00:00:06,665
+是迭代器。
+is an iterator.
+
+5
+00:00:06,665 --> 00:00:08,550
+迭代器是一个
+An iterator is an object that steps
+
+6
+00:00:08,550 --> 00:00:11,060
+通过元素集合并返回
+through a collection of elements and returns each
+
+7
+00:00:11,060 --> 00:00:13,190
+一个接一个。
+of those elements one by one.
+
+8
+00:00:13,190 --> 00:00:16,300
+迭代器在Java中自动在后台使用
+Iterators are automatically used behind the scenes in Java
+
+9
+00:00:16,300 --> 00:00:17,980
+当你使用for循环时
+when you're using a for loop to step
+
+10
+00:00:17,980 --> 00:00:19,610
+通过列表或数组。
+through a list or an array.
+
+11
+00:00:19,610 --> 00:00:23,350
+所以如果你有一个列表并且你写了一个for循环
+So if you have a list and you write a for loop that
+
+12
+00:00:23,350 --> 00:00:26,100
+说你要严格--你要看
+says you want strict-- you want to look
+
+13
+00:00:26,100 --> 00:00:30,070
+在该列表的每个元素上，Java编译器实际上
+at each element of that list, then the Java compiler actually
+
+14
+00:00:30,070 --> 00:00:31,770
+把它改写成某种
+rewrites that into something kind
+
+15
+00:00:31,770 --> 00:00:36,810
+，通过调用
+of like this-- creates an iterator object by calling
+
+16
+00:00:36,810 --> 00:00:38,720
+列表中返回
+a method on the list that returns
+
+17
+00:00:38,720 --> 00:00:41,740
+迭代器类型的新对象。
+a new object of type iterator.
+
+18
+00:00:41,740 --> 00:00:44,820
+然后循环重复调用
+And then the loop repeatedly calls
+
+19
+00:00:44,820 --> 00:00:47,870
+下一步要找出迭代器是否已经结束。
+has next to find out if the iterator has gotten to the end.
+
+20
+00:00:47,870 --> 00:00:50,700
+如果没有，它会问迭代器--
+And if it hasn't, it asks the iterator--
+
+21
+00:00:50,700 --> 00:00:53,370
+调用迭代器next方法以获取下一个元素
+calls the iterators next method to get the next element
+
+22
+00:00:53,370 --> 00:00:54,210
+从名单上。
+from that list.
+
+23
+00:00:54,210 --> 00:00:57,970
+所以这条线变成了这三条线。
+So this line here turns into these three lines here.
+
+24
+00:00:57,970 --> 00:01:01,480
+这里有一个迭代器，它是一个可变的对象
+And there's this iterator, which is a mutable object, that
+
+25
+00:01:01,480 --> 00:01:04,080
+基本上表示通过列表移动的位置
+basically represents a position through the list moving
+
+26
+00:01:04,080 --> 00:01:05,370
+通过列表。
+through the list.
+
+27
+00:01:05,370 --> 00:01:07,640
+关于迭代器的两个重要方法--
+And two important methods on an iterator--
+
+28
+00:01:07,640 --> 00:01:10,530
+next返回集合中的下一个元素
+next returns the next element in the collection
+
+29
+00:01:10,530 --> 00:01:13,270
+并向前移动指针。
+and advances the pointer.
+
+30
+00:01:13,270 --> 00:01:14,850
+接下来的测试你是否
+And has next tests whether you've
+
+31
+00:01:14,850 --> 00:01:17,480
+是不是到了收藏的最后。
+gotten to the end of the collection or not.
+
+32
+00:01:17,480 --> 00:01:19,430
+所以下一个方法实际上是一个变异器。
+So this next method is actually a mutator.
+
+33
+00:01:19,430 --> 00:01:22,770
+它改变了迭代器的含义。
+It changes what the iterator means.
+
+34
+00:01:22,770 --> 00:01:24,090
+它改变了它的价值。
+It changes its value.
+
+35
+00:01:24,090 --> 00:01:28,040
+它改变了“下一个”和“下一个”将在
+It changes what has next and next will return when
+
+36
+00:01:28,040 --> 00:01:29,610
+你下次再打给他们。
+you call them another time.
+
+38
+00:01:32,770 --> 00:01:34,930
+为了更好地理解迭代器的工作原理，
+So to better understand how an iterator works,
+
+39
+00:01:34,930 --> 00:01:38,100
+下面是一个迭代器的简单实现，它只起作用
+here's a simple implementation of an iterator that only works
+
+40
+00:01:38,100 --> 00:01:40,700
+在字符串的数组列表上。
+on array lists of strings.
+
+41
+00:01:40,700 --> 00:01:43,400
+我们一般不想使用MyIterator。
+We don't want to use MyIterator in general.
+
+42
+00:01:43,400 --> 00:01:45,951
+实际上，您需要使用数组列表自己的迭代器
+You actually want to use the array list's own iterator
+
+43
+00:01:45,951 --> 00:01:46,450
+反对。
+object.
+
+44
+00:01:46,450 --> 00:01:50,510
+但我们写这篇文章是为了——为了理解
+But we're writing this for the sake of-- for understanding how
+
+45
+00:01:50,510 --> 00:01:54,910
+这是一个简单的例子。
+it works on a simple example.
+
+46
+00:01:54,910 --> 00:01:57,580
+所以这使用了一些Java语言特性
+So this uses a few Java language features that maybe you haven't
+
+47
+00:01:57,580 --> 00:01:59,330
+在这一点上看到了很多。
+seen much up to this point.
+
+48
+00:01:59,330 --> 00:02:01,910
+所以我们要简单地解释一下。
+So we're going to explain them very briefly.
+
+49
+00:02:01,910 --> 00:02:04,300
+实例变量，也称为字段，
+Instance variables, which are also called fields,
+
+50
+00:02:04,300 --> 00:02:07,750
+是与每个实例关联的变量，
+are variables that are associated with each instance,
+
+51
+00:02:07,750 --> 00:02:10,400
+类的每个对象值。
+each object value of a class.
+
+52
+00:02:10,400 --> 00:02:14,500
+所以MyIterator对象将有两个实例变量
+So a MyIterator object is going to have two instance variables
+
+53
+00:02:14,500 --> 00:02:17,530
+其中有一个列表和一个索引。
+in it-- a list and an index.
+
+54
+00:02:17,530 --> 00:02:19,662
+所以这个列表指向字符串列表
+So this list points to the list of strings
+
+55
+00:02:19,662 --> 00:02:21,120
+我们实际上在重复。
+that we're actually iterating over.
+
+56
+00:02:21,120 --> 00:02:24,280
+迭代器需要保持这种状态。
+The iterator needs to hold on to that.
+
+57
+00:02:24,280 --> 00:02:28,840
+index是当前值，列表中的当前索引，
+And index is the current value, the current index in that list,
+
+58
+00:02:28,840 --> 00:02:33,260
+迭代器当前正在返回的。
+that the iterator is currently returning.
+
+59
+00:02:33,260 --> 00:02:35,190
+下一步是推进这一进程。
+And next is going to advance that.
+
+60
+00:02:35,190 --> 00:02:37,130
+下一个要测试的是
+And has next is going to test whether that's
+
+61
+00:02:37,130 --> 00:02:38,090
+在名单的最后。
+at the end of the list.
+
+63
+00:02:41,010 --> 00:02:42,620
+这里还有一个构造函数。
+There's also a constructor here.
+
+64
+00:02:42,620 --> 00:02:45,010
+构造函数是一种特殊的方法
+And a constructor is a special kind of method
+
+65
+00:02:45,010 --> 00:02:49,930
+这将生成类的新值、新实例。
+that makes a new value, a new instance, of the class.
+
+66
+00:02:49,930 --> 00:02:52,210
+您应该已经在Python中看到了构造函数
+You should have seen constructors already in Python
+
+67
+00:02:52,210 --> 00:02:53,190
+也。
+as well.
+
+68
+00:02:53,190 --> 00:02:55,270
+这个会拿走我们想要的名单
+This one will take the list that we want
+
+69
+00:02:55,270 --> 00:02:57,570
+作为参数迭代。
+to iterate over as a parameter.
+
+70
+00:02:57,570 --> 00:02:58,770
+它坚持住了。
+And it holds on to that.
+
+71
+00:02:58,770 --> 00:03:02,860
+它将其存储在实例变量中。
+It stores it in the instance variable.
+
+72
+00:03:02,860 --> 00:03:06,000
+你注意到我们在这里使用的是this关键字。
+And you notice that we're using here the this keyword.
+
+73
+00:03:06,000 --> 00:03:12,540
+这实际上是Python中self关键字的Java版本。
+This is actually Java's version of the self keyword in Python.
+
+74
+00:03:12,540 --> 00:03:14,750
+Java的一个特性是
+One of the features of Java though-- you
+
+75
+00:03:14,750 --> 00:03:18,960
+从Python可以知道
+may know from Python that self normally
+
+76
+00:03:18,960 --> 00:03:21,520
+必须作为参数之一传递
+has to be passed as one of the arguments
+
+77
+00:03:21,520 --> 00:03:23,640
+进入构造函数或实例方法。
+into a constructor or an instance method.
+
+78
+00:03:23,640 --> 00:03:26,570
+在Java中，这是隐式的。
+In Java, this is implicit.
+
+79
+00:03:26,570 --> 00:03:30,580
+你知道你能用它的方式
+And the way that you know that you are able to use it
+
+80
+00:03:30,580 --> 00:03:34,110
+构造函数和实例方法不
+is that a constructor and instance method does not
+
+81
+00:03:34,110 --> 00:03:35,340
+这里有静电。
+have static here.
+
+82
+00:03:35,340 --> 00:03:38,400
+所以没有静态意味着你可以访问
+So the absence of static means that you have access
+
+83
+00:03:38,400 --> 00:03:40,720
+对这个物体。
+to a this object.
+
+84
+00:03:40,720 --> 00:03:43,050
+你可以用这个来指代它
+And you can use this to refer to it
+
+85
+00:03:43,050 --> 00:03:46,680
+尤其是访问列表和索引等字段。
+and particularly to access its fields like list and index.
+
+86
+00:03:46,680 --> 00:03:49,400
+这就是这里发生的事。
+And that's what's happening here.
+
+87
+00:03:49,400 --> 00:03:50,400
+所以这是一个构造器。
+So that's a constructor.
+
+88
+00:03:50,400 --> 00:03:52,360
+这是一个实例方法。
+Well, here's one of the instance methods.
+
+89
+00:03:52,360 --> 00:03:53,960
+记住，迭代器中需要两个。
+Remember, we need two in an iterator.
+
+90
+00:03:53,960 --> 00:03:56,090
+我们需要下一个测试我们是否在最后
+We need has next to test whether we're at the end
+
+91
+00:03:56,090 --> 00:03:59,770
+然后返回下一个值。
+and next that returns the next value.
+
+92
+00:03:59,770 --> 00:04:02,370
+再说一遍，我们知道这些是实例方法，因为它们
+And again, we know these are instance methods because they
+
+93
+00:04:02,370 --> 00:04:04,320
+不要有静电。
+don't have a static.
+
+94
+00:04:04,320 --> 00:04:08,540
+必须在迭代器的一个实例上调用它们
+They will have to be called on an instance of the my iterator
+
+95
+00:04:08,540 --> 00:04:09,050
+上课。
+class.
+
+96
+00:04:09,050 --> 00:04:13,960
+当你在这个方法里面的时候，它就会变成这个对象。
+And that will become this object when you're inside this method.
+
+97
+00:04:13,960 --> 00:04:16,560
+但现在，注意这个特殊的例子，
+But now, notice in this particular case,
+
+98
+00:04:16,560 --> 00:04:18,149
+我们不用这个。
+we're not using this.
+
+99
+00:04:18,149 --> 00:04:19,529
+我们不是指这个。
+We're not referring to this.
+
+100
+00:04:19,529 --> 00:04:25,270
+Java允许我们简单地隐式地引用字段，
+Java allows us to simply refer implicitly to the fields,
+
+101
+00:04:25,270 --> 00:04:28,970
+对于类的实例变量，如果
+to the instance variables, of a class if we're
+
+102
+00:04:28,970 --> 00:04:30,570
+在实例方法中。
+inside an instance method.
+
+103
+00:04:30,570 --> 00:04:33,527
+所以这个索引实际上是指
+So this index is actually referring
+
+104
+00:04:33,527 --> 00:04:34,610
+到那个实例变量。
+to that instance variable.
+
+105
+00:04:34,610 --> 00:04:37,140
+我们可以把这个点索引写在这里
+And we could have written this dot index here
+
+106
+00:04:37,140 --> 00:04:39,920
+就像我们在这里写的一样。
+in the same way we wrote it here.
+
+107
+00:04:39,920 --> 00:04:42,530
+我们选择不只是为了方便。
+We chose not to just for convenience.
+
+108
+00:04:42,530 --> 00:04:45,320
+您将看到许多Java程序员忽略了这一点。
+And you'll see many Java programmers omitting the this.
+
+110
+00:04:48,910 --> 00:04:51,730
+所以，顺便说一下，我们也有一些不同
+So we also have, by the way, some differences
+
+111
+00:04:51,730 --> 00:04:54,340
+在私人和公共之间。
+between private and public.
+
+112
+00:04:54,340 --> 00:04:57,310
+私人物品，私人类和变量，
+Private things, private classes and variables,
+
+113
+00:04:57,310 --> 00:05:01,780
+只能在类的文本中访问
+can only be accessed within the text of the class
+
+114
+00:05:01,780 --> 00:05:03,050
+他们所属的。
+that they belong to.
+
+115
+00:05:03,050 --> 00:05:05,370
+所以这意味着这个列表和这个索引
+So that means that this list and this index
+
+116
+00:05:05,370 --> 00:05:09,190
+只能从MyIterator中查看和访问
+can only be seen and accessed from within this MyIterator
+
+117
+00:05:09,190 --> 00:05:10,090
+上课。
+class.
+
+118
+00:05:10,090 --> 00:05:12,380
+而公共的，比如构造器
+Whereas public ones, like the constructor
+
+119
+00:05:12,380 --> 00:05:16,940
+像这些方法一样，可以从任何地方调用。
+and like these methods, can be called from anywhere.
+
+120
+00:05:16,940 --> 00:05:19,040
+我们以前也讨论过决赛。
+And we've talked about final before.
+
+121
+00:05:19,040 --> 00:05:24,000
+Final使这个引用，这个列表变量，不可变。
+Final makes this reference, this list variable, immutable.
+
+122
+00:05:24,000 --> 00:05:26,940
+这意味着它只能指向那个列表。
+It means that it can only ever point to that list.
+
+124
+00:05:33,670 --> 00:05:37,250
+特别是，当我们绘制这个快照图时
+So in particular, when we draw this snapshot diagram that
+
+125
+00:05:37,250 --> 00:05:41,260
+显示MyIterator的特定实例及其字段，
+shows a particular instance of MyIterator with its fields,
+
+126
+00:05:41,260 --> 00:05:45,950
+对于它的实例变量，它的列表变量
+with its instance variables, its list variable
+
+127
+00:05:45,950 --> 00:05:48,100
+指向特定数组列表。
+points to a particular array list.
+
+128
+00:05:48,100 --> 00:05:52,130
+那是一个双箭头，因为它是最终的。
+And that's a double arrow because it's final.
+
+129
+00:05:52,130 --> 00:05:56,150
+这意味着这个箭头永远不会改变。
+And that means that this arrow can never actually change.
+
+130
+00:05:56,150 --> 00:05:58,750
+但是请注意，它指向的数组列表对象
+But notice that the array list object that it points to
+
+131
+00:05:58,750 --> 00:05:59,590
+是可变的。
+is mutable.
+
+132
+00:05:59,590 --> 00:06:00,090
+对吗？
+Right?
+
+133
+00:06:00,090 --> 00:06:03,010
+它周围没有双重边界。
+It doesn't have a double border around it.
+
+134
+00:06:03,010 --> 00:06:04,730
+列表通常是可变的。
+Lists are, in general, mutable.
+
+135
+00:06:04,730 --> 00:06:07,010
+所以元素可以在里面改变。
+So elements can be changed within it.
+
+136
+00:06:07,010 --> 00:06:10,760
+声明此列表为final无效
+Declaring this list final has no effect
+
+137
+00:06:10,760 --> 00:06:15,700
+这个对象是可变的还是不可变的。
+on whether this object is mutable or immutable.
+
+138
+00:06:15,700 --> 00:06:17,070
+现在，为什么存在迭代器？
+Now, why do iterators exist?
+
+139
+00:06:17,070 --> 00:06:18,945
+有很多种收集数据
+Well, there are many kinds of collection data
+
+140
+00:06:18,945 --> 00:06:21,592
+结构——链表、映射、哈希表和数组。
+structures-- linked lists, maps, and hash tables, and arrays.
+
+141
+00:06:21,592 --> 00:06:23,050
+他们每个人都有不同的类型
+And they each have a different kind
+
+142
+00:06:23,050 --> 00:06:24,286
+内部代表。
+of internal representation.
+
+143
+00:06:24,286 --> 00:06:26,430
+以及迭代器思想的优势
+And advantage of the iterator idea
+
+144
+00:06:26,430 --> 00:06:28,560
+我们现在有一个统一的方法
+is that we now have a single uniform way
+
+145
+00:06:28,560 --> 00:06:33,550
+要访问它们，一个具有方法next和has next的对象。
+to access them all, an object with methods next and has next.
+
+146
+00:06:33,550 --> 00:06:35,460
+所以客户端代码可以简单得多。
+So the client code can be much simpler.
+
+147
+00:06:35,460 --> 00:06:37,970
+我们可以使用不同的收藏
+And we can use various different collections
+
+148
+00:06:37,970 --> 00:06:43,710
+而不更改使用该集合的代码。
+without changing the code that is using that collection.
+
+149
+00:06:43,710 --> 00:06:45,540
+所以大多数现代语言，包括
+So most modern languages, including
+
+150
+00:06:45,540 --> 00:06:47,550
+Python和C Sharp、Ruby以及Java，
+Python and C Sharp and Ruby, as well as Java,
+
+151
+00:06:47,550 --> 00:06:48,841
+有迭代器的概念。
+have the notion of an iterator.
+
+152
+00:06:48,841 --> 00:06:50,900
+这是一个非常有效的设计模式。
+It's a very effective design pattern.
+
+153
+00:06:50,900 --> 00:06:53,050
+设计模式是经过充分测试的解决方案
+A design pattern is a well tested solution
+
+154
+00:06:53,050 --> 00:06:54,550
+一个共同的问题。
+to a common problem.
+
+155
+00:06:54,550 --> 00:06:56,290
+我们将看到许多其他的设计模式
+And we'll see many other design patterns
+
+156
+00:06:56,290 --> 00:06:58,620
+当我们走完全程。
+as we move through the course.
+

@@ -1,0 +1,55 @@
+1
+00:00:00,530 --> 00:00:03,310
+在这篇文章中，我们将看到一个强大的想法，叫做
+In this reading, we're going to look at a powerful idea called
+
+2
+00:00:03,310 --> 00:00:06,420
+抽象数据类型，使我们能够分离
+abstract data types, which enable us to separate how
+
+3
+00:00:06,420 --> 00:00:08,710
+我们在程序中使用数据结构
+we use a data structure in a program
+
+4
+00:00:08,710 --> 00:00:12,070
+从数据结构本身的特定形式。
+from the particular form of the data structure itself.
+
+5
+00:00:12,070 --> 00:00:15,160
+抽象数据类型解决了一个特别危险的问题，
+Abstract data types address a particularly dangerous problem,
+
+6
+00:00:15,160 --> 00:00:17,540
+客户对该类型的
+clients making assumptions about the type's
+
+7
+00:00:17,540 --> 00:00:19,780
+内部代表。
+internal representation.
+
+8
+00:00:19,780 --> 00:00:22,810
+我们会知道为什么这是危险的，以及你如何避免它。
+We'll see why this is dangerous and how you can avoid it.
+
+9
+00:00:22,810 --> 00:00:26,030
+我们还将讨论操作的分类
+We'll also discuss the classification of operations
+
+10
+00:00:26,030 --> 00:00:29,790
+以及对抽象数据类型进行良好设计的一些原则。
+and some principles of good design for abstract data types.
+
+11
+00:00:29,790 --> 00:00:31,620
+我们开始吧。
+Let's get started.
+

@@ -1,0 +1,375 @@
+1
+00:00:00,500 --> 00:00:01,302
+不可变类型。
+Immutable types.
+
+2
+00:00:01,302 --> 00:00:03,260
+如果你在数据型超市购物
+If you were shopping in a data type supermarket
+
+3
+00:00:03,260 --> 00:00:06,790
+你必须在一个无聊的不可变字符串之间做出选择
+and you had to choose between a boring immutable string
+
+4
+00:00:06,790 --> 00:00:08,430
+一个真正有权势的人
+and a really powerful do anything
+
+5
+00:00:08,430 --> 00:00:09,930
+可变字符串生成器，为什么在地球上
+mutable string builder, why on Earth
+
+6
+00:00:09,930 --> 00:00:11,734
+你会选择不变的那个吗？
+would you choose the immutable one?
+
+7
+00:00:11,734 --> 00:00:13,650
+字符串生成器应该能够执行所有操作
+String builder should be able to do everything
+
+8
+00:00:13,650 --> 00:00:15,250
+毕竟它的弦可以做，
+that its string can do, after all,
+
+9
+00:00:15,250 --> 00:00:18,830
+伴随着这些突变，比如设置和附加
+along with these mutations, like setting and appending
+
+10
+00:00:18,830 --> 00:00:20,960
+删除其他所有内容。
+and delete and everything else.
+
+11
+00:00:20,960 --> 00:00:25,590
+答案是不可变的类型
+And the answer is immutable types actually
+
+12
+00:00:25,590 --> 00:00:28,220
+更好地满足本课程的三个原则。
+satisfy much better the three principles of this course.
+
+13
+00:00:28,220 --> 00:00:29,290
+它们对虫子更安全。
+They're safer from bugs.
+
+14
+00:00:29,290 --> 00:00:30,498
+它们更容易理解。
+They're easier to understand.
+
+15
+00:00:30,498 --> 00:00:32,374
+他们更愿意改变。
+And they're more ready for change.
+
+16
+00:00:32,374 --> 00:00:34,040
+易变性使它更难理解
+Mutability makes it harder to understand
+
+17
+00:00:34,040 --> 00:00:36,030
+你的程序在做什么而且更难
+what your program is doing and much harder
+
+18
+00:00:36,030 --> 00:00:37,190
+执行合同。
+to enforce contracts.
+
+19
+00:00:37,190 --> 00:00:39,648
+我们将举几个例子
+And we're going to have a few examples in this reading that
+
+20
+00:00:39,648 --> 00:00:41,360
+说明原因。
+illustrate why.
+
+21
+00:00:41,360 --> 00:00:44,660
+第一个例子说明了什么会出错
+First example shows what can go wrong
+
+22
+00:00:44,660 --> 00:00:48,170
+当您将可变值传递给方法时。
+when you're passing a mutable value into a method.
+
+23
+00:00:48,170 --> 00:00:49,840
+所以让我们从一个简单的方法开始
+So let's start with a simple method that
+
+24
+00:00:49,840 --> 00:00:51,710
+将列表中的整数相加。
+sums up the integers in a list.
+
+25
+00:00:51,710 --> 00:00:54,990
+所以这里需要一个列表。
+So it takes a list here.
+
+26
+00:00:54,990 --> 00:00:57,590
+它在列表的值上循环，
+It loops over the values of that list,
+
+27
+00:00:57,590 --> 00:01:00,460
+x取列表中出现的所有整数，
+x takes on every integer that appears in that list,
+
+28
+00:01:00,460 --> 00:01:02,560
+我们只是把它们加在一起。
+and we're simply adding them to this sum.
+
+29
+00:01:02,560 --> 00:01:04,940
+然后我们还这笔钱。
+And then we return that sum.
+
+30
+00:01:04,940 --> 00:01:06,630
+这就是它的合同承诺的，
+And that's what its contract promises,
+
+31
+00:01:06,630 --> 00:01:08,004
+它会把钱还回来
+that it's going to return the sum
+
+32
+00:01:08,004 --> 00:01:10,950
+名单上的号码。
+of the numbers in this list.
+
+33
+00:01:10,950 --> 00:01:11,580
+很简单。
+Simple enough.
+
+34
+00:01:11,580 --> 00:01:13,070
+假设现在我们还需要一个方法
+Suppose now we also need a method
+
+35
+00:01:13,070 --> 00:01:16,970
+对列表中数字的绝对值求和。
+that sums the absolute values of the numbers in the list.
+
+36
+00:01:16,970 --> 00:01:19,110
+现在，也许我们的程序员想跟随
+Now, maybe our programmer wants to follow
+
+37
+00:01:19,110 --> 00:01:21,372
+很好，不要重复练习。
+good don't repeat yourself practice.
+
+38
+00:01:21,372 --> 00:01:23,330
+记住，我们说过不要重复
+Remember, we talked about don't repeat yourself
+
+39
+00:01:23,330 --> 00:01:25,450
+在先前的阅读中。
+in an earlier reading.
+
+40
+00:01:25,450 --> 00:01:29,680
+所以他们写了一个方法，使用sum作为子例程。
+And so they write a method that uses sum as a sub routine.
+
+41
+00:01:29,680 --> 00:01:31,800
+所以绝对值之和是假设的
+So sum of absolute values is supposed
+
+42
+00:01:31,800 --> 00:01:33,670
+返回绝对值之和
+to return the sum of the absolute values
+
+43
+00:01:33,670 --> 00:01:35,690
+在名单上的数字里。
+in the numbers in the list.
+
+44
+00:01:35,690 --> 00:01:37,860
+所以拿着那张单子
+So takes that list of numbers and it's
+
+45
+00:01:37,860 --> 00:01:39,860
+应该给出绝对值的和。
+supposed to give the sum of the absolute values.
+
+46
+00:01:39,860 --> 00:01:44,330
+让我们继续使用sum，换句话说，
+And let's go ahead and reuse sum, in other words,
+
+47
+00:01:44,330 --> 00:01:47,477
+构造此实现，以便我们可以简单地调用sum。
+structure this implementation so we can simply call sum.
+
+48
+00:01:47,477 --> 00:01:49,060
+程序的运行方式
+And the way the program is going to do
+
+49
+00:01:49,060 --> 00:01:50,550
+就在他们要循环的时候
+that is while they're going to loop
+
+50
+00:01:50,550 --> 00:01:55,120
+通过此列表中每个元素的索引
+through the indexes of each of the elements in this list
+
+51
+00:01:55,120 --> 00:01:57,380
+更改列表的值。
+and change the value of the list.
+
+52
+00:01:57,380 --> 00:02:04,470
+因此，将索引I处的元素替换为其绝对值。
+So replace the element at index I with its absolute value.
+
+53
+00:02:04,470 --> 00:02:08,080
+然后我们可以简单地调用结果列表上的sum。
+And then we can simply call sum on that resulting list.
+
+54
+00:02:08,080 --> 00:02:12,240
+所以这个方法通过直接改变列表来完成它的工作。
+So this method does its job by mutating the list directly.
+
+55
+00:02:12,240 --> 00:02:14,380
+对程序员来说似乎很明智
+Seems sensible actually to a programmer
+
+56
+00:02:14,380 --> 00:02:17,020
+因为重用现有列表非常有效。
+because it's very efficient to reuse this existing list.
+
+57
+00:02:17,020 --> 00:02:20,157
+如果清单上有几百万个项目，
+If the list happens to be millions of items long,
+
+58
+00:02:20,157 --> 00:02:21,740
+那么你就节省了时间和记忆
+then you're saving the time and memory
+
+59
+00:02:21,740 --> 00:02:25,580
+生成新的百万项绝对值列表
+of generating a new million item list of the absolute values
+
+60
+00:02:25,580 --> 00:02:27,157
+在你叫苏姆之前。
+before you call sum.
+
+61
+00:02:27,157 --> 00:02:28,990
+所以实现者有两个很好的理由
+So the implementer has two very good reasons
+
+62
+00:02:28,990 --> 00:02:31,280
+对于这种设计，不要重复，
+for this kind of design, don't repeat yourself,
+
+63
+00:02:31,280 --> 00:02:35,672
+他们在这里重用这些代码和性能。
+they're reusing this code here, and performance.
+
+64
+00:02:35,672 --> 00:02:37,130
+但最终的结果是
+But the resulting behavior is going
+
+65
+00:02:37,130 --> 00:02:39,900
+对任何一个
+to be very surprising to any client who
+
+66
+00:02:39,900 --> 00:02:42,380
+尝试使用此函数。
+tries to use this function.
+
+67
+00:02:42,380 --> 00:02:45,650
+例如，假设我们在某个地方有一个主方法
+For example, imagine that we have a main method some place
+
+68
+00:02:45,650 --> 00:02:47,620
+上面有一个数字列表。
+that has a list of numbers.
+
+69
+00:02:47,620 --> 00:02:50,130
+它想打印出绝对值
+And it wants to print the absolute values
+
+70
+00:02:50,130 --> 00:02:53,260
+以及打印总数
+of those numbers as well as printing the sum
+
+71
+00:02:53,260 --> 00:02:55,860
+这些数字中的一个。
+of those numbers just as is.
+
+72
+00:02:55,860 --> 00:02:57,920
+问题是，这个代码会打印什么？
+The question is, what will this code print?
+
+73
+00:02:57,920 --> 00:03:01,740
+会打印5加3加2等于10吗
+Will it print 5 plus 3 plus 2 is 10
+
+74
+00:03:01,740 --> 00:03:04,370
+然后负5加负3加负2
+and then negative 5 plus negative 3 plus negative 2
+
+75
+00:03:04,370 --> 00:03:08,190
+是负10，还是会有其他作用？
+is negative 10, or will it do something else?
+

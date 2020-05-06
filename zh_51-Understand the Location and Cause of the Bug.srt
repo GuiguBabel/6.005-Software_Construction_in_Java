@@ -1,0 +1,1330 @@
+1
+00:00:01,780 --> 00:00:03,520
+接下来我们想知道地点
+Next we want to understand the location
+
+2
+00:00:03,520 --> 00:00:05,710
+以及这个错误的原因。
+and the cause of the bug.
+
+3
+00:00:05,710 --> 00:00:09,820
+在这里，我们可以用科学的方法。
+And, here, to do that we can use the scientific method.
+
+4
+00:00:09,820 --> 00:00:12,670
+换句话说，首先，研究数据——理解数据
+In other words, first, study the data-- understand the data
+
+5
+00:00:12,670 --> 00:00:13,820
+我们得到的。
+that we've got.
+
+6
+00:00:13,820 --> 00:00:18,060
+做出假设——猜测错误可能是什么。
+Make hypotheses-- guesses about what the bug could be.
+
+7
+00:00:18,060 --> 00:00:22,590
+做一个实验来验证这个假设，然后重复。
+Do an experiment to test the hypothesis, and repeat.
+
+8
+00:00:22,590 --> 00:00:24,860
+再说一遍，我们想研究数据。
+So again-- we want to study the data.
+
+9
+00:00:24,860 --> 00:00:26,670
+所以我们想看看这个测试输入
+So we want to look at that test input that
+
+10
+00:00:26,670 --> 00:00:30,440
+导致错误和不正确的结果，以及失败的断言，
+causes the bug and the incorrect results, and failed assertions,
+
+11
+00:00:30,440 --> 00:00:33,190
+堆栈跟踪和它引起的异常。
+and stack traces, and exceptions that it causes.
+
+12
+00:00:33,190 --> 00:00:36,760
+这些都是数据告诉我们--给我们信息
+Those are all data that tell us-- give us information
+
+13
+00:00:36,760 --> 00:00:38,100
+关于虫子可能是什么。
+about what the bug might be.
+
+14
+00:00:38,100 --> 00:00:40,510
+所以我们想先仔细研究一下。
+So we want to study those carefully first.
+
+15
+00:00:40,510 --> 00:00:43,170
+然后我们想提出一个一致的假设
+And then we want to come up with a hypothesis that's consistent
+
+16
+00:00:43,170 --> 00:00:45,790
+有了关于窃听器可能在哪里的数据，
+with the data about where the bug might be,
+
+17
+00:00:45,790 --> 00:00:48,590
+不可能的地方。
+and where it cannot be.
+
+18
+00:00:48,590 --> 00:00:52,450
+先把这个假设概括一下是很好的。
+It's good to make this hypothesis general at first.
+
+19
+00:00:52,450 --> 00:00:54,400
+第三，我们想设计一个实验
+Third, we want to devise an experiment
+
+20
+00:00:54,400 --> 00:00:55,900
+来检验这个假设。
+to test the hypothesis.
+
+21
+00:00:55,900 --> 00:00:57,870
+做这个实验真的很好
+And it's really good to make this experiment
+
+22
+00:00:57,870 --> 00:01:00,170
+只是一个观察。
+just an observation.
+
+23
+00:01:00,170 --> 00:01:03,307
+换言之，探测，如打印语句或中断
+In other words, a probe, like a print statement or a break
+
+24
+00:01:03,307 --> 00:01:07,210
+收集信息但干扰系统的点
+point that collects information but disturbs the system
+
+25
+00:01:07,210 --> 00:01:08,750
+尽可能少。
+as little as possible.
+
+26
+00:01:08,750 --> 00:01:10,640
+特别是，这个实验不应该
+Particularly, this experiment should not
+
+27
+00:01:10,640 --> 00:01:12,780
+“好吧，让我彻底重写
+be "well, let me completely rewrite
+
+28
+00:01:12,780 --> 00:01:16,220
+这个函数的主体，看看它是否修复了错误。”
+the body of this function and see if that fixes the bug."
+
+29
+00:01:16,220 --> 00:01:18,500
+你首先要做的是真正理解
+What you want to do first is really understand
+
+30
+00:01:18,500 --> 00:01:21,590
+我们的假设是否正确。
+whether our hypothesis is true.
+
+31
+00:01:21,590 --> 00:01:23,530
+在那次实验之后，我们得到了更多的数据。
+After that experiment, we've got more data.
+
+32
+00:01:23,530 --> 00:01:25,700
+把我们收集的数据加到实验中，
+Add that data we collected to the experiment,
+
+33
+00:01:25,700 --> 00:01:27,984
+从我们以前知道的。
+from what we knew before.
+
+34
+00:01:27,984 --> 00:01:29,150
+做一个新的假设。
+And make a fresh hypothesis.
+
+35
+00:01:29,150 --> 00:01:31,936
+所以希望我们排除了一些可能性，
+So hopefully we've ruled out some possibilities,
+
+36
+00:01:31,936 --> 00:01:34,665
+可能会缩小可能的地点范围
+and maybe narrowed down the set of possible locations
+
+37
+00:01:34,665 --> 00:01:36,780
+以及错误的原因。
+and reasons for the bug.
+
+38
+00:01:36,780 --> 00:01:39,300
+因此，让我们在这个
+So let's look at these steps in the context of this most
+
+39
+00:01:39,300 --> 00:01:42,960
+我们在上一节中使用的常见单词示例。
+common word example that we had in the previous section.
+
+40
+00:01:42,960 --> 00:01:44,490
+现在我们充实了它。
+Now we fleshed it out.
+
+41
+00:01:44,490 --> 00:01:49,510
+最常见的一个词并不是独自完成它的工作。
+The most common word doesn't do its job all by itself.
+
+42
+00:01:49,510 --> 00:01:52,130
+相反，它有这三个助手函数。
+Instead it has these three helper functions.
+
+43
+00:01:52,130 --> 00:01:54,660
+这一个，它接受文本字符串
+This one, that takes the string of text
+
+44
+00:01:54,660 --> 00:01:57,250
+把它拆分成单词--所以它返回
+and splits it into words-- so it returns
+
+45
+00:01:57,250 --> 00:02:00,840
+列表中每个元素都是一个单词的列表。
+a list in which each element of the list is a word.
+
+46
+00:02:00,840 --> 00:02:04,130
+计算出现次数，这需要一个单词列表--
+Count occurrences, that takes a list of words--
+
+47
+00:02:04,130 --> 00:02:06,440
+很可能是那句话--
+probably the one returned by split into words--
+
+48
+00:02:06,440 --> 00:02:08,919
+并生成频率图。
+and produces a frequency map.
+
+49
+00:02:08,919 --> 00:02:11,940
+所以对于列表中的每个单词，这张地图
+So for each word in that list, this map
+
+50
+00:02:11,940 --> 00:02:14,130
+会有一个有那个词的条目
+will have an entry that has that word, along
+
+51
+00:02:14,130 --> 00:02:18,680
+以及该单词在列表中出现的次数。
+with the number of times that that word occurs in that list.
+
+52
+00:02:18,680 --> 00:02:20,600
+然后是第三个helper函数
+And then the third helper function
+
+53
+00:02:20,600 --> 00:02:22,450
+获取其中一个频率图
+takes one of these frequency maps
+
+54
+00:02:22,450 --> 00:02:25,920
+基本上找到了它的顶点--找到了单词，
+and basically finds the peaks in it-- finds the words,
+
+55
+00:02:25,920 --> 00:02:30,090
+查找具有最高整数的字符串。
+finds the strings that have the highest integer.
+
+56
+00:02:30,090 --> 00:02:32,300
+事实上，它发现了这样一个词。
+In fact, it finds one such word.
+
+57
+00:02:32,300 --> 00:02:34,420
+所以如果有领带，它会给你
+So if there are ties, it's going to give you
+
+58
+00:02:34,420 --> 00:02:35,660
+一个特别的词。
+one particular word.
+
+59
+00:02:35,660 --> 00:02:39,075
+因为我们只想要一个最大限度地出现的词。
+Because we only wanted a word that occurs in maximally.
+
+60
+00:02:39,075 --> 00:02:42,660
+我们不一定都需要。
+We don't necessarily need all of them.
+
+61
+00:02:42,660 --> 00:02:44,630
+所以在最普通的字眼里，你会
+And so inside most common word, you'll
+
+62
+00:02:44,630 --> 00:02:47,700
+看它叫这三个帮手
+see that it's calling these three helper
+
+63
+00:02:47,700 --> 00:02:50,270
+方法——基本上取一个的输出，
+methods-- basically taking the output of one,
+
+64
+00:02:50,270 --> 00:02:54,390
+把它作为输入传递给下一个，
+passing it in as the input to the next,
+
+65
+00:02:54,390 --> 00:02:56,980
+直到我们最终得到这个获胜的词
+until we finally get this winning word which
+
+66
+00:02:56,980 --> 00:02:58,095
+是我们真正的回报。
+is what we actual return.
+
+67
+00:02:58,095 --> 00:02:59,900
+我们这里有点点点
+And we've got dot-dot-dots here just
+
+68
+00:02:59,900 --> 00:03:01,886
+因为还有其他Java代码
+because there's other Java code that we
+
+69
+00:03:01,886 --> 00:03:03,010
+需要把这个粘在一起。
+need to glue this together.
+
+70
+00:03:03,010 --> 00:03:07,172
+但对于这个例子来说，这并不重要。
+But it won't be important for the sake of this example.
+
+71
+00:03:07,172 --> 00:03:08,630
+所以首先我们要研究数据。
+So first we want to study the data.
+
+72
+00:03:08,630 --> 00:03:10,430
+我们得到的一种重要的数据形式
+One important form of data we get
+
+73
+00:03:10,430 --> 00:03:13,140
+是来自异常的堆栈跟踪。
+is a stack trace from an exception.
+
+74
+00:03:13,140 --> 00:03:15,062
+所以你应该练习读取堆栈跟踪
+So you should practice reading stack traces
+
+75
+00:03:15,062 --> 00:03:17,270
+你可以在Eclipse和Java中看到，因为它们会给你
+you see in Eclipse and Java, because they'll give you
+
+76
+00:03:17,270 --> 00:03:18,660
+大量的信息
+an enormous amount of information
+
+77
+00:03:18,660 --> 00:03:21,636
+关于虫子可能在哪里和什么地方。
+about where and what the bug might be.
+
+78
+00:03:21,636 --> 00:03:23,510
+例如，堆栈跟踪可能会告诉您
+The stack trace, for instance, might tell you
+
+79
+00:03:23,510 --> 00:03:25,990
+它实际上是在倒计时出现。
+that it's actually down inside count occurrences.
+
+80
+00:03:25,990 --> 00:03:30,870
+那就是我们可能想要集中注意力的地方。
+And then that is where we maybe want to focus our attention.
+
+81
+00:03:30,870 --> 00:03:32,930
+不过，也有可能是
+Although, it could also have been
+
+82
+00:03:32,930 --> 00:03:35,880
+由于拼字错误引起的
+caused by a mistake in split into words
+
+83
+00:03:35,880 --> 00:03:39,090
+然后就变成了计数事件，对吧？
+that then fed into count occurrences, right?
+
+84
+00:03:39,090 --> 00:03:42,850
+但它不可能是最常见的，
+But it can't be in find most common,
+
+85
+00:03:42,850 --> 00:03:45,600
+因为那已经被执行了。
+Because that has an even executed yet.
+
+86
+00:03:45,600 --> 00:03:49,010
+确实如此——堆栈跟踪给了我们信息
+So that really does-- that stack trace gives us information
+
+87
+00:03:49,010 --> 00:03:53,550
+关于虫子能在哪里，不能在哪里。
+about where the bug can and cannot be.
+
+88
+00:03:53,550 --> 00:03:55,309
+分离小测试用例的过程
+The process of isolating a small test case
+
+89
+00:03:55,309 --> 00:03:57,350
+也可能给我们以前没有的数据。
+may also give us data that we didn't have before.
+
+90
+00:03:57,350 --> 00:04:00,120
+我们甚至可能有两个相关的测试用例
+We may even have two related test cases
+
+91
+00:04:00,120 --> 00:04:03,320
+从某种意义上说，这是一个错误
+that bracket the bug, in the sense that one of them
+
+92
+00:04:03,320 --> 00:04:05,890
+成功而其中一个失败。
+succeeds and one of them fails.
+
+93
+00:04:05,890 --> 00:04:09,280
+所以也许把这个字符串转换成最常用的单词
+So maybe passing this string into most common word
+
+94
+00:04:09,280 --> 00:04:11,560
+失败，但此字符串成功。
+fails, but this string succeeds.
+
+95
+00:04:11,560 --> 00:04:14,190
+然后你可以看看这两者的区别
+And then you can look at the difference between these two
+
+96
+00:04:14,190 --> 00:04:17,430
+测试用例，然后查看——并获取一些信息
+test cases, and see-- and get some information
+
+97
+00:04:17,430 --> 00:04:19,320
+关于问题的可能原因。
+about the possible cause of problem.
+
+98
+00:04:19,320 --> 00:04:24,710
+所以这是另一个为什么通过减少你的测试来隔离
+So this is another reason why isolating by reducing your test
+
+99
+00:04:24,710 --> 00:04:27,981
+输入——减少导致错误的输入——可以给您
+input-- reducing the input the causes the bug-- can give you
+
+100
+00:04:27,981 --> 00:04:29,480
+关于这个错误的更多信息
+a lot more information about the bug
+
+101
+00:04:29,480 --> 00:04:33,740
+甚至连代码都没看。
+without even looking at any of the code yet.
+
+102
+00:04:33,740 --> 00:04:35,230
+现在我们要假设。
+Now we want to hypothesize.
+
+103
+00:04:35,230 --> 00:04:36,720
+为了这个，你可以想想
+And for this, It can help to think
+
+104
+00:04:36,720 --> 00:04:38,250
+关于作为模块的程序。
+about the program as modules.
+
+105
+00:04:38,250 --> 00:04:41,810
+记住，最常见的单词有三个子例程
+Remember that most common word has three subroutines
+
+106
+00:04:41,810 --> 00:04:42,710
+它正在使用。
+that it's using.
+
+107
+00:04:42,710 --> 00:04:45,980
+这些子程序之间有数据流
+And there's a flow of data between those subroutines
+
+108
+00:04:45,980 --> 00:04:48,340
+这是由最常见的词编排的。
+that's orchestrated by most common words.
+
+109
+00:04:48,340 --> 00:04:50,380
+如果bug的症状是一个异常
+Now if the symptom of the bug is an exception
+
+110
+00:04:50,380 --> 00:04:52,980
+像我们刚才说的那样，在计数事件中，
+in count occurrences, like we said earlier,
+
+111
+00:04:52,980 --> 00:04:56,140
+然后我们可以排除下游的一切。
+then we can rule out everything that's downstream.
+
+112
+00:04:56,140 --> 00:04:59,400
+窃听器实际上必须发生在这里或这里，
+The bug actually has to happen either here or here,
+
+113
+00:04:59,400 --> 00:05:01,960
+但这段代码还没有运行。
+but this code hasn't even run yet.
+
+114
+00:05:01,960 --> 00:05:04,680
+所以虫子不会在这里出现。
+So the bug doesn't occur here.
+
+115
+00:05:04,680 --> 00:05:06,220
+所以我们可以选择一个假设
+So we might choose a hypothesis that
+
+116
+00:05:06,220 --> 00:05:08,190
+尝试进一步本地化错误。
+tries to localize the bug even further.
+
+117
+00:05:08,190 --> 00:05:10,340
+例如，我们可以假设
+We might, for instance, hypothesize
+
+118
+00:05:10,340 --> 00:05:12,820
+窃听器一分为二，
+that the bug is in split in two words,
+
+119
+00:05:12,820 --> 00:05:15,580
+破坏其结果，从而导致异常
+corrupting its results which then cause the exception
+
+120
+00:05:15,580 --> 00:05:17,660
+并计算出现次数。
+and count occurrences.
+
+121
+00:05:17,660 --> 00:05:20,600
+所以我们想要一个实验来验证这个假设。
+So we then want an experiment to test that hypothesis.
+
+122
+00:05:20,600 --> 00:05:23,560
+例如，我们可以将print语句放在split的末尾
+For instance, we might put print statements at the end of split
+
+123
+00:05:23,560 --> 00:05:26,440
+说出来看看它到底在生产什么。
+into words to see what it's actually producing.
+
+124
+00:05:26,440 --> 00:05:29,340
+或者我们可以将额外的断言语句分成
+Or we might put extra assertion statements into split
+
+125
+00:05:29,340 --> 00:05:32,200
+用语言表达。
+into words.
+
+126
+00:05:32,200 --> 00:05:35,450
+如果我们的假设是真的
+Now if our hypothesis is true and there is actually
+
+127
+00:05:35,450 --> 00:05:38,220
+垃圾结果或损坏的结果，
+garbage results, or corrupt results,
+
+128
+00:05:38,220 --> 00:05:40,120
+分裂成语言或生产，我们
+split into words or producing, we
+
+129
+00:05:40,120 --> 00:05:41,970
+将排除计数事件
+will have ruled out count occurrences
+
+130
+00:05:41,970 --> 00:05:44,010
+作为问题的根源，我们可以集中精力
+as the source of the problem, and we can focus
+
+131
+00:05:44,010 --> 00:05:45,880
+相反的，是分裂成文字。
+instead on split into words.
+
+132
+00:05:45,880 --> 00:05:48,780
+如果我们的程序是错误的，就把它分成几个字
+If our process is false, and split into words
+
+133
+00:05:48,780 --> 00:05:52,962
+是返回好的数据，然后我们可以排除分成几个词
+is returning good data, then we can rule out split into words
+
+134
+00:05:52,962 --> 00:05:54,545
+我们会把重点放在反事故上。
+and we'd focus on counter occurrences.
+
+136
+00:05:57,270 --> 00:05:59,730
+好的实验是温和的观察
+Now a good experiment is a gentle observation
+
+137
+00:05:59,730 --> 00:06:01,780
+对系统没有太大的干扰。
+of the system that doesn't disturb it much.
+
+138
+00:06:01,780 --> 00:06:04,730
+它可能试图运行另一个测试用例。
+It might be trying to run a different test case.
+
+139
+00:06:04,730 --> 00:06:07,780
+当我们讨论测试用例的时候
+So we showed that above, when we were talking about test case
+
+140
+00:06:07,780 --> 00:06:08,460
+减少。
+reduction.
+
+141
+00:06:08,460 --> 00:06:10,530
+我们用测试用例做实验。
+We were using test cases as experiments.
+
+142
+00:06:10,530 --> 00:06:12,860
+这根本不会改变代码。
+That doesn't change the code at all.
+
+143
+00:06:12,860 --> 00:06:15,620
+我们还可以插入print语句或断言
+We might also insert a print statement or an assertion
+
+144
+00:06:15,620 --> 00:06:17,510
+进入正在运行的程序来检查
+into the running program to check something
+
+145
+00:06:17,510 --> 00:06:18,980
+关于它的内部状态。
+about its internal state.
+
+146
+00:06:18,980 --> 00:06:21,000
+这使它非常轻微地受到干扰。
+That perturbs it very lightly.
+
+147
+00:06:21,000 --> 00:06:24,040
+我们可以使用调试器设置断点，然后
+We might set a break point using a debugger, and then
+
+148
+00:06:24,040 --> 00:06:26,698
+单步执行代码并查看变量和对象
+single step through the code and look at variable and object
+
+149
+00:06:26,698 --> 00:06:28,410
+价值观。
+values.
+
+150
+00:06:28,410 --> 00:06:32,870
+这些都是很好的实验——轻量级探针。
+These are all good experiments-- lightweight probes.
+
+151
+00:06:32,870 --> 00:06:35,420
+现在很容易尝试，马上，
+Now can be very tempting to try, right away,
+
+152
+00:06:35,420 --> 00:06:38,130
+去修复错误而不是仅仅探测。
+to jump to fixing the bug instead of just probing.
+
+153
+00:06:38,130 --> 00:06:41,220
+但这几乎总是错误的。
+But this is almost always the wrong thing to do.
+
+154
+00:06:41,220 --> 00:06:44,290
+它会导致一种非常特别的猜测和测试
+It leads to a kind of very ad hoc guessing and test
+
+155
+00:06:44,290 --> 00:06:46,570
+一种可以产生
+kind of programming, which can produce
+
+156
+00:06:46,570 --> 00:06:49,960
+糟糕、复杂、难以理解的代码。
+awful and complex and hard to understand code.
+
+157
+00:06:49,960 --> 00:06:52,570
+其次，你的修复可能会掩盖真正的错误
+And secondly, your fix may just mask the true bug
+
+158
+00:06:52,570 --> 00:06:54,540
+而不是真的移除它。
+without actually removing it.
+
+159
+00:06:54,540 --> 00:06:57,280
+你真的想知道什么是错误
+You really want to understand what the bug is
+
+160
+00:06:57,280 --> 00:07:00,870
+决定一个好的解决方案，而不是随机的
+and decide on a good fix for it, rather than just randomly
+
+161
+00:07:00,870 --> 00:07:03,504
+改变并希望它消失。
+change and hope that it goes away.
+
+162
+00:07:03,504 --> 00:07:05,670
+例如，如果你得到一个超出边界的区域
+For example, if you're getting an area out of bounds
+
+163
+00:07:05,670 --> 00:07:07,336
+例外，你真的想了解
+exception, you really want to understand
+
+164
+00:07:07,336 --> 00:07:08,550
+先发生什么事。
+what's going on first.
+
+165
+00:07:08,550 --> 00:07:12,270
+不要只抓住异常而忽略它。
+Don't just catch the exception and ignore it.
+
+166
+00:07:12,270 --> 00:07:13,841
+你想解决真正的问题。
+You want to fix the real problem.
+
+168
+00:07:16,430 --> 00:07:19,410
+这里还有一些其他的技巧可以帮助调试。
+And here are some other tips that can help with debugging.
+
+169
+00:07:19,410 --> 00:07:21,470
+调试实际上是一个搜索过程。
+Debugging is really a search process.
+
+170
+00:07:21,470 --> 00:07:24,170
+所以你可以用二进制搜索来加快速度。
+So you can use binary search to speed it up.
+
+171
+00:07:24,170 --> 00:07:27,760
+所以用最普通的话来说，这些数据
+So in most common words, this data
+
+172
+00:07:27,760 --> 00:07:29,625
+通过三个助手方法。
+flows through three helper methods.
+
+173
+00:07:29,625 --> 00:07:31,710
+所以要进行二进制搜索
+So to do a binary search you would divide
+
+174
+00:07:31,710 --> 00:07:35,100
+将此工作流分成两半，可能是猜测发现了错误
+this workflow in half, perhaps guessing that the bug is found
+
+175
+00:07:35,100 --> 00:07:38,110
+介于这通电话和那通电话之间，
+somewhere between this call and that call,
+
+176
+00:07:38,110 --> 00:07:39,917
+在那里插入探针。
+and inserting probes there.
+
+177
+00:07:39,917 --> 00:07:41,750
+从实验的答案来看，
+And then from the answer to that experiment,
+
+178
+00:07:41,750 --> 00:07:44,200
+你可以把代码进一步分成两半。
+you might further divide the code in half.
+
+179
+00:07:44,200 --> 00:07:45,850
+所以这样重复——特别是
+So repeating this way-- particularly
+
+180
+00:07:45,850 --> 00:07:48,630
+在一个大系统中——你可以很快
+in a large system-- you can very quickly
+
+181
+00:07:48,630 --> 00:07:55,080
+把它隔离到一个可能有虫子的较小区域。
+isolate down to a smaller area where the bug might be.
+
+182
+00:07:55,080 --> 00:07:58,179
+同时考虑优先考虑你可能的假设，
+Also think about prioritizing your possible hypotheses,
+
+183
+00:07:58,179 --> 00:07:59,720
+因为系统的不同部分
+because different parts of the system
+
+184
+00:07:59,720 --> 00:08:01,970
+增加不同的失败可能性。
+add different likelihoods of failure.
+
+185
+00:08:01,970 --> 00:08:05,450
+所以你的密码已经存在一段时间了
+So code of yours that has been around for a while
+
+186
+00:08:05,450 --> 00:08:07,800
+以不同的方式测试了很多--
+and tested a lot in various different ways--
+
+187
+00:08:07,800 --> 00:08:09,450
+不仅仅是通过它的单元测试套件
+not only through its unit test suite
+
+188
+00:08:09,450 --> 00:08:12,930
+也可以通过其他客户端代码实际使用--
+but also through actually being used by other client code--
+
+189
+00:08:12,930 --> 00:08:15,030
+它可能比代码更可信
+it's probably more trustworthy than code
+
+190
+00:08:15,030 --> 00:08:17,410
+你最近添加的。
+that you recently added.
+
+191
+00:08:17,410 --> 00:08:20,470
+同样，出于同样的原因，Java库代码，
+Likewise Java library code, for the same reason,
+
+192
+00:08:20,470 --> 00:08:22,790
+已经存在了很长一段时间，并且测试了很多
+has been around much longer and been tested much more
+
+193
+00:08:22,790 --> 00:08:23,740
+更多的人。
+by many more people.
+
+194
+00:08:23,740 --> 00:08:27,150
+所以它可能比你的代码更可信。
+So it's probably more trustworthy than your code.
+
+195
+00:08:27,150 --> 00:08:31,110
+如果你使用的是Java库之类的
+If you're using the Java library and something
+
+196
+00:08:31,110 --> 00:08:33,081
+似乎出了问题，原因
+seems to be going wrong, the cause
+
+197
+00:08:33,081 --> 00:08:34,580
+可能是你使用它的方式，
+is probably the way you're using it,
+
+198
+00:08:34,580 --> 00:08:37,720
+而不是因为Java库中的错误。
+rather than due to a bug in the Java library.
+
+199
+00:08:37,720 --> 00:08:40,809
+接下来，Java编译器和运行时
+Further down, the Java compiler and run time, the operating
+
+200
+00:08:40,809 --> 00:08:43,210
+系统，你机器的硬件，
+system, the hardware of your machine,
+
+201
+00:08:43,210 --> 00:08:45,280
+越来越值得信赖，因为他们
+are increasingly more trustworthy because they're
+
+202
+00:08:45,280 --> 00:08:46,520
+更多的尝试和考验。
+more tried and tested.
+
+203
+00:08:46,520 --> 00:08:49,310
+所以你应该相信这些低级的
+So you should trust these lower levels
+
+204
+00:08:49,310 --> 00:08:51,330
+直到你找到一个好的理由不去。
+until you've found a good reason not to.
+
+206
+00:08:54,050 --> 00:08:56,170
+另一个好的技术是交换组件。
+Another good technique is swapping components.
+
+207
+00:08:56,170 --> 00:08:58,280
+如果你有一个模块的实现
+So if you have an implementation of a module that
+
+208
+00:08:58,280 --> 00:09:00,900
+满足与模块相同的接口--
+satisfies the same interface as the module--
+
+209
+00:09:00,900 --> 00:09:02,710
+这是同样的规格——而你
+it's the same specification-- and you
+
+210
+00:09:02,710 --> 00:09:05,890
+怀疑这个实现，那么你可以做一件事
+suspect that implementation, then one thing you can do
+
+211
+00:09:05,890 --> 00:09:07,720
+正在尝试替换。
+is try swapping in the alternative.
+
+212
+00:09:07,720 --> 00:09:11,810
+例如，如果你有一个搜索函数
+So if you have, for instance, a search function that
+
+213
+00:09:11,810 --> 00:09:14,480
+有一个二进制实现，您可以
+has a binary implementation, you might
+
+214
+00:09:14,480 --> 00:09:17,210
+希望用更简单的线性实现来替换它。
+want to replace it with a simpler linear implementation.
+
+215
+00:09:17,210 --> 00:09:20,720
+会比较慢，但你可以更确信
+It will be slower, but you can be more confident that it
+
+216
+00:09:20,720 --> 00:09:24,080
+符合其规范。
+satisfies its specification.
+
+217
+00:09:24,080 --> 00:09:26,950
+例如，如果您怀疑数组列表
+If you suspect, for example, the array list
+
+218
+00:09:26,950 --> 00:09:30,530
+实现列表时，可以在链接列表中进行交换。
+implementation of lists, you might swap in a linked list.
+
+219
+00:09:30,530 --> 00:09:32,780
+如果您怀疑Java运行时已损坏，
+If you suspect the Java runtime is broken,
+
+220
+00:09:32,780 --> 00:09:35,520
+您可以切换到另一个版本的Java。
+you might switch to a different version of Java.
+
+221
+00:09:35,520 --> 00:09:40,640
+记住这些都是非常不寻常的假设。
+Remember these are very unusual hypotheses.
+
+222
+00:09:40,640 --> 00:09:44,900
+但它们说明了交换的概念。
+But they illustrate the notion of swapping.
+
+223
+00:09:44,900 --> 00:09:46,400
+你可以浪费很多时间交换
+You can waste a lot of time swapping
+
+224
+00:09:46,400 --> 00:09:48,090
+在组件出现故障时，不要这样做
+on failing components, so don't do this
+
+225
+00:09:48,090 --> 00:09:50,540
+除非你有充分的理由怀疑某个部件，
+unless you have good reason to suspect a component,
+
+226
+00:09:50,540 --> 00:09:54,092
+就像我们在前一段提到的。
+like we talked about in the previous paragraph.
+
+227
+00:09:54,092 --> 00:09:55,550
+你应该确定这是
+You should make sure-- this is sort
+
+228
+00:09:55,550 --> 00:09:57,720
+一件简单的事情——确保你的源代码和对象
+of a simple thing-- make sure your source code and object
+
+229
+00:09:57,720 --> 00:09:58,928
+代码实际上是最新的。
+code are actually up to date.
+
+230
+00:09:58,928 --> 00:10:01,776
+在Eclipse中，您可以通过运行project clean来实现这一点。
+In Eclipse, you can do this by running project clean.
+
+231
+00:10:01,776 --> 00:10:03,550
+你也应该确保，如果你
+You Should also make sure, if you
+
+232
+00:10:03,550 --> 00:10:07,030
+在一个组中工作——在一个有源代码控制的组中工作
+are working in a group-- in a team with a source code control
+
+233
+00:10:07,030 --> 00:10:09,250
+存储库——你应该确保
+repository-- you should make sure you've
+
+234
+00:10:09,250 --> 00:10:12,330
+从存储库中获取代码的最新版本。
+got the latest version of the code from the repository.
+
+235
+00:10:12,330 --> 00:10:14,560
+你可以得到帮助，经常有助于解释
+And you can get help it often helps to explain
+
+236
+00:10:14,560 --> 00:10:17,120
+你对别人的问题。
+your problem to someone else.
+
+237
+00:10:17,120 --> 00:10:19,910
+最后，睡在上面总是个好主意。
+Finally, sleeping on it is always a good idea.
+
+238
+00:10:19,910 --> 00:10:21,560
+如果你太累了，就不去了
+If you're too tired, you are not going
+
+239
+00:10:21,560 --> 00:10:24,942
+成为一个有效的调试器。
+to be an effective debugger.
+
+240
+00:10:24,942 --> 00:10:26,650
+所以一旦你发现了虫子
+So now I'll say once you've found the bug
+
+241
+00:10:26,650 --> 00:10:28,630
+你知道它的原因，第三步
+and you understand its cause, the third step
+
+242
+00:10:28,630 --> 00:10:30,730
+就是想办法解决它。
+is to devise a fix for it.
+
+243
+00:10:30,730 --> 00:10:32,540
+一个好的程序员会
+Here's where a good programmer will
+
+244
+00:10:32,540 --> 00:10:36,334
+避免诱惑，只要拍打一个补丁，然后继续前进。
+avoid temptations to just slap a patch on it and move on.
+
+245
+00:10:36,334 --> 00:10:38,250
+所以你应该扪心自问
+So you should ask yourself whether the bug was
+
+246
+00:10:38,250 --> 00:10:41,174
+一个简单的编码错误——比如变量名拼写错误
+a simple coding error-- like a misspelled variable name
+
+247
+00:10:41,174 --> 00:10:42,590
+或者互换方法参数，
+or interchanged method parameters,
+
+248
+00:10:42,590 --> 00:10:44,900
+或者是设计错误--
+or whether it was a design error--
+
+249
+00:10:44,900 --> 00:10:49,464
+就像方法中的一个坏规范。
+like a bad spec in a method.
+
+250
+00:10:49,464 --> 00:10:51,880
+设计错误表明您需要退后一步思考
+Design errors suggest that you need to step back and think
+
+251
+00:10:51,880 --> 00:10:52,830
+关于你的设计。
+about your design.
+
+252
+00:10:52,830 --> 00:10:55,280
+或者至少考虑一下所有的客户
+Or at the very least, consider all the clients
+
+253
+00:10:55,280 --> 00:10:56,460
+失败的接口。
+of the failing interface.
+
+254
+00:10:56,460 --> 00:10:59,130
+在你的代码中搜索它们，看看它们是否受到这个bug的影响
+Search for them in your code to see if they suffer from the bug
+
+255
+00:10:59,130 --> 00:11:00,764
+我也是。
+too.
+
+256
+00:11:00,764 --> 00:11:02,680
+想想这个虫子有没有亲戚。
+Think about whether the bug has any relatives.
+
+257
+00:11:02,680 --> 00:11:04,490
+如果你发现一个被零除的错误
+If you just found a divide by zero error
+
+258
+00:11:04,490 --> 00:11:07,280
+在这部分代码中，你做了同样的事情吗
+in this part of the code, did you do that same thing
+
+259
+00:11:07,280 --> 00:11:08,870
+密码里还有别的地方吗？
+anywhere else in the code?
+
+260
+00:11:08,870 --> 00:11:10,960
+你的目标是使你的代码安全
+Your goal is to try to make your code safe
+
+261
+00:11:10,960 --> 00:11:13,640
+从未来的虫子身上。
+from future bugs like this.
+
+262
+00:11:13,640 --> 00:11:16,010
+您还应该考虑影响代码的因素
+You should also consider what affects your code
+
+263
+00:11:16,010 --> 00:11:17,330
+你的修好了吗。
+will your fix will have.
+
+264
+00:11:17,330 --> 00:11:20,070
+它会打破其他密码吗？
+Will it break any other code?
+
+265
+00:11:20,070 --> 00:11:22,370
+最后，在你应用了你的修复程序之后，
+Finally, after you've applied your fix,
+
+266
+00:11:22,370 --> 00:11:25,160
+将bug测试用例添加到回归测试套件中
+add the bugs test case to your regression test suite
+
+267
+00:11:25,160 --> 00:11:27,800
+运行所有的测试来保证你自己，首先，
+and run all the tests to assure yourself, first,
+
+268
+00:11:27,800 --> 00:11:29,770
+你修好了，第二，你已经
+that you fixed it, and second, that you've
+
+269
+00:11:29,770 --> 00:11:32,160
+没有引入新的漏洞。
+introduced no new bugs.
+

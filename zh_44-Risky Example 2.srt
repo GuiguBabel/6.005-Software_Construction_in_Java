@@ -1,0 +1,510 @@
+1
+00:00:02,610 --> 00:00:04,990
+所以让我们想想这个例子的关键教训。
+So let's think about the key lessons of this example.
+
+2
+00:00:04,990 --> 00:00:07,270
+记住，这是我们一直在看的代码。
+Remember, here's the code that we've been looking at.
+
+3
+00:00:07,270 --> 00:00:09,600
+那么它是安全的吗？
+So is it safe from bugs?
+
+4
+00:00:09,600 --> 00:00:12,690
+好吧，很容易责怪sum的实现者
+Well, it's easy to blame the implementer of sum
+
+5
+00:00:12,690 --> 00:00:17,850
+绝对值超过其规范允许的范围。
+of absolute values for going beyond what its spec allowed.
+
+6
+00:00:17,850 --> 00:00:19,820
+因为它确实超出了规范允许的范围，
+Because it did go beyond what its spec allowed,
+
+7
+00:00:19,820 --> 00:00:22,340
+它的规范没有提到任何关于改变列表的内容。
+its spec didn't say anything about mutating the list.
+
+8
+00:00:22,340 --> 00:00:23,909
+我们说这是一个要求。
+And we said that was a requirement.
+
+9
+00:00:23,909 --> 00:00:25,950
+如果你想改变其中一个参数
+If you were going to mutate one of the parameters
+
+10
+00:00:25,950 --> 00:00:27,630
+那是传给你的，必须是
+that was passed into you, had to be
+
+11
+00:00:27,630 --> 00:00:30,550
+你的规格允许这么做。
+allowed to do so by your spec.
+
+12
+00:00:30,550 --> 00:00:34,330
+但实际上，传递不可变对象是一个潜在的错误。
+But really, passing immutable objects around is a latent bug.
+
+13
+00:00:34,330 --> 00:00:35,900
+只是在等程序员
+It's just waiting for some programmer
+
+14
+00:00:35,900 --> 00:00:38,590
+不经意地改变列表，经常
+to inadvertently mutate that list, often
+
+15
+00:00:38,590 --> 00:00:41,180
+具有很好的意图，比如能够重用其他代码
+with very good intentions like being able to reuse other code
+
+16
+00:00:41,180 --> 00:00:44,220
+或者获得更快的性能，但会导致
+or getting faster performance but resulting in a bug that
+
+17
+00:00:44,220 --> 00:00:47,350
+可能很难找到。
+may be very hard to track down.
+
+18
+00:00:47,350 --> 00:00:49,390
+另一个问题是容易理解吗？
+Is it easy to understand is another question?
+
+19
+00:00:49,390 --> 00:00:51,080
+好吧，当你读main的时候，你会
+Well, when reading main, what would you
+
+20
+00:00:51,080 --> 00:00:53,870
+假设绝对值和和？
+assume about sum and sum of absolute values?
+
+21
+00:00:53,870 --> 00:00:57,190
+读者是否能清楚地看到这份清单
+Is it clearly visible to a reader that this list is going
+
+22
+00:00:57,190 --> 00:00:59,230
+被其中一个改变？
+to get changed by one of them?
+
+23
+00:00:59,230 --> 00:01:04,560
+只是在你读代码的时候不明显
+Just not obvious in when you're reading code
+
+24
+00:01:04,560 --> 00:01:07,470
+突变可能发生的地方。
+where mutations can happen.
+
+25
+00:01:07,470 --> 00:01:08,730
+下面是第二个例子。
+Here's a second example.
+
+26
+00:01:08,730 --> 00:01:11,020
+所以我们看到了其中一个危险
+So we looked at one of the dangers
+
+27
+00:01:11,020 --> 00:01:13,940
+将可变对象传递到函数中。
+of passing a mutable object into a function.
+
+28
+00:01:13,940 --> 00:01:15,890
+让我们看看出现的问题
+Let's look at a problem that arises
+
+29
+00:01:15,890 --> 00:01:19,960
+当从函数返回可变值时。
+when you're returning a mutable value from a function.
+
+30
+00:01:19,960 --> 00:01:21,210
+所以让我们想想约会。
+So let's think about date.
+
+31
+00:01:21,210 --> 00:01:23,730
+Date是一个内置Java类。
+Date is a built in Java class.
+
+32
+00:01:23,730 --> 00:01:26,840
+它碰巧是一种可变类型。
+And it happens to be a mutable type.
+
+33
+00:01:26,840 --> 00:01:30,570
+它里面有方法--让我们向下滚动一点--
+It's got methods in it-- let's Scroll down here a little bit--
+
+34
+00:01:30,570 --> 00:01:36,124
+你可以设定时间，分钟，日期和时间
+that allow you to set the hours and minutes and day and time
+
+35
+00:01:36,124 --> 00:01:37,165
+日期所代表的。
+that the date represents.
+
+37
+00:01:42,140 --> 00:01:43,850
+假设我们读到一个方法
+So suppose we read a method that's
+
+38
+00:01:43,850 --> 00:01:46,646
+应该决定春天的第一天。
+supposed to determine the first day of Spring.
+
+39
+00:01:46,646 --> 00:01:49,270
+所以说明书上说，我们要在春天的第一天回来
+So its spec says, we're going to return the first day of Spring
+
+40
+00:01:49,270 --> 00:01:50,610
+今年。
+this year.
+
+41
+00:01:50,610 --> 00:01:52,290
+不需要争论。
+Takes no arguments.
+
+42
+00:01:52,290 --> 00:01:55,190
+它只返回其中一个日期对象
+And it simply returns one of these date objects, which
+
+43
+00:01:55,190 --> 00:01:56,770
+记住是可变的。
+remember is mutable.
+
+44
+00:01:56,770 --> 00:01:59,700
+我们会掩盖它的内部运作。
+And we'll gloss over how it actually works inside.
+
+45
+00:01:59,700 --> 00:02:05,230
+所以现在，我们用土拨鼠日来考虑
+So for now, we'll think about it using the Groundhog Day
+
+46
+00:02:05,230 --> 00:02:08,370
+算法，包括询问某种啮齿动物
+algorithm, which involves asking some kind of rodent when
+
+47
+00:02:08,370 --> 00:02:11,300
+春天就要开始了。
+the start of Spring will be.
+
+48
+00:02:11,300 --> 00:02:13,720
+现在，客户端开始使用这种方法，例如，
+Now, clients start using this method, for example,
+
+49
+00:02:13,720 --> 00:02:16,100
+计划他们春季派对的盛大开始。
+to plan their big start of Spring parties.
+
+50
+00:02:16,100 --> 00:02:17,962
+所以在密码的其他地方，有
+So somewhere else in the code, there's
+
+51
+00:02:17,962 --> 00:02:19,420
+一种叫做政党计划的方法
+a method called party planning that
+
+52
+00:02:19,420 --> 00:02:21,800
+会打电话给春天的开始，然后安排这个派对的日期
+is going to call start of Spring and get this party date
+
+53
+00:02:21,800 --> 00:02:24,400
+反对然后做些事情
+object back and then do some things
+
+54
+00:02:24,400 --> 00:02:27,070
+或者发邀请函，不管我们需要做什么
+and maybe send invitations, whatever we need to do
+
+55
+00:02:27,070 --> 00:02:28,780
+能够策划那个聚会。
+to be able to plan that party.
+
+56
+00:02:28,780 --> 00:02:31,400
+所以所有这些代码都有效，人们都很高兴。
+So all this code works and people are happy.
+
+57
+00:02:31,400 --> 00:02:34,740
+但现在独立了，两件事发生了，两个变化
+But now independently, two things happen, two changes
+
+58
+00:02:34,740 --> 00:02:36,200
+发生在这个密码上。
+happen to this code.
+
+59
+00:02:36,200 --> 00:02:37,908
+这是我们要开始讨论的地方
+Here's where we're going to start to talk
+
+60
+00:02:37,908 --> 00:02:39,670
+为改变做好准备。
+about getting ready for change.
+
+61
+00:02:39,670 --> 00:02:41,590
+首先是春天开始的实施者
+First the implementer of start of Spring
+
+62
+00:02:41,590 --> 00:02:43,820
+意识到土拨鼠开始了
+realizes the groundhog is starting
+
+63
+00:02:43,820 --> 00:02:45,650
+因为经常被问到而生气
+to get annoyed from being constantly asked
+
+64
+00:02:45,650 --> 00:02:46,830
+春天什么时候开始。
+when Spring will start.
+
+65
+00:02:46,830 --> 00:02:49,380
+换句话说，这是一个昂贵的算法。
+This is an expensive algorithm, in other words.
+
+66
+00:02:49,380 --> 00:02:51,890
+所以代码被重写了，春天开始的代码
+So the code is rewritten, the code of start of Spring
+
+67
+00:02:51,890 --> 00:02:55,350
+被改写成最多问一次土拨鼠，
+is rewritten to ask the groundhog at most once,
+
+68
+00:02:55,350 --> 00:02:59,410
+然后把土拨鼠的答案存起来以备将来的电话。
+and then cache the groundhog's answer for future calls.
+
+69
+00:02:59,410 --> 00:03:04,350
+所以我们要创建一个私有静态变量，static
+So we're going to create a private static variable, static
+
+70
+00:03:04,350 --> 00:03:07,680
+这意味着它只有一个可能的价值。
+meaning it has only one possible value.
+
+71
+00:03:07,680 --> 00:03:10,370
+一开始，它将是空的。
+And initially, that's going to be null.
+
+72
+00:03:10,370 --> 00:03:15,110
+但当春天第一次来临的时候，
+But as soon as start of Spring is called for the first time,
+
+73
+00:03:15,110 --> 00:03:17,460
+它将看到它的缓存为空。
+it's going to see that its cache is null.
+
+74
+00:03:17,460 --> 00:03:18,970
+它将运行这个算法
+And it's going to run that algorithm
+
+75
+00:03:18,970 --> 00:03:20,930
+找出土拨鼠的答案
+to figure out what the groundhog's answer is
+
+76
+00:03:20,930 --> 00:03:23,650
+把它放在土拨鼠答案里。
+and store it in groundhog answer.
+
+77
+00:03:23,650 --> 00:03:27,220
+然后永远地，土拨鼠的答案大概不会
+And then forever on, groundhog answer will presumably not
+
+78
+00:03:27,220 --> 00:03:28,652
+不再是空的。
+be null anymore.
+
+79
+00:03:28,652 --> 00:03:30,360
+每次调用它时
+Every time this is called, it will simply
+
+80
+00:03:30,360 --> 00:03:33,130
+让土拨鼠直接回答这个变量
+get the groundhog to answer directly from that variable
+
+81
+00:03:33,130 --> 00:03:34,830
+别再打扰土拨鼠了。
+and stop bothering the groundhog.
+
+82
+00:03:34,830 --> 00:03:37,090
+所以这是一种非常常见的优化
+So this is a very common kind of optimization
+
+83
+00:03:37,090 --> 00:03:42,554
+当你有一个缓慢的算法是你缓存的结果。
+when you have a slow algorithm is that you cache the result.
+
+84
+00:03:42,554 --> 00:03:44,220
+所以这是发生的第一个变化。
+So that's the first change that happens.
+
+85
+00:03:44,220 --> 00:03:45,990
+但同时，另一个变化
+But simultaneously, another change
+
+86
+00:03:45,990 --> 00:03:48,340
+是《春天开始》的客户之一吗
+is that one of the clients of start of Spring
+
+87
+00:03:48,340 --> 00:03:50,630
+决定春天的第一天
+decides that the actual first day of Spring
+
+88
+00:03:50,630 --> 00:03:52,440
+对派对来说太冷了，所以他们
+is too cold for the party, so they're
+
+89
+00:03:52,440 --> 00:03:55,830
+一个月后就要开派对了。
+going to make the party a month later instead.
+
+90
+00:03:55,830 --> 00:03:59,320
+所以他们把春天的开始作为派对的开始
+So they get the start of Spring into their party date
+
+91
+00:03:59,320 --> 00:04:02,310
+然后他们用
+and then they advance it by one month using
+
+92
+00:04:02,310 --> 00:04:03,816
+其中一种突变方法。
+one of these mutation methods.
+
+94
+00:04:08,100 --> 00:04:09,740
+顺便说一下，这段代码有一个潜在的bug
+By the way, this code has a latent bug
+
+95
+00:04:09,740 --> 00:04:11,020
+以增加一个月的方式。
+in the way it adds a month.
+
+96
+00:04:11,020 --> 00:04:13,380
+你可能想知道为什么。
+And you might want to think about why that is.
+
+97
+00:04:13,380 --> 00:04:17,310
+那么，当这两个决定相互影响时，会发生什么呢？
+So now what happens when these two decisions interact?
+
+98
+00:04:17,310 --> 00:04:18,970
+特别要考虑谁是第一个
+Think in particular about who is first
+
+99
+00:04:18,970 --> 00:04:20,346
+去发现这个虫子。
+going to discover this bug.
+
+100
+00:04:20,346 --> 00:04:22,470
+是春天的开始谁发现的？
+Is it going to be start of Spring who discovers it?
+
+101
+00:04:22,470 --> 00:04:24,250
+会是派对策划吗？
+Is it going to be party planning?
+
+102
+00:04:24,250 --> 00:04:27,010
+或者是完全无辜的第三部分
+Or is it going to be some completely innocent third piece
+
+103
+00:04:27,010 --> 00:04:30,560
+也碰巧调用了Spring开始的代码
+of code that also happens to call start of Spring
+
+104
+00:04:30,560 --> 00:04:32,670
+在同一个节目里？
+in the same program?
+
