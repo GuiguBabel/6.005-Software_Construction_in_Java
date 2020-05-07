@@ -1,0 +1,265 @@
+1
+00:00:00,590 --> 00:00:03,305
+在Java中还有一个更具启发性的陷阱。
+Here's one more instructive pitfall in Java.
+
+2
+00:00:03,305 --> 00:00:06,030
+我们讨论过原始类型和它们的对象
+We've talked about primitive types and their object
+
+3
+00:00:06,030 --> 00:00:06,540
+等价物。
+equivalents.
+
+4
+00:00:06,540 --> 00:00:09,020
+例如，int是一个基元类型。
+For example, int is a primitive type.
+
+5
+00:00:09,020 --> 00:00:14,670
+大写I整型是与int等价的对象类型。
+Capital I integer is an object type that is equivalent to int.
+
+6
+00:00:14,670 --> 00:00:17,390
+对象类型以正确的方式实现等于。
+The object type implements equals in the correct way.
+
+7
+00:00:17,390 --> 00:00:20,290
+所以如果你用相同的值创建两个整数对象，
+So if you create two integer objects with the same value,
+
+8
+00:00:20,290 --> 00:00:21,720
+他们将是平等的。
+they will be equals to each other.
+
+9
+00:00:21,720 --> 00:00:25,080
+所以如果我们把大写字母I整型表示3
+So if we make Capital I integer represents 3 and a different
+
+10
+00:00:25,080 --> 00:00:27,120
+大写I整数，也表示3，
+capital I integer that also represents 3,
+
+11
+00:00:27,120 --> 00:00:31,500
+然后x和y将使用Equals（）方法比较equal。
+then x and y will compare equal using the Equals() method.
+
+12
+00:00:31,500 --> 00:00:34,070
+但这里有个微妙的问题。
+But there's a subtle problem here.
+
+13
+00:00:34,070 --> 00:00:38,310
+对于这些类型，等于等于实际上是重载的。
+Equals equals is actually overloaded for these types.
+
+14
+00:00:38,310 --> 00:00:41,230
+对于参考类型，如capitol I integer，
+For reference types like capitol I integer,
+
+15
+00:00:41,230 --> 00:00:44,320
+它实现引用相等。
+it implements referential equality.
+
+16
+00:00:44,320 --> 00:00:47,340
+所以当x等于y时，x等于y
+So where x. equaled y, x equals equals y
+
+17
+00:00:47,340 --> 00:00:49,560
+因为这是两个
+is going to return false because these are two
+
+18
+00:00:49,560 --> 00:00:52,210
+内存中的不同对象。
+different objects in memory.
+
+19
+00:00:52,210 --> 00:00:53,790
+但是对于像int这样的原始类型，
+But for primitive types like int,
+
+20
+00:00:53,790 --> 00:00:57,280
+等于等于实现行为上的平等。
+equals equals implements behavioral equality.
+
+21
+00:00:57,280 --> 00:01:00,230
+特别是，如果你把这个x，
+In particular, if you cast this x,
+
+22
+00:01:00,230 --> 00:01:02,430
+这个大写I整数变成一个整数
+this capital I integer into an int
+
+23
+00:01:02,430 --> 00:01:07,240
+当被问到它是否等于y的整数，那是
+and asked whether it's equals to y cast to an int, that's
+
+24
+00:01:07,240 --> 00:01:09,500
+会回到现实。
+going to return true.
+
+25
+00:01:09,500 --> 00:01:12,420
+所以你不能互换使用大写I整数
+So you can't really use capital I integer interchangeably
+
+26
+00:01:12,420 --> 00:01:14,290
+因为他们的行为不同
+with int because they behave differently
+
+27
+00:01:14,290 --> 00:01:17,710
+使用这个操作，这个非常重要的操作。
+using this operation, this very important operation.
+
+28
+00:01:17,710 --> 00:01:19,610
+不幸的是，Java自动
+Unfortunately, Java automatically
+
+29
+00:01:19,610 --> 00:01:22,855
+在整数和大写I整数之间转换。
+converts between int and capital I integer.
+
+30
+00:01:22,855 --> 00:01:24,730
+这叫做，如果你想用谷歌搜索，
+This is called, if you want to Google for it,
+
+31
+00:01:24,730 --> 00:01:27,230
+自动装箱和自动拆箱。
+autoboxing and autounboxing.
+
+32
+00:01:27,230 --> 00:01:32,000
+所以你要把原语类型包装成一个对象类型。
+So you're wrapping the primitive type into an object type.
+
+33
+00:01:32,000 --> 00:01:35,570
+拳击就是这个意思。
+That's what the boxing means.
+
+34
+00:01:35,570 --> 00:01:38,130
+而这种自动转换会导致细微的错误。
+And that automatic conversion can lead to subtle bugs.
+
+35
+00:01:38,130 --> 00:01:40,830
+你必须知道编译时
+You have to be aware what the compile time
+
+36
+00:01:40,830 --> 00:01:42,990
+你的表达方式是。
+types of your expressions are.
+
+37
+00:01:42,990 --> 00:01:44,210
+所以考虑一下。
+So consider this.
+
+38
+00:01:44,210 --> 00:01:49,280
+有一个将字符串映射到大写I整数的映射。
+You have a map that maps strings to capital I integers.
+
+39
+00:01:49,280 --> 00:01:50,530
+事实上，你有两个。
+In fact, you have two of them.
+
+40
+00:01:50,530 --> 00:01:55,575
+你有一个叫A，还有一个叫B。
+You have one called A. And you have one called B.
+
+41
+00:01:55,575 --> 00:02:00,090
+在A中，我们将放入130。
+And into A, we're going to put 130.
+
+42
+00:02:00,090 --> 00:02:02,260
+实际上，在幕后，
+And that actually, behind the scenes,
+
+43
+00:02:02,260 --> 00:02:06,730
+将其自动装箱为一个大写I整数，表示130。
+autoboxes it into a capital I integer representing 130.
+
+44
+00:02:06,730 --> 00:02:09,000
+我们会对B做同样的事。我们会
+We'll do the same thing into B. We'll
+
+45
+00:02:09,000 --> 00:02:11,740
+以相同的方式获取不同的大写I整数
+get a different capital I integer in the same way
+
+46
+00:02:11,740 --> 00:02:14,700
+我们这里有一个不同的大写I整数。
+we got a different capital I integer up here.
+
+47
+00:02:14,700 --> 00:02:19,280
+现在如果我们问，如果我得到赋值
+And now if we ask, well, if I get the value assigned
+
+48
+00:02:19,280 --> 00:02:26,990
+对于C和A，我同样得到分配给C和B的值，
+to C and A, and I similarly get the value assigned to C and B,
+
+49
+00:02:26,990 --> 00:02:30,240
+每种情况下我都会拿出代表130的东西，
+in each case I'm going to get out something representing 130,
+
+50
+00:02:30,240 --> 00:02:34,290
+但现在它们将有大写I整数类型。
+but now they will have type capital I integer.
+
+51
+00:02:34,290 --> 00:02:40,210
+比较将使用这个，它将返回false。
+And the comparison will use this and it will return false.
+
+52
+00:02:40,210 --> 00:02:41,630
+所以你可以看到这段代码在运行
+So you can see this code in action
+
+53
+00:02:41,630 --> 00:02:44,140
+在线Python教程。
+on the Online Python Tutor.
+

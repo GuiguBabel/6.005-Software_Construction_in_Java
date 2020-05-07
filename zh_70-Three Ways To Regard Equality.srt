@@ -1,0 +1,585 @@
+1
+00:00:00,040 --> 00:00:02,420
+在之前的阅读中，我们已经形成了一个严格的概念
+In previous readings, we've developed a rigorous notion
+
+2
+00:00:02,420 --> 00:00:05,000
+数据抽象，抽象数据类型，
+of data abstraction, abstract data types,
+
+3
+00:00:05,000 --> 00:00:07,370
+通过创建具有以下特征的类型
+by creating types that are characterized
+
+4
+00:00:07,370 --> 00:00:10,400
+通过他们的行动，而不是他们的代表。
+by their operations, not by their representation.
+
+5
+00:00:10,400 --> 00:00:12,930
+对于抽象数据类型，抽象函数
+For an abstract data type, the abstraction function
+
+6
+00:00:12,930 --> 00:00:14,930
+解释如何解释具体的销售代表
+explains how to interpret a concrete rep
+
+7
+00:00:14,930 --> 00:00:18,060
+值作为抽象类型的值。
+value as a value of the abstract type.
+
+8
+00:00:18,060 --> 00:00:19,985
+我们看到了抽象函数的选择
+We saw how the choice of abstraction function
+
+9
+00:00:19,985 --> 00:00:21,860
+确定如何编写代码实现
+determines how we write the code implementing
+
+10
+00:00:21,860 --> 00:00:24,150
+ADT的每个操作。
+each of the ADT's operations.
+
+11
+00:00:24,150 --> 00:00:25,780
+在这篇文章中，我们回到
+In this reading, we return to how
+
+12
+00:00:25,780 --> 00:00:29,691
+我们定义了数据类型中值相等的概念。
+we define the notion of equality of values in a data type.
+
+13
+00:00:29,691 --> 00:00:31,190
+抽象函数实际上是
+The abstraction function is actually
+
+14
+00:00:31,190 --> 00:00:33,870
+使我们能够清楚地定义
+made us a way to cleanly define what the equality
+
+15
+00:00:33,870 --> 00:00:37,050
+在ADT上操作意味着。
+operation means on an ADT.
+
+16
+00:00:37,050 --> 00:00:39,370
+现在出现在现实世界，物质世界，
+Now popping out in the real world, the physical world,
+
+17
+00:00:39,370 --> 00:00:40,940
+每个物体都是不同的。
+every object is distinct.
+
+18
+00:00:40,940 --> 00:00:42,364
+在某种程度上，即使是两片雪花
+At some level, even two snowflakes
+
+19
+00:00:42,364 --> 00:00:44,280
+是不同的，即使区别只是
+are different, even if the distinction is just
+
+20
+00:00:44,280 --> 00:00:46,824
+它们在太空中所占据的位置。
+the position they occupy in space.
+
+21
+00:00:46,824 --> 00:00:48,240
+事实上，这不是真的
+Actually, this isn't strictly true
+
+22
+00:00:48,240 --> 00:00:49,690
+所有的亚原子粒子，但是
+of all subatomic particles, but it's
+
+23
+00:00:49,690 --> 00:00:52,106
+足够大的物体像雪花和棒球
+true enough of large objects like snowflakes and baseballs
+
+24
+00:00:52,106 --> 00:00:52,927
+还有人。
+and people.
+
+25
+00:00:52,927 --> 00:00:54,760
+我们有常识经验的东西。
+Things we have common sense experience with.
+
+26
+00:00:54,760 --> 00:00:57,090
+所以两个物体永远不会
+So two physical objects are never
+
+27
+00:00:57,090 --> 00:00:59,200
+彼此真正平等。
+truly equal to one another.
+
+28
+00:00:59,200 --> 00:01:01,650
+它们只有相似的程度。
+They only have degrees of similarity.
+
+29
+00:01:01,650 --> 00:01:04,480
+但是在人类语言的世界里，在数学的世界里，
+But in the world of human language, in the world of math,
+
+30
+00:01:04,480 --> 00:01:07,470
+同一件事可以有多个名字。
+you can have multiple names for the same thing.
+
+31
+00:01:07,470 --> 00:01:10,160
+所以很自然地会问
+So it's natural to ask when two expressions represent
+
+32
+00:01:10,160 --> 00:01:14,090
+同样的东西，1加2，9的平方，
+the same thing, 1 plus 2, squared of nine,
+
+33
+00:01:14,090 --> 00:01:16,600
+3个都是可选表达式
+and 3 are all alternative expressions
+
+34
+00:01:16,600 --> 00:01:20,640
+为了同样的理想数学值。
+for the same ideal mathematical value.
+
+35
+00:01:20,640 --> 00:01:22,920
+所以考虑到ADTs，正式的我们
+So thinking about ADTs, formally we
+
+36
+00:01:22,920 --> 00:01:26,150
+可以从几个方面看待平等和ADT。
+can regard equality and ADTs in several ways.
+
+37
+00:01:26,150 --> 00:01:27,960
+首先，使用抽象函数。
+First, using an abstraction function.
+
+38
+00:01:27,960 --> 00:01:29,840
+所以请记住，抽象函数
+So remember that an abstraction function
+
+39
+00:01:29,840 --> 00:01:34,140
+F从空间映射数据类型的具体实例
+F maps concrete instances of a data type from the space
+
+40
+00:01:34,140 --> 00:01:37,680
+它们对应的抽象值。
+R to their corresponding abstract values in A.
+
+41
+00:01:37,680 --> 00:01:39,950
+所以用F来定义平等，
+So to use F as a definition for equality,
+
+42
+00:01:39,950 --> 00:01:45,410
+当且仅当A的F等于B的F时，我们会说A等于B。
+we would say A equals B if and only if F of A equals F of B.
+
+43
+00:01:45,410 --> 00:01:48,220
+换句话说，如果它们的抽象映射是
+If, in other words, their abstract mappings are
+
+44
+00:01:48,220 --> 00:01:51,890
+同一个数学对象。
+the same mathematical object.
+
+45
+00:01:51,890 --> 00:01:53,600
+第二种方法是使用关系。
+Second way is using a relations.
+
+46
+00:01:53,600 --> 00:01:57,060
+所以数学上的等价是一种关系，
+So an equivalence in math is a relation,
+
+47
+00:01:57,060 --> 00:02:01,550
+抽象数据类型的有序对的子集
+E a subset of the ordered pairs of the abstract data type
+
+48
+00:02:01,550 --> 00:02:04,700
+它有三个属性。
+T that has three properties.
+
+49
+00:02:04,700 --> 00:02:06,690
+首先，它必须是反射性的。
+First, it has to be reflexive.
+
+50
+00:02:06,690 --> 00:02:10,610
+换句话说，对于数据类型中的所有值
+In other words, for all the values in the data type
+
+51
+00:02:10,610 --> 00:02:16,640
+一定是真的，这对，T，T，是在那种关系中。
+must be true that the pair, T, T, is in that relation.
+
+52
+00:02:16,640 --> 00:02:19,180
+它必须是对称的。
+It must be symmetric.
+
+53
+00:02:19,180 --> 00:02:23,140
+如果TU在关系中，那么UT也在关系中。
+If TU is in the relation, then UT is also in the relation.
+
+54
+00:02:23,140 --> 00:02:24,710
+它必须是可传递的。
+And it must be transitive.
+
+55
+00:02:24,710 --> 00:02:27,200
+如果TU在关系中，UV在关系中，
+If TU is in the relation, and UV is in the relation,
+
+56
+00:02:27,200 --> 00:02:28,940
+那么电视就是关系。
+then TV is in the relation.
+
+57
+00:02:28,940 --> 00:02:32,110
+所以如果我们把E看作一个等号，
+So if we think about E as an equal sign here,
+
+58
+00:02:32,110 --> 00:02:36,070
+这些规则你应该从普通数学中熟悉。
+these rules should be familiar to you from ordinary math.
+
+59
+00:02:36,070 --> 00:02:38,370
+如果我们用E，这个等价关系
+So if we use E, this equivalence relation
+
+60
+00:02:38,370 --> 00:02:41,230
+作为平等的定义，我们可以说a等于B
+as a definition for equality, we would say that A equals B if
+
+61
+00:02:41,230 --> 00:02:47,090
+只有当这个关系包含有序对AB时。
+and only if this relation contains the ordered pair AB.
+
+62
+00:02:47,090 --> 00:02:50,250
+现在这两个概念使用一个抽象函数，使用
+Now these two notions using an abstraction function, using
+
+63
+00:02:50,250 --> 00:02:53,130
+一个关系，是等价的。
+a relation, are equivalent.
+
+64
+00:02:53,130 --> 00:02:56,400
+等价关系产生抽象函数
+An equivalence relation induces an abstraction function
+
+65
+00:02:56,400 --> 00:03:00,430
+因为关系划分T所以F只是映射每个元素
+because the relation partitions T so F just maps each element
+
+66
+00:03:00,430 --> 00:03:03,180
+到它的分区类。
+to its partitioned class.
+
+67
+00:03:03,180 --> 00:03:05,630
+抽象函数引起的关系
+The relation induced by an abstraction function
+
+68
+00:03:05,630 --> 00:03:07,050
+是一个等价关系。
+is an equivalence relation.
+
+69
+00:03:07,050 --> 00:03:11,450
+你可以自己检查一下这三个属性是否有效。
+You can check for yourself that those three properties hold.
+
+70
+00:03:11,450 --> 00:03:13,960
+第三种方法是平等
+Now a third way we can talk about equality
+
+71
+00:03:13,960 --> 00:03:15,910
+在抽象值之间
+between abstract values is in terms
+
+72
+00:03:15,910 --> 00:03:19,700
+一些局外人，比如抽象数据的客户
+of what some outsider, like a client of the abstract data
+
+73
+00:03:19,700 --> 00:03:22,390
+打字，可以观察他们。
+type, can observe about them.
+
+74
+00:03:22,390 --> 00:03:25,190
+我们可以说两个物体在不能相等时是相等的
+We can say that two objects are equal when they cannot be
+
+75
+00:03:25,190 --> 00:03:29,140
+以观察为特点，当我们能
+distinguished by observation, when every operation we can
+
+76
+00:03:29,140 --> 00:03:32,980
+应用为两个对象生成相同的结果。
+apply produces the same result for both objects.
+
+77
+00:03:32,980 --> 00:03:37,720
+所以考虑集合表达式，1，2和2，1。
+So consider the set expressions, 1, 2 and 2, 1.
+
+78
+00:03:37,720 --> 00:03:40,870
+使用可用于集合的观察者操作，
+Using the observer operations that are available for sets,
+
+79
+00:03:40,870 --> 00:03:45,540
+例如基数，集合的大小和成员，
+such as cardinality, the size of the set, and membership,
+
+80
+00:03:45,540 --> 00:03:48,760
+元素是否是集合的成员，
+whether an element is a member of the set,
+
+81
+00:03:48,760 --> 00:03:50,880
+这些表达式，1，2和2，1，
+these expressions, 1, 2 and 2, 1,
+
+82
+00:03:50,880 --> 00:03:52,460
+实际上是无法区分的。
+are actually indistinguishable.
+
+83
+00:03:52,460 --> 00:03:54,155
+集合的基数是2。
+The cardinality of the set is 2.
+
+84
+00:03:54,155 --> 00:03:56,940
+这个集合的基数也是2。
+The cardinality of this set is also 2.
+
+85
+00:03:56,940 --> 00:03:59,170
+1是1，2的成员。
+1 is a member of 1, 2.
+
+86
+00:03:59,170 --> 00:04:00,630
+1也是2，1的成员。
+1 is also member of 2, 1.
+
+87
+00:04:00,630 --> 00:04:02,880
+同样需要2个。
+want Likewise for 2.
+
+88
+00:04:02,880 --> 00:04:05,890
+你可以尝试的任何其他价值
+Any other value that you might try
+
+89
+00:04:05,890 --> 00:04:09,390
+不是1，2的成员，也不是2，1的成员。
+is not a member of 1, 2 and not a member of 2, 1.
+
+90
+00:04:09,390 --> 00:04:12,760
+所以对于这些操作，基数和成员，
+So for both of these operations, cardinality and membership,
+
+91
+00:04:12,760 --> 00:04:17,029
+这两个设定值无法区分。
+these two set values are indistinguishable.
+
+92
+00:04:17,029 --> 00:04:19,279
+现在就Java中的抽象数据类型而言，
+Now in terms of abstract data types in Java,
+
+93
+00:04:19,279 --> 00:04:22,720
+观察意味着调用对象上的操作。
+observation means calling operations on the objects.
+
+94
+00:04:22,720 --> 00:04:25,620
+所以两个Java对象是相等的，只要它们不能
+So two Java objects are equal if and only if they cannot be
+
+95
+00:04:25,620 --> 00:04:28,551
+通过调用抽象数据的任何操作来区分
+distinguished by calling any operations of the abstract data
+
+96
+00:04:28,551 --> 00:04:29,050
+键入。
+type.
+
+98
+00:04:32,170 --> 00:04:34,490
+这里有一个不可变ADT的简单例子
+So here's a simple example of an immutable ADT
+
+99
+00:04:34,490 --> 00:04:39,910
+我们将在今天的阅读中用到。
+that we're going to use throughout today's reading.
+
+100
+00:04:39,910 --> 00:04:44,080
+这个ADT应该代表一段时间。
+It's an ADT that's supposed to represent a duration of time.
+
+101
+00:04:44,080 --> 00:04:47,525
+它有一个创建者，需要几分钟，然后
+It has a creator that takes a number of minutes, then
+
+102
+00:04:47,525 --> 00:04:50,070
+数秒并创建持续时间。
+a number of seconds and creates a duration.
+
+103
+00:04:50,070 --> 00:04:53,570
+它有一个观察者返回长度
+And it has an observer that returns the length
+
+104
+00:04:53,570 --> 00:04:55,580
+以秒为单位的持续时间。
+of the duration in seconds.
+
+105
+00:04:55,580 --> 00:04:59,960
+我们有一个销售代表负责记录
+And we have a rep that stores the minutes and seconds
+
+106
+00:04:59,960 --> 00:05:02,504
+持续时间所代表的。
+that the duration represents.
+
+107
+00:05:02,504 --> 00:05:04,170
+一个代表不变量说
+And a rep invariant that says that those
+
+108
+00:05:04,170 --> 00:05:06,280
+必须大于或等于0。
+have to be greater than or equal to 0.
+
+109
+00:05:06,280 --> 00:05:10,830
+以及一个将这两个值关联起来的抽象函数
+And an abstraction function that relates those two values
+
+110
+00:05:10,830 --> 00:05:15,220
+抽象的价值，即时间跨度的概念
+to the abstract value which is the notion of a span of time
+
+111
+00:05:15,220 --> 00:05:17,790
+通过说它对应于一段时间，
+by saying that it corresponds to a span of time,
+
+112
+00:05:17,790 --> 00:05:21,560
+它是分，分，秒，长。
+which is min, minutes, and sec, seconds, long.
+
+113
+00:05:21,560 --> 00:05:25,950
+既然如此，既然我们已经讨论过
+So given that, given what we've talked about for the ways
+
+114
+00:05:25,950 --> 00:05:28,220
+我们可以在抽象数据类型中考虑平等，
+that we can regard equality in abstract data types,
+
+115
+00:05:28,220 --> 00:05:32,561
+哪些值应该被认为是相等的？
+which of these values should be considered equal?
+
+116
+00:05:32,561 --> 00:05:34,810
+所以让我们考虑一下，两个抽象函数
+So let's think in terms, both the abstraction function
+
+117
+00:05:34,810 --> 00:05:38,230
+定义和观察定义，
+definition and the observational definition,
+
+118
+00:05:38,230 --> 00:05:40,750
+你会在练习中给出答案。
+and you'll give your answer in the exercises.
+

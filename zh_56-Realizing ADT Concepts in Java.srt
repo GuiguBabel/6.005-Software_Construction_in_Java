@@ -1,0 +1,530 @@
+1
+00:00:00,040 --> 00:00:01,570
+总结一些总体思路
+Summarize some of the general ideas
+
+2
+00:00:01,570 --> 00:00:03,278
+我们在这篇文章中讨论过
+we've talked about in this reading, which
+
+3
+00:00:03,278 --> 00:00:06,100
+一般适用于任何语言的编程，
+are applicable in general to programming in any language,
+
+4
+00:00:06,100 --> 00:00:08,119
+但同时也涉及到他们是如何被特别意识到的
+but also about how they're specifically realized
+
+5
+00:00:08,119 --> 00:00:10,070
+使用Java语言特性。
+using Java language features.
+
+6
+00:00:10,070 --> 00:00:12,150
+关键是有几种方法可以做到这一点。
+Point is that there are several ways to do it.
+
+7
+00:00:12,150 --> 00:00:14,870
+重要的是要理解这两个大的想法，
+And it's important to understand both the big idea,
+
+8
+00:00:14,870 --> 00:00:17,150
+就像创造者的操作一样，
+like what a creator operation is,
+
+9
+00:00:17,150 --> 00:00:19,635
+以及在实践中实现这一想法的不同方法。
+and the different ways to achieve that idea in practice.
+
+11
+00:00:22,820 --> 00:00:25,950
+例如，creator操作
+So for example, a creator operation
+
+12
+00:00:25,950 --> 00:00:31,350
+可以在Java中实现为数组列表等构造函数。
+can be realized in Java as a constructor such as array list.
+
+13
+00:00:31,350 --> 00:00:34,420
+它可以实现为静态方法，也称为工厂
+It can be realized as a static method, also called a factory
+
+14
+00:00:34,420 --> 00:00:37,020
+方法，比如collection，singleton list，
+method, like collection, singleton list,
+
+15
+00:00:37,020 --> 00:00:38,860
+或要列出的数组。
+or arrays to list.
+
+16
+00:00:38,860 --> 00:00:42,160
+或者它可以作为一个常数来实现。
+Or it can be realized just as a constant.
+
+17
+00:00:42,160 --> 00:00:45,490
+例如，如果你看大整数类，
+So if you look in the big integer class, for example,
+
+18
+00:00:45,490 --> 00:00:47,350
+有一个0，一个1和一个10。
+there is a 0 and a 1 and a 10.
+
+19
+00:00:47,350 --> 00:00:49,150
+这些只是常数。
+And these are just constants.
+
+20
+00:00:49,150 --> 00:00:51,482
+但他们实际上是创造者。
+But they're effectively creators.
+
+21
+00:00:51,482 --> 00:00:53,930
+当我们谈到ints的时候你也看到了
+You saw that as well when we talked about ints
+
+22
+00:00:53,930 --> 00:00:57,250
+整型文字，0，1，2等等，
+and how the integer literals, 0 and 1 and 2 and so forth,
+
+23
+00:00:57,250 --> 00:01:00,110
+是inttype的创建者。
+are creators for the inttype.
+
+24
+00:01:00,110 --> 00:01:02,630
+对于观察者操作，您可以表示
+For an observer operation where you can represent that
+
+25
+00:01:02,630 --> 00:01:05,600
+作为对特定对象调用的实例方法
+as an instance method that you call on a particular object
+
+26
+00:01:05,600 --> 00:01:09,540
+比如get，你在一个列表的特定实例上调用它，
+like get, which you call on a particular instance of a list,
+
+27
+00:01:09,540 --> 00:01:11,650
+或作为静态方法。
+or as a static method.
+
+28
+00:01:11,650 --> 00:01:14,790
+所以我们可以考虑collections.max，
+So we can regard collections.max,
+
+29
+00:01:14,790 --> 00:01:17,290
+这是一个静态方法
+which is a static method that takes
+
+30
+00:01:17,290 --> 00:01:21,600
+集合——集合可以是任何列表或集合--
+a collection-- a collection can be any list or set--
+
+31
+00:01:21,600 --> 00:01:25,100
+并返回其最大值。
+and returns its maximum value.
+
+32
+00:01:25,100 --> 00:01:27,820
+类似地，生产者操作也可以指实例方法。
+Producer operations, similarly, can mean instance method.
+
+33
+00:01:27,820 --> 00:01:30,101
+举个例子，就像字符串上的trim，
+An example is like trim on a string,
+
+34
+00:01:30,101 --> 00:01:31,850
+删除开头的空白
+which removes white space at the beginning
+
+35
+00:01:31,850 --> 00:01:35,340
+或字符串的结尾并返回新字符串。
+or the end of a string and returns a new string.
+
+36
+00:01:35,340 --> 00:01:36,910
+或者它可以是静态方法。
+Or it can be a static method.
+
+37
+00:01:36,910 --> 00:01:38,990
+所以可修改列表上的集合
+So collections on modifiable list
+
+38
+00:01:38,990 --> 00:01:43,800
+是一个静态方法的示例，该方法是列表的生产者。
+is an example of a static method that is a producer for list.
+
+39
+00:01:43,800 --> 00:01:47,380
+mutator可以是实例方法，也可以是静态方法。
+A mutator can be an instance method or a static method.
+
+40
+00:01:47,380 --> 00:01:51,070
+然后ADT的表示--
+And then the representation of an ADT--
+
+41
+00:01:51,070 --> 00:01:54,860
+在Java中，您表示--通过将
+in Java you represent-- you realize that by putting
+
+42
+00:01:54,860 --> 00:01:56,911
+类中的私有字段。
+private fields inside a class.
+
+44
+00:02:00,000 --> 00:02:02,080
+现在，让我们回去再谈谈测试。
+Now, let's go back and talk about testing again.
+
+45
+00:02:02,080 --> 00:02:05,390
+所以我们在之前的阅读，测试中讨论过
+So we talked before in the previous reading, the testing
+
+46
+00:02:05,390 --> 00:02:07,060
+阅读，关于如何编写测试
+reading, about how to write tests
+
+47
+00:02:07,060 --> 00:02:09,639
+对于单一方法，规范
+for a single method, the specification
+
+48
+00:02:09,639 --> 00:02:13,210
+在单个方法中，为抽象数据构建测试套件
+of a single method, to build a test suite for an abstract data
+
+49
+00:02:13,210 --> 00:02:13,780
+键入。
+type.
+
+50
+00:02:13,780 --> 00:02:16,030
+我们通过创建测试来概括这一点
+We generalized that by creating tests
+
+51
+00:02:16,030 --> 00:02:18,220
+对于它的每个操作
+for each of its operations-- each
+
+52
+00:02:18,220 --> 00:02:20,762
+构成类型的那些方法。
+of those methods that make up the type.
+
+53
+00:02:20,762 --> 00:02:22,970
+现在，这些测试不可避免地相互影响。
+Now, these tests inevitably interact with each other.
+
+54
+00:02:22,970 --> 00:02:26,280
+测试创造者、生产者或变异者的唯一方法
+The only way to test the creator or producer or mutator, which
+
+55
+00:02:26,280 --> 00:02:28,130
+创建对象的新值
+either creates a new value of the object
+
+56
+00:02:28,130 --> 00:02:30,370
+或者改变物体的状态，
+or changes the state of the object,
+
+57
+00:02:30,370 --> 00:02:33,170
+是通过调用结果对象上的观察者
+is by calling observers on the resulting objects
+
+58
+00:02:33,170 --> 00:02:36,350
+看看你期望的效果或结果
+to see whether the effects that you expect or the resulting
+
+59
+00:02:36,350 --> 00:02:38,240
+你从创造者那里得到的东西
+object that you got from the creator producer
+
+60
+00:02:38,240 --> 00:02:39,550
+是你所期望的。
+is what you expect.
+
+61
+00:02:39,550 --> 00:02:42,070
+同样，测试观察者的唯一方法
+Similarly, the only way to test an observer
+
+62
+00:02:42,070 --> 00:02:44,160
+就是为他们创造某种东西
+is to create some kind of object for them
+
+63
+00:02:44,160 --> 00:02:48,070
+观察使用创造者、生产者或变异者观察。
+to observe using a creator or a producer or a mutator.
+
+65
+00:02:51,640 --> 00:02:53,240
+但我们可以用同样的策略
+But we can use the same strategies
+
+66
+00:02:53,240 --> 00:02:56,000
+用于我们单独使用的方法的测试。
+for testing that we used with individual methods.
+
+67
+00:02:56,000 --> 00:02:59,490
+我们只是把它们应用到所有四个操作的输入空间。
+We just apply them to the input spaces of all four operations.
+
+68
+00:02:59,490 --> 00:03:01,450
+所以对于myString类型，你记得
+So for a myString type, which you remember
+
+69
+00:03:01,450 --> 00:03:06,220
+有一个创作者，两个观察者和一个制片人，
+had a creator, two observers, and a producer,
+
+70
+00:03:06,220 --> 00:03:08,780
+我们要做的是划分输入输出
+what we would do is partition the input output
+
+71
+00:03:08,780 --> 00:03:10,050
+每一个的空间。
+space of each of those.
+
+72
+00:03:10,050 --> 00:03:13,600
+所以的值取了一个参数，一个布尔参数。
+So value of took one argument, a Boolean argument.
+
+73
+00:03:13,600 --> 00:03:17,750
+基本上，我们可以把它分成两个可能的输入。
+Basically, we can partition that into two possible inputs.
+
+74
+00:03:17,750 --> 00:03:20,544
+对于长度，你所调用的字符串，
+For length, the string that you're calling,
+
+75
+00:03:20,544 --> 00:03:22,460
+他们调用的myString值，
+the myString value that they're calling it on,
+
+76
+00:03:22,460 --> 00:03:25,540
+长度可能为0、1或大于1。
+might have length 0, 1, or greater than 1.
+
+77
+00:03:25,540 --> 00:03:27,610
+它也可能是一个字符串
+It also might be a string produced
+
+78
+00:03:27,610 --> 00:03:29,140
+有几种不同的方式。
+in several different ways.
+
+79
+00:03:29,140 --> 00:03:31,900
+它可能是由的创建者值生成的字符串。
+It might be a string produced by the creator value of.
+
+80
+00:03:31,900 --> 00:03:35,119
+或者它可能是由子字符串生成的。
+Or it might be produced, created by substring.
+
+81
+00:03:35,119 --> 00:03:37,410
+我们想区分这两个的原因
+And the reason we want to distinguish between those two
+
+82
+00:03:37,410 --> 00:03:40,780
+因为其中一个可能会搞砸
+things is because one of these might actually screw up
+
+83
+00:03:40,780 --> 00:03:43,640
+它创建字符串的方式。
+the way it creates the string.
+
+84
+00:03:43,640 --> 00:03:45,620
+所以测试它们并思考
+So it's useful to test them both and think
+
+85
+00:03:45,620 --> 00:03:46,710
+作为一个分区。
+about that as a partition.
+
+86
+00:03:46,710 --> 00:03:48,460
+我们在[？查拉德？]
+And we use that partition in [? charadd ?]
+
+87
+00:03:48,460 --> 00:03:53,230
+以及对其索引进行分区。
+as well as well as partitioning its index.
+
+88
+00:03:53,230 --> 00:03:56,590
+我们对子串做类似的分区。
+And we do similar partitioning on the substring.
+
+89
+00:03:56,590 --> 00:03:58,900
+然后，我们可以编写一个压缩文本套件
+And then, we can write a compact text suite
+
+90
+00:03:58,900 --> 00:04:01,440
+基本上检查了每个部分
+that basically checks off each of the parts
+
+91
+00:04:01,440 --> 00:04:03,780
+在这些分区中。
+of these partitions.
+
+92
+00:04:03,780 --> 00:04:06,760
+而这，不可避免的，将是--
+And that, inevitably, is going to be calling--
+
+93
+00:04:06,760 --> 00:04:10,360
+两者都将调用多个操作
+both going to be calling multiple operations
+
+94
+00:04:10,360 --> 00:04:12,660
+在每个测试用例中，因为这是我们
+in each test case because that's the only way that we
+
+95
+00:04:12,660 --> 00:04:18,649
+实际上可以检查抽象数据类型的值。
+can actually examine the value of an abstract data type.
+
+96
+00:04:18,649 --> 00:04:21,940
+所以如果测试值为真的话，这就可以抵消了，
+So for test value of true, which would check this off,
+
+97
+00:04:21,940 --> 00:04:25,030
+实际上我们也在检查
+we actually also are checking off
+
+98
+00:04:25,030 --> 00:04:30,240
+其他行动的一些部分。
+some of the parts of other operations.
+
+99
+00:04:30,240 --> 00:04:32,830
+例如，我们在检查
+So for example, we were checking off
+
+100
+00:04:32,830 --> 00:04:38,050
+长度大于1且值为。
+length equals greater than 1 and value of.
+
+101
+00:04:38,050 --> 00:04:40,340
+所以这里有一个测试套件
+And so here's a test suite that is
+
+102
+00:04:40,340 --> 00:04:43,510
+合理的——提供合理的良好的保险
+a reasonably-- provides reasonably good coverage
+
+103
+00:04:43,510 --> 00:04:45,730
+测试策略。
+of this testing strategy.
+
+104
+00:04:45,730 --> 00:04:47,230
+注意，每个测试用例通常
+Notice that each test case typically
+
+105
+00:04:47,230 --> 00:04:53,540
+调用一些可能执行、修改或生成的操作
+calls a few operations that might make or modify or produce
+
+106
+00:04:53,540 --> 00:04:57,300
+类型的新值，然后是
+new values of the type and then some operations that
+
+107
+00:04:57,300 --> 00:05:00,140
+检查类型的对象。
+inspect objects of the type.
+
+108
+00:05:00,140 --> 00:05:01,820
+所以每个测试用例实际上包括
+So each test case actually covers
+
+109
+00:05:01,820 --> 00:05:04,240
+几次行动的一部分。
+parts of several operations.
+

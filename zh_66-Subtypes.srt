@@ -1,0 +1,235 @@
+1
+00:00:00,940 --> 00:00:03,420
+让我们来谈谈接口如何帮助实现一个新的想法
+Let's talk about how interfaces help with a new idea
+
+2
+00:00:03,420 --> 00:00:04,720
+称为子类型。
+called subtyping.
+
+3
+00:00:04,720 --> 00:00:09,980
+所以回想一下第一次阅读时，类型是一组值。
+So recall from the first reading that type is a set of values.
+
+4
+00:00:09,980 --> 00:00:12,620
+现在，在Java中，列表类型是由接口定义的。
+Now, in Java, the list type is defined by an interface.
+
+5
+00:00:12,620 --> 00:00:16,230
+所以如果我们考虑所有可能的列表值，
+So if we think about all possible list values,
+
+6
+00:00:16,230 --> 00:00:18,900
+它们实际上都不是列表对象。
+none of them are actually list objects.
+
+7
+00:00:18,900 --> 00:00:20,770
+我们无法创建接口的实例。
+We can't create instances of an interface.
+
+8
+00:00:20,770 --> 00:00:25,370
+相反，这些值都是数组列表对象，链接列表
+Instead, those values are all array list objects, linked list
+
+9
+00:00:25,370 --> 00:00:27,620
+对象，或其他类的对象
+objects, or objects of some other class
+
+10
+00:00:27,620 --> 00:00:30,120
+实现列表的。
+that implements list.
+
+11
+00:00:30,120 --> 00:00:33,770
+所以子类型只是父类型的一个子集。
+So a subtype is simply a subset of the supertype.
+
+12
+00:00:33,770 --> 00:00:39,970
+数组列表和链接列表是列表的子类型。
+Array list and linked list are subtypes of list.
+
+13
+00:00:39,970 --> 00:00:42,350
+而短语b是一种手段的亚型，
+And the phrase b is a subtype of a means,
+
+14
+00:00:42,350 --> 00:00:47,190
+一般来说，每个b值都是a值。
+in general, every b value is an a value.
+
+15
+00:00:47,190 --> 00:00:49,650
+或者就规格而言，这意味着
+Or in terms of specifications, what this means is
+
+16
+00:00:49,650 --> 00:00:52,460
+每一个值，每一个b的实例，每一个b的类型，
+that every value, every instance of b, of the type b,
+
+17
+00:00:52,460 --> 00:00:56,600
+符合a型规范。
+satisfies the spec for type a.
+
+18
+00:00:56,600 --> 00:00:58,440
+所以这意味着b只是a的一个子类型
+So that means that b is only a subtype of a
+
+19
+00:00:58,440 --> 00:01:03,400
+如果b的规格至少和a的规格一样强
+if b's specification is at least as strong as a's specification
+
+20
+00:01:03,400 --> 00:01:07,520
+因此每个b值也将满足
+so that every b value will also satisfy
+
+21
+00:01:07,520 --> 00:01:11,360
+所有的要求都加上了a值。
+all of the requirements put on an a value.
+
+22
+00:01:11,360 --> 00:01:13,030
+现在，让我们回到Java，当
+Now, bringing us back to Java, when
+
+23
+00:01:13,030 --> 00:01:14,870
+我们声明他们的类--
+we declare their class that implement--
+
+24
+00:01:14,870 --> 00:01:17,720
+当我们声明一个类
+that a class implements-- when we declare a class that
+
+25
+00:01:17,720 --> 00:01:19,480
+实现一个接口，Java编译器
+implements an interface, the Java compiler
+
+26
+00:01:19,480 --> 00:01:22,680
+自动执行此要求的一部分。
+enforces part of this requirement automatically.
+
+27
+00:01:22,680 --> 00:01:26,400
+例如，它确保
+For example, it ensures that every method in a appears
+
+28
+00:01:26,400 --> 00:01:29,150
+在具有兼容类型签名的b中
+in b with a compatible type signature
+
+29
+00:01:29,150 --> 00:01:34,410
+因此，对于
+so that a b value could be used in place of-- for a client that
+
+30
+00:01:34,410 --> 00:01:37,010
+期望a值能够调用所有方法
+is expecting an a value would be able to call all the methods
+
+31
+00:01:37,010 --> 00:01:38,000
+它需要召唤。
+that it needs to call.
+
+32
+00:01:38,000 --> 00:01:40,700
+所以b类不能实现接口a
+So class b can't implement interface a
+
+33
+00:01:40,700 --> 00:01:45,040
+除非它实现了a中声明的所有方法。
+unless it implements all of the methods declared in a.
+
+34
+00:01:45,040 --> 00:01:46,560
+不幸的是，编译器不能
+Unfortunately, the compiler can't
+
+35
+00:01:46,560 --> 00:01:50,230
+检查我们没有在其他方面削弱这个规格
+check that we haven't weakened the spec in other ways
+
+36
+00:01:50,230 --> 00:01:52,930
+当我们申报b。
+when we declare b.
+
+37
+00:01:52,930 --> 00:01:54,990
+不能确定我们是否
+It can't check that we-- whether we've
+
+38
+00:01:54,990 --> 00:01:57,670
+加强了对一种方法的某些投入的先决条件，
+strengthened the precondition on some inputs to a method,
+
+39
+00:01:57,670 --> 00:01:59,590
+我们是否削弱了一些
+whether we've weakened a postcondition on some
+
+40
+00:01:59,590 --> 00:02:02,340
+我们能否保证
+of the outputs, whether we can guarantee
+
+41
+00:02:02,340 --> 00:02:06,760
+接口抽象类型向其客户播发的。
+that the interface abstract type advertises to its clients.
+
+42
+00:02:06,760 --> 00:02:09,780
+所以，如果您在Java中声明一个子类型——换句话说，
+So if you declare a subtype in Java-- in other words,
+
+43
+00:02:09,780 --> 00:02:11,440
+如果你宣布你正在实施
+if you declare that you're implementing
+
+44
+00:02:11,440 --> 00:02:13,700
+一个接口——那么您必须确保
+an interface-- then you must ensure
+
+45
+00:02:13,700 --> 00:02:15,860
+子类型规范至少是
+that that subtype spec is at least as
+
+46
+00:02:15,860 --> 00:02:19,290
+强如超模规格，不仅仅是
+strong as the supertype spec, not just
+
+47
+00:02:19,290 --> 00:02:24,760
+在它的方法类型声明中，也在实际的规范中。
+in its method type declarations, but also in the actual specs.
+

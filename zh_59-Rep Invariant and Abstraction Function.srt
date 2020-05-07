@@ -1,0 +1,1065 @@
+1
+00:00:00,050 --> 00:00:01,780
+深入研究一下
+Take a deeper look at the theory that
+
+2
+00:00:01,780 --> 00:00:03,570
+作为抽象数据类型的基础。
+underlies abstract data types.
+
+3
+00:00:03,570 --> 00:00:05,960
+它本身不仅优雅有趣，
+It's not only elegant and interesting in its own right,
+
+4
+00:00:05,960 --> 00:00:08,050
+但它具有直接的实际应用价值
+but it has immediate practical application
+
+5
+00:00:08,050 --> 00:00:11,360
+设计一个ADT的实现。
+to design an implementation of an ADT.
+
+6
+00:00:11,360 --> 00:00:13,510
+您将能够构建更好的抽象数据类型，
+You'll be able to build better abstract data types,
+
+7
+00:00:13,510 --> 00:00:17,750
+而且你也不太可能落入微妙的陷阱。
+and you'll be less likely to fall into subtle traps.
+
+8
+00:00:17,750 --> 00:00:20,420
+现在我们要考虑两人之间的关系
+Now we're going to think about the relationship between two
+
+9
+00:00:20,420 --> 00:00:22,640
+价值空间。
+spaces of values.
+
+10
+00:00:22,640 --> 00:00:26,410
+第一个空间称为表示值的空间或表示
+First space is called the space of representation values or rep
+
+11
+00:00:26,410 --> 00:00:28,220
+简称值。
+values for short.
+
+12
+00:00:28,220 --> 00:00:32,040
+这些是实际实现实体的值。
+And these are the values of the actual implementation entities.
+
+13
+00:00:32,040 --> 00:00:34,040
+所以在简单的情况下，抽象数据类型
+So in simple cases, an abstract data type
+
+14
+00:00:34,040 --> 00:00:37,260
+我们只实现了一个对象。
+we implemented as just a single object.
+
+15
+00:00:37,260 --> 00:00:40,000
+但更常见的是，需要一个小的物体网络，
+But more commonly, a small network of objects is needed,
+
+16
+00:00:40,000 --> 00:00:41,940
+所以这个值实际上是
+so this value is actually often something
+
+17
+00:00:41,940 --> 00:00:43,480
+更复杂。
+rather more complicated.
+
+18
+00:00:43,480 --> 00:00:45,390
+不过，现在我们要简单地考虑一下
+For now, though, we'll think about it simply
+
+19
+00:00:45,390 --> 00:00:47,600
+作为一个数学值。
+as a mathematical value.
+
+20
+00:00:47,600 --> 00:00:49,600
+所以一个表示值。
+So a representation value.
+
+21
+00:00:49,600 --> 00:00:52,210
+还有一个抽象值的空间
+And then there is a space of abstract values
+
+22
+00:00:52,210 --> 00:00:54,090
+包含类型为
+that consists of the values that the type is
+
+23
+00:00:54,090 --> 00:00:56,544
+专为支撑而设计。
+designed to support.
+
+24
+00:00:56,544 --> 00:00:58,210
+这是我们想象的虚构，
+These are a figment of our imaginations,
+
+25
+00:00:58,210 --> 00:01:01,170
+不存在的柏拉图实体
+the platonic entities that don't exist exactly
+
+26
+00:01:01,170 --> 00:01:03,100
+如前所述，但这是我们想要的
+as described, but are the way we want
+
+27
+00:01:03,100 --> 00:01:06,700
+思考或观察抽象类型的元素
+to think about or viewing the elements of the abstract type
+
+28
+00:01:06,700 --> 00:01:08,970
+当你是这种类型的客户时。
+when you are a client of the type.
+
+29
+00:01:08,970 --> 00:01:12,370
+例如，整个整数集的抽象类型
+For example, an abstract type for the whole set of integers
+
+30
+00:01:12,370 --> 00:01:17,172
+可能有数学整数作为它的抽象值空间，
+might have mathematical integers as its abstract value space,
+
+31
+00:01:17,172 --> 00:01:18,880
+但事实上
+but the fact that it might be implemented
+
+32
+00:01:18,880 --> 00:01:22,760
+是基元有界整数的数组
+is an array of primitive, bounded ints
+
+33
+00:01:22,760 --> 00:01:25,270
+与类型的用户没有实际关系。
+is not really relevant to the user of the type.
+
+34
+00:01:25,270 --> 00:01:30,080
+这实际上是Java中一个大整数的内部内容。
+This is what's actually inside a big integer in Java.
+
+35
+00:01:30,080 --> 00:01:32,090
+但这种类型的用户想考虑一下
+But the user of the type wants to think of it
+
+36
+00:01:32,090 --> 00:01:35,370
+就像一组数学整数，通常是
+just as the set of mathematical integers, which is usually
+
+37
+00:01:35,370 --> 00:01:38,510
+叫Z。所以这就是区别
+called Z. So that's the difference
+
+38
+00:01:38,510 --> 00:01:42,520
+在表示值和抽象值之间。
+between representation values and abstract values.
+
+39
+00:01:42,520 --> 00:01:44,814
+我们很快就会看到更多的例子。
+We'll see some more examples soon.
+
+40
+00:01:44,814 --> 00:01:46,980
+当然，现在抽象类型的实现者
+Now, of course, the implementer of the abstract type
+
+41
+00:01:46,980 --> 00:01:49,063
+必须对表示值感兴趣，
+has to be interested in the representation values,
+
+42
+00:01:49,063 --> 00:01:50,930
+因为实现者的工作
+since the implementer's job to achieve
+
+43
+00:01:50,930 --> 00:01:54,110
+抽象价值空间的幻象
+the illusion of the abstract value space
+
+44
+00:01:54,110 --> 00:01:58,120
+使用rep值空间。
+using the rep value space.
+
+45
+00:01:58,120 --> 00:02:00,730
+例如，假设我们想
+So suppose, for example, that we want to represent
+
+46
+00:02:00,730 --> 00:02:02,050
+一组字符。
+a set of characters.
+
+47
+00:02:02,050 --> 00:02:03,650
+这是我们的抽象数据类型。
+That's our abstract data type.
+
+48
+00:02:03,650 --> 00:02:05,630
+这是一个角色集。
+It's a character set.
+
+49
+00:02:05,630 --> 00:02:09,169
+我们选择使用一个字符串，一系列字符，
+And we choose to use a string, a sequence of characters,
+
+50
+00:02:09,169 --> 00:02:10,710
+代表它。
+to represent it.
+
+51
+00:02:10,710 --> 00:02:14,170
+那么rep空间R包含字符串。
+Then the rep space R contains strings.
+
+52
+00:02:14,170 --> 00:02:17,020
+它实际上包含这些字符集对象
+It contains actually these char set objects
+
+53
+00:02:17,020 --> 00:02:20,060
+里面有一个指向字符串的字段
+that have inside them a field pointing to a string
+
+54
+00:02:20,060 --> 00:02:22,789
+然后，当然，那个string对象指向其他东西。
+and then, of course, that string object points to other things.
+
+55
+00:02:22,789 --> 00:02:24,330
+但我们要把它缩写一下
+But we're just going to abbreviate it
+
+56
+00:02:24,330 --> 00:02:26,930
+通过说，嗯，这是一系列的字符
+by saying, well, it's a sequence of characters
+
+57
+00:02:26,930 --> 00:02:30,210
+它应该代表一组字符。
+that is supposed to represent a set of characters.
+
+58
+00:02:30,210 --> 00:02:32,450
+所以我们可以用图形的方式显示这两个值空间
+So we can show those two value spaces graphically
+
+59
+00:02:32,450 --> 00:02:35,830
+从rep值到抽象值有一个弧
+with an arc from a rep value to the abstract value
+
+60
+00:02:35,830 --> 00:02:37,510
+它代表。
+it represents.
+
+61
+00:02:37,510 --> 00:02:41,750
+这是R，rep空间，它包含字符串。
+This is R, the rep space, and it contains strings.
+
+62
+00:02:41,750 --> 00:02:44,330
+这是一个抽象的空间，
+And this is A, the abstract space,
+
+63
+00:02:44,330 --> 00:02:46,940
+它包含一组字符。
+and it contains sets of characters.
+
+64
+00:02:46,940 --> 00:02:49,320
+注意花括号。
+Notice the curly braces.
+
+65
+00:02:49,320 --> 00:02:51,570
+这张照片有几点需要注意。
+Now there's several things to note about this picture.
+
+66
+00:02:51,570 --> 00:02:53,480
+首先，每个抽象值
+First of all, every abstract value
+
+67
+00:02:53,480 --> 00:02:57,700
+由某个rep值映射到，因此为空集
+is mapped to by some rep value, so empty set
+
+68
+00:02:57,700 --> 00:03:01,150
+由空字符串映射。
+is mapped by the empty string.
+
+69
+00:03:01,150 --> 00:03:06,230
+这组字符ABC被映射
+This set of characters, ABC, is mapped
+
+70
+00:03:06,230 --> 00:03:10,476
+至少是弦乐，ABC，还有其他的。
+to by at least the string, ABC, but others, as well.
+
+71
+00:03:10,476 --> 00:03:12,350
+实现抽象类型的目的
+The purpose of implementing the abstract type
+
+72
+00:03:12,350 --> 00:03:14,306
+支持对抽象值的操作，
+is to support operations on abstract values,
+
+73
+00:03:14,306 --> 00:03:15,680
+所以我们应该
+so presumably then, we need to be
+
+74
+00:03:15,680 --> 00:03:19,110
+能够创造和操纵所有可能的A，所以他们必须
+able to create and manipulate all possible A's, so they must
+
+75
+00:03:19,110 --> 00:03:21,890
+可以用一些R来表示。
+be representable by some R.
+
+76
+00:03:21,890 --> 00:03:25,440
+现在一些抽象值可以由多个rep映射到
+Now some abstract values may be mapped to by more than one rep
+
+77
+00:03:25,440 --> 00:03:28,060
+值，当表示不是
+value, and this can happen when the representation isn't
+
+78
+00:03:28,060 --> 00:03:29,690
+编码那么紧。
+that tight in coding.
+
+79
+00:03:29,690 --> 00:03:32,840
+表示无序集的方法可能不止一种
+There may be more than one way to represent an unordered set
+
+80
+00:03:32,840 --> 00:03:36,820
+作为字符串的字符。
+of characters as a string.
+
+81
+00:03:36,820 --> 00:03:39,290
+但也许并不是所有的值都被映射。
+But maybe not all of their values are mapped.
+
+82
+00:03:39,290 --> 00:03:43,850
+所以，在这种情况下，我们与ABBC没有优势。
+So, in this case, we don't have an edge from ABBC.
+
+83
+00:03:43,850 --> 00:03:45,710
+它没有映射。
+It's not mapped.
+
+84
+00:03:45,710 --> 00:03:48,950
+我们已经决定字符串不应该包含重复项，
+We've decided that the string should not contain duplicates,
+
+85
+00:03:48,950 --> 00:03:51,630
+当我们写作的时候，比如说，
+and that will allow us, when we're writing, for example,
+
+86
+00:03:51,630 --> 00:03:56,950
+此字符集数据类型的remove方法，
+the remove method for this char set data type,
+
+87
+00:03:56,950 --> 00:03:58,890
+我们只要停下来
+we'll be able to just stop as soon as we
+
+88
+00:03:58,890 --> 00:04:01,360
+找到要移除的角色的第一个实例，
+find the first instance of a character to remove,
+
+89
+00:04:01,360 --> 00:04:05,980
+因为我们知道最多只能有一个。
+since we know there can be at most one.
+
+90
+00:04:05,980 --> 00:04:08,510
+实际上，我们只能说明几个要素
+In practice, we can only illustrate a few elements
+
+91
+00:04:08,510 --> 00:04:10,410
+在他们关系中的这两个空间中，
+of these two spaces in their relationships,
+
+92
+00:04:10,410 --> 00:04:12,250
+作为一个整体的图形是无限的。
+as the graph as a whole is infinite.
+
+93
+00:04:12,250 --> 00:04:15,240
+所以我们要用两件事来描述它。
+So we're going to describe it by giving two things.
+
+94
+00:04:15,240 --> 00:04:18,110
+首先是映射rep的抽象函数
+First is an abstraction function that maps rep
+
+95
+00:04:18,110 --> 00:04:22,089
+值到它们所表示的抽象值。
+values to the abstract values they represent.
+
+96
+00:04:22,089 --> 00:04:25,930
+这里的弧是抽象函数。
+So the arcs here are the abstraction function.
+
+97
+00:04:25,930 --> 00:04:27,430
+现在用函数的术语来说，
+Now in the terminology of functions,
+
+98
+00:04:27,430 --> 00:04:29,100
+我们上面讨论过的性质
+the properties we discussed above
+
+99
+00:04:29,100 --> 00:04:32,920
+可以说函数是满射的
+can be expressed by saying that the function is surjective
+
+100
+00:04:32,920 --> 00:04:37,770
+或者到——这意味着映射的每个抽象值
+or onto-- that means every abstract values mapped
+
+101
+00:04:37,770 --> 00:04:39,740
+以某种代表性的价值。
+to by some rep value.
+
+102
+00:04:39,740 --> 00:04:41,710
+但不一定是双射的。
+But it's not necessarily bijective.
+
+104
+00:04:44,650 --> 00:04:49,610
+所以可能有多个抽象的rep值
+So there may be multiple abstract rep values that
+
+105
+00:04:49,610 --> 00:04:53,340
+映射到相同的抽象值。
+map to the same abstract value.
+
+106
+00:04:53,340 --> 00:04:57,360
+它通常是部分的，所以不是
+And it's often partial, so it's not
+
+107
+00:04:57,360 --> 00:04:59,290
+在其整个域上定义。
+defined on its entire domain.
+
+108
+00:04:59,290 --> 00:05:05,410
+并不是rep空间中的所有值都被映射。
+Not all the values here in the rep space are mapped.
+
+109
+00:05:05,410 --> 00:05:06,840
+所以我有阻塞功能。
+So I have an obstruction function.
+
+110
+00:05:06,840 --> 00:05:12,450
+我们还有一个rep变量，它将rep值映射到布尔值。
+We also have a rep variant that maps rep values to a Boolean.
+
+111
+00:05:12,450 --> 00:05:16,300
+代表不变量，代表不变量，意味着什么
+And what the rep invariant, the representation invariant, means
+
+112
+00:05:16,300 --> 00:05:21,300
+当rep值的RVI为真时，如果
+is that when RVI of a rep value is true if
+
+113
+00:05:21,300 --> 00:05:24,800
+只有当R被抽象函数映射时。
+and only if R is mapped by the abstraction functions.
+
+114
+00:05:24,800 --> 00:05:30,570
+所以RI告诉我们一个给定的rep值的格式是否正确。
+So RI tells us whether a given rep value is well-formed.
+
+115
+00:05:30,570 --> 00:05:32,865
+或者，你可以把RI看作一个集合。
+Alternatively, you can think of the RI as a set.
+
+116
+00:05:32,865 --> 00:05:37,080
+它是定义AF的rep值的子集。
+It's a subset of rep values on which the AF is defined.
+
+117
+00:05:37,080 --> 00:05:43,760
+这是R的rep不变子集。
+So this is the rep invariant subset of R.
+
+118
+00:05:43,760 --> 00:05:46,240
+现在我们要写下rep不变量
+Now we want to write down the rep invariant
+
+119
+00:05:46,240 --> 00:05:48,460
+在代码的抽象函数中，
+in the abstract function in the code,
+
+120
+00:05:48,460 --> 00:05:50,690
+就在我们写下销售代表的地方。
+right next to where we write down the rep itself.
+
+121
+00:05:50,690 --> 00:05:56,600
+所以我们把这里的代表写成了一个字符串。
+So we wrote down the rep here as a string.
+
+122
+00:05:56,600 --> 00:05:59,860
+它的代表不变量说
+And its rep invariant says that it's
+
+123
+00:05:59,860 --> 00:06:02,630
+不包含重复字符的字符串。
+a string that contains no repeated characters.
+
+124
+00:06:02,630 --> 00:06:05,570
+所以这说明这是被排除在外的。
+So that's stating that this is excluded.
+
+125
+00:06:05,570 --> 00:06:06,830
+这是违法的。
+This is illegal.
+
+126
+00:06:06,830 --> 00:06:09,850
+然而，这些都是法律陈述。
+Whereas, these are legal representations.
+
+127
+00:06:09,850 --> 00:06:12,080
+所以把它想象成，
+So think about this as being like,
+
+128
+00:06:12,080 --> 00:06:14,270
+有点像，不变量。
+kind of like, an invariant.
+
+129
+00:06:14,270 --> 00:06:19,640
+它是所有价值观，法律价值观的不变量，
+It is an invariant on all values, on legal values,
+
+130
+00:06:19,640 --> 00:06:21,270
+属于这种抽象数据类型。
+of this abstract data type.
+
+131
+00:06:21,270 --> 00:06:26,286
+它必须在程序的所有状态下都是正确的。
+It must always be true in all states of the program.
+
+132
+00:06:26,286 --> 00:06:27,660
+然后抽象函数
+And then the abstraction function
+
+133
+00:06:27,660 --> 00:06:33,110
+说明特定代表值的映射方式
+states how a particular rep value S maps
+
+134
+00:06:33,110 --> 00:06:36,970
+一个特定的抽象值。
+to a particular abstract value.
+
+135
+00:06:36,970 --> 00:06:41,070
+在这种情况下，我们只是用英语写，
+And in this case, again, we're just writing it in English,
+
+136
+00:06:41,070 --> 00:06:47,184
+值S表示在S中找到的字符集。
+a value S represents the set of characters that are found in S.
+
+137
+00:06:47,184 --> 00:06:49,600
+现在关于抽象函数和
+Now a common confusion about abstraction functions and rep
+
+138
+00:06:49,600 --> 00:06:54,210
+不变性是一旦你有了代表--
+invariance is that once you have the rep--
+
+139
+00:06:54,210 --> 00:06:56,640
+一旦你有了代表空间和抽象值
+once you have rather the rep space and the abstract value
+
+140
+00:06:56,640 --> 00:06:58,960
+空间——这完全决定了抽象
+space-- and that fully determines the abstraction
+
+141
+00:06:58,960 --> 00:07:01,210
+rep不变量中的函数——这不是真的。
+function in the rep invariant-- that's not true.
+
+142
+00:07:01,210 --> 00:07:04,310
+如果那是真的，那么这些想法就没什么用处了
+If that were true, then these ideas would be of little use
+
+143
+00:07:04,310 --> 00:07:06,530
+因为他们有多余的东西
+since they'd be redundant with something which was
+
+144
+00:07:06,530 --> 00:07:09,060
+其他地方已经有了。
+already available elsewhere.
+
+145
+00:07:09,060 --> 00:07:11,342
+抽象值空间本身并不
+The abstract value space alone does not
+
+146
+00:07:11,342 --> 00:07:12,550
+确定其中任何一个。
+determine either one of them.
+
+147
+00:07:12,550 --> 00:07:14,430
+可以有几个表示
+There can be several representations
+
+148
+00:07:14,430 --> 00:07:16,140
+对于相同的抽象类型。
+for the same abstract type.
+
+149
+00:07:16,140 --> 00:07:18,710
+我们不一定要用字符串来表示
+We don't necessarily have to use strings to represent
+
+150
+00:07:18,710 --> 00:07:19,580
+一组字符。
+a set of characters.
+
+151
+00:07:19,580 --> 00:07:23,200
+我们可以用一个位向量，一个位数组，
+We could conceivably use a bit vector, an array of bits,
+
+152
+00:07:23,200 --> 00:07:25,170
+每个可能的字符有1位
+with 1-bit for each possible character
+
+153
+00:07:25,170 --> 00:07:28,410
+在字符数据类型中。
+that we have in the character data type.
+
+154
+00:07:28,410 --> 00:07:30,830
+显然，我们需要两个不同的抽象函数
+Clearly we would need two different abstraction functions
+
+155
+00:07:30,830 --> 00:07:34,590
+映射这两个非常不同的rep值空间。
+to map these two very different rep value spaces.
+
+156
+00:07:34,590 --> 00:07:36,170
+现在不那么明显了为什么，
+Now it's a little less obvious why,
+
+157
+00:07:36,170 --> 00:07:38,770
+如果你选择了这两个空间，
+if once you've chosen both of these spaces,
+
+158
+00:07:38,770 --> 00:07:42,460
+你没有决心，没有完全确定的抽象概念
+you don't have a determination, a fully determined abstraction
+
+159
+00:07:42,460 --> 00:07:44,410
+rep不变量的函数，但关键是
+function of rep invariant, but the key point
+
+160
+00:07:44,410 --> 00:07:48,140
+是不是为rep定义了一个类型，比如string--
+is that defining a type for the rep, like string--
+
+161
+00:07:48,140 --> 00:07:50,940
+那就是为rep值选择空间--
+and that's choosing the space for the rep values--
+
+162
+00:07:50,940 --> 00:07:53,070
+不确定哪个rep值
+does not determine which of the rep values
+
+163
+00:07:53,070 --> 00:07:55,350
+将被视为合法。
+will be deemed to be legal.
+
+164
+00:07:55,350 --> 00:07:57,270
+以及那些合法的，确切地说
+And of those that are legal, exactly how
+
+165
+00:07:57,270 --> 00:07:58,930
+他们会被解释的。
+they'll be interpreted.
+
+166
+00:07:58,930 --> 00:08:01,090
+所以与其像我们上面所做的那样决定，
+So rather than deciding, as we did above,
+
+167
+00:08:01,090 --> 00:08:03,710
+字符串不能有重复项
+that strings can have no duplicates-- alll right-- that
+
+168
+00:08:03,710 --> 00:08:07,100
+我们的代表在这里是不变的--我们可以，
+was our rep invariant here-- we could, instead,
+
+169
+00:08:07,100 --> 00:08:10,680
+允许重复，但同时
+allow duplicates, but at the same time
+
+170
+00:08:10,680 --> 00:08:13,120
+要求对字符进行排序，显示
+require that the characters be sorted, appearing
+
+171
+00:08:13,120 --> 00:08:15,020
+以非递减的顺序。
+in non-decreasing order.
+
+172
+00:08:15,020 --> 00:08:17,575
+这是一个非常不同的代表不变量。
+That's a very different rep invariant.
+
+173
+00:08:17,575 --> 00:08:19,200
+这个rep不变量的优点
+And the advantage of this rep invariant
+
+174
+00:08:19,200 --> 00:08:23,070
+现在我们可以做一个更快的查找操作。
+is now we can do a much faster find operation.
+
+175
+00:08:23,070 --> 00:08:25,740
+我们可以用对数来检查集合的成员资格，
+We can check membership in the set in logarithmic,
+
+176
+00:08:25,740 --> 00:08:29,390
+而不是线性时间，使用二进制搜索。
+rather than linear time, using binary search.
+
+177
+00:08:29,390 --> 00:08:31,710
+所以这是相同的rep值空间。
+So it's the same rep value space.
+
+178
+00:08:31,710 --> 00:08:32,964
+还是一根绳子。
+It's still a string.
+
+180
+00:08:35,908 --> 00:08:37,449
+但是它有一个不同的rep不变量。
+But it has a different rep invariant.
+
+182
+00:08:42,906 --> 00:08:44,780
+现在即使rep值的类型相同
+Now even with the same type for the rep value
+
+183
+00:08:44,780 --> 00:08:46,760
+空间和相同的rep不变量RI，
+space and the same rep invariant RI,
+
+184
+00:08:46,760 --> 00:08:48,790
+我们还是可以用不同的方式来解释
+we still might interpret the rep differently
+
+185
+00:08:48,790 --> 00:08:50,790
+使用不同的抽象函数AF。
+with a different abstraction functions AF.
+
+186
+00:08:50,790 --> 00:08:53,830
+假设我们有一个rep不变量
+So suppose we have a rep invariant that admits
+
+187
+00:08:53,830 --> 00:08:55,740
+任何字符串。
+any string of characters.
+
+188
+00:08:55,740 --> 00:08:59,400
+然后我们可以定义AF，如上所述，来表示
+Then we can define AF, as above, to represent
+
+189
+00:08:59,400 --> 00:09:03,620
+数组元素作为集合的元素。
+the arrays elements as the elements of the set.
+
+190
+00:09:03,620 --> 00:09:05,120
+但没有优先考虑的理由
+But there is no A priority reason
+
+191
+00:09:05,120 --> 00:09:08,010
+让代表决定解释。
+to let the rep decide the interpretation.
+
+192
+00:09:08,010 --> 00:09:11,300
+例如，我们可以解释连续对
+For example, maybe we could interpret consecutive pairs
+
+193
+00:09:11,300 --> 00:09:17,230
+作为子范围的字符，因此字符串rep，ACGG，是
+of characters as sub ranges, so that the string rep, ACGG, is
+
+194
+00:09:17,230 --> 00:09:21,230
+解释为两个范围对，A到C，G到G。
+interpreted as two range pairs, A through C, and G through G.
+
+195
+00:09:21,230 --> 00:09:25,137
+因此，代表一个集合，ABCG。
+And, therefore, represents a set, ABCG.
+
+196
+00:09:25,137 --> 00:09:26,720
+所以我和空军会
+So here's what the AF and I would look
+
+197
+00:09:26,720 --> 00:09:29,360
+就像那个代表。
+like for that representation.
+
+198
+00:09:29,360 --> 00:09:32,760
+rep不变量要求长度为偶数。
+The rep invariant would require that length is even.
+
+199
+00:09:32,760 --> 00:09:37,130
+一切正常。
+And that it's in order.
+
+200
+00:09:37,130 --> 00:09:38,750
+然后抽象函数
+And then the abstraction function
+
+201
+00:09:38,750 --> 00:09:42,410
+会说它代表着山脉的结合
+would say it represents the union of the ranges
+
+202
+00:09:42,410 --> 00:09:45,010
+从I的S开始，I的S加1，
+starting from S of I, S of I plus 1,
+
+203
+00:09:45,010 --> 00:09:51,647
+对于S中的每个相邻字符对。
+for each adjacent pair of characters in S.
+
+204
+00:09:51,647 --> 00:09:54,090
+中心点是设计一个抽象类型
+The central point is that designing an abstract type
+
+205
+00:09:54,090 --> 00:09:58,870
+意思不仅仅是选择这两个空间，抽象值
+means not only choosing these two spaces, the abstract value
+
+206
+00:09:58,870 --> 00:10:01,630
+规范的空间和rep值
+space for the specification, and the rep value
+
+207
+00:10:01,630 --> 00:10:05,210
+实施的空间，也决定了
+space for the implementation, but also deciding
+
+208
+00:10:05,210 --> 00:10:10,020
+使用什么rep值，以及如何解释它们。
+what rep values to use, and how to interpret them.
+
+209
+00:10:10,020 --> 00:10:11,704
+写下来是非常重要的
+It's critically important to write down
+
+210
+00:10:11,704 --> 00:10:13,870
+正如我们在上面所做的，你的代码中的这些假设，
+these assumptions in your code, as we've done above,
+
+211
+00:10:13,870 --> 00:10:17,120
+所以未来的程序员，尤其是你未来的自我，
+so that future programmers, and especially your future self,
+
+212
+00:10:17,120 --> 00:10:20,330
+知道表示的实际含义。
+are aware of what the representation actually means.
+
+213
+00:10:20,330 --> 00:10:21,180
+为什么呢？
+Now why is that?
+
+214
+00:10:21,180 --> 00:10:23,640
+如果不同的实现者不同意
+What happens if different implementers disagree
+
+215
+00:10:23,640 --> 00:10:24,990
+关于代表的意思？
+about the meaning of the rep?
+
+216
+00:10:24,990 --> 00:10:27,430
+让我们在练习中探索一下。
+Let's explore that in the exercises.
+

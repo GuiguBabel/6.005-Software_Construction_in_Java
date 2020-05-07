@@ -1,0 +1,125 @@
+1
+00:00:00,060 --> 00:00:02,070
+现在，让我们把很多东西拼凑起来。
+Now let's bring a lot of pieces together.
+
+2
+00:00:02,070 --> 00:00:04,980
+精心设计的抽象数据的巨大优势
+An enormous advantage of a well-designed abstract data
+
+3
+00:00:04,980 --> 00:00:08,530
+类型是它封装并强制执行属性
+type is that it encapsulates and enforces properties
+
+4
+00:00:08,530 --> 00:00:13,070
+否则我们必须在一个先决条件中加以规定。
+that we would otherwise have to stipulate in a precondition.
+
+5
+00:00:13,070 --> 00:00:16,250
+例如，不是像这样的规范
+For example, instead of a spec like this
+
+6
+00:00:16,250 --> 00:00:19,570
+它的前提条件是
+with its elaborate precondition that says it's set
+
+7
+00:00:19,570 --> 00:00:24,470
+1是一个字符串，是一个排序集
+1, which is a string, is a sorted set
+
+8
+00:00:24,470 --> 00:00:27,260
+没有重复的字符。
+of characters with no repeats.
+
+9
+00:00:27,260 --> 00:00:29,760
+第二组也是。
+Set 2 is likewise.
+
+10
+00:00:29,760 --> 00:00:34,450
+它再次按顺序返回一组字符
+And it returns, again, a set of characters in sorted order
+
+11
+00:00:34,450 --> 00:00:35,430
+没有重复。
+with no repeats.
+
+12
+00:00:35,430 --> 00:00:38,860
+我们可以使用一个ADT来捕获
+We can instead use an ADT that captures
+
+13
+00:00:38,860 --> 00:00:42,170
+所需的属性，排序集
+that desired property, sorted set
+
+14
+00:00:42,170 --> 00:00:45,380
+人物，上面写着。
+characters, which says this.
+
+15
+00:00:45,380 --> 00:00:51,040
+这更容易理解，因为ADT的名称
+This is easier to understand because the name of the ADT
+
+16
+00:00:51,040 --> 00:00:53,340
+排序而不是字符表示所有
+sort instead of character conveys all
+
+17
+00:00:53,340 --> 00:00:54,940
+程序员需要知道。
+the programmer needs to know.
+
+18
+00:00:54,940 --> 00:00:59,000
+它也更安全，因为Java静态检查
+It's also safer from bugs because Java static checking
+
+19
+00:00:59,000 --> 00:01:00,430
+开始发挥作用。
+comes into play.
+
+20
+00:01:00,430 --> 00:01:03,090
+以及不重复排序的所需条件
+And the required conditions sorted with no repeats
+
+21
+00:01:03,090 --> 00:01:07,396
+可以在一个地方强制执行，即排序集类型。
+can be enforced in exactly one place, the sorted set type.
+
+22
+00:01:07,396 --> 00:01:09,770
+很多地方我们可能使用了先决条件
+Many of the places where we might have used preconditions
+
+23
+00:01:09,770 --> 00:01:12,145
+关于你在课程中看到的问题集或早期代码
+on problem sets or earlier code you've seen in the course
+
+24
+00:01:12,145 --> 00:01:15,890
+如果有一个自定义的抽象数据类型
+would have benefited from having a custom abstract data type
+
+25
+00:01:15,890 --> 00:01:17,440
+相反。
+instead.
+

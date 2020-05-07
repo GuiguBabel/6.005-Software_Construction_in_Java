@@ -1,0 +1,710 @@
+1
+00:00:00,499 --> 00:00:02,990
+我们一直在关注不可变对象的质量
+We've been focusing on quality of immutable objects
+
+2
+00:00:02,990 --> 00:00:04,030
+到目前为止的阅读。
+so far in this reading.
+
+3
+00:00:04,030 --> 00:00:07,187
+可变数据类型呢？
+What about mutable data types?
+
+4
+00:00:07,187 --> 00:00:08,270
+现在回想一下我们的定义。
+Now recall our definition.
+
+5
+00:00:08,270 --> 00:00:11,090
+两个物体不能区分时是相等的
+Two objects are equal when they cannot be distinguished
+
+6
+00:00:11,090 --> 00:00:13,080
+通过观察。
+by observation.
+
+7
+00:00:13,080 --> 00:00:17,590
+对于可变对象，现在有两种解释方法。
+With mutable objects, there are now two ways to interpret this.
+
+8
+00:00:17,590 --> 00:00:20,277
+也许他们——我们所说的通过观察来区分
+Maybe they-- what we mean by distinguished by observation
+
+9
+00:00:20,277 --> 00:00:22,360
+是不能用观察来区分的
+is that they can't be distinguished by observation
+
+10
+00:00:22,360 --> 00:00:24,619
+这不会改变对象的状态。
+that doesn't change the state of the objects.
+
+11
+00:00:24,619 --> 00:00:26,410
+换言之，它们无法区分
+In other words, they can't be distinguished
+
+12
+00:00:26,410 --> 00:00:31,140
+如果只调用observer、producer和creator方法。
+if you only call observer, producer, and creator methods.
+
+13
+00:00:31,140 --> 00:00:33,950
+这通常被称为观察平等，
+This is often called observational equality,
+
+14
+00:00:33,950 --> 00:00:36,140
+因为它在测试两个对象是否
+because it's testing whether two objects look
+
+15
+00:00:36,140 --> 00:00:38,420
+在程序的当前状态下也是如此，
+the same in the current state of the program,
+
+16
+00:00:38,420 --> 00:00:39,798
+不改变状态。
+without changing the state.
+
+18
+00:00:42,404 --> 00:00:44,070
+更有力的说法是
+A stronger way of saying it is that they
+
+19
+00:00:44,070 --> 00:00:46,890
+任何观察都无法区分，甚至
+can't be distinguished by any observation, even
+
+20
+00:00:46,890 --> 00:00:48,020
+状态更改。
+state changes.
+
+21
+00:00:48,020 --> 00:00:50,800
+这个解释允许调用
+And this interpretation allows calling any methods on the two
+
+22
+00:00:50,800 --> 00:00:52,790
+对象，包括变换器。
+objects, including mutators.
+
+23
+00:00:52,790 --> 00:00:54,820
+这通常被称为行为平等，
+This is often called behavioral equality,
+
+24
+00:00:54,820 --> 00:00:58,050
+因为它测试两个对象的行为是否相同
+since it tests whether two objects will behave the same
+
+25
+00:00:58,050 --> 00:01:00,330
+在这个和所有未来的国家。
+in this and all future states.
+
+26
+00:01:00,330 --> 00:01:03,680
+现在对于没有变异的不可变对象，
+Now for immutable objects which don't have mutators,
+
+27
+00:01:03,680 --> 00:01:07,380
+观察和行为上的平等是一样的。
+observational and behavioral equality are identical.
+
+28
+00:01:07,380 --> 00:01:09,240
+对于可变对象，它可以是
+For mutable objects, it can be very
+
+29
+00:01:09,240 --> 00:01:12,480
+试图实施严格的观察平等，
+tempting to implement strict observational equality,
+
+30
+00:01:12,480 --> 00:01:14,520
+换句话说，忽略变异。
+in other words, ignoring mutators.
+
+31
+00:01:14,520 --> 00:01:17,000
+Java实际上使用了观察等式
+Java actually uses observational equality
+
+32
+00:01:17,000 --> 00:01:19,142
+对于它的大多数可变数据类型。
+for most of its mutable data types.
+
+33
+00:01:19,142 --> 00:01:22,630
+如果两个不同的列表对象包含相同的序列
+If two distinct list objects contain the same sequence
+
+34
+00:01:22,630 --> 00:01:26,470
+元素的，然后等于它们相等的报告，
+of elements, then equals reports that they are equal,
+
+35
+00:01:26,470 --> 00:01:30,596
+即使突变者会发现它们是不同的。
+even though a mutator would find that they are different.
+
+36
+00:01:30,596 --> 00:01:32,970
+但是使用观测相等可能会导致微小的错误。
+But using observational equality can lead to subtle bugs.
+
+37
+00:01:32,970 --> 00:01:35,180
+事实上，它让我们很容易打破
+In fact, it allows us to easily break
+
+38
+00:01:35,180 --> 00:01:39,070
+其他集合数据结构的表示不变量。
+the rep invariants of other collection data structures.
+
+39
+00:01:39,070 --> 00:01:39,950
+这里有一个例子。
+Here's an example.
+
+40
+00:01:39,950 --> 00:01:45,540
+假设我们制作一个列表，在其中添加一个元素，
+Suppose we make a list, add an element to it,
+
+41
+00:01:45,540 --> 00:01:47,360
+然后我们把它放进一套。
+and then we put it into a set.
+
+42
+00:01:47,360 --> 00:01:51,760
+所以我们现在有一组字符串列表。
+So we have now a set of lists of strings.
+
+43
+00:01:51,760 --> 00:01:56,880
+我们将把这个列表添加到这个集合中。
+And we're going to add this list to that set.
+
+44
+00:01:56,880 --> 00:01:59,070
+现在我们可以问一下，这套有没有
+Now we can ask, does this set contain
+
+45
+00:01:59,070 --> 00:02:00,370
+我们刚放进去的名单？
+the list we just put into it?
+
+46
+00:02:00,370 --> 00:02:02,800
+是的，答案是肯定的。
+And yes, the answer is yes.
+
+47
+00:02:02,800 --> 00:02:04,940
+现在假设我们改变了列表。
+Now suppose we mutate the list.
+
+48
+00:02:04,940 --> 00:02:06,680
+所以它以前只有一个。
+So it used to have just A in it.
+
+49
+00:02:06,680 --> 00:02:08,840
+我们现在在结尾处加上了再见。
+We've now added goodbye to the ends.
+
+50
+00:02:08,840 --> 00:02:10,979
+所以名单上有一个和再见。
+So the list has A and goodbye.
+
+51
+00:02:10,979 --> 00:02:14,540
+现在我们要问的是，这个集合包含这个列表吗？
+Now we ask, does this set contain this list?
+
+52
+00:02:14,540 --> 00:02:16,977
+答案是错误的。
+The answer is false.
+
+53
+00:02:16,977 --> 00:02:18,560
+但比这更糟，因为当
+But it's worse than that, because when
+
+54
+00:02:18,560 --> 00:02:20,970
+我们迭代集合的成员，
+we iterate over members of the set,
+
+55
+00:02:20,970 --> 00:02:24,220
+我们还在里面找到名单。
+we still find the list in there.
+
+56
+00:02:24,220 --> 00:02:26,070
+但是contains说它不在那里。
+But contains says it's not there.
+
+57
+00:02:26,070 --> 00:02:27,220
+看看这个。
+So look at this.
+
+58
+00:02:27,220 --> 00:02:30,450
+所以我们在列表中迭代
+So we are iterating over the lists
+
+59
+00:02:30,450 --> 00:02:31,590
+在这个集合中找到的。
+that are found in this set.
+
+60
+00:02:31,590 --> 00:02:34,450
+所以我要对每个列表的值
+So L is going to take on the value of each list that
+
+61
+00:02:34,450 --> 00:02:35,966
+在这个集合中找到。
+is found in this set.
+
+62
+00:02:35,966 --> 00:02:40,020
+我们要从名单中找出一个L——从那一组中，
+We're going to get an L out of that list-- out of that set,
+
+63
+00:02:40,020 --> 00:02:41,620
+我很抱歉。
+I'm sorry.
+
+64
+00:02:41,620 --> 00:02:43,280
+然后我们要这个
+And then we're going to ask for this L
+
+65
+00:02:43,280 --> 00:02:45,340
+我们刚在片场找到的。
+that we have just found in the set.
+
+66
+00:02:45,340 --> 00:02:47,560
+它来自集合的迭代。
+It's coming out of the iteration of the set.
+
+67
+00:02:47,560 --> 00:02:49,475
+这套衣服里有L吗？
+Does the set contain that L?
+
+68
+00:02:49,475 --> 00:02:51,030
+答案是不。
+The answer is no.
+
+69
+00:02:51,030 --> 00:02:55,180
+这显然违背了我们所期望的含意，
+This clearly violates what we expect contains to mean,
+
+70
+00:02:55,180 --> 00:02:57,420
+以及我们所期望的迭代意味着什么。
+and what we expect iteration to mean.
+
+71
+00:02:57,420 --> 00:03:01,410
+他们现在不同意元素是否在集合中。
+They disagree now about whether an element is in the set.
+
+72
+00:03:01,410 --> 00:03:04,200
+这套显然坏了。
+The set is clearly broken.
+
+73
+00:03:04,200 --> 00:03:06,790
+如果转到联机Python，您可以看到这段代码正在运行
+You can see this code in action if you go to the online Python
+
+74
+00:03:06,790 --> 00:03:08,620
+带着那个链接做家教。
+tutor with that link.
+
+75
+00:03:08,620 --> 00:03:09,740
+怎么回事？
+So what's going on?
+
+76
+00:03:09,740 --> 00:03:13,022
+好吧，字符串列表是一个可变对象。
+Well, a list of string is a mutable object.
+
+77
+00:03:13,022 --> 00:03:14,480
+在标准Java实现中
+In the standard Java implementation
+
+78
+00:03:14,480 --> 00:03:17,170
+像列表、突变这样的集合类
+of collection classes like list, mutations
+
+79
+00:03:17,170 --> 00:03:20,030
+影响equals和hashcode的结果。
+affect the result of equals and hashcode.
+
+80
+00:03:20,030 --> 00:03:23,140
+当列表第一次放入哈希集中时，
+When the list is first put into the hash set,
+
+81
+00:03:23,140 --> 00:03:25,220
+它存储在相应的散列桶中
+it's stored in the hash bucket corresponding
+
+82
+00:03:25,220 --> 00:03:26,990
+对于当时的hashcode结果，
+to its hashcode result at that time,
+
+83
+00:03:26,990 --> 00:03:31,910
+它只使用元素A。
+which uses only the element A.
+
+84
+00:03:31,910 --> 00:03:33,720
+当列表随后发生变异时
+When the list is subsequently mutated
+
+85
+00:03:33,720 --> 00:03:38,760
+所以它有一个和再见，它的哈希码变化。
+so that it has A and goodbye on it, it's hashcode changes.
+
+86
+00:03:38,760 --> 00:03:40,540
+但hashset并不知道这一点。
+But hashset doesn't know about that.
+
+87
+00:03:40,540 --> 00:03:44,040
+它没有意识到它需要被转移到另一个桶里。
+It doesn't realize it needs to be moved to a different bucket.
+
+88
+00:03:44,040 --> 00:03:48,574
+所以当容器去寻找它时，它永远找不到它。
+So when contains goes and looks for it, it can never find it.
+
+89
+00:03:48,574 --> 00:03:50,240
+另一方面，迭代器没有
+The iterator, on the other hand, doesn't
+
+90
+00:03:50,240 --> 00:03:51,350
+遭受那个问题的折磨。
+suffer from that problem.
+
+91
+00:03:51,350 --> 00:03:53,940
+只是一次一个地检查散列桶
+It's just going through the hash buckets one at a time
+
+92
+00:03:53,940 --> 00:03:58,500
+也不想用它的hashcode查找任何东西。
+and not actually trying to look anything up using its hashcode.
+
+93
+00:03:58,500 --> 00:04:01,800
+所以当equals和hashcode可能受到变异的影响时，
+So when equals and hashcode can be affected by mutation,
+
+94
+00:04:01,800 --> 00:04:04,690
+我们可以打破哈希表的rep不变量
+we can break the rep invariant of a hash table that
+
+95
+00:04:04,690 --> 00:04:07,170
+使用该对象作为键。
+uses that object as a key.
+
+96
+00:04:07,170 --> 00:04:09,670
+这里有一个非常有说服力的引用
+Here's a very telling quote from the specification
+
+97
+00:04:09,670 --> 00:04:11,530
+在Java.util.set中。
+of Java.util.set.
+
+98
+00:04:11,530 --> 00:04:14,620
+“如果可变对象是
+"Great care must be exercised if mutable objects are
+
+99
+00:04:14,620 --> 00:04:16,690
+用作集合元素。
+used as set elements.
+
+100
+00:04:16,690 --> 00:04:18,420
+未指定集合的行为
+Behavior of a set is not specified
+
+101
+00:04:18,420 --> 00:04:20,149
+如果对象的值被更改
+if the value of an object is changed
+
+102
+00:04:20,149 --> 00:04:23,300
+当对象是
+in a manner that affects equals comparisons while the object is
+
+103
+00:04:23,300 --> 00:04:26,590
+集合中的元素。“
+an element in the set."
+
+104
+00:04:26,590 --> 00:04:28,104
+不幸的是，Java库是，
+The Java library is, unfortunately,
+
+105
+00:04:28,104 --> 00:04:29,770
+解释方式不一致
+inconsistent about the way it interprets
+
+106
+00:04:29,770 --> 00:04:30,930
+对于可变类等于。
+equals for mutable classes.
+
+107
+00:04:30,930 --> 00:04:33,400
+集合使用观察等式，
+Collections use observational equality,
+
+108
+00:04:33,400 --> 00:04:36,030
+但是其他可变类，比如stringbuilder，
+but other mutable classes, like stringbuilder,
+
+109
+00:04:36,030 --> 00:04:39,370
+使用行为平等。
+use behavioral equality.
+
+110
+00:04:39,370 --> 00:04:41,230
+我们应该从这个例子中吸取教训
+The lesson we should draw from this example
+
+111
+00:04:41,230 --> 00:04:44,440
+是为了防止虫子，等于
+is that to be safe from bugs, equals
+
+112
+00:04:44,440 --> 00:04:46,970
+应实现行为平等。
+should implement behavioral equality.
+
+113
+00:04:46,970 --> 00:04:49,110
+这意味着两个引用应该等于
+That means two references should be equals if
+
+114
+00:04:49,110 --> 00:04:52,430
+只有当它们是同一对象的别名时。
+and only if they are aliases for the same object.
+
+115
+00:04:52,430 --> 00:04:55,110
+所以可变对象应该继承hashcode中的equals
+So mutable objects should just inherit equals in the hashcode
+
+116
+00:04:55,110 --> 00:04:56,830
+直接从物体上，因为
+directly from object, because that's
+
+117
+00:04:56,830 --> 00:04:58,590
+它已经实现了什么。
+what it already implements.
+
+118
+00:04:58,590 --> 00:05:01,180
+对于需要观察平等概念的客户，
+For clients that need a notion of observational equality,
+
+119
+00:05:01,180 --> 00:05:03,700
+两个对象在当前状态下看起来相同，
+where the two objects look the same in the current state,
+
+120
+00:05:03,700 --> 00:05:06,810
+最好定义一个全新的方法
+it's better to define a completely new method that
+
+121
+00:05:06,810 --> 00:05:08,450
+不会影响平等的方式，
+won't interfere with the way equals,
+
+122
+00:05:08,450 --> 00:05:10,730
+hashcode和hash表的行为。
+and hashcode, and hash tables behave.
+
+123
+00:05:10,730 --> 00:05:12,435
+例如，我们可以称之为类似的。
+We might call it, for example, similar.
+
+125
+00:05:15,580 --> 00:05:18,650
+这里是equals和hashcode的最终规则
+So here is the final rule for equals and hashcode
+
+126
+00:05:18,650 --> 00:05:19,980
+对于抽象数据类型。
+for abstract data types.
+
+127
+00:05:19,980 --> 00:05:21,740
+如果你在写一个不可变的数据类型，
+If you're writing an immutable data type,
+
+128
+00:05:21,740 --> 00:05:24,231
+那么你的等号应该比较抽象值。
+then your equals should compare abstract values.
+
+129
+00:05:24,231 --> 00:05:25,980
+等于说平等者应该
+It's the same as saying that equals should
+
+130
+00:05:25,980 --> 00:05:28,330
+提供行为平等。
+provide behavioral equality.
+
+131
+00:05:28,330 --> 00:05:32,180
+hashcode应该将抽象值映射为整数。
+And hashcode should map the abstract value to an integer.
+
+132
+00:05:32,180 --> 00:05:36,550
+所以不可变类型必须同时重写equals和hashcode。
+So immutable types must override both equals and hashcode.
+
+133
+00:05:36,550 --> 00:05:39,200
+对于可变类型，equals应该比较引用，
+For mutable types, equals should compare references,
+
+134
+00:05:39,200 --> 00:05:41,306
+就像平等一样。
+just like equals equals does.
+
+135
+00:05:41,306 --> 00:05:42,680
+这和说平等一样
+This is the same as saying equals
+
+136
+00:05:42,680 --> 00:05:45,270
+应该提供行为上的平等，但也有参考价值
+should provide behavioral equality, but also referential
+
+137
+00:05:45,270 --> 00:05:46,210
+平等。
+equality.
+
+138
+00:05:46,210 --> 00:05:50,027
+hashcode应该将引用映射为整数。
+And hashcode should map the reference into an integer.
+
+139
+00:05:50,027 --> 00:05:52,360
+所以可变类型不应该重写equals和hashcode
+So mutable types should not override equals and hashcode
+
+140
+00:05:52,360 --> 00:05:52,600
+完全。
+at all.
+
+141
+00:05:52,600 --> 00:05:54,600
+它应该只使用默认值和限制
+It should simply use the default and limitations
+
+142
+00:05:54,600 --> 00:05:55,990
+由对象提供。
+provided by object.
+
+143
+00:05:55,990 --> 00:05:58,350
+Java的集合不遵循这个规则，
+Java doesn't follow this rule for its collections,
+
+144
+00:05:58,350 --> 00:06:03,400
+不幸的是，这导致了我们在上面看到的陷阱。
+unfortunately, which leads to the pitfalls that we saw above.
+

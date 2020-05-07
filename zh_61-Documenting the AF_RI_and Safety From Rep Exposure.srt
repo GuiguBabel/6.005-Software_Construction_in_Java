@@ -1,0 +1,220 @@
+1
+00:00:00,240 --> 00:00:02,750
+最好记录抽象函数
+It's good practice to document the abstraction function
+
+2
+00:00:02,750 --> 00:00:04,714
+在类中使用注释表示不变量
+and rep invariant in the class using comments
+
+3
+00:00:04,714 --> 00:00:07,380
+这就是声明rep的私有字段的地方。
+that are right where the private fields of the rep are declared.
+
+4
+00:00:07,380 --> 00:00:09,420
+我们已经在上面做了。
+We've already been doing that above.
+
+5
+00:00:09,420 --> 00:00:12,920
+另一份我们要你写的文件
+Another piece of documentation that we'll ask you to write
+
+6
+00:00:12,920 --> 00:00:15,890
+是一个代表暴露安全的论点。
+is a rep exposure safety argument.
+
+7
+00:00:15,890 --> 00:00:18,820
+这是一条评论，它检查了销售代表的每个部分，
+This is a comment that examines each part of the rep,
+
+8
+00:00:18,820 --> 00:00:21,116
+查看处理该rep部分的代码--
+looks at the code that handles that part of the rep--
+
+9
+00:00:21,116 --> 00:00:23,490
+尤其是在参数和返回值方面
+particularly with respect to parameters and return values
+
+10
+00:00:23,490 --> 00:00:27,470
+从客户那里，因为那是代表曝光的地方--
+from clients because that's where rep exposure occurs--
+
+11
+00:00:27,470 --> 00:00:31,061
+并给出代码不公开rep的原因。
+and presents a reason why the code doesn't expose the rep.
+
+12
+00:00:31,061 --> 00:00:34,050
+下面是一个带有rep不变量的tweet示例
+Here's an example of tweet with its rep invariant
+
+13
+00:00:34,050 --> 00:00:36,540
+从重复暴露中提取功能和安全性
+abstraction function and safety from rep exposure
+
+14
+00:00:36,540 --> 00:00:38,110
+完全记录在案。
+fully documented.
+
+15
+00:00:38,110 --> 00:00:39,500
+这是它的rep不变量。
+Here is its rep invariant.
+
+16
+00:00:39,500 --> 00:00:42,410
+上面说作者是Twitter用户名，
+It says that the author is a Twitter username,
+
+17
+00:00:42,410 --> 00:00:46,070
+定义了这意味着什么，它还说
+defines what that means, It also says
+
+18
+00:00:46,070 --> 00:00:50,430
+tweet的长度小于或等于140个字符。
+that the tweet is less than or equal to 140 characters long.
+
+19
+00:00:50,430 --> 00:00:52,050
+它的抽象功能是
+And its abstraction function says
+
+20
+00:00:52,050 --> 00:00:54,010
+它代表了一条微博
+that it represents a tweet posted
+
+21
+00:00:54,010 --> 00:00:58,170
+作者用文字的内容
+by that author with the content of text
+
+22
+00:00:58,170 --> 00:00:59,390
+在时间戳上。
+at the time time-stamped.
+
+24
+00:01:02,790 --> 00:01:05,430
+它有一个关于避免暴露在公众面前的安全性的论点。
+And it has an argument for safety from rep exposure.
+
+25
+00:01:05,430 --> 00:01:09,270
+所有的田地都是私人的。
+All the fields are private.
+
+26
+00:01:09,270 --> 00:01:12,600
+作者和文本是字符串，所以它们是
+Author and text are strings, so they're
+
+27
+00:01:12,600 --> 00:01:14,890
+保证是不变的。
+guaranteed to be immutable.
+
+28
+00:01:14,890 --> 00:01:17,220
+时间戳是可变日期。
+Time stamp is a mutable date.
+
+29
+00:01:17,220 --> 00:01:21,000
+所以tweet构造函数可以得到时间戳，
+So the tweet constructor can get time stamp,
+
+30
+00:01:21,000 --> 00:01:24,240
+制作防御副本以避免共享销售代表的数据
+make defensive copies to avoid sharing the rep's data
+
+31
+00:01:24,240 --> 00:01:27,380
+反对客户。
+object with clients.
+
+32
+00:01:27,380 --> 00:01:29,600
+现在，注意我们没有任何显式的rep不变量
+Now, notice we don't have any explicit rep invariant
+
+33
+00:01:29,600 --> 00:01:32,140
+时间戳的条件
+conditions on time stamp aside from
+
+34
+00:01:32,140 --> 00:01:34,500
+时间戳不是
+the conventional assumption that time stamp is not
+
+35
+00:01:34,500 --> 00:01:37,770
+等于空，我们对所有对象引用都有空。
+equal to null, which we have for all object references.
+
+36
+00:01:37,770 --> 00:01:40,950
+但我们还需要在广告曝光中加入时间戳
+But we still need to include time stamp in the rep exposure
+
+37
+00:01:40,950 --> 00:01:43,870
+安全参数，因为不变性属性
+safety argument because the immutability property
+
+38
+00:01:43,870 --> 00:01:47,080
+整个类型的依赖于保持不变的所有字段。
+of the whole type depends on all the fields remaining unchanged.
+
+40
+00:01:49,840 --> 00:01:51,940
+以下是拉特南的论点--
+Here are the arguments for ratnam--
+
+41
+00:01:51,940 --> 00:01:59,240
+它的代表不变量，它的抽象函数，
+its rep invariant, its abstraction function,
+
+42
+00:01:59,240 --> 00:02:01,110
+以及它的安全性。
+and its safety from rep exposure.
+
+43
+00:02:01,110 --> 00:02:03,130
+所有字段都是私有的。
+All fields are private.
+
+44
+00:02:03,130 --> 00:02:06,940
+代表中的所有类型都是不可变的。
+All types in the rep are immutable.
+
+45
+00:02:06,940 --> 00:02:10,180
+所以请注意，一个不变的代表特别容易争论
+So notice that an immutable rep is particularly easy to argue
+
+46
+00:02:10,180 --> 00:02:12,549
+为了避免重复暴露。
+for safety from rep exposure.
+

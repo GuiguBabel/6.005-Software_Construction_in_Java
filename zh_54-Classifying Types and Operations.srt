@@ -1,0 +1,925 @@
+1
+00:00:01,660 --> 00:00:04,340
+现在想想不同的方法是有用的
+Now it's useful to think about different ways
+
+2
+00:00:04,340 --> 00:00:07,540
+我们可以对类型和不同类型的操作进行分类
+that we can classify types and different kinds of operations
+
+3
+00:00:07,540 --> 00:00:08,400
+对那些类型。
+on those types.
+
+4
+00:00:08,400 --> 00:00:10,910
+我们已经遇到了一些。
+And we've already encountered some of them.
+
+5
+00:00:10,910 --> 00:00:13,290
+类型可以是可变的或不可变的。
+Types can be either mutable or immutable.
+
+6
+00:00:13,290 --> 00:00:15,420
+这是一个非常重要的特征，
+And this is a very important feature of a type,
+
+7
+00:00:15,420 --> 00:00:17,690
+是否该类型的对象--
+whether the object of that type--
+
+8
+00:00:17,690 --> 00:00:21,090
+该类型的值创建后是否可以更改。
+whether a value of that type can be changed once it's created.
+
+9
+00:00:21,090 --> 00:00:24,660
+它是否提供在执行时，
+Does it provide operations that, when executed,
+
+10
+00:00:24,660 --> 00:00:26,490
+导致其他操作的结果
+cause the results of other operations
+
+11
+00:00:26,490 --> 00:00:28,510
+对同一个对象给出不同的结果？
+on the same object to give different results?
+
+12
+00:00:28,510 --> 00:00:33,070
+这就是我们所说的可变抽象数据类型。
+That's actually what we mean by a mutable abstract data type.
+
+13
+00:00:33,070 --> 00:00:36,240
+所以在Java中，日期类型是可变的，
+So in Java, the date type is mutable,
+
+14
+00:00:36,240 --> 00:00:39,520
+因为你有固定的月份
+because you have operations like set month
+
+15
+00:00:39,520 --> 00:00:42,410
+你可以观察到这个月的变化
+that make a change that you can then observe with the get month
+
+16
+00:00:42,410 --> 00:00:43,820
+操作。
+operation.
+
+17
+00:00:43,820 --> 00:00:45,840
+但是字符串是不可变的，因为它是
+But string is immutable, because it's
+
+18
+00:00:45,840 --> 00:00:50,610
+操作，那些改变字符串的操作，
+operations, the ones that seem to change a string,
+
+19
+00:00:50,610 --> 00:00:52,570
+实际创建一个新的字符串对象
+actually create a new string objects
+
+20
+00:00:52,570 --> 00:00:55,620
+保持现有价值不变，
+and leave the existing value unchanged,
+
+21
+00:00:55,620 --> 00:00:58,740
+据你所知。
+as far as you can tell.
+
+22
+00:00:58,740 --> 00:01:01,650
+有时一个类型以两种形式出现--可变和不可变
+Sometimes a type appears in two forms-- a mutable and immutable
+
+23
+00:01:01,650 --> 00:01:02,150
+形式。
+form.
+
+24
+00:01:02,150 --> 00:01:06,200
+例如，字符串生成器是字符串的可变版本，
+So string builder, for example, is a mutable version of string,
+
+25
+00:01:06,200 --> 00:01:08,450
+虽然这两种Java类型肯定不同，
+although the two are certainly not the same Java type,
+
+26
+00:01:08,450 --> 00:01:10,630
+而且在Java中它们是不可互换的。
+and they're not interchangeable in Java.
+
+27
+00:01:10,630 --> 00:01:15,490
+因此可变和不可变是类型的重要属性。
+So mutable and immutable are important properties of a type.
+
+28
+00:01:15,490 --> 00:01:19,800
+类型的操作也可以分类。
+The operations of a type can also be classified.
+
+29
+00:01:19,800 --> 00:01:23,870
+创建者是创建类型的新对象的操作。
+A creator is an operation that creates new objects of a type.
+
+30
+00:01:23,870 --> 00:01:27,800
+它可能将其他类型的对象作为参数。
+It might take an object of some other type as an argument.
+
+31
+00:01:27,800 --> 00:01:30,890
+生产者从旧对象创建新对象
+A producer creates new objects from old objects
+
+32
+00:01:30,890 --> 00:01:32,040
+相同类型的。
+of the same type.
+
+33
+00:01:32,040 --> 00:01:36,270
+例如，对于字符串，concat方法是一个生产者。
+So for string, for example, the concat method is a producer.
+
+34
+00:01:36,270 --> 00:01:38,420
+它需要你从两条线开始，
+It needs you to start with two strings,
+
+35
+00:01:38,420 --> 00:01:41,400
+它产生了一个新的。
+and it produces a new one.
+
+36
+00:01:41,400 --> 00:01:46,030
+观察者获取类型为的对象并返回属性
+Observers take an object of the type and return properties
+
+37
+00:01:46,030 --> 00:01:49,500
+属于那种类型的——属于那种对象
+of that type-- of that object, which
+
+38
+00:01:49,500 --> 00:01:50,670
+必须是另一种类型。
+have to be a different type.
+
+39
+00:01:50,670 --> 00:01:54,590
+例如，list的size方法返回一个int。
+So the size method of list, for example, returns an int.
+
+40
+00:01:54,590 --> 00:01:57,450
+所以size是list的观察者。
+So size is an observer for list.
+
+41
+00:01:57,450 --> 00:01:59,830
+最后，一个变异操作
+And then, finally, a mutator operation actually
+
+42
+00:01:59,830 --> 00:02:01,280
+更改对象值。
+changes an object values.
+
+43
+00:02:01,280 --> 00:02:04,030
+所以add方法列表对一个列表进行了变异
+So the add method list mutates a list
+
+44
+00:02:04,030 --> 00:02:06,390
+通过在末尾添加元素。
+by adding an element to the end.
+
+45
+00:02:06,390 --> 00:02:08,139
+现在，我们可以总结这些区别
+Now, we can summarize these distinctions
+
+46
+00:02:08,139 --> 00:02:12,760
+基本上使用函数符号。
+schematically using basically functional notation.
+
+47
+00:02:12,760 --> 00:02:19,030
+阅读这篇文章的方式是大写的，这是我们抽象的类型。
+And the way to read this is capital T is our abstract type.
+
+48
+00:02:19,030 --> 00:02:21,540
+例如，它可能是字符串。
+So it might be string, for example.
+
+49
+00:02:21,540 --> 00:02:24,140
+所以一根弦的创造者
+And so a creator for a string is going
+
+50
+00:02:24,140 --> 00:02:28,730
+获取某些其他类型的0个或多个值--
+to take 0 or more values of some other types--
+
+51
+00:02:28,730 --> 00:02:31,310
+所以小写的t代表任何其他类型
+so lowercase t just represents any other type
+
+52
+00:02:31,310 --> 00:02:33,920
+除了我们所说的抽象类型--
+other than the abstract type we're talking about--
+
+53
+00:02:33,920 --> 00:02:38,760
+在常规正则表达式中，星号表示0或更多
+and the star means 0 or more in conventional regular expression
+
+54
+00:02:38,760 --> 00:02:40,580
+符号。
+notation.
+
+55
+00:02:40,580 --> 00:02:42,110
+其他类型的还要0个
+It'll take 0 more of some other type
+
+56
+00:02:42,110 --> 00:02:45,550
+并生成抽象类型的值。
+and produce a value of the abstract type.
+
+57
+00:02:45,550 --> 00:02:48,290
+生产者至少有一个价值--
+A producer takes at least one value--
+
+58
+00:02:48,290 --> 00:02:50,790
+这就是加号的意思--至少是一个或多个
+that's what the plus means-- it means one or more-- at least
+
+59
+00:02:50,790 --> 00:02:54,180
+抽象类型的一个值，一些0
+one value of the abstract type, some 0
+
+60
+00:02:54,180 --> 00:02:56,360
+或者其他类型的值，
+or more values of some other types,
+
+61
+00:02:56,360 --> 00:02:59,930
+并生成抽象类型的值。
+and produces a value of the abstract type.
+
+62
+00:02:59,930 --> 00:03:01,780
+观察者从一个或多个值开始
+An observer starts with one of more values
+
+63
+00:03:01,780 --> 00:03:05,840
+抽象类型的，其他类型的0或更多，
+of the abstract type, 0 or more of some other type,
+
+64
+00:03:05,840 --> 00:03:08,170
+并产生另一种类型。
+and produces another type.
+
+65
+00:03:08,170 --> 00:03:11,080
+它不产生抽象类型。
+It does not produce the abstract type.
+
+66
+00:03:11,080 --> 00:03:14,050
+然后，最后，一个变异器接受一个或多个值
+And then, finally, a mutator takes one or more value
+
+67
+00:03:14,050 --> 00:03:17,580
+抽象类型，可能还有其他一些值，
+of the abstract type, possibly some other values,
+
+68
+00:03:17,580 --> 00:03:21,000
+通常，在Java中返回void。
+and, normally, returns void in Java.
+
+69
+00:03:21,000 --> 00:03:23,270
+因为你只是
+That is returns nothing because you only
+
+70
+00:03:23,270 --> 00:03:24,810
+执行它的效果。
+execute it for its effect.
+
+71
+00:03:24,810 --> 00:03:30,170
+但有时可能返回类型本身的值
+But some times may return values of the type itself
+
+72
+00:03:30,170 --> 00:03:31,590
+或其他类型的值。
+or values of some other type.
+
+74
+00:03:34,700 --> 00:03:37,312
+现在在Java中执行creator操作，并且
+Now creator operation in Java, and
+
+75
+00:03:37,312 --> 00:03:39,270
+任何其他面向对象的编程语言
+any other object-oriented programming languages
+
+76
+00:03:39,270 --> 00:03:41,000
+像Python和JavaScript一样
+like Python and JavaScript, is often
+
+77
+00:03:41,000 --> 00:03:45,697
+实现为使用new调用的构造函数。
+implemented as a constructor that you called using new.
+
+78
+00:03:45,697 --> 00:03:46,780
+但这不一定。
+But it doesn't have to be.
+
+79
+00:03:46,780 --> 00:03:49,080
+创建者可以只是一个静态方法
+A creator can simply be a static method
+
+80
+00:03:49,080 --> 00:03:52,910
+相反，就像一张加薪清单。
+instead, like a raise as list.
+
+81
+00:03:52,910 --> 00:03:54,960
+实现的Creator通常是静态方法
+Creator-implemented are static methods often
+
+82
+00:03:54,960 --> 00:03:56,430
+调用工厂方法。
+called a factory methods.
+
+83
+00:03:56,430 --> 00:04:01,990
+这是一个实现创建者的设计模式。
+This is a design pattern for implementing creators.
+
+84
+00:04:01,990 --> 00:04:03,880
+实现的其他创建者示例
+Other examples of creators implemented
+
+85
+00:04:03,880 --> 00:04:10,340
+as factory方法在字符串中包含方法的值。
+as factory methods include the value of methods in the string.
+
+86
+00:04:10,340 --> 00:04:12,060
+重要的是这些是静态的，
+And it's important that these are static,
+
+87
+00:04:12,060 --> 00:04:14,480
+因为如果它们不是静止的，你
+because if they were not static, you
+
+88
+00:04:14,480 --> 00:04:16,820
+必须有一个字符串的现有值
+would have to have an existing value of string
+
+89
+00:04:16,820 --> 00:04:17,510
+打电话给他们。
+to call them on.
+
+90
+00:04:17,510 --> 00:04:19,010
+然后他们就不再是创造者了，
+And then they wouldn't be a creator,
+
+91
+00:04:19,010 --> 00:04:20,426
+他们实际上是个制片人。
+they would actually be a producer.
+
+93
+00:04:23,040 --> 00:04:25,280
+变异器通常由void返回类型发出信号。
+Mutators are often signaled by a void return type.
+
+94
+00:04:25,280 --> 00:04:26,950
+返回void的方法必须是
+A method that returns void must be
+
+95
+00:04:26,950 --> 00:04:28,460
+需要某种副作用，
+called for some kind of side effect,
+
+96
+00:04:28,460 --> 00:04:30,335
+因为它不返回任何东西。
+because it doesn't otherwise return anything.
+
+97
+00:04:30,335 --> 00:04:32,430
+但并不是所有的突变子都返回空域。
+But not all mutators return void.
+
+98
+00:04:32,430 --> 00:04:35,600
+例如，set.add返回一个布尔值
+For example, set.add returns a Boolean
+
+99
+00:04:35,600 --> 00:04:38,700
+它告诉你这套衣服是否真的换了。
+that tells you whether the set was actually changed.
+
+100
+00:04:38,700 --> 00:04:40,510
+在Java的图形用户界面中
+In Java's graphical user interface to a kit
+
+101
+00:04:40,510 --> 00:04:43,240
+component.add返回对象本身，
+component.add returns the object itself,
+
+102
+00:04:43,240 --> 00:04:46,520
+这很有用，因为这样你可以添加另一个
+which is useful because that way you can just add another .add
+
+103
+00:04:46,520 --> 00:04:48,880
+叫到最后，把他们绑在一起。
+call to the end, and chain them together.
+
+105
+00:04:54,886 --> 00:04:56,510
+下面是一些抽象数据的例子
+Here are some examples of abstract data
+
+106
+00:04:56,510 --> 00:04:59,640
+类型，以及按种类分组的某些操作。
+types, along with some of their operations grouped by kind.
+
+107
+00:04:59,640 --> 00:05:01,200
+所以让我们想想，例如，
+So let's think about, for example,
+
+108
+00:05:01,200 --> 00:05:03,300
+Java的原始整数类型int。
+Java's primitive integer type, int.
+
+109
+00:05:03,300 --> 00:05:05,330
+Int是不可变的，所以它不应该
+Int is immutable, so it shouldn't
+
+110
+00:05:05,330 --> 00:05:07,120
+做任何变异操作。
+have any mutator operations.
+
+111
+00:05:07,120 --> 00:05:08,120
+它的创造者是什么？
+What are its creators?
+
+112
+00:05:08,120 --> 00:05:12,750
+好吧，Java有数字文本，0、1、2等等。
+Well, Java has numeric literals, 0, 1, 2, and so forth.
+
+113
+00:05:12,750 --> 00:05:15,820
+它们是有效的创造者
+These are effectively creators that produce-- that
+
+114
+00:05:15,820 --> 00:05:19,150
+生成int类型的值。
+generate a value of int type.
+
+115
+00:05:19,150 --> 00:05:20,340
+生产商是什么？
+What are the producers?
+
+116
+00:05:20,340 --> 00:05:22,330
+如果你从整数开始，
+Well, if you're starting with integers,
+
+117
+00:05:22,330 --> 00:05:25,320
+你可以把两个整数加上
+you can combine two integers with plus
+
+118
+00:05:25,320 --> 00:05:27,400
+得到另一个整数。
+to get another integer.
+
+119
+00:05:27,400 --> 00:05:31,370
+同样，用减号，乘以，除以。
+Likewise, with minus and times and divides.
+
+120
+00:05:31,370 --> 00:05:32,710
+观察员呢？
+What about the observers?
+
+121
+00:05:32,710 --> 00:05:35,850
+好吧，你可以取两个整数，然后比较它们。
+Well, you can take two integers, and you can compare them.
+
+122
+00:05:35,850 --> 00:05:37,320
+这给了你一个布尔值。
+And that gives you a Boolean back.
+
+123
+00:05:37,320 --> 00:05:38,236
+所以这是一个观察者。
+So that's an observer.
+
+125
+00:05:40,710 --> 00:05:42,130
+当然，它没有变异因子
+And, of course, it has no mutators
+
+126
+00:05:42,130 --> 00:05:44,000
+因为它是不可变的。
+because it's immutable.
+
+127
+00:05:44,000 --> 00:05:46,680
+另一个例子是list，Java的list类型。
+Another example is list, Java's list type.
+
+128
+00:05:46,680 --> 00:05:47,850
+列表是不可变的。
+List is immutable.
+
+129
+00:05:47,850 --> 00:05:51,510
+List碰巧是一个接口，这意味着它本身
+List happens to be an interface, which means that by itself it
+
+130
+00:05:51,510 --> 00:05:54,960
+没有实现，但其他类提供
+doesn't have an implementation, but that other classes provide
+
+131
+00:05:54,960 --> 00:05:56,350
+实际执行。
+the actual implementation.
+
+132
+00:05:56,350 --> 00:05:57,930
+我们以前也看过。
+And we've looked at that before.
+
+133
+00:05:57,930 --> 00:06:00,360
+数组列表和链接列表是示例
+Array list and linked list are examples
+
+134
+00:06:00,360 --> 00:06:03,410
+可用于实现列表接口的类的。
+of classes that you can use that implement the list interface.
+
+135
+00:06:03,410 --> 00:06:06,361
+但是列表接口本身是一种类型。
+But the list interface itself is a type.
+
+136
+00:06:06,361 --> 00:06:07,860
+我们可以把它看作一种类型，
+And we can think about it as a type,
+
+137
+00:06:07,860 --> 00:06:10,109
+我们可以谈谈它提供的操作。
+and we can talk about the operations that it provides.
+
+138
+00:06:10,109 --> 00:06:11,829
+这些是接口的方法。
+Those are the methods of the interface.
+
+139
+00:06:11,829 --> 00:06:12,870
+那么它的创造者是什么呢？
+So what are its creators?
+
+140
+00:06:12,870 --> 00:06:15,970
+好吧，列表本身实际上没有任何创建者。
+Well, list by itself actually does not have any creators.
+
+141
+00:06:15,970 --> 00:06:18,030
+Java中有一个限制
+There's a limitation in Java that you're not
+
+142
+00:06:18,030 --> 00:06:20,590
+允许将构造函数放入接口中。
+allowed to put constructors into an interface.
+
+143
+00:06:20,590 --> 00:06:24,580
+所以您必须使用这些类中的一个构造函数
+So you have to use a constructor from one of these classes that
+
+144
+00:06:24,580 --> 00:06:27,260
+提供列表接口，如数组列表或链接
+provides the list interface, like your array list or linked
+
+145
+00:06:27,260 --> 00:06:28,880
+列出构造函数。
+list constructors.
+
+146
+00:06:28,880 --> 00:06:32,380
+还有像collection singleton list这样的工厂方法，
+There's also factory methods like collection singleton list,
+
+147
+00:06:32,380 --> 00:06:35,870
+它是一个静态方法
+which is a static method that will
+
+148
+00:06:35,870 --> 00:06:38,890
+生成包含任意
+produce a list containing a single object of an arbitrary
+
+149
+00:06:38,890 --> 00:06:41,020
+键入。
+type.
+
+150
+00:06:41,020 --> 00:06:42,560
+有哪些制片人？
+What producers are there?
+
+151
+00:06:42,560 --> 00:06:49,170
+好吧，例如，我们看了不可修改的列表，
+Well, for example, we've looked at the unmodifiable list,
+
+152
+00:06:49,170 --> 00:06:52,820
+rapper是一个静态方法，它接受一个列表
+rapper which is a static method that takes a list
+
+153
+00:06:52,820 --> 00:06:56,400
+并生成另一个列表。
+and produces another list.
+
+154
+00:06:56,400 --> 00:06:58,440
+另一份名单的重要特征
+And the important feature of that other list
+
+155
+00:06:58,440 --> 00:07:00,770
+这是不可改变的，你不被允许
+is that it's immutable, that you aren't allowed
+
+156
+00:07:00,770 --> 00:07:03,880
+称之为变异因子。
+to call any of it's mutators.
+
+157
+00:07:03,880 --> 00:07:05,660
+名单上有哪些观察员？
+What observers does list have?
+
+158
+00:07:05,660 --> 00:07:07,580
+好吧，有些尺寸是
+Well, some of them are size which
+
+159
+00:07:07,580 --> 00:07:09,590
+以整数形式返回列表的大小，
+returns the size of the list as an integer,
+
+160
+00:07:09,590 --> 00:07:14,282
+获取返回列表中特定元素的。
+get which returns a particular element from the list.
+
+161
+00:07:14,282 --> 00:07:15,490
+还有其他的。
+And there are others as well.
+
+162
+00:07:15,490 --> 00:07:18,120
+如果我们查看列表，就会发现其他API。
+If we looked at lists, API would be find others.
+
+163
+00:07:18,120 --> 00:07:20,310
+因为列表是可变的，所以它也
+And because list is mutable, it also
+
+164
+00:07:20,310 --> 00:07:23,650
+有变异，比如加，除，等等。
+has mutators, like add, and remove, and at all.
+
+165
+00:07:23,650 --> 00:07:27,865
+这里有一个作为静态方法实现的mutator。
+Here is a mutator that is implemented as a static method.
+
+167
+00:07:30,780 --> 00:07:34,290
+最后，字符串——Java字符串类型——字符串是不可变的。
+Finally, strings-- Java string types-- string is immutable.
+
+168
+00:07:34,290 --> 00:07:35,930
+它有什么创造者？
+What creators does it have?
+
+169
+00:07:35,930 --> 00:07:39,100
+好吧，它有很多你可以使用的构造器。
+Well, it has a number of constructors that you can use.
+
+170
+00:07:39,100 --> 00:07:40,510
+它有哪些生产商？
+What producers does it have?
+
+171
+00:07:40,510 --> 00:07:42,047
+可以连接两个字符串。
+You can concatenate two strings.
+
+172
+00:07:42,047 --> 00:07:43,880
+可以获取字符串的子字符串
+You can take the substring of a string which
+
+173
+00:07:43,880 --> 00:07:44,900
+生成另一个字符串。
+produces another string.
+
+174
+00:07:44,900 --> 00:07:47,840
+可以将字符串转换为大小写。
+You can convert strings to uppercase and lowercase.
+
+175
+00:07:47,840 --> 00:07:50,294
+它有哪些观察员？
+What observers does it have?
+
+176
+00:07:50,294 --> 00:07:52,710
+Length将给您一个字符串的整数长度。
+Length will give you the length of a string as an integer.
+
+177
+00:07:52,710 --> 00:07:55,110
+随便给你个角色
+Char at will give you the character
+
+178
+00:07:55,110 --> 00:07:56,927
+在字符串中的特定位置。
+at a particular position in the string.
+
+179
+00:07:56,927 --> 00:07:58,010
+它有突变子吗。
+Does it have any mutators.
+
+180
+00:07:58,010 --> 00:08:00,840
+不，它是不变的。
+No, it's immutable.
+
+181
+00:08:00,840 --> 00:08:03,740
+所以这一分类的创造者，生产者，观察者
+So this classification of creators, producers, observers
+
+182
+00:08:03,740 --> 00:08:06,010
+变异的，可变的，不变的，
+and mutators and mutable and immutable,
+
+183
+00:08:06,010 --> 00:08:07,550
+它给了我们一些有用的术语
+it gives us some useful terminology
+
+184
+00:08:07,550 --> 00:08:10,500
+用于思考操作和类型。
+for thinking about operations and types.
+
+185
+00:08:10,500 --> 00:08:11,290
+这不完美。
+It's not perfect.
+
+186
+00:08:11,290 --> 00:08:12,790
+在复杂的数据类型中，可能有
+In complicated data types, there may
+
+187
+00:08:12,790 --> 00:08:16,860
+是一些既生产又变异的操作，
+be some operations that are both a producer and a mutator,
+
+188
+00:08:16,860 --> 00:08:17,770
+例如。
+for example.
+
+189
+00:08:17,770 --> 00:08:19,530
+有些人把生产者这个词保留下来
+Some people reserve the term producer
+
+190
+00:08:19,530 --> 00:08:22,660
+只适用于没有变异的手术。
+only for operations that do no mutation.
+

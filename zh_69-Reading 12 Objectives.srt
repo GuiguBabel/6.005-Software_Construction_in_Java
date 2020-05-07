@@ -1,0 +1,75 @@
+1
+00:00:00,367 --> 00:00:02,200
+在这篇文章中，我们将仔细观察
+In this reading, we're going to look closely
+
+2
+00:00:02,200 --> 00:00:05,350
+如何定义抽象数据的相等操作
+at how to define the equality operation for an abstract data
+
+3
+00:00:05,350 --> 00:00:06,136
+键入。
+type.
+
+4
+00:00:06,136 --> 00:00:07,510
+读完这篇文章，你应该
+After this reading, you should be
+
+5
+00:00:07,510 --> 00:00:09,180
+能够理解平等的定义
+able to understand equality defined
+
+6
+00:00:09,180 --> 00:00:11,470
+就抽象功能而言，
+in terms of the abstraction function,
+
+7
+00:00:11,470 --> 00:00:14,805
+作为等价关系，或作为观察。
+as an equivalence relation, or as observations.
+
+8
+00:00:14,805 --> 00:00:17,530
+你也应该能够区分参考文献
+You should also be able to differentiate between reference
+
+9
+00:00:17,530 --> 00:00:20,520
+平等与客体平等与区分
+equality and object equality and differentiate
+
+10
+00:00:20,520 --> 00:00:22,900
+在严格的观测相等之间
+between strict observational equality
+
+11
+00:00:22,900 --> 00:00:26,020
+以及可变类型的行为平等。
+and behavioral equality for mutable types.
+
+12
+00:00:26,020 --> 00:00:28,600
+你应该能理解目标合同
+And you should be able to understand the object contract
+
+13
+00:00:28,600 --> 00:00:31,710
+在Java中，能够正确实现等式
+in Java and be able to implement equality correctly
+
+14
+00:00:31,710 --> 00:00:34,910
+对于可变和不可变类型。
+for both mutable and immutable types.
+
+15
+00:00:34,910 --> 00:00:36,770
+我们开始吧。
+Let's get started.
+

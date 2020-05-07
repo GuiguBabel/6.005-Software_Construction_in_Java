@@ -1,0 +1,1265 @@
+1
+00:00:00,640 --> 00:00:03,540
+像许多语言一样，Java有两种不同的操作
+Like many languages, Java has two different operations
+
+2
+00:00:03,540 --> 00:00:06,170
+为了测试相等性，这两个操作
+for testing equality, and those two operations
+
+3
+00:00:06,170 --> 00:00:08,119
+有不同的语义。
+have different semantics.
+
+4
+00:00:08,119 --> 00:00:09,920
+在Java中，equals等于运算符
+In Java the equals equals operator
+
+5
+00:00:09,920 --> 00:00:12,330
+比较引用或更准确地说，
+compares references or more precisely,
+
+6
+00:00:12,330 --> 00:00:14,820
+测试引用相等。
+a test referential equality.
+
+7
+00:00:14,820 --> 00:00:17,120
+如果两个引用指向
+Two references are equals equals if they point
+
+8
+00:00:17,120 --> 00:00:18,980
+相同的存储和内存。
+to the same storage and memory.
+
+9
+00:00:18,980 --> 00:00:20,620
+在快照图方面
+In terms of snapshot diagrams we've
+
+10
+00:00:20,620 --> 00:00:23,030
+已绘制两个引用等于
+been drawn two references are equals equals
+
+11
+00:00:23,030 --> 00:00:25,410
+如果它们的箭头指向同一个对象气泡。
+if their arrows point to the same object bubble.
+
+13
+00:00:28,290 --> 00:00:32,409
+equals操作比较对象内容，换句话说
+The equals operation compares object contents, in other words
+
+14
+00:00:32,409 --> 00:00:34,100
+从我们的角度来看
+object equality in the sense we've been
+
+15
+00:00:34,100 --> 00:00:35,580
+在这篇文章里谈论。
+talking about in this reading.
+
+16
+00:00:35,580 --> 00:00:38,030
+必须适当地定义equals操作
+The equals operation has to be defined appropriately
+
+17
+00:00:38,030 --> 00:00:40,080
+对于每个抽象数据类型。
+for every abstract data type.
+
+18
+00:00:40,080 --> 00:00:42,340
+为了便于比较，这里是等式
+So for comparison here are the equality the operators
+
+19
+00:00:42,340 --> 00:00:45,050
+在几种语言中，Java，Objective C，C#，
+in several languages, Java, Objective C, C#,
+
+20
+00:00:45,050 --> 00:00:47,700
+Python和JavaScript。
+Python and JavaScript.
+
+21
+00:00:47,700 --> 00:00:49,955
+引用相等运算符
+The referential equality operator
+
+22
+00:00:49,955 --> 00:00:52,950
+在这些语言中通常等于，
+is generally equals equals in these languages,
+
+23
+00:00:52,950 --> 00:00:56,230
+虽然在Python中，它的关键字是。
+although in Python, it's the keyword is.
+
+24
+00:00:56,230 --> 00:00:58,600
+对象相等操作通常是
+The object equality operation is usually
+
+25
+00:00:58,600 --> 00:01:01,750
+用这些语言调用对象的方法。
+a method in these languages that you call in an object.
+
+26
+00:01:01,750 --> 00:01:05,590
+但不幸的是，在Python中，对象相等运算符
+But in Python, unfortunately, the object equality operator
+
+27
+00:01:05,590 --> 00:01:06,890
+等于等于。
+is equals equals.
+
+28
+00:01:06,890 --> 00:01:09,050
+所以请注意，不幸的是
+So notice that equals equals unfortunately
+
+29
+00:01:09,050 --> 00:01:11,970
+在Java和Python之间转换其含义。
+flips its meaning between Java and Python.
+
+30
+00:01:11,970 --> 00:01:13,640
+如果你做了那可能是个陷阱
+That might be a trap if you've done
+
+31
+00:01:13,640 --> 00:01:15,130
+很多Python程序。
+a lot of Python programmings.
+
+32
+00:01:15,130 --> 00:01:17,150
+别让这迷惑了你。
+Don't let that confuse you.
+
+33
+00:01:17,150 --> 00:01:20,250
+Equals在Java中只测试引用标识。
+Equals equals in Java just tests reference identity.
+
+34
+00:01:20,250 --> 00:01:25,006
+它不会将对象与内容进行比较。
+It doesn't compare object to contents.
+
+35
+00:01:25,006 --> 00:01:26,880
+现在作为这些语言的程序员，
+Now as programmers in any of these languages,
+
+36
+00:01:26,880 --> 00:01:30,280
+我们不能改变指称平等的含义
+we can't change the meaning of the referential equality
+
+37
+00:01:30,280 --> 00:01:31,590
+算符，等于。
+operator, equals equals.
+
+38
+00:01:31,590 --> 00:01:34,460
+在Java中，equals始终表示引用相等。
+In Java equals equals always means referential equality.
+
+39
+00:01:34,460 --> 00:01:36,390
+但是当我们定义一个新的数据类型时，
+But when we define a new data type,
+
+40
+00:01:36,390 --> 00:01:37,830
+我们有责任决定
+it's our responsibility to decide
+
+41
+00:01:37,830 --> 00:01:41,170
+对于数据类型的值，对象相等意味着什么，
+what object equality means for values of the data type,
+
+42
+00:01:41,170 --> 00:01:45,610
+并适当地实现equals方法。
+and to implement the equals method appropriately.
+
+43
+00:01:45,610 --> 00:01:49,230
+所以让我们先考虑一下不可变类型。
+So let's think about that for immutable types first.
+
+44
+00:01:49,230 --> 00:01:50,720
+现在equals方法实际上是
+Now the equals method is actually
+
+45
+00:01:50,720 --> 00:01:53,550
+由对象类定义。
+defined by the object class.
+
+46
+00:01:53,550 --> 00:01:57,750
+它的默认实现如下所示。
+And its default implementation looks like this.
+
+47
+00:01:57,750 --> 00:02:03,330
+它是一个实例方法，接受另一个对象并询问，
+It is an instance method that takes another object and asks,
+
+48
+00:02:03,330 --> 00:02:06,150
+它们的参照物彼此相等吗？
+are they referentially equal to each other?
+
+49
+00:02:06,150 --> 00:02:08,461
+并返回true或false，具体取决于此。
+And returns true or false, depending on that.
+
+50
+00:02:08,461 --> 00:02:10,919
+换句话说，equals方法的默认含义
+So in other words, the default meaning of the equals method
+
+51
+00:02:10,919 --> 00:02:13,910
+实际上与引用相等。
+is actually the same as referential equality.
+
+52
+00:02:13,910 --> 00:02:17,634
+对于不可变的数据类型，这几乎总是错误的。
+For immutable data types, this is almost always wrong.
+
+53
+00:02:17,634 --> 00:02:19,300
+如果您正在编写不可变的数据类型
+If you're writing an immutable data type
+
+54
+00:02:19,300 --> 00:02:21,830
+你必须重写这个equals方法
+you have to override this equals method
+
+55
+00:02:21,830 --> 00:02:23,695
+用你自己的实现替换它。
+and replace it with your own implementation.
+
+57
+00:02:26,950 --> 00:02:28,760
+所以这是我们第一次尝试。
+So here's our first try for duration.
+
+58
+00:02:28,760 --> 00:02:30,430
+我真的想指出
+I actually want to point out here
+
+59
+00:02:30,430 --> 00:02:35,310
+Java中的每个类，即使我们没有编写它
+that every class in Java, even though we didn't write that it
+
+60
+00:02:35,310 --> 00:02:38,520
+扩展对象，它隐式扩展
+extends object, it implicitly extends
+
+61
+00:02:38,520 --> 00:02:42,960
+对象，以便它继承此equals方法，除非
+object so that it's inheriting this equals method unless it
+
+62
+00:02:42,960 --> 00:02:45,060
+覆盖它。
+overrides it.
+
+63
+00:02:45,060 --> 00:02:47,400
+所以这是我们第一次尝试
+So here's our first try for duration at overriding
+
+64
+00:02:47,400 --> 00:02:48,324
+这等于方法。
+that equals method.
+
+65
+00:02:48,324 --> 00:02:50,490
+它说我们要写一个实例方法
+It says we're going to write an instance method that
+
+66
+00:02:50,490 --> 00:02:53,310
+取另一个持续时间，
+takes the duration of another duration,
+
+67
+00:02:53,310 --> 00:02:57,060
+并将此持续时间的长度与该持续时间的
+and compares this duration's length with that duration's
+
+68
+00:02:57,060 --> 00:02:58,910
+长度，并返回true或false，
+length, and returns true or false,
+
+69
+00:02:58,910 --> 00:03:01,530
+取决于它们是否相等。
+depending on whether they're equals equals.
+
+70
+00:03:01,530 --> 00:03:03,327
+所以这里有个微妙的问题。
+So there's a subtle problem here.
+
+71
+00:03:03,327 --> 00:03:04,410
+为什么这不管用？
+Now why doesn't this work?
+
+72
+00:03:04,410 --> 00:03:05,720
+好吧，让我们试试这个代码。
+Well let's try this code.
+
+73
+00:03:05,720 --> 00:03:09,310
+这段代码创建了两个新的duration对象
+This code creates two new duration objects
+
+74
+00:03:09,310 --> 00:03:10,860
+内容相同。
+with the same contents in them.
+
+75
+00:03:10,860 --> 00:03:13,710
+它们都有1分2秒长。
+They're both one minute two seconds long.
+
+76
+00:03:13,710 --> 00:03:15,410
+然后它做了一件有趣的事。
+And then it does an interesting thing.
+
+77
+00:03:15,410 --> 00:03:19,190
+它创建了这个新的object类型的变量
+It creates this new variable of type object
+
+78
+00:03:19,190 --> 00:03:23,300
+称为o2，指向与d2相同的对象。
+called o2 that points to the same object as d2.
+
+79
+00:03:23,300 --> 00:03:27,820
+我们可以这样做，因为所有的持续时间都是隐式的
+And we can do this because all durations are implicitly also
+
+80
+00:03:27,820 --> 00:03:30,830
+对象，因此Java将允许我们指出
+objects, so Java will allow us to point
+
+81
+00:03:30,830 --> 00:03:35,740
+这个o2变量是d2对象。
+this o2 variable to d2 object.
+
+82
+00:03:35,740 --> 00:03:40,300
+然后我们会问，我们会调用equals方法
+And then we'll ask, we'll call the equals method
+
+83
+00:03:40,300 --> 00:03:43,010
+为了测试d1是否等于d2，我们还将
+to test whether d1 equals d2, and we'll also
+
+84
+00:03:43,010 --> 00:03:45,110
+测试d1是否等于o2。
+test whether d1 equals o2.
+
+85
+00:03:45,110 --> 00:03:46,780
+他们应该是平等的，对吧？
+And they ought to be equal, right?
+
+86
+00:03:46,780 --> 00:03:49,040
+如果d1和d2相等，则d1和o2
+If d1 and d2 are equal, the d1 and o2
+
+87
+00:03:49,040 --> 00:03:52,410
+应该相等，因为o2和d2点
+ought to be equal because o2 and d2 point
+
+88
+00:03:52,410 --> 00:03:54,980
+完全相同的地方。
+to exactly the same place.
+
+89
+00:03:54,980 --> 00:03:59,880
+现在我们可以在在线Java教程中看到这段代码的实际操作。
+Now we can see this code in action in online Java Tutor.
+
+90
+00:03:59,880 --> 00:04:00,700
+就在这里。
+And here it is.
+
+91
+00:04:00,700 --> 00:04:02,460
+你看，我们有d1和d2，我们有
+You see, we've got d1 and d2, we've
+
+92
+00:04:02,460 --> 00:04:04,170
+把这两件东西放在记忆里。
+got these two objects in memory.
+
+93
+00:04:04,170 --> 00:04:06,900
+这有点像我们的气泡图和快照图。
+Those are kind of like our bubbles and snapshot diagrams.
+
+94
+00:04:06,900 --> 00:04:11,870
+我们有d1指向每一个，还有o2
+And we've got d1 pointing to each of them, and also o2
+
+95
+00:04:11,870 --> 00:04:13,840
+指向d2指向的同一对象。
+pointing to the same object that d2 points to.
+
+96
+00:04:13,840 --> 00:04:19,690
+但是d1等于d2，这是正确的，它们都有
+But d1 equals d2, that does the right thing, they both have
+
+97
+00:04:19,690 --> 00:04:21,924
+同样的内容，1分2秒，
+the same contents, one minute and two seconds,
+
+98
+00:04:21,924 --> 00:04:23,800
+所以我们想让他们比较平等。
+so we want them to compare equals.
+
+99
+00:04:23,800 --> 00:04:28,440
+但如果我们称d1等于o2，即使2分
+But if we call d1 equals against o2, even though 2 points
+
+100
+00:04:28,440 --> 00:04:31,800
+对于和d2完全相同的物体，我们得到了错误。
+to exactly the same object as d2, we're getting false.
+
+101
+00:04:31,800 --> 00:04:32,700
+那为什么呢？
+So why is that?
+
+103
+00:04:36,580 --> 00:04:39,290
+好吧，原因是
+Well, the reason is that it turns out
+
+104
+00:04:39,290 --> 00:04:43,480
+持续时间实际上重载了equals方法
+the duration is actually overloaded the equals method
+
+105
+00:04:43,480 --> 00:04:49,100
+因为它的方法签名，这部分在这里，
+because its method signature, this part right here,
+
+106
+00:04:49,100 --> 00:04:52,040
+与它正在尝试的不一样
+was not identical to the one that it was trying
+
+107
+00:04:52,040 --> 00:04:54,010
+从对象重写。
+to override from the object.
+
+108
+00:04:54,010 --> 00:04:58,370
+实际上，在持续时间上我们有两种不同的等于方法。
+We actually have two different equals methods in duration.
+
+109
+00:04:58,370 --> 00:05:02,210
+有一个隐式的equals of object方法
+There is an implicit equals of object method
+
+110
+00:05:02,210 --> 00:05:07,000
+是从对象继承的，没有被正确重写，
+that was inherited from object, and not correctly overridden,
+
+111
+00:05:07,000 --> 00:05:09,831
+这个新的等于持续时间。
+and this new equals duration.
+
+112
+00:05:09,831 --> 00:05:10,330
+对吗？
+Right?
+
+113
+00:05:10,330 --> 00:05:14,116
+所以这里的区别是参数的类型是什么。
+So the distinction here is what the type of the parameter is.
+
+114
+00:05:14,116 --> 00:05:16,240
+从一开始我们就看到了超载
+Now we've seen overloading since the very beginning
+
+115
+00:05:16,240 --> 00:05:17,780
+当然是静态检查。
+of the course in static checking.
+
+117
+00:05:20,890 --> 00:05:22,380
+关于重载的一条重要规则
+An important rule about overloading
+
+118
+00:05:22,380 --> 00:05:24,280
+是Java编译器选择
+is that the Java compiler selects
+
+119
+00:05:24,280 --> 00:05:27,100
+在使用编译时的重载操作之间
+between overloaded operations using the compile time
+
+120
+00:05:27,100 --> 00:05:29,350
+参数的类型。
+type of the parameters.
+
+121
+00:05:29,350 --> 00:05:32,429
+例如，当我们使用除法运算符时，
+So for example, when we used the division operator,
+
+122
+00:05:32,429 --> 00:05:34,470
+编译器将选择整数除法
+the compiler would choose either integer division
+
+123
+00:05:34,470 --> 00:05:37,110
+基于参数的浮点除法
+of floating point division based on whether the arguments
+
+124
+00:05:37,110 --> 00:05:38,720
+是整数还是双数。
+are ints or doubles.
+
+125
+00:05:38,720 --> 00:05:42,296
+同样的编译时选择也发生在这里。
+Well the same compile time selection happens here.
+
+126
+00:05:42,296 --> 00:05:48,760
+如果我们传递了一个对象引用，如d1等于o2，
+If we passed an object reference, as in d1 equals o2,
+
+127
+00:05:48,760 --> 00:05:52,650
+我们最终调用equals对象实现
+we end up calling the equals object implementation that's
+
+128
+00:05:52,650 --> 00:05:54,910
+被隐式继承。
+been implicitly inherited.
+
+129
+00:05:54,910 --> 00:06:00,020
+如果我们传递一个d1等于d2的持续时间引用，
+If we pass a duration reference as an d1 equals d2,
+
+130
+00:06:00,020 --> 00:06:03,020
+我们最终调用了equals duration版本。
+we end up calling the equals duration version.
+
+131
+00:06:03,020 --> 00:06:06,780
+即使o2和d2实际上
+And this happens even though o2 and d2 actually
+
+132
+00:06:06,780 --> 00:06:09,590
+在运行时指向同一个对象。
+point to the very same object at runtime.
+
+133
+00:06:09,590 --> 00:06:12,000
+不管怎样，质量已经变得不一致了
+Anyway, quality has become inconsistent
+
+134
+00:06:12,000 --> 00:06:15,740
+因为我们有两个不同的定义
+because we have these two different definitions of equals
+
+135
+00:06:15,740 --> 00:06:18,397
+在不同上下文中调用的。
+that are invoked in different contexts.
+
+136
+00:06:18,397 --> 00:06:20,730
+现在很容易在方法签名中出错
+Now it's easy to make a mistake in that method signature
+
+137
+00:06:20,730 --> 00:06:23,000
+当你打算重写一个方法时，重载它。
+and overload a method when you meant to overwrite it.
+
+138
+00:06:23,000 --> 00:06:24,670
+这是一个常见的错误，Java现在
+That's such a common error that Java now
+
+139
+00:06:24,670 --> 00:06:28,610
+具有语言功能，重写时的注释，
+has a language feature, the annotation at override,
+
+140
+00:06:28,610 --> 00:06:30,390
+把它放在方法声明之前，
+which you put before a method declaration,
+
+141
+00:06:30,390 --> 00:06:32,000
+你应该随时使用它
+and you should always use it whenever
+
+142
+00:06:32,000 --> 00:06:35,342
+您的目的是重写超级类中的方法。
+your intention is to override a method in your super class.
+
+143
+00:06:35,342 --> 00:06:36,800
+当你有相同的符号
+And when you have the same notation
+
+144
+00:06:36,800 --> 00:06:40,340
+Java编译器将检查
+the Java compiler will check that there is actually
+
+145
+00:06:40,340 --> 00:06:43,027
+在超类中具有此签名的方法
+a method with this signature in the super-class
+
+146
+00:06:43,027 --> 00:06:44,610
+给你一个编译器如果你
+and give you a compiler if you've made
+
+147
+00:06:44,610 --> 00:06:46,640
+签名有误。
+a mistake in that signature.
+
+148
+00:06:46,640 --> 00:06:48,980
+所以这里是实现equals方法的正确方法。
+So here's the right way to implement that equals method.
+
+149
+00:06:48,980 --> 00:06:50,438
+我们有at超驰控制系统，
+We've got the at override in there,
+
+150
+00:06:50,438 --> 00:06:52,880
+我们有正确的签名。
+we've got the correct signature in there.
+
+151
+00:06:52,880 --> 00:06:57,340
+现在我们要做一些事情来转动那个物体，
+Now we have to do some things in order to turn that object,
+
+152
+00:06:57,340 --> 00:06:59,550
+我们得到的参数是一个物体，
+parameter that we're getting in which is an object,
+
+153
+00:06:59,550 --> 00:07:03,260
+在一段时间内
+into a duration that we can actually
+
+154
+00:07:03,260 --> 00:07:07,110
+与此持续时间比较。
+compare with this duration.
+
+155
+00:07:07,110 --> 00:07:10,620
+这是用来做这个的样板。
+And this is the boilerplate that's used to do that.
+
+156
+00:07:10,620 --> 00:07:14,220
+它首先要做的是测试对象是否
+What it does first is it tests whether the object were being
+
+157
+00:07:14,220 --> 00:07:18,540
+传入，我们只知道它是静态的资本对象，
+passed in, which we only know it as a capital object statically,
+
+158
+00:07:18,540 --> 00:07:20,840
+我们必须动态测试它是否
+we have to test dynamically whether it's actually
+
+159
+00:07:20,840 --> 00:07:21,970
+持续时间对象。
+a duration object.
+
+160
+00:07:21,970 --> 00:07:24,000
+如果不是的话
+And if it's not, the spec for equal
+
+161
+00:07:24,000 --> 00:07:26,010
+说我们必须返回false因为他们
+says that we have to return false because they
+
+162
+00:07:26,010 --> 00:07:28,980
+无法比较相等。
+can't compare equal.
+
+163
+00:07:28,980 --> 00:07:35,180
+否则，我们要做的就是把这个对象转换成一个持续时间。
+Otherwise, what we do is we cast that object into a duration.
+
+164
+00:07:35,180 --> 00:07:37,790
+我们已经检查过这是安全的，
+And we've already checked that that's safe to do,
+
+165
+00:07:37,790 --> 00:07:41,470
+所以我们现在要引用的是duration类型，
+so we'll a reference now that has duration type,
+
+166
+00:07:41,470 --> 00:07:45,310
+我们可以打电话给GetLength。
+and that we can go ahead and call GetLength on.
+
+167
+00:07:45,310 --> 00:07:47,360
+这确实解决了问题。
+And this does fix the problem.
+
+168
+00:07:47,360 --> 00:07:50,830
+所以现在再说一遍，如果我们像以前那样创造d1，d2和o2，
+So now again, if we create d1, d2 and o2 as we did before,
+
+169
+00:07:50,830 --> 00:07:54,725
+我们问d1是否等于d2，d1是否等于o2，
+we ask whether d1 equals d2, and d1 equals o2,
+
+170
+00:07:54,725 --> 00:07:57,460
+看看这段代码。
+and look at this code in action.
+
+171
+00:07:57,460 --> 00:07:59,610
+我们看到这里也有同样的设施。
+We see we have the same set up here.
+
+172
+00:07:59,610 --> 00:08:05,210
+现在终于o2和d2的行为都是一样的。
+Now finally both o2 and d2 are behaving the same way.
+
+174
+00:08:08,240 --> 00:08:11,360
+顺便说一下，我们在这里引入了一个新的接线员。
+So we introduced a new operator here, by the way.
+
+175
+00:08:11,360 --> 00:08:13,140
+测试运算符的实例
+The instance of operator that tests
+
+176
+00:08:13,140 --> 00:08:16,340
+对象是否为特定类型的实例。
+whether an object is an instance of a particular type.
+
+177
+00:08:16,340 --> 00:08:19,980
+使用的实例是动态类型检查的一个示例，
+Using instance of is an example of dynamic type checking,
+
+178
+00:08:19,980 --> 00:08:24,060
+不是静态类型检查，我们非常喜欢在6005。
+not the static type checking that we vastly prefer in 6005.
+
+179
+00:08:24,060 --> 00:08:27,030
+通常使用面向对象编程的实例
+And in general using instance of an object oriented programming
+
+180
+00:08:27,030 --> 00:08:29,070
+是一种难闻的气味。
+is a bad smell.
+
+181
+00:08:29,070 --> 00:08:31,170
+在6005年，这是我们的另一个规则
+In 6005, and this is another of our rules
+
+182
+00:08:31,170 --> 00:08:33,940
+对于大多数优秀的Java编程来说也是如此。
+that holds true for most good Java programming, as well.
+
+183
+00:08:33,940 --> 00:08:36,740
+这不仅仅是6005的怪癖。
+It's not just a 6005 quirk.
+
+184
+00:08:36,740 --> 00:08:39,419
+的实例在任何地方都不允许
+Instance of is disallowed anywhere
+
+185
+00:08:39,419 --> 00:08:41,450
+除非你必须使用它，
+except where you absolutely have to use it,
+
+186
+00:08:41,450 --> 00:08:43,861
+这就是实现equals的地方。
+and that's where that's an implementing equals.
+
+187
+00:08:43,861 --> 00:08:45,360
+所以如果你在其他地方使用它，
+So if you're using it anywhere else,
+
+188
+00:08:45,360 --> 00:08:47,745
+那你可能做错了什么。
+then you're probably doing something wrong.
+
+189
+00:08:47,745 --> 00:08:49,620
+这项禁令还包括其他方式
+And this prohibition also includes other ways
+
+190
+00:08:49,620 --> 00:08:54,590
+检查对象运行时类型，如调用GetClass。
+of inspecting objects runtime types like calling GetClass.
+
+191
+00:08:54,590 --> 00:08:59,490
+稍后我们将看到一些示例
+We'll see some examples later on where you might
+
+192
+00:08:59,490 --> 00:09:01,290
+尝试使用的实例。
+be tempted to use instance of.
+
+193
+00:09:01,290 --> 00:09:03,150
+我们将在编写备选方案时讨论
+And we'll talk about at write alternatives
+
+194
+00:09:03,150 --> 00:09:07,200
+更安全，更易于改变。
+that are safer from bugs and more ready for change.
+
+195
+00:09:07,200 --> 00:09:10,600
+好的，对象类的规范，
+OK, the specification of the object class,
+
+196
+00:09:10,600 --> 00:09:13,800
+我们所有的类都继承自
+the simplistic class that all of our classes inherit from
+
+197
+00:09:13,800 --> 00:09:16,380
+是如此的重要以至于它经常被称为对象
+is so important that it's often referred to as the object
+
+198
+00:09:16,380 --> 00:09:16,970
+合同。
+contract.
+
+199
+00:09:16,970 --> 00:09:19,965
+合同可以在方法规范中找到
+And that contract can be found in the method specifications
+
+200
+00:09:19,965 --> 00:09:20,840
+对于对象类。
+for the object class.
+
+201
+00:09:20,840 --> 00:09:22,590
+在这里我们要特别关注
+And here we're going to focus specifically
+
+202
+00:09:22,590 --> 00:09:25,360
+关于等价方法的契约。
+on the contract for the equals method.
+
+203
+00:09:25,360 --> 00:09:28,340
+当重写equals方法时
+When you override the equals method
+
+204
+00:09:28,340 --> 00:09:30,380
+你必须遵守它的总合同
+you must adhere to its general contract which
+
+205
+00:09:30,380 --> 00:09:34,040
+相等的状态必须定义一个等价关系
+states that equals must define an equivalence relation that
+
+206
+00:09:34,040 --> 00:09:37,390
+是一个自反的，对称的，传递的关系。
+is a relation that reflexive, symmetric, and transitive.
+
+207
+00:09:37,390 --> 00:09:39,750
+我们一会儿再谈这些是什么意思。
+We'll talk about what those mean in a moment.
+
+208
+00:09:39,750 --> 00:09:42,680
+等于必须一致，所以重复调用
+Equals must be consistent, so repeated calls
+
+209
+00:09:42,680 --> 00:09:45,190
+同一方法必须产生相同的结果
+to the same method must yield the same result
+
+210
+00:09:45,190 --> 00:09:47,540
+没有提供使用equals比较的信息
+provided no information using the equals comparisons
+
+211
+00:09:47,540 --> 00:09:48,670
+对象被修改。
+and the object is modified.
+
+212
+00:09:48,670 --> 00:09:51,847
+所以这就是我们处理可变对象的方法。
+So that's how we deal with mutable objects.
+
+213
+00:09:51,847 --> 00:09:53,430
+但是如果你有一个不可变的对象，
+But if you've got an immutable object,
+
+214
+00:09:53,430 --> 00:09:58,150
+在平等问题上，它必须总是得到同样的结果。
+it's got to always yield the same result about equality.
+
+215
+00:09:58,150 --> 00:10:01,180
+现在这里有一个处理条款
+Now there's a clause here for handling
+
+216
+00:10:01,180 --> 00:10:03,840
+即使我们在6005中没有使用空，
+null even though we don't use null in 6005,
+
+217
+00:10:03,840 --> 00:10:05,667
+或者我们尽量避免，
+or we try to avoid it as much as possible,
+
+218
+00:10:05,667 --> 00:10:07,250
+目标合同中有一条规则
+there is a rule in the object contract
+
+219
+00:10:07,250 --> 00:10:10,250
+说事物不应等同于零。
+saying that things should not compare equal to null.
+
+220
+00:10:10,250 --> 00:10:12,710
+最后，还有另一个方法散列码
+And finally, there's this other method hash code
+
+221
+00:10:12,710 --> 00:10:15,460
+对于两个被认为是
+that must return the same result for two objects that are deemed
+
+222
+00:10:15,460 --> 00:10:17,570
+按等于方法相等。
+equal by the equals method.
+
+223
+00:10:17,570 --> 00:10:20,409
+我们一会儿再谈。
+And we'll talk about that in a moment as well.
+
+224
+00:10:20,409 --> 00:10:21,950
+如果你要去
+That's very important if you're going
+
+225
+00:10:21,950 --> 00:10:26,450
+将类型与内置集合类（如哈希）一起使用
+to use your type with built-in collection classes like hash
+
+226
+00:10:26,450 --> 00:10:29,190
+集合和哈希映射。
+sets and hash maps.
+
+227
+00:10:29,190 --> 00:10:31,090
+所以现在让我们看看当
+So now let's see what goes wrong when
+
+228
+00:10:31,090 --> 00:10:33,880
+我们违反了一些规则，特别是
+we break some of these rules, particularly the rules
+
+229
+00:10:33,880 --> 00:10:36,964
+关于等价关系。
+about equivalence relations.
+
+230
+00:10:36,964 --> 00:10:39,380
+所以我们必须确保有足够的平等定义
+So we have to make sure that enough definition of equality
+
+231
+00:10:39,380 --> 00:10:41,046
+事实上是平等实现的
+that's implemented by equals is actually
+
+232
+00:10:41,046 --> 00:10:43,614
+我们前面定义的等价关系。
+an equivalence relation as we defined earlier.
+
+233
+00:10:43,614 --> 00:10:45,530
+它必须是自反的，必须是对称的
+It has to be reflexive, it has to be symmetric
+
+234
+00:10:45,530 --> 00:10:46,696
+它必须是可传递的。
+and it has to be transitive.
+
+235
+00:10:46,696 --> 00:10:48,360
+如果不是，那么
+If it isn't, then the operations that
+
+236
+00:10:48,360 --> 00:10:53,120
+依赖于相等性，就像内部库操作一样，
+depend on equality, like internal library operations,
+
+237
+00:10:53,120 --> 00:10:56,870
+比如搜索，或者设置数据结构，
+like searching, or like set data structures,
+
+238
+00:10:56,870 --> 00:10:58,989
+会表现得很奇怪。
+will behave very strangely.
+
+239
+00:10:58,989 --> 00:11:00,530
+你不想用数据编程
+You don't want to program with a data
+
+240
+00:11:00,530 --> 00:11:05,040
+有时a引起b但b不等于a的类型。
+type in which sometimes a caused b but b doesn't equals a.
+
+241
+00:11:05,040 --> 00:11:05,540
+对吗？
+Right?
+
+242
+00:11:05,540 --> 00:11:08,520
+这是破坏对称性的一个例子。
+That's an example of breaking symmetry.
+
+243
+00:11:08,520 --> 00:11:11,920
+会导致微妙和非常痛苦的虫子。
+Subtle and very painful bugs will result.
+
+244
+00:11:11,920 --> 00:11:14,760
+这是一个无辜企图的例子
+Here's an example of how an innocent attempt
+
+245
+00:11:14,760 --> 00:11:18,790
+使平等更加灵活可能会出错。
+to make equality more flexible can go wrong.
+
+246
+00:11:18,790 --> 00:11:21,160
+假设我们想在计算上允许一个公差
+Suppose we wanted to allow for a tolerance in computing
+
+247
+00:11:21,160 --> 00:11:22,840
+持续时间[听不见]比较持续时间
+duration [INAUDIBLE] comparing duration
+
+248
+00:11:22,840 --> 00:11:24,673
+对象，因为不同的计算机可能具有
+objects because different computers may have
+
+249
+00:11:24,673 --> 00:11:26,220
+稍微不同步的时钟。
+slightly unsynchronized clocks.
+
+250
+00:11:26,220 --> 00:11:29,210
+所以我们得到了这个时钟SKU常数
+So we have this clock SKU constant that
+
+251
+00:11:29,210 --> 00:11:34,310
+说只要两者有区别
+says as long as the difference between the two
+
+252
+00:11:34,310 --> 00:11:38,120
+长度以秒为单位，只要绝对值
+lengths in seconds, as long as the absolute value
+
+253
+00:11:38,120 --> 00:11:40,950
+其中的差异小于或等于时钟SKU，
+of that difference is less than or equal to the clock SKU,
+
+254
+00:11:40,950 --> 00:11:44,910
+我们要说这两个持续时间是相等的。
+we're going to say those two durations are equal.
+
+255
+00:11:44,910 --> 00:11:47,330
+现在的问题是，哪种财产
+Now the question is, which property
+
+256
+00:11:47,330 --> 00:11:50,190
+等价关系的，自反的，对称的或
+of the equivalence relation, reflexive, symmetric or
+
+257
+00:11:50,190 --> 00:11:53,010
+违反传递性。
+transitive is violated.
+
+258
+00:11:53,010 --> 00:11:56,080
+让我们看下一个练习。
+Let's see in the exercise next.
+

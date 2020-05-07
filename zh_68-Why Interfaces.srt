@@ -1,0 +1,525 @@
+1
+00:00:00,500 --> 00:00:02,770
+接口在真正的Java代码中被广泛使用。
+Interfaces are used pervasively in real Java code.
+
+2
+00:00:02,770 --> 00:00:04,890
+不是每个类都与接口关联，
+Not every class is associated with interface,
+
+3
+00:00:04,890 --> 00:00:06,598
+但有几个很好的理由
+but there are a few good reasons to bring
+
+4
+00:00:06,598 --> 00:00:08,620
+代码的接口。
+an interface into your code.
+
+5
+00:00:08,620 --> 00:00:10,220
+首先，它们是很好的文档
+First, they are good documentation
+
+6
+00:00:10,220 --> 00:00:12,465
+对于编译器和人类来说。
+for both the compiler and for humans.
+
+7
+00:00:12,465 --> 00:00:14,340
+接口不仅帮助编译器
+Not only does the interface help the compiler
+
+8
+00:00:14,340 --> 00:00:16,840
+捕获ADT实现错误，如忘记
+catch ADT implementation bugs like forgetting
+
+9
+00:00:16,840 --> 00:00:18,990
+为了实现一个特定的操作，
+to implement a particular operation,
+
+10
+00:00:18,990 --> 00:00:20,800
+但对人类来说也更有用
+but it's also much more useful for a human
+
+11
+00:00:20,800 --> 00:00:24,090
+读取比代码更具体的实现
+to read than the code for a concrete implementation
+
+12
+00:00:24,090 --> 00:00:27,530
+因为实现散布ADT级别的类型
+because an implementation intersperses ADT level types
+
+13
+00:00:27,530 --> 00:00:30,495
+以及带有实现细节的规范。
+and specs with implementation details.
+
+14
+00:00:30,495 --> 00:00:34,000
+而接口没有。
+And interface does not.
+
+15
+00:00:34,000 --> 00:00:36,400
+允许性能权衡是另一个原因
+Allowing performance trade-offs is another reason
+
+16
+00:00:36,400 --> 00:00:38,160
+用于使用接口。
+for using interfaces.
+
+17
+00:00:38,160 --> 00:00:40,160
+ADT的不同实现
+Different implementations of the ADT
+
+18
+00:00:40,160 --> 00:00:42,450
+可以提供具有非常不同性能的方法
+can provide methods with very different performance
+
+19
+00:00:42,450 --> 00:00:43,650
+特点。
+characteristics.
+
+20
+00:00:43,650 --> 00:00:46,210
+不同的应用程序可能在不同的选择下工作得更好
+Different apps may work better with different choices
+
+21
+00:00:46,210 --> 00:00:47,624
+在这些实现中。
+of those implementations.
+
+22
+00:00:47,624 --> 00:00:49,790
+但我们还是希望用一种
+But we'd still like to code those apps in a way that
+
+23
+00:00:49,790 --> 00:00:52,360
+代表独立。
+is representation independent.
+
+24
+00:00:52,360 --> 00:00:53,934
+所以从正确的角度来看，
+So from a correctness standpoint,
+
+25
+00:00:53,934 --> 00:00:55,350
+应该可以直接掉下去
+it should be possible to just drop
+
+26
+00:00:55,350 --> 00:00:58,350
+在任何一个重要ADT的新实现中
+in any new implementation of an important ADT
+
+27
+00:00:58,350 --> 00:01:00,800
+最多只需要简单的本地化代码更改。
+with simple, localized code changes at best.
+
+29
+00:01:04,430 --> 00:01:06,770
+我们可以对接口使用可选方法。
+We can use optional methods with interfaces.
+
+30
+00:01:06,770 --> 00:01:09,180
+Java标准库中的So列表
+So list from the Java standard library
+
+31
+00:01:09,180 --> 00:01:12,054
+将所有mutator方法标记为可选。
+marks all mutator methods as optional.
+
+32
+00:01:12,054 --> 00:01:13,470
+通过构建一个
+By building an implementation that
+
+33
+00:01:13,470 --> 00:01:17,340
+不支持这些方法，我们可以提供不可变列表。
+does not support these methods, we can provide immutable lists.
+
+34
+00:01:17,340 --> 00:01:18,940
+有些操作很难实施
+Some operations are hard to implement
+
+35
+00:01:18,940 --> 00:01:20,940
+在不可变列表上有足够好的性能，
+with good enough performance on immutable lists,
+
+36
+00:01:20,940 --> 00:01:23,972
+所以我们也需要可变的实现。
+so we want mutable implementations as well.
+
+37
+00:01:23,972 --> 00:01:25,430
+不调用变异器的代码可以
+Code that doesn't call mutators can
+
+38
+00:01:25,430 --> 00:01:29,900
+被编写成自动处理任何一种列表。
+be written to work automatically with either kind of list.
+
+39
+00:01:29,900 --> 00:01:32,680
+方法与故意低于规定的规格
+Methods with intentionally under determined specifications
+
+40
+00:01:32,680 --> 00:01:33,430
+可能有用。
+can be useful.
+
+41
+00:01:33,430 --> 00:01:36,370
+例如，有限集的ADT
+For example, an ADT for finite sets
+
+42
+00:01:36,370 --> 00:01:38,790
+无法指定元素顺序
+could leave unspecified the element order
+
+43
+00:01:38,790 --> 00:01:41,680
+当你把集合转换成一个列表时得到的。
+that you get back when you convert the set into a list.
+
+44
+00:01:41,680 --> 00:01:44,290
+实际上，Java集合的
+In fact, the Java collection's set
+
+45
+00:01:44,290 --> 00:01:47,680
+就是这样定义的。
+is precisely defined in that way.
+
+46
+00:01:47,680 --> 00:01:50,969
+有些实现可能使用较慢的方法实现
+Some implementations might use a slower method implementation
+
+47
+00:01:50,969 --> 00:01:52,760
+设法保持集合表示的
+that manages to keep the set representation
+
+48
+00:01:52,760 --> 00:01:55,100
+以某种排序顺序允许快速转换
+in some sorted order allowing quick conversion
+
+49
+00:01:55,100 --> 00:01:56,240
+排序列表。
+to a sorted list.
+
+50
+00:01:56,240 --> 00:01:59,150
+但其他实现可能会进行许多其他操作
+But other implementations might make many other operations
+
+51
+00:01:59,150 --> 00:02:02,300
+不必费心支持转换，速度更快
+faster by not bothering to support conversion
+
+52
+00:02:02,300 --> 00:02:03,030
+排序列表。
+to sorted lists.
+
+53
+00:02:03,030 --> 00:02:06,630
+所以这就交给了实现者。
+So that leaves it up to the implementer.
+
+54
+00:02:06,630 --> 00:02:09,690
+它还允许一个类的多个视图。
+It also allows multiple views of one class.
+
+55
+00:02:09,690 --> 00:02:11,990
+因此一个Java类可以实现多个方法。
+So a Java class may implement multiple methods.
+
+56
+00:02:11,990 --> 00:02:13,590
+例如，用户界面小部件
+For example, a user interface widget
+
+57
+00:02:13,590 --> 00:02:17,700
+程序员可以查看显示下拉列表
+displaying a drop-down list could be viewed by a programmer
+
+58
+00:02:17,700 --> 00:02:22,410
+作为一个小部件，作为一个用户界面，作为一个列表。
+both as a widget, as a user interface thing, and as a list.
+
+59
+00:02:22,410 --> 00:02:25,124
+这个小部件的类可以实现这两个接口。
+The class for this widget could implement both interfaces.
+
+60
+00:02:25,124 --> 00:02:27,790
+换句话说，我们不需要多次实现ADT
+In other words, we don't need to implement an ADT multiple times
+
+61
+00:02:27,790 --> 00:02:30,570
+只是因为我们选择了不同的数据结构。
+just because we're choosing different data structures.
+
+62
+00:02:30,570 --> 00:02:32,160
+我们可以做多种实现
+We might make multiple implementations
+
+63
+00:02:32,160 --> 00:02:33,890
+因为有很多不同种类的物体
+because many different kinds of objects
+
+64
+00:02:33,890 --> 00:02:37,180
+可视为ADT的特例
+can be seen as special cases of the ADT
+
+65
+00:02:37,180 --> 00:02:38,815
+以及其他有用的观点。
+along with other useful perspectives.
+
+67
+00:02:41,660 --> 00:02:44,660
+接口也让我们拥有越来越少的
+Interfaces also allow us to have more and less
+
+68
+00:02:44,660 --> 00:02:47,714
+值得信赖的实现。
+trustworthy implementations.
+
+69
+00:02:47,714 --> 00:02:49,380
+这是实施--
+This is a good reason for implementing--
+
+70
+00:02:49,380 --> 00:02:51,190
+实现的调试原因
+a debugging reason for implementing
+
+71
+00:02:51,190 --> 00:02:52,370
+一个接口多次。
+an interface multiple times.
+
+72
+00:02:52,370 --> 00:02:56,160
+所以很容易，通常很容易，构建简单的实现
+So it's easy, typically easy, to build simple implementation
+
+73
+00:02:56,160 --> 00:02:59,100
+你能说服自己是正确的。
+that you can convince yourself is correct.
+
+74
+00:02:59,100 --> 00:03:01,180
+一旦你做到了，你可以更加努力地工作
+And once you've done that, you can work harder
+
+75
+00:03:01,180 --> 00:03:02,850
+创造一个更华丽的版本。
+to build a fancier version.
+
+76
+00:03:02,850 --> 00:03:05,750
+但这将更有可能包含bug。
+But that will be more likely to contain bugs.
+
+77
+00:03:05,750 --> 00:03:07,500
+然后您可以选择实现
+And then you can choose the implementation
+
+78
+00:03:07,500 --> 00:03:10,030
+根据应用程序有多糟来使用
+to use for your application based on how bad it would
+
+79
+00:03:10,030 --> 00:03:11,200
+被虫子咬了。
+be to get bitten by a bug.
+
+80
+00:03:11,200 --> 00:03:15,460
+您还可以使用这些多个实现
+And you can also use these multiple implementations
+
+81
+00:03:15,460 --> 00:03:20,340
+当你试着调试时把它们调进调出。
+for swapping them in and out when you're trying to debug.
+
+82
+00:03:20,340 --> 00:03:25,210
+最后，我们可以扩展ADT概念的Java工具箱，
+So finally, we can extend our Java toolbox of ADT concepts,
+
+83
+00:03:25,210 --> 00:03:27,970
+以及如何在Java中实现这些概念
+of concepts and how they're implemented in Java, that we
+
+84
+00:03:27,970 --> 00:03:30,840
+在第一个ADT读数中看到。
+saw in the first ADT reading.
+
+85
+00:03:30,840 --> 00:03:33,420
+对于抽象数据类型，我们可以表示它
+For an abstract data type, we can represent it either
+
+86
+00:03:33,420 --> 00:03:39,960
+作为一个类——string就是一个例子--
+as a single class-- and string is an example of that--
+
+87
+00:03:39,960 --> 00:03:42,360
+或者我们可以将其表示为与类的接口
+or we can represent it as an interface with class
+
+88
+00:03:42,360 --> 00:03:43,380
+实现。
+implementations.
+
+89
+00:03:43,380 --> 00:03:45,540
+列表，带有数组列表或链表，
+And list, with array list or linked list,
+
+90
+00:03:45,540 --> 00:03:47,770
+就是一个例子。
+is an example of that.
+
+91
+00:03:47,770 --> 00:03:50,912
+对于creator操作，我们可以使用构造函数
+For creator operations, we can use a constructor
+
+92
+00:03:50,912 --> 00:03:52,245
+就像数组列表构造函数一样。
+like the array list constructor.
+
+93
+00:03:52,245 --> 00:03:56,010
+我们可以使用静态方法，也称为工厂方法，
+We can use a static method, also called a factory method,
+
+94
+00:03:56,010 --> 00:03:58,800
+要列出的数组和单例列表就是这样的例子。
+Arrays to list and singleton list are examples of that.
+
+95
+00:03:58,800 --> 00:04:01,570
+我们之前看到的神秘感的价值
+So is value of in the myString that we saw earlier
+
+96
+00:04:01,570 --> 00:04:03,390
+在这篇文章里。
+in this reading.
+
+97
+00:04:03,390 --> 00:04:10,620
+或者我们可以在大整数ADT中使用像0这样的常量。
+Or we can use a constant value like 0 in the big integer ADT.
+
+98
+00:04:10,620 --> 00:04:13,500
+对于观察者操作，它们可能是实例方法
+For observer operations, they might be instance methods
+
+99
+00:04:13,500 --> 00:04:15,040
+就像在名单上一样。
+like get on a list.
+
+100
+00:04:15,040 --> 00:04:18,990
+它们可能是静态方法，如集合中的max
+They might be static methods like max in the collections
+
+101
+00:04:18,990 --> 00:04:19,490
+上课。
+class.
+
+103
+00:04:22,400 --> 00:04:24,870
+对于生产者来说，它们又可以是实例方法
+For producers, they can again be instance methods
+
+104
+00:04:24,870 --> 00:04:25,646
+或静态方法。
+or static methods.
+
+105
+00:04:25,646 --> 00:04:27,020
+同样地，突变子也可以
+And likewise, mutators can either
+
+106
+00:04:27,020 --> 00:04:28,603
+是实例方法还是静态方法。
+be instance methods or static methods.
+
+107
+00:04:28,603 --> 00:04:31,030
+和以前一样，
+And the representation, as before,
+
+108
+00:04:31,030 --> 00:04:34,540
+是类中的私有字段。
+is the private fields inside a class.
+

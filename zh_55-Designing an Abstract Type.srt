@@ -1,0 +1,1110 @@
+1
+00:00:00,720 --> 00:00:02,470
+设计抽象数据类型涉及
+Designing an abstract data type involves
+
+2
+00:00:02,470 --> 00:00:04,390
+选择好的操作并确定
+choosing good operations and determining
+
+3
+00:00:04,390 --> 00:00:05,440
+他们应该怎么做。
+how they should behave.
+
+4
+00:00:05,440 --> 00:00:07,050
+这里有一些经验法则。
+Here a few rules of thumb.
+
+5
+00:00:07,050 --> 00:00:09,880
+首先，最好有几个简单的操作
+First, it's better to have a few simple operations that
+
+6
+00:00:09,880 --> 00:00:12,480
+可以用强有力的方式组合而不是
+can be combined in powerful ways rather than
+
+7
+00:00:12,480 --> 00:00:15,240
+很多复杂的操作。
+lots of complex operations.
+
+8
+00:00:15,240 --> 00:00:17,380
+每个操作都应该有明确的目的
+Each operation should have a well-defined purpose
+
+9
+00:00:17,380 --> 00:00:19,840
+应该有连贯的行为而不是
+and should have a coherent behavior rather than
+
+10
+00:00:19,840 --> 00:00:21,830
+很多特殊情况。
+a lot of special cases.
+
+11
+00:00:21,830 --> 00:00:24,280
+所以我们可能不应该添加sum操作
+So we probably shouldn't add a sum operation
+
+12
+00:00:24,280 --> 00:00:25,690
+举个例子。
+to List, for example.
+
+13
+00:00:25,690 --> 00:00:28,520
+它可能有助于处理整数列表的客户机，
+It might help with clients who work with lists of integers,
+
+14
+00:00:28,520 --> 00:00:30,020
+但是列表是用来做其他事情的
+but List is used for other things
+
+15
+00:00:30,020 --> 00:00:33,000
+还有，比如字符串列表，或者列表列表。
+as well, like lists of strings, or lists of lists.
+
+16
+00:00:33,000 --> 00:00:35,425
+所有这些特殊情况都会使sum成为一个困难的操作
+All these special cases would make sum a hard operation
+
+17
+00:00:35,425 --> 00:00:38,410
+理解和使用。
+to understand and use.
+
+18
+00:00:38,410 --> 00:00:40,932
+现在这套操作在意义上应该是足够的
+Now the set of operations should be adequate in the sense
+
+19
+00:00:40,932 --> 00:00:42,640
+必须有足够的资源来做这些事
+that there must be enough to do the kinds
+
+20
+00:00:42,640 --> 00:00:45,210
+客户端可能要做的计算。
+of computations clients are likely to want to do.
+
+21
+00:00:45,210 --> 00:00:47,020
+良好的测试检查每个属性
+Good tests check that every property
+
+22
+00:00:47,020 --> 00:00:50,347
+这种类型的对象可以用一些观察者来提取。
+of an object of the type can be extracted with some observer.
+
+23
+00:00:50,347 --> 00:00:52,180
+例如，如果没有get操作，
+For example, if there were no get operation,
+
+24
+00:00:52,180 --> 00:00:54,680
+我们无法找出列表中的元素
+we wouldn't be able to find out what the elements of a list
+
+25
+00:00:54,680 --> 00:00:56,240
+是。
+are.
+
+26
+00:00:56,240 --> 00:00:58,350
+所以基本信息不应该过分
+So basic information should not be inordinately
+
+27
+00:00:58,350 --> 00:00:59,310
+很难获得。
+difficult to obtain.
+
+28
+00:00:59,310 --> 00:01:01,620
+例如，size方法并不严格
+For example, the size method is not strictly
+
+29
+00:01:01,620 --> 00:01:03,620
+必须列出，因为我们能做的
+necessary for List, because what we could do
+
+30
+00:01:03,620 --> 00:01:07,300
+是应用不断增加的指数，直到我们得到一个失败。
+is apply get on increasing indices until we get a failure.
+
+31
+00:01:07,300 --> 00:01:09,120
+但这是低效和不方便的。
+But this is inefficient and inconvenient.
+
+32
+00:01:09,120 --> 00:01:12,190
+这是不够的。
+It's not adequate.
+
+33
+00:01:12,190 --> 00:01:14,140
+现在您创建的类型可能是泛型，
+Now the type you're creating might be generic,
+
+34
+00:01:14,140 --> 00:01:16,600
+像一个列表，或一个集合，或一个图表，用于抽签
+like a list, or a set, or a graph, used for lots
+
+35
+00:01:16,600 --> 00:01:17,750
+在不同的情况下。
+of different situations.
+
+36
+00:01:17,750 --> 00:01:20,490
+或者它可能是特定领域的，比如街道
+Or it might be domain-specific, like a street
+
+37
+00:01:20,490 --> 00:01:23,770
+地图，员工数据库，电话簿。
+map, or an employee database, or a phone book.
+
+38
+00:01:23,770 --> 00:01:27,510
+但不应该混合使用一般特性和特定于域的特性。
+But you should not mix generic and domain-specific features.
+
+39
+00:01:27,510 --> 00:01:29,290
+如果要创建甲板类型
+If you create a Deck type intended
+
+40
+00:01:29,290 --> 00:01:31,180
+为了表示一系列扑克牌，
+to represent a sequence of playing cards,
+
+41
+00:01:31,180 --> 00:01:33,180
+你可能不应该有一个通用的add方法
+you probably shouldn't have a generic add method
+
+42
+00:01:33,180 --> 00:01:34,570
+接受任意对象，
+that accepts an arbitrary object,
+
+43
+00:01:34,570 --> 00:01:36,270
+例如整数或字符串。
+like an integer or a string.
+
+44
+00:01:36,270 --> 00:01:38,334
+你应该坚持打牌。
+You should stick to cards.
+
+45
+00:01:38,334 --> 00:01:39,750
+相反，这是没有意义的
+Conversely, it wouldn't make sense
+
+46
+00:01:39,750 --> 00:01:42,530
+把特定于域的方法，比如dealCards，
+to put a domain-specific method, like dealCards,
+
+47
+00:01:42,530 --> 00:01:46,150
+进入泛型类型列表。
+into a generic type List.
+
+48
+00:01:46,150 --> 00:01:48,390
+现在关键的是，一个好的抽象数据类型
+Now critically, a good abstract data type
+
+49
+00:01:48,390 --> 00:01:51,180
+应独立于代表。
+should be representation independent.
+
+50
+00:01:51,180 --> 00:01:53,180
+这意味着使用抽象数据类型
+This means that the use of an abstract data type
+
+51
+00:01:53,180 --> 00:01:56,260
+独立于它的表示，实际数据
+is independent of its representation, the actual data
+
+52
+00:01:56,260 --> 00:01:59,120
+用于实现它的结构或数据字段，
+structure or data fields that are used to implement it,
+
+53
+00:01:59,120 --> 00:02:00,820
+所以这个表示的变化
+so that changes in that representation
+
+54
+00:02:00,820 --> 00:02:04,250
+对抽象类型本身之外的代码没有影响
+have no effect on code outside the abstract type itself
+
+55
+00:02:04,250 --> 00:02:06,100
+对它的客户。
+on its clients.
+
+56
+00:02:06,100 --> 00:02:09,217
+例如，List提供的操作
+For example, the operations offered by List
+
+57
+00:02:09,217 --> 00:02:11,800
+与列表是否表示为链接无关
+are independent of whether the list is represented as a linked
+
+58
+00:02:11,800 --> 00:02:14,807
+列表或作为数组。
+list or as an array.
+
+59
+00:02:14,807 --> 00:02:17,140
+您将无法更改ADT的表示形式
+You won't be able to change the representation of an ADT
+
+60
+00:02:17,140 --> 00:02:19,070
+除非它的运作完全
+at all unless its operations are fully
+
+61
+00:02:19,070 --> 00:02:21,155
+用前置条件和后置条件指定
+specified with preconditions and postconditions
+
+62
+00:02:21,155 --> 00:02:22,780
+让客户知道该依赖什么，
+so that clients know what to depend on,
+
+63
+00:02:22,780 --> 00:02:25,310
+你知道你可以安全地改变什么。
+and you know what you can safely change.
+
+64
+00:02:25,310 --> 00:02:29,779
+你需要这些方法的所有规格。
+You need all of those specs on those methods.
+
+65
+00:02:29,779 --> 00:02:30,820
+让我们看一个例子。
+Let's look at an example.
+
+66
+00:02:30,820 --> 00:02:32,565
+让我们看一个简单的抽象数据类型
+Let's look at a simple abstract data type
+
+67
+00:02:32,565 --> 00:02:34,440
+看看代表独立意味着什么
+to see what representation independence means
+
+68
+00:02:34,440 --> 00:02:35,320
+为什么有用。
+and why it's useful.
+
+69
+00:02:35,320 --> 00:02:37,310
+我们要看一根绳子。
+We're going to look at a string.
+
+70
+00:02:37,310 --> 00:02:39,730
+这将类似于
+This will be similar to the string type that's
+
+71
+00:02:39,730 --> 00:02:42,522
+内置到Java中，但它的操作要少得多。
+built into Java, but it's going to have far fewer operations.
+
+72
+00:02:42,522 --> 00:02:44,230
+规格会有点不同。
+And the specs will be a little different.
+
+73
+00:02:44,230 --> 00:02:46,640
+所以我们称之为我的字符串。
+So we'll call it mystring.
+
+74
+00:02:46,640 --> 00:02:48,335
+这是ADT的规格。
+Now here are the specs for that ADT.
+
+75
+00:02:48,335 --> 00:02:51,600
+首先，有个标题说，
+First of all, there's a header that says,
+
+76
+00:02:51,600 --> 00:02:54,200
+这应该代表一个不可变的序列
+well this is supposed to represent an immutable sequence
+
+77
+00:02:54,200 --> 00:02:54,880
+角色的。
+of characters.
+
+78
+00:02:54,880 --> 00:02:56,270
+这就是绳子。
+That's what a string is.
+
+79
+00:02:56,270 --> 00:02:58,500
+重要的是，我们在这里说它是不可变的。
+It's important that we say here that it's immutable.
+
+80
+00:02:58,500 --> 00:03:01,530
+在以后的阅读中我们会经常讨论这个问题。
+We'll talk about that a lot in future reading.
+
+81
+00:03:01,530 --> 00:03:03,800
+我们有每种手术的例子
+And we have an example of each kind of operation
+
+82
+00:03:03,800 --> 00:03:05,780
+这里，或者至少所有
+here, or at least all the ones that make
+
+83
+00:03:05,780 --> 00:03:07,200
+对不可变类型的检测。
+sense on an immutable type.
+
+84
+00:03:07,200 --> 00:03:08,420
+我们这里没有突变子。
+We don't have a mutator here.
+
+85
+00:03:08,420 --> 00:03:10,090
+我们有一个创造者。
+We've got a creator.
+
+86
+00:03:10,090 --> 00:03:11,890
+我们的创造者将会非常简单。
+And our creator is going to be very simple.
+
+87
+00:03:11,890 --> 00:03:15,090
+它实际上只是取一个布尔值
+It's actually just going to take a Boolean value
+
+88
+00:03:15,090 --> 00:03:17,510
+给你一个布尔值的字符串表示
+and give you a string representation of that Boolean
+
+89
+00:03:17,510 --> 00:03:18,850
+值，为真或为假。
+value, either true or false.
+
+90
+00:03:18,850 --> 00:03:21,561
+所以这将是一个非常有限的数据类型
+So this is really going to be a very limited data type
+
+91
+00:03:21,561 --> 00:03:22,060
+马上。
+right now.
+
+92
+00:03:22,060 --> 00:03:24,080
+但这是个很好的例子。
+But it's good as an example.
+
+93
+00:03:24,080 --> 00:03:25,930
+这里有几个观察者操作。
+And here's a couple of observer operations.
+
+94
+00:03:25,930 --> 00:03:30,800
+长度给出了字符串中的字符数。
+Length gives us the number of characters in the string.
+
+95
+00:03:30,800 --> 00:03:34,010
+CharAt给了我们位置I的角色，
+CharAt gives us the character at position I,
+
+96
+00:03:34,010 --> 00:03:37,264
+它有一个先决条件。
+and it has a precondition on that I.
+
+97
+00:03:37,264 --> 00:03:39,430
+然后我们有一个生产商运作的例子。
+And then we have an example of a producer operation.
+
+98
+00:03:39,430 --> 00:03:43,930
+子字符串给我们一个字符串
+Substring gives us a string consisting
+
+99
+00:03:43,930 --> 00:03:46,690
+从位置开始的字符数
+of the characters from position start
+
+100
+00:03:46,690 --> 00:03:49,850
+在调用此项的字符串中定位结束。
+to position end in the string that you are calling this on.
+
+101
+00:03:49,850 --> 00:03:52,600
+这是一个实例方法。
+This is an instance method.
+
+102
+00:03:52,600 --> 00:03:58,050
+它有一个开始和结束的先决条件。
+And it has a precondition on start and end.
+
+103
+00:03:58,050 --> 00:04:01,190
+现在这些公共操作和它们的规格
+Now these public operations and their specs
+
+104
+00:04:01,190 --> 00:04:03,580
+是此数据类型的客户端的唯一信息
+are the only information that a client of this data type
+
+105
+00:04:03,580 --> 00:04:06,780
+允许知道，在第一次测试编程之后
+is allowed to know, following the test first programming
+
+106
+00:04:06,780 --> 00:04:07,300
+范式。
+paradigm.
+
+107
+00:04:07,300 --> 00:04:09,150
+实际上，我们应该创建的第一个客户机
+In fact, the first client we should create
+
+108
+00:04:09,150 --> 00:04:13,110
+是一个测试套件，它根据
+is a test suite that exercises these operations according
+
+109
+00:04:13,110 --> 00:04:15,100
+他们的规格。
+to their specs.
+
+110
+00:04:15,100 --> 00:04:18,269
+但目前，在使用assert equals的测试用例中，
+But at the moment, in test cases that use assert equals,
+
+111
+00:04:18,269 --> 00:04:21,850
+J units断言equals，直接在mystring对象上是行不通的。
+J units assert equals, directly on mystring objects won't work.
+
+112
+00:04:21,850 --> 00:04:25,410
+我们没有在mystring上定义相等操作。
+We don't have an equality operation defined on mystring.
+
+113
+00:04:25,410 --> 00:04:27,599
+我们将仔细讨论如何实现平等
+We'll talk about how to implement equality carefully
+
+114
+00:04:27,599 --> 00:04:28,640
+稍后再阅读。
+later in a later reading.
+
+115
+00:04:28,640 --> 00:04:31,700
+但目前我们只能用mystring执行的操作
+But for now the only operations we can perform with mystring
+
+116
+00:04:31,700 --> 00:04:33,220
+是我们上面定义的那些。
+are the ones we've defined above.
+
+117
+00:04:33,220 --> 00:04:36,350
+长度、字符和子字符串的值。
+Value of length, charAt, and substring.
+
+118
+00:04:36,350 --> 00:04:40,110
+所以我们的测试必须局限于这些操作。
+So our tests have to limit themselves to those operations.
+
+119
+00:04:40,110 --> 00:04:42,540
+这其实不是一个可怕的限制。
+That's actually not a terrible limitation.
+
+120
+00:04:42,540 --> 00:04:46,255
+例如，这里有一个值为operation的测试。
+For example, here's one test with a value of operation.
+
+121
+00:04:46,255 --> 00:04:47,560
+我们会让它成真的。
+We're going to give it true.
+
+122
+00:04:47,560 --> 00:04:48,645
+我们要拿回一根绳子。
+We're going to get a string back.
+
+123
+00:04:48,645 --> 00:04:51,090
+然后我们要在弦上运行一些观察程序
+And then we're going to run some observers on the string
+
+124
+00:04:51,090 --> 00:04:55,860
+我们回来确认结果是
+that we got back to confirm that it produced the result that we
+
+125
+00:04:55,860 --> 00:04:56,530
+希望如此。
+expect it to.
+
+126
+00:04:56,530 --> 00:05:00,880
+我们要一个四字的字符串，字母是t-r-u-e，
+We want a string of length four whose letters are t-r-u-e,
+
+127
+00:05:00,880 --> 00:05:02,807
+按顺序。
+in that order.
+
+128
+00:05:02,807 --> 00:05:04,390
+我们将回到如何
+We'll come back to the question of how
+
+129
+00:05:04,390 --> 00:05:05,935
+更详细地测试adt
+to test ADTs in a little more detail
+
+130
+00:05:05,935 --> 00:05:07,060
+在阅读结束时。
+at the end of this reading.
+
+131
+00:05:07,060 --> 00:05:09,220
+但现在，让我们来看一个简单的表示
+But for now, let's look at a simple representation
+
+132
+00:05:09,220 --> 00:05:10,060
+为了我的字符串。
+for mystring.
+
+133
+00:05:10,060 --> 00:05:11,992
+我们进去挖吧。
+Let's dig inside.
+
+134
+00:05:11,992 --> 00:05:15,540
+假设我们将其表示为一个字符数组。
+Suppose we represent it just as an array of characters.
+
+135
+00:05:15,540 --> 00:05:18,200
+这个阵列正好是这条带子的长度，
+And that array is exactly the length of this strip,
+
+136
+00:05:18,200 --> 00:05:20,819
+最后没有多余的房间。
+with no extra room at the end.
+
+137
+00:05:20,819 --> 00:05:22,610
+下面是内部表示
+Now here's how that internal representation
+
+138
+00:05:22,610 --> 00:05:24,450
+将声明为内部实例
+will be declared as an internal instance
+
+139
+00:05:24,450 --> 00:05:26,260
+类中的变量。
+variable within the class.
+
+140
+00:05:26,260 --> 00:05:28,530
+有了这样的选择，
+And with that choice of representation,
+
+141
+00:05:28,530 --> 00:05:29,920
+操作可以实现
+the operations can be implemented
+
+142
+00:05:29,920 --> 00:05:31,360
+以非常直接的方式。
+in a very straightforward way.
+
+143
+00:05:31,360 --> 00:05:34,320
+所以创造者的价值应该取布尔值
+So value of the creator that's supposed to take a Boolean
+
+144
+00:05:34,320 --> 00:05:36,582
+给你一个字符串，不管是真是假
+and give you a string either true or false according
+
+145
+00:05:36,582 --> 00:05:38,040
+对于布尔值来说
+to the value of that Boolean-- well
+
+146
+00:05:38,040 --> 00:05:40,540
+它需要创建一个新的mystring对象。
+it needs to create a new mystring object.
+
+147
+00:05:40,540 --> 00:05:44,620
+它需要把里面的数组设置为
+And it needs to set the array that's inside it to either
+
+148
+00:05:44,620 --> 00:05:47,540
+包含字母t-r-u-e的字符数组，
+a character array containing the letters t-r-u-e,
+
+149
+00:05:47,540 --> 00:05:51,180
+或包含字母f-a-l-s-e的字符数组。
+or a character array containing the letters f-a-l-s-e.
+
+150
+00:05:51,180 --> 00:05:54,260
+这是基于B的值。
+And that switched based on the value of B.
+
+151
+00:05:54,260 --> 00:05:57,870
+注意我们用的是三元的，条件的，
+And notice we're using the ternary, the conditional,
+
+152
+00:05:57,870 --> 00:06:00,315
+Java提供给我们的运算符
+operator here that Java provides us to make
+
+153
+00:06:00,315 --> 00:06:01,440
+更紧凑一点。
+that a little more compact.
+
+154
+00:06:01,440 --> 00:06:05,820
+然后返回字符串值。
+And then we return that string value.
+
+155
+00:06:05,820 --> 00:06:11,075
+Length只需查看该数组并返回其长度。
+Length simply looks at that array and returns it's length.
+
+156
+00:06:11,075 --> 00:06:15,270
+它的长度不是4就是5。
+And It's length is either going to be four or five.
+
+157
+00:06:15,270 --> 00:06:18,430
+查拉特拿起索引并查找它。
+CharAt takes the index and looks it up.
+
+158
+00:06:18,430 --> 00:06:20,874
+在数组中查找相应的索引。
+Looks up the corresponding index in the array.
+
+159
+00:06:20,874 --> 00:06:22,665
+子串有点复杂。
+Substring is a little bit more complicated.
+
+160
+00:06:22,665 --> 00:06:25,640
+它需要构造一个新的字符串来表示
+It needs to construct a new string representing
+
+161
+00:06:25,640 --> 00:06:26,780
+子字符串。
+the substring.
+
+162
+00:06:26,780 --> 00:06:30,840
+它需要创建适当大小的数组
+It needs to create the array of the appropriate size
+
+163
+00:06:30,840 --> 00:06:31,940
+在新的子串中。
+in that new substring.
+
+164
+00:06:31,940 --> 00:06:37,470
+它将是结束和开始之间距离的大小。
+It's going to be the size of the distance between end and start.
+
+165
+00:06:37,470 --> 00:06:40,480
+然后它使用这个效用函数
+And then it's using this utility function
+
+166
+00:06:40,480 --> 00:06:42,340
+由Java库提供
+provided by the Java library that
+
+167
+00:06:42,340 --> 00:06:46,140
+允许我们复制数组的某一段
+allows us to copy a certain segment of an array
+
+168
+00:06:46,140 --> 00:06:49,035
+从这个点阵到那个点阵。
+from this dot array to that dot array.
+
+170
+00:06:51,605 --> 00:06:52,980
+现在有一个问题需要思考。
+Now here is a question to ponder.
+
+171
+00:06:52,980 --> 00:06:56,723
+为什么不猜谜和猜谜，这两个家伙，
+Why don't charAt and substring, these two guys here,
+
+172
+00:06:56,723 --> 00:06:58,610
+很抱歉，这两个人--
+have to-- I'm sorry, these two guys here--
+
+173
+00:06:58,610 --> 00:07:00,359
+必须检查它们的参数是否
+have to check whether their parameters are
+
+174
+00:07:00,359 --> 00:07:01,460
+在有效范围内。
+within the valid range.
+
+175
+00:07:01,460 --> 00:07:02,400
+你认为会发生什么
+What do you think is going to happen
+
+176
+00:07:02,400 --> 00:07:04,430
+如果客户端调用这些实现
+if the client calls these implementations
+
+177
+00:07:04,430 --> 00:07:07,780
+非法输入。
+with illegal inputs.
+
+178
+00:07:07,780 --> 00:07:09,280
+这个实现有一个问题
+One problem with this implementation
+
+179
+00:07:09,280 --> 00:07:11,930
+是在错过表演的机会
+is that it's passing up an opportunity for performance
+
+180
+00:07:11,930 --> 00:07:12,760
+改进。
+improvement.
+
+181
+00:07:12,760 --> 00:07:14,970
+此数据类型是不可变的。
+This data type is immutable.
+
+182
+00:07:14,970 --> 00:07:17,480
+所以子串操作实际上
+So the substring operation doesn't actually
+
+183
+00:07:17,480 --> 00:07:21,295
+必须将字符复制到新数组中。
+have to copy characters out into a fresh array.
+
+184
+00:07:21,295 --> 00:07:25,450
+它实际上可以指向最初的mystring对象
+It could actually just point to the original mystring objects
+
+185
+00:07:25,450 --> 00:07:30,430
+字符数组并跟踪该数组中的确切位置
+character array and keep track of where exactly in that array
+
+186
+00:07:30,430 --> 00:07:32,760
+是表示新子字符串的开始和结束
+are the start and end that represent the new substring
+
+187
+00:07:32,760 --> 00:07:33,770
+反对。
+object.
+
+188
+00:07:33,770 --> 00:07:36,240
+现在，一些版本的Java中的字符串实现
+Now the string implementation in some versions of Java
+
+189
+00:07:36,240 --> 00:07:40,070
+实际上，这样做可以节省内存。
+actually do this, and it does save memory.
+
+190
+00:07:40,070 --> 00:07:41,570
+为了实现这个优化，
+So to implement this optimization,
+
+191
+00:07:41,570 --> 00:07:43,990
+我们可以改变这个类的内部表示
+we can change the internal representation of this class
+
+192
+00:07:43,990 --> 00:07:45,546
+像这样的事情。
+to something like this.
+
+193
+00:07:45,546 --> 00:07:50,770
+这是包含字符串的数组。
+This is the array that contains the string somewhere inside it.
+
+194
+00:07:50,770 --> 00:07:55,930
+然后开始和结束表示实际的子字符串
+And then start and end represent the actual substring
+
+195
+00:07:55,930 --> 00:07:57,930
+在那个阵营里。
+of that array.
+
+196
+00:07:57,930 --> 00:08:00,050
+现在有了这个新的行动
+Now with this new operation, the operations
+
+197
+00:08:00,050 --> 00:08:02,150
+现在是这样实现的。
+are now implemented like this.
+
+198
+00:08:02,150 --> 00:08:05,140
+所以再一次，做的价值。
+So again, do value of.
+
+199
+00:08:05,140 --> 00:08:07,650
+我们要么把它指向一个新的真数组
+We are either going to point it to a new array of true
+
+200
+00:08:07,650 --> 00:08:09,066
+或一系列错误。
+or array of false.
+
+201
+00:08:09,066 --> 00:08:12,160
+我们要从头到尾
+And we're going to set start and end to the beginning
+
+202
+00:08:12,160 --> 00:08:15,310
+以及实际数组的结尾。
+and end of that actual array.
+
+203
+00:08:15,310 --> 00:08:19,360
+Length现在不是这个数组的长度，
+Length now is not the length of this array,
+
+204
+00:08:19,360 --> 00:08:22,660
+但它可能是数组的某个子字符串的长度。
+but it might be a length of some substring of that array.
+
+205
+00:08:22,660 --> 00:08:25,570
+所以我们实际上返回结束减去开始。
+So we actually return end minus start.
+
+206
+00:08:25,570 --> 00:08:27,740
+查拉特必须调整
+CharAt is going to have to adjust
+
+207
+00:08:27,740 --> 00:08:30,150
+你要找的角色的位置
+the position of the character you are asking for
+
+208
+00:08:30,150 --> 00:08:34,299
+根据这个起始偏移量。
+according to this start offset.
+
+209
+00:08:34,299 --> 00:08:36,960
+子串——这是有趣的事情发生的地方。
+And substring-- this is where something interesting happens.
+
+210
+00:08:36,960 --> 00:08:39,929
+我们正在创建这个数组的新子串，
+We're creating this new substring of this array,
+
+211
+00:08:39,929 --> 00:08:42,020
+并称之为。
+and calling it that.
+
+212
+00:08:42,020 --> 00:08:46,350
+该数组将指向与此数组相同的数组。
+That array is going to point to the same array as this's array.
+
+213
+00:08:46,350 --> 00:08:48,180
+开始的位置很简单
+And that start position is simply
+
+214
+00:08:48,180 --> 00:08:50,240
+这是开始位置的调整
+going to be this's start position adjusted
+
+215
+00:08:50,240 --> 00:08:53,302
+按此处提供的子字符串起始位置。
+by the substring start position provided here.
+
+216
+00:08:53,302 --> 00:08:56,722
+同样，在结束位置。
+And likewise with the end position.
+
+217
+00:08:56,722 --> 00:08:58,180
+所以我们能做出改变
+So we were able to make that change
+
+218
+00:08:58,180 --> 00:09:00,700
+因为mystring的现有客户端只依赖于
+because mystring's existing clients depend only
+
+219
+00:09:00,700 --> 00:09:02,500
+在公共方法的规范上，
+on the specs of its public methods,
+
+220
+00:09:02,500 --> 00:09:05,632
+不是在这些私人领域。
+not on these private fields.
+
+221
+00:09:05,632 --> 00:09:07,340
+所以我们可以不用
+So we can make that change without having
+
+222
+00:09:07,340 --> 00:09:09,460
+检查并更改所有客户端代码。
+to inspect and change all that client code.
+
+223
+00:09:09,460 --> 00:09:13,850
+这就是代表独立的力量。
+That really is the power of representation independence.
+

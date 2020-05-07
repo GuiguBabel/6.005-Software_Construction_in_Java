@@ -1,0 +1,1315 @@
+1
+00:00:00,060 --> 00:00:02,710
+上一次阅读时，我们讨论了什么是好的抽象数据
+Last reading, we talked about what makes a good abstract data
+
+2
+00:00:02,710 --> 00:00:04,150
+键入。
+type.
+
+3
+00:00:04,150 --> 00:00:06,149
+好的抽象数据的最终性质
+And the final property of a good abstract data
+
+4
+00:00:06,149 --> 00:00:08,440
+我们想花很多时间讨论的类型，
+type that we want to spend a lot of time talking about,
+
+5
+00:00:08,440 --> 00:00:11,402
+它应该保留自己的不变量。
+is that it should preserve its own invariants.
+
+6
+00:00:11,402 --> 00:00:12,360
+那这是什么意思？
+So what does that mean?
+
+7
+00:00:12,360 --> 00:00:15,410
+不变量是程序的一个属性
+Well, an invariant is a property of a program that is always
+
+8
+00:00:15,410 --> 00:00:17,720
+对于每个可能的运行时状态为true
+true for every possible runtime state
+
+9
+00:00:17,720 --> 00:00:19,830
+程序可以进入的。
+that the program can get into.
+
+10
+00:00:19,830 --> 00:00:21,880
+易变性是一个重要的不变量
+Mutability is one crucial invariant
+
+11
+00:00:21,880 --> 00:00:23,390
+我们已经看到了。
+that we've already seen.
+
+12
+00:00:23,390 --> 00:00:25,780
+一旦你创建了一个不可变的对象，
+Once you create an immutable object,
+
+13
+00:00:25,780 --> 00:00:29,700
+它在整个生命周期中始终代表相同的值
+it always represents the same value for the entire lifetime
+
+14
+00:00:29,700 --> 00:00:30,410
+关于那个物体。
+of that object.
+
+15
+00:00:30,410 --> 00:00:32,770
+不管这个计划经历了什么样的状态，
+No matter what states the program goes through,
+
+16
+00:00:32,770 --> 00:00:36,550
+那个物体应该代表同样的东西。
+that object should represent the same thing.
+
+17
+00:00:36,550 --> 00:00:39,200
+所以说ADT保留了它自己的不变量
+So saying that an ADT preserves its own invariants
+
+18
+00:00:39,200 --> 00:00:41,940
+意味着ADT负责确保
+means that the ADT is responsible for ensuring
+
+19
+00:00:41,940 --> 00:00:43,280
+它的不变量。
+that its invariants hold.
+
+20
+00:00:43,280 --> 00:00:47,110
+它并不依赖于客户的良好行为。
+It doesn't depend on good behavior from its clients.
+
+21
+00:00:47,110 --> 00:00:49,090
+现在当ADT保留它自己的不变量时，
+Now when an ADT preserves its own invariants,
+
+22
+00:00:49,090 --> 00:00:51,160
+对代码进行推理要容易得多
+reasoning about the code is much easier
+
+23
+00:00:51,160 --> 00:00:52,970
+例如，如果你能相信事实，
+if you can count on the fact, for example,
+
+24
+00:00:52,970 --> 00:00:55,100
+一根弦永远不会改变。
+that a string never changes.
+
+25
+00:00:55,100 --> 00:00:57,560
+当你调试使用字符串的代码时，
+And when you're debugging code that uses strings,
+
+26
+00:00:57,560 --> 00:01:00,330
+你可以排除这个字符串
+you can rule out the possibility that the string might
+
+27
+00:01:00,330 --> 00:01:02,600
+在你脚下改变了。
+have changed under your feet.
+
+28
+00:01:02,600 --> 00:01:05,137
+当你试图为另一个ADT建立一个不变量时
+When you're trying to establish an invariant for another ADT
+
+29
+00:01:05,137 --> 00:01:06,970
+使用字符串，你可以相信
+that uses strings, you can count on the fact
+
+30
+00:01:06,970 --> 00:01:08,990
+绳子不会变。
+that the string won't change.
+
+31
+00:01:08,990 --> 00:01:10,900
+与字符串类型相比
+Contrast that with a string type that
+
+32
+00:01:10,900 --> 00:01:14,170
+保证只有当客户承诺
+guarantees it will be immutable only if its clients promise
+
+33
+00:01:14,170 --> 00:01:15,426
+别碰它。
+not to touch it.
+
+34
+00:01:15,426 --> 00:01:17,550
+那你就得检查密码里的所有地方
+Then you'd have to check all the places in the code
+
+35
+00:01:17,550 --> 00:01:19,883
+其中字符串可用于确保客户端
+where the string might be used to make sure that clients
+
+36
+00:01:19,883 --> 00:01:23,200
+都在信守承诺。
+are upholding that promise.
+
+37
+00:01:23,200 --> 00:01:24,950
+我们先来谈谈不变性。
+Let's start by talking about immutability.
+
+38
+00:01:24,950 --> 00:01:26,544
+我们将看到更多有趣的不变量
+We'll see more interesting invariants
+
+39
+00:01:26,544 --> 00:01:27,460
+稍后阅读。
+later in this reading.
+
+40
+00:01:27,460 --> 00:01:29,929
+但不变性是一个很好的开始，因为我们
+But immutability is a good one to start with because we're
+
+41
+00:01:29,929 --> 00:01:30,970
+已经很熟悉了。
+already familiar with it.
+
+42
+00:01:30,970 --> 00:01:33,110
+下面是一个具体的例子。
+Here is a specific example.
+
+43
+00:01:33,110 --> 00:01:35,270
+这是一个不可变的抽象数据类型。
+This is an immutable abstract data type.
+
+44
+00:01:35,270 --> 00:01:36,850
+它代表，应该代表，
+It represents, supposed to represent,
+
+45
+00:01:36,850 --> 00:01:39,170
+推特上的推文。
+a tweet from Twitter.
+
+46
+00:01:39,170 --> 00:01:41,290
+一条微博有三个属性。
+And a tweet has three properties.
+
+47
+00:01:41,290 --> 00:01:42,860
+它的作者是一个字符串。
+It has an author that's a string.
+
+48
+00:01:42,860 --> 00:01:44,780
+它有一个字符串的tweet文本。
+It has the text of the tweet that's a string.
+
+49
+00:01:44,780 --> 00:01:46,613
+有时间发微博，
+And it has the time that the tweet was sent,
+
+50
+00:01:46,613 --> 00:01:49,170
+我们会用日期来表示。
+which we'll represent with a date.
+
+51
+00:01:49,170 --> 00:01:51,830
+这有一个单独的创建者操作，
+And this has a single creator operation,
+
+52
+00:01:51,830 --> 00:01:54,890
+需要作者、文本和时间戳，
+which takes that author, text, and timestamp,
+
+53
+00:01:54,890 --> 00:01:57,970
+把它打包成一个tweet对象。
+and packages it up into a tweet object.
+
+54
+00:01:57,970 --> 00:02:00,910
+然后观察者的操作基本上是
+And then the observer operations are basically
+
+55
+00:02:00,910 --> 00:02:02,380
+这些字段是公共的。
+these fields, which are public.
+
+56
+00:02:02,380 --> 00:02:03,950
+所以你可以找到作者。
+So you can get the author.
+
+57
+00:02:03,950 --> 00:02:04,960
+你可以收到短信。
+You can get the text.
+
+58
+00:02:04,960 --> 00:02:06,290
+你可以得到时间戳。
+And you can get the timestamp.
+
+59
+00:02:06,290 --> 00:02:11,262
+只需使用点作者、点文本和点时间戳。
+Just by using dot author, dot text, and dot timestamp.
+
+60
+00:02:11,262 --> 00:02:12,970
+现在我们说我们希望它是不变的。
+Now we said we wanted it to be immutable.
+
+61
+00:02:12,970 --> 00:02:14,840
+那么我们如何保证这些tweet
+So how do we guarantee that these tweet
+
+62
+00:02:14,840 --> 00:02:16,120
+对象是不可变的？
+objects are immutable?
+
+63
+00:02:16,120 --> 00:02:19,170
+一旦创建了tweet，它的作者、消息和日期永远不会
+Once a tweet is created, it's author, message, and date never
+
+64
+00:02:19,170 --> 00:02:21,450
+改变。
+change.
+
+65
+00:02:21,450 --> 00:02:24,130
+好吧，这里有很多对不变性的威胁。
+Well, there's a bunch of threats to immutability here.
+
+66
+00:02:24,130 --> 00:02:26,240
+这不是一个设计得很好的数据类型
+This is not a very well-designed data type
+
+67
+00:02:26,240 --> 00:02:27,570
+如果它想是不变的。
+if it wants to be immutable.
+
+68
+00:02:27,570 --> 00:02:30,860
+对不变性的第一个威胁来自于
+The first threat to immutability comes from the fact
+
+69
+00:02:30,860 --> 00:02:33,190
+客户端可以直接访问其字段。
+that clients can directly access its fields.
+
+70
+00:02:33,190 --> 00:02:36,500
+实际上，他们必须直接访问它的字段
+In fact, they have to directly access Its fields in order
+
+71
+00:02:36,500 --> 00:02:38,347
+找出它们是什么。
+to find out what they are.
+
+72
+00:02:38,347 --> 00:02:40,430
+所以没有什么能真正阻止我们编写代码
+So nothing is really stopping us from writing code
+
+73
+00:02:40,430 --> 00:02:43,110
+像这样——构造一个tweet对象
+like this-- constructing a tweet object
+
+74
+00:02:43,110 --> 00:02:47,700
+然后直接重新指派tweet对象的作者
+and then directly reassigning the author of that tweet object
+
+75
+00:02:47,700 --> 00:02:49,530
+给另一个作者。
+to a different author.
+
+76
+00:02:49,530 --> 00:02:54,110
+这意味着tweet并不是真的一成不变的。
+This means that the tweet is not really immutable.
+
+77
+00:02:54,110 --> 00:02:56,520
+这也是一个小例子，一个简单的例子，
+This is also a trivial example, a simple example,
+
+78
+00:02:56,520 --> 00:03:00,570
+一个叫做表象暴露的概念
+of an idea called representation exposure, which is
+
+79
+00:03:00,570 --> 00:03:02,330
+抽象数据类型的风险。
+a risk to abstract data types.
+
+80
+00:03:02,330 --> 00:03:04,890
+意思是类之外的代码
+Meaning that code outside the class
+
+81
+00:03:04,890 --> 00:03:07,850
+允许直接修改表示。
+is allowed to modify the representation directly.
+
+82
+00:03:07,850 --> 00:03:10,940
+这样的重复曝光不仅威胁到不变量
+Rep exposure like this threatens not only the invariants
+
+83
+00:03:10,940 --> 00:03:12,920
+抽象数据类型的
+of the abstract data type, but also
+
+84
+00:03:12,920 --> 00:03:15,360
+代表独立性，我们讨论过
+representation independence, which we talked about
+
+85
+00:03:15,360 --> 00:03:17,290
+在之前的阅读中。
+in the previous reading.
+
+86
+00:03:17,290 --> 00:03:19,830
+换句话说，我们不能改变实现。
+In other words, we can't change the implementation.
+
+87
+00:03:19,830 --> 00:03:24,080
+我们不能允许实现者使用不同的定义
+We can't allow the implementer to use different definitions
+
+88
+00:03:24,080 --> 00:03:27,200
+在不影响所有客户机的情况下
+for these fields without affecting all the clients that
+
+89
+00:03:27,200 --> 00:03:30,860
+直接访问这些字段。
+are directly accessing those fields.
+
+90
+00:03:30,860 --> 00:03:32,980
+幸运的是，Java为我们提供了语言机制
+Fortunately, Java gives us language mechanisms
+
+91
+00:03:32,980 --> 00:03:34,701
+以应对这种公关曝光。
+to deal with this kind of rep exposure.
+
+93
+00:03:37,470 --> 00:03:41,460
+这些私有关键字表示
+These private keywords indicate which
+
+94
+00:03:41,460 --> 00:03:43,620
+字段和方法只能访问
+fields and methods are accessible only
+
+95
+00:03:43,620 --> 00:03:44,580
+在班里。
+within the class.
+
+96
+00:03:44,580 --> 00:03:46,330
+而公众则指出
+And the public ones indicate which
+
+97
+00:03:46,330 --> 00:03:48,600
+一个可以在课外使用。
+ones are accessible outside of the class.
+
+98
+00:03:48,600 --> 00:03:52,572
+所以现在我们可以创建显式的观察者方法
+So now we can create explicit observer methods
+
+99
+00:03:52,572 --> 00:03:54,530
+你可以得到作者和文本，
+that allow you to get the author, and the text,
+
+100
+00:03:54,530 --> 00:03:55,530
+还有时间戳。
+and the timestamp.
+
+101
+00:03:55,530 --> 00:03:57,700
+这就是客户可以使用的，
+And that's what the client will be able to use,
+
+102
+00:03:57,700 --> 00:04:00,580
+但他们将无法使用这些私人领域。
+but they won't be able to use these private fields.
+
+103
+00:04:00,580 --> 00:04:02,830
+最后一个关键字，我们也讨论过，
+This final keyword, which we've also talked about,
+
+104
+00:04:02,830 --> 00:04:05,410
+也有助于保证
+also helps by guaranteeing that the fields
+
+105
+00:04:05,410 --> 00:04:11,270
+在对象为
+of this type of tweet can not be reassigned after the object is
+
+106
+00:04:11,270 --> 00:04:13,902
+构建。
+constructed.
+
+107
+00:04:13,902 --> 00:04:15,360
+但这不是故事的结尾
+But that's not the end of the story
+
+108
+00:04:15,360 --> 00:04:17,620
+因为代表还没被曝光。
+because the rep is still exposed.
+
+109
+00:04:17,620 --> 00:04:19,810
+所以想想这个非常合理的客户
+So think about this perfectly reasonable client
+
+110
+00:04:19,810 --> 00:04:22,230
+使用tweet的代码。
+code that uses tweet.
+
+111
+00:04:22,230 --> 00:04:25,340
+所以它需要一条tweet t。
+So it takes in a tweet t.
+
+112
+00:04:25,340 --> 00:04:28,020
+T指向这个tweet对象。
+T points to this tweet object.
+
+113
+00:04:28,020 --> 00:04:31,690
+它会得到tweet的时间戳，它会记住
+It gets the timestamp of that tweet, which remember
+
+114
+00:04:31,690 --> 00:04:32,980
+我们说过会有个约会。
+we had said would be a date.
+
+115
+00:04:32,980 --> 00:04:36,150
+所以它得到了时间戳
+So it gets that timestamp and puts
+
+116
+00:04:36,150 --> 00:04:38,160
+在局部变量d中。
+that in a local variable d.
+
+117
+00:04:38,160 --> 00:04:40,890
+现在，注意d和时间戳都指向
+And so now, note d and timestamp are both pointing
+
+118
+00:04:40,890 --> 00:04:44,270
+到同一个日期对象。
+to the same date object.
+
+119
+00:04:44,270 --> 00:04:46,650
+然后我们要做的就是加一个
+And then what we want to do is add one
+
+120
+00:04:46,650 --> 00:04:50,230
+到时间戳的小时数，并创建
+to the hours of that timestamp, and create
+
+121
+00:04:50,230 --> 00:04:53,430
+一小时后的新推文，但有相同的文本。
+a new tweet that is an hour later but has the same text.
+
+122
+00:04:53,430 --> 00:04:55,040
+所以就像转发一样。
+So it's like retweeting it.
+
+123
+00:04:55,040 --> 00:04:58,089
+所以我们加上一个小时
+So we add an hour to this date, and then we're
+
+124
+00:04:58,089 --> 00:05:00,630
+正在构造一个新的tweet对象，该对象未在此处显示。
+constructing a new tweet object which isn't being shown here.
+
+125
+00:05:00,630 --> 00:05:04,990
+但问题是那个突变，那个设定的时间，
+But the problem is that that mutation, that set hours,
+
+126
+00:05:04,990 --> 00:05:08,500
+更改与原始tweet相同的日期对象
+changes this same date object that the original tweet
+
+127
+00:05:08,500 --> 00:05:09,670
+这取决于。
+t was depending on.
+
+129
+00:05:12,470 --> 00:05:14,390
+Get timestamp返回引用
+Get timestamp returns a reference
+
+130
+00:05:14,390 --> 00:05:17,830
+指向tweet t t dot引用的同一日期对象
+to the same date object referenced by tweet t dot
+
+131
+00:05:17,830 --> 00:05:19,466
+时间戳。
+timestamp.
+
+132
+00:05:19,466 --> 00:05:23,400
+T点时间戳和d，换句话说，这个箭头
+T dot time stamp and d, in other words, this arrow
+
+133
+00:05:23,400 --> 00:05:27,290
+那个箭头，是同一个可变对象的别名。
+and that arrow, are aliases to the same mutable object.
+
+134
+00:05:27,290 --> 00:05:32,170
+所以当那个日期对象被d点集小时改变时，
+So when that date object is mutated by d dot set hours,
+
+135
+00:05:32,170 --> 00:05:36,230
+会影响时间戳t和tweet t中的日期
+that affects the date in the timestamp t, and in the tweet t
+
+136
+00:05:36,230 --> 00:05:38,450
+同样，如快照图所示。
+as well, as it shows in this snapshot diagram.
+
+137
+00:05:38,450 --> 00:05:42,080
+所以我们打破了这个tweet的不变性。
+So we've broken the immutability invariant of this tweet.
+
+138
+00:05:42,080 --> 00:05:43,860
+我们实际上已经改变了时间戳
+We've actually changed the timestamp
+
+139
+00:05:43,860 --> 00:05:45,740
+原来的微博。
+of the original tweet.
+
+140
+00:05:45,740 --> 00:05:47,920
+最根本的问题是微博泄露出去了
+The fundamental problem is that tweet leaked out
+
+141
+00:05:47,920 --> 00:05:50,911
+对其不变性所依赖的可变对象的引用
+a reference to a mutable object that its immutability depended
+
+142
+00:05:50,911 --> 00:05:51,410
+打开。
+on.
+
+143
+00:05:51,410 --> 00:05:54,740
+我们以这样一种方式揭露了这个代表
+We exposed the rep in such a way that tweet
+
+144
+00:05:54,740 --> 00:05:57,710
+无法再保证其对象是不可变的。
+can no longer guarantee that its objects are immutable.
+
+145
+00:05:57,710 --> 00:05:59,860
+完全合理的客户代码
+And perfectly reasonable client code
+
+146
+00:05:59,860 --> 00:06:01,600
+以为它是无害的
+that thought it would be harmless
+
+147
+00:06:01,600 --> 00:06:04,830
+创建了这个微妙的错误。
+created this subtle bug.
+
+148
+00:06:04,830 --> 00:06:07,020
+现在我们讨论了这个，在某种意义上，
+Now we talked about this, in some sense,
+
+149
+00:06:07,020 --> 00:06:10,700
+在我们讨论返回不可变对象之前
+before when we talked about returning immutable objects
+
+150
+00:06:10,700 --> 00:06:12,890
+从一种方法。
+from a method.
+
+151
+00:06:12,890 --> 00:06:15,670
+我们可以使用防御复制修补此代码。
+We can patch this code by using defensive copying.
+
+152
+00:06:15,670 --> 00:06:18,500
+换句话说，复制可变对象
+In other words, making a copy of a mutable object
+
+153
+00:06:18,500 --> 00:06:20,890
+以避免泄露对该代表的引用。
+to avoid leaking out references to the rep.
+
+154
+00:06:20,890 --> 00:06:22,740
+所以这是做这件事的代码。
+So here's the code that does it.
+
+155
+00:06:22,740 --> 00:06:24,900
+这将使用
+This makes a new date object using
+
+156
+00:06:24,900 --> 00:06:29,500
+与该日期对象中的时间戳相同。
+the same timestamp that happens to be in that date object.
+
+157
+00:06:29,500 --> 00:06:32,039
+许多可变类型通常都有一个复制构造函数。
+Many mutable types often have a copy constructor.
+
+158
+00:06:32,039 --> 00:06:34,080
+换言之，它接受类型的一个实例
+In other words, it takes one instance of the type
+
+159
+00:06:34,080 --> 00:06:35,800
+并产生一个相同的实例，
+and produces an identical instance,
+
+160
+00:06:35,800 --> 00:06:40,870
+但有不同类型的参考。
+but with a different reference of the type.
+
+161
+00:06:40,870 --> 00:06:42,500
+在这种情况下，日期的复制构造函数
+In this case, date's copy constructor
+
+162
+00:06:42,500 --> 00:06:44,387
+有点奇怪，因为你
+is a little bit weird, because you
+
+163
+00:06:44,387 --> 00:06:46,970
+必须首先获取以毫秒为单位测量的时间戳值
+have to first get the timestamp value measured in milliseconds
+
+164
+00:06:46,970 --> 00:06:49,570
+从1970年1月1日起。
+since January 1, 1970.
+
+165
+00:06:49,570 --> 00:06:51,715
+Stringbuilder的复制构造函数接受一个字符串。
+Stringbuilder's copy constructor takes a string.
+
+166
+00:06:51,715 --> 00:06:54,090
+所以你必须把另一个stringbuilder变成一个string
+So you have to turn the other stringbuilder into a string
+
+167
+00:06:54,090 --> 00:06:57,980
+才能从中创建第二个stringbuilder。
+before you can create a second stringbuilder from it.
+
+168
+00:06:57,980 --> 00:07:00,980
+在Java中，有另一种方法可以复制一个名为
+There is in Java another way to copy a mutable object called
+
+169
+00:07:00,980 --> 00:07:04,475
+克隆，某些类型支持，但并非所有类型都支持。
+clone, which is supported by some types but not by all.
+
+170
+00:07:04,475 --> 00:07:07,060
+克隆人的方式有一些不幸的问题
+There's some unfortunate problems with the way clone
+
+171
+00:07:07,060 --> 00:07:07,832
+在Java中工作。
+works in Java.
+
+172
+00:07:07,832 --> 00:07:09,540
+如果你想了解更多，谷歌搜索吧，
+If you want to learn more, Google for it,
+
+173
+00:07:09,540 --> 00:07:13,170
+或者看看乔希·布洛赫的书中的第11条，
+or look at Item 11 in Josh Bloch's wonderful book,
+
+174
+00:07:13,170 --> 00:07:15,350
+“有效的Java。”
+"Effective Java."
+
+175
+00:07:15,350 --> 00:07:16,930
+所以我们做了一些防御性的复制
+So we've done some defensive copying
+
+176
+00:07:16,930 --> 00:07:18,410
+在get timestamp的返回值中，
+in return value of get timestamp,
+
+177
+00:07:18,410 --> 00:07:19,650
+但我们还没有结束。
+but we're not done yet.
+
+178
+00:07:19,650 --> 00:07:22,560
+这里仍然有一个代表曝光。
+There's still a rep exposure here.
+
+179
+00:07:22,560 --> 00:07:25,720
+所以请考虑这个完全合理的客户机代码。
+So consider this perfectly reasonable client code.
+
+180
+00:07:25,720 --> 00:07:28,980
+我们试着写一个方法
+We've got-- trying to write a method that
+
+181
+00:07:28,980 --> 00:07:32,360
+将生成一个包含24条鼓舞人心的推文的列表。
+is going to generate a list of 24 inspiring tweets.
+
+182
+00:07:32,360 --> 00:07:35,230
+今天每小时一个。
+One for each hour of the day today.
+
+183
+00:07:35,230 --> 00:07:38,160
+所以它会生成一个数组列表。
+So it makes an array list.
+
+184
+00:07:38,160 --> 00:07:39,650
+有个约会。
+It gets a date.
+
+185
+00:07:39,650 --> 00:07:43,110
+默认情况下，这会给你今天的日期。
+And by default, this is going to give you today's date.
+
+186
+00:07:43,110 --> 00:07:46,510
+然后从0到24，从0到23，
+And then runs through the hours from 0 to 24, 0 to 23,
+
+187
+00:07:46,510 --> 00:07:48,070
+事实上。
+actually.
+
+188
+00:07:48,070 --> 00:07:51,950
+每一个都会改变这个日期
+And for each one, it changes this date
+
+189
+00:07:51,950 --> 00:07:54,990
+所以它的时间是我。
+so that its hour is i.
+
+190
+00:07:54,990 --> 00:07:58,510
+然后用那个日期创建一个新的tweet，
+And then it creates a new tweet with that date,
+
+191
+00:07:58,510 --> 00:07:59,969
+现在，同样的信息。
+and for now, just the same message.
+
+192
+00:07:59,969 --> 00:08:02,093
+我们可能希望这是不同的灵感
+We probably want this to be different inspirational
+
+193
+00:08:02,093 --> 00:08:03,690
+信息，但现在，我们只是
+messages, but for now, we're just
+
+194
+00:08:03,690 --> 00:08:05,840
+要做24个相同的信息。
+going to do 24 of the same message.
+
+195
+00:08:05,840 --> 00:08:09,990
+所以我们得到了一个包含24个tweet对象的数组列表。
+So we end up with an array list of 24 tweet objects.
+
+196
+00:08:09,990 --> 00:08:11,040
+现在这里怎么了？
+Now what's wrong here?
+
+197
+00:08:11,040 --> 00:08:14,420
+问题是每个tweet对象
+Well the problem is that each of those tweet objects
+
+198
+00:08:14,420 --> 00:08:17,670
+现在指向同一日期对象。
+is now pointing to the same date object.
+
+199
+00:08:17,670 --> 00:08:19,500
+我们在这里传入了这个日期对象，
+We passed in this date object here,
+
+200
+00:08:19,500 --> 00:08:22,470
+我们只是在进行变异。
+and we were just mutating it as we went along.
+
+201
+00:08:22,470 --> 00:08:25,170
+所有24个tweet对象同时结束，
+All 24 tweet objects end up at the same time,
+
+202
+00:08:25,170 --> 00:08:30,870
+刚好是23点，我们结束的那个。
+which happens to be hour 23, the one we finished with.
+
+203
+00:08:30,870 --> 00:08:33,890
+因此，tweet的不变性再次遭到了侵犯。
+So again, the immutability of tweet has been violated.
+
+204
+00:08:33,890 --> 00:08:35,679
+我们构建了这些早期的tweets，
+We constructed these earlier tweets,
+
+205
+00:08:35,679 --> 00:08:38,770
+希望他们在更早的时间，0，1和2，
+intending them to be at the earlier time, 0, 1 and 2,
+
+206
+00:08:38,770 --> 00:08:40,730
+等等，但他们最后都
+and so forth, but they all ended up
+
+207
+00:08:40,730 --> 00:08:43,280
+在事实发生后被改变。
+being changed after the fact.
+
+208
+00:08:43,280 --> 00:08:44,990
+问题是这次约会
+And the problem was that this date
+
+209
+00:08:44,990 --> 00:08:47,170
+我们路过的东西刚被放进去
+object that we were passing in just got put
+
+210
+00:08:47,170 --> 00:08:49,820
+在tweet的表示中，
+into the representation of the tweet,
+
+211
+00:08:49,820 --> 00:08:51,730
+即使上面还有化名
+even though there were still aliases to it
+
+212
+00:08:51,730 --> 00:08:53,960
+由客户代码持有。
+being held by the client code.
+
+213
+00:08:53,960 --> 00:08:57,460
+所以我们也可以通过明智的防御性复制来解决这个问题，
+So we can fix this problem too by judicious defensive copying,
+
+214
+00:08:57,460 --> 00:08:58,950
+这次是在构造函数中。
+this time in the constructor.
+
+215
+00:08:58,950 --> 00:09:03,810
+在我们储存时间戳之前，我们先复印一份。
+Before we store that time stamp, we make a copy of it.
+
+216
+00:09:03,810 --> 00:09:06,980
+一般来说，为了避免这种重复暴露，
+In general, to avoid these kinds of rep exposure,
+
+217
+00:09:06,980 --> 00:09:09,910
+你应该仔细检查参数类型
+you should carefully inspect the argument types
+
+218
+00:09:09,910 --> 00:09:12,100
+并返回所有ADT操作的类型。
+and return types of all your ADT operations.
+
+219
+00:09:12,100 --> 00:09:14,810
+如果其中任何一个是可变的，那么
+If any of them are mutable, then make
+
+220
+00:09:14,810 --> 00:09:18,080
+确保您的实现不会存储或返回
+sure your implementation doesn't store or return
+
+221
+00:09:18,080 --> 00:09:20,300
+直接引用其表示。
+direct references to its representation.
+
+222
+00:09:20,300 --> 00:09:24,670
+因为这样做会产生这些类型的代表曝光。
+Because doing that will create these kinds of rep exposure.
+
+223
+00:09:24,670 --> 00:09:26,690
+现在你可能会抱怨这似乎是浪费。
+Now you may complain that this seems wasteful.
+
+224
+00:09:26,690 --> 00:09:28,760
+为什么我们要复制这些日期？
+Why are we making all these copies of dates?
+
+225
+00:09:28,760 --> 00:09:30,260
+为什么我们不能解决这个问题
+Why can't we just solve this problem
+
+226
+00:09:30,260 --> 00:09:32,090
+一份精心编写的说明书
+with a carefully written specification that
+
+227
+00:09:32,090 --> 00:09:33,920
+比如说，打电话的人一定不能
+says something like, caller must never
+
+228
+00:09:33,920 --> 00:09:37,780
+再次更改此日期对象？
+mutate this date object again?
+
+229
+00:09:37,780 --> 00:09:39,830
+这种方法有时在没有
+This approach is sometimes taken when there isn't
+
+230
+00:09:39,830 --> 00:09:40,954
+任何合理的选择。
+any reasonable alternative.
+
+231
+00:09:40,954 --> 00:09:42,570
+例如，当可变对象
+For example, when the mutable object
+
+232
+00:09:42,570 --> 00:09:45,810
+太大，无法有效地进行复制。
+is too large to do copying efficiently.
+
+233
+00:09:45,810 --> 00:09:47,940
+但代价和你的能力
+But the cost of this, and your ability
+
+234
+00:09:47,940 --> 00:09:51,710
+为了解释这个程序，以及你避免错误的能力，
+to reason about the program, and your ability to avoid bugs,
+
+235
+00:09:51,710 --> 00:09:52,589
+是巨大的。
+is enormous.
+
+236
+00:09:52,589 --> 00:09:54,880
+在没有令人信服的相反论据的情况下，
+In the absence of compelling arguments to the contrary,
+
+237
+00:09:54,880 --> 00:09:57,130
+对于抽象数据类型来说，它几乎总是值得的
+it's almost always worth it for an abstract data type
+
+238
+00:09:57,130 --> 00:09:59,280
+以保证其自身的不变量。
+to guarantee its own invariants.
+
+239
+00:09:59,280 --> 00:10:02,579
+而预防rep暴露对这一点至关重要。
+And preventing rep exposure is essential to that.
+
+240
+00:10:02,579 --> 00:10:04,370
+现在是解决这个问题的更好办法
+Now an even better solution to this problem
+
+241
+00:10:04,370 --> 00:10:05,760
+就是使用不可变类型。
+is to just use immutable types.
+
+242
+00:10:05,760 --> 00:10:07,570
+如果我们使用了一个不可变的数据对象，
+If we had used an immutable data object,
+
+243
+00:10:07,570 --> 00:10:11,860
+就像Java时区日期时间而不是这个Java.util.date，
+like Java timezone date-time instead of this Java.util.date,
+
+244
+00:10:11,860 --> 00:10:14,110
+那我们早就结束这一段了。
+then we would have ended this section a long time ago.
+
+245
+00:10:14,110 --> 00:10:16,170
+再也不可能暴露在公众面前了。
+No further rep exposure would have been possible.
+
+246
+00:10:16,170 --> 00:10:18,470
+这正是我们用弦得到的。
+And that's exactly what we got with strings.
+
+248
+00:10:21,990 --> 00:10:25,060
+可变数据类型周围有不可变的包装器。
+There are immutable wrappers around mutable data types.
+
+249
+00:10:25,060 --> 00:10:27,960
+Java集合类提供了有趣的折衷方案
+The Java collections classes offer interesting compromise
+
+250
+00:10:27,960 --> 00:10:28,780
+为了这个。
+to that.
+
+251
+00:10:28,780 --> 00:10:31,605
+我们讨论过集合不可修改列表，它
+We've talked about collections unmodifiable list, which
+
+252
+00:10:31,605 --> 00:10:33,480
+获取一个列表并用一个
+takes a list and wraps it with an object that
+
+253
+00:10:33,480 --> 00:10:37,261
+看起来像一个列表，但其变异器抛出异常。
+looks like a list but whose mutators throw exceptions.
+
+254
+00:10:37,261 --> 00:10:39,010
+所以你可以用变异器构造一个列表
+So you can construct a list using mutators
+
+255
+00:10:39,010 --> 00:10:41,810
+然后把它封在一个不可修改的包装里，
+and then seal it up in an unmodifiable wrapper,
+
+256
+00:10:41,810 --> 00:10:43,070
+你会得到一个不可变的列表。
+and you get an immutable list.
+
+257
+00:10:43,070 --> 00:10:48,080
+然后从观察者方法返回是安全的，
+And then that's safe to return from the observer method,
+
+258
+00:10:48,080 --> 00:10:49,040
+例如。
+for example.
+
+259
+00:10:49,040 --> 00:10:51,090
+缺点是在运行时会得到不变性，
+Downside is you get immutability at runtime,
+
+260
+00:10:51,090 --> 00:10:52,990
+但不一定是在编译时。
+but not necessarily at compile time.
+
+261
+00:10:52,990 --> 00:10:57,550
+所以如果你调用一个变异器，比如这个不可修改列表上的sort，
+So if you call a mutator, like sort on this unmodifiable list,
+
+262
+00:10:57,550 --> 00:10:59,084
+Java不会警告你。
+Java won't warn you.
+
+263
+00:10:59,084 --> 00:11:00,750
+你只会在运行时得到一个异常。
+You'll just get an exception at runtime.
+
+264
+00:11:00,750 --> 00:11:02,291
+但那还是比什么都没有好。
+But that's still better than nothing.
+
+265
+00:11:02,291 --> 00:11:04,090
+所以不可修改的列表映射和集合
+So unmodifiable list maps and sets
+
+266
+00:11:04,090 --> 00:11:07,270
+可以是一个很好的方法来减少错误的风险。
+can be a very good way to reduce the risk of bugs.
+

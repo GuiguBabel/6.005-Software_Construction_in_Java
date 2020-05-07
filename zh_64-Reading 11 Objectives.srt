@@ -1,0 +1,40 @@
+1
+00:00:00,660 --> 00:00:03,220
+今天的阅读主题是界面--
+The topic of today's reading is interfaces--
+
+2
+00:00:03,220 --> 00:00:05,520
+分离抽象数据类型的接口
+separating the interface of an abstract data type
+
+3
+00:00:05,520 --> 00:00:09,320
+从它的实现和使用Java接口类型
+from its implementation and using Java interface types that
+
+4
+00:00:09,320 --> 00:00:11,762
+强制分离。
+enforce that separation.
+
+5
+00:00:11,762 --> 00:00:13,220
+今天的阅读之后你应该
+After today's reading you should be
+
+6
+00:00:13,220 --> 00:00:15,750
+能够用接口定义抽象数据类型
+able to define abstract data types with interfaces
+
+7
+00:00:15,750 --> 00:00:19,190
+编写实现这些接口的类。
+and write classes that implement those interfaces.
+
+8
+00:00:19,190 --> 00:00:21,120
+我们开始吧。
+Let's get started.
+

@@ -1,0 +1,735 @@
+1
+00:00:00,499 --> 00:00:03,560
+让我们回顾一下前面的mystring示例。
+Let's revisit the mystring example from earlier.
+
+2
+00:00:03,560 --> 00:00:05,944
+使用接口而不是ADT的类，
+Using an interface instead of a class for the ADT,
+
+3
+00:00:05,944 --> 00:00:07,610
+我们可以支持多种实现。
+we can support multiple implementations.
+
+4
+00:00:07,610 --> 00:00:11,500
+所以我们将它声明为公共接口。
+So we'll declare it public interface.
+
+5
+00:00:11,500 --> 00:00:13,840
+我们暂时跳过创建操作，
+We'll skip the creator operation for now,
+
+6
+00:00:13,840 --> 00:00:17,180
+但我们会做另外三个手术。
+but we'll have the other three operations.
+
+7
+00:00:17,180 --> 00:00:24,030
+它们只是没有消息方法体的规范。
+And they will just be specs with no message method body.
+
+8
+00:00:24,030 --> 00:00:26,512
+我们马上会回到方法的静态值。
+We'll come back to the static value of method in a minute.
+
+9
+00:00:26,512 --> 00:00:28,720
+相反，让我们继续使用不同的技术
+Instead, let's go ahead and use a different technique
+
+10
+00:00:28,720 --> 00:00:30,855
+从我们的Java ADT概念工具箱中。
+from our toolbox of ADT concepts in Java.
+
+11
+00:00:30,855 --> 00:00:34,630
+让我们使用构造器来完成这个creator操作。
+Let's use constructors for that creator operation.
+
+12
+00:00:34,630 --> 00:00:36,695
+这是我们的第一个实现。
+Here's our first implementation.
+
+13
+00:00:36,695 --> 00:00:40,250
+这是一个实现mystring的类simple mystring。
+It's a class simple mystring that implements mystring.
+
+14
+00:00:40,250 --> 00:00:43,990
+这就是接口的来源。
+So this is where the interface comes in.
+
+15
+00:00:43,990 --> 00:00:46,580
+它有一个代表。
+And it has a rep.
+
+16
+00:00:46,580 --> 00:00:50,560
+它实现了每个操作——长度，字符，
+And it implements each of the operations-- length, charAt,
+
+17
+00:00:50,560 --> 00:00:52,460
+和子串。
+and substring.
+
+18
+00:00:52,460 --> 00:00:54,350
+我们用@Override来表示
+And we're using @Override here to indicate
+
+19
+00:00:54,350 --> 00:00:59,280
+我们的意思是凌驾于我们从mystring得到的东西之上。
+that we mean to override what we got from mystring.
+
+20
+00:00:59,280 --> 00:01:02,100
+它也有创造者。
+And it also has a creator.
+
+21
+00:01:02,100 --> 00:01:06,890
+这就是我们现在要做的——实现造物主。
+And that's where we're at now-- implementing the creator.
+
+22
+00:01:06,890 --> 00:01:09,340
+下面是我们讨论的优化实现
+Here's the optimized implementation we talked about
+
+23
+00:01:09,340 --> 00:01:10,530
+在前面的阅读中。
+in the earlier reading.
+
+24
+00:01:10,530 --> 00:01:12,600
+这是一个不同的类，快速mystring。
+This is a different class, fast mystring.
+
+25
+00:01:12,600 --> 00:01:14,290
+它仍然实现mystring。
+It still implements mystring.
+
+26
+00:01:14,290 --> 00:01:18,050
+所以它是相同抽象数据类型的实现，
+So it's an implementation of the same abstract data type,
+
+27
+00:01:18,050 --> 00:01:20,260
+但它有不同的代表。
+but it has a different rep.
+
+28
+00:01:20,260 --> 00:01:24,240
+它以不同的方式实现这些操作符。
+And it implements these operators in a different way.
+
+30
+00:01:29,312 --> 00:01:31,270
+所以将这些类与实现进行比较
+So compare these classes to the implementations
+
+31
+00:01:31,270 --> 00:01:33,530
+我们在抽象数据类型中看到的mystring。
+of mystring that we saw in abstract data type.
+
+32
+00:01:33,530 --> 00:01:35,770
+注意之前出现的代码
+Notice that the code that previously appeared
+
+33
+00:01:35,770 --> 00:01:37,570
+在方法的静态值中
+in the static value of methods now
+
+34
+00:01:37,570 --> 00:01:40,500
+出现在这些构造函数中
+appears in these constructors, slightly
+
+35
+00:01:40,500 --> 00:01:46,760
+改成他们指的是这个代表。
+changed so that they refer to the rep of this.
+
+36
+00:01:46,760 --> 00:01:49,880
+还要注意@Override的使用。
+Also notice the use of @Override.
+
+37
+00:01:49,880 --> 00:01:51,380
+此注释通知编译器
+This annotation informs the compiler
+
+38
+00:01:51,380 --> 00:01:53,645
+方法必须与
+that the method must have the same signature as one
+
+39
+00:01:53,645 --> 00:01:55,770
+我们正在实现的接口中的方法。
+of the methods in the interface we're implementing.
+
+40
+00:01:55,770 --> 00:01:57,489
+但是因为编译器已经检查了
+But since the compiler already checks
+
+41
+00:01:57,489 --> 00:01:59,530
+我们已经实现了所有的接口方法，
+that we've implemented all the interface methods,
+
+42
+00:01:59,530 --> 00:02:01,100
+实际上@Override的主要值
+really the primary value of @Override
+
+43
+00:02:01,100 --> 00:02:04,380
+这是一个人类程序员阅读代码。
+here is for a human programmer reading the code.
+
+44
+00:02:04,380 --> 00:02:06,630
+它告诉我们要寻找那个方法的规格
+It tells us to look for the spec of that method
+
+45
+00:02:06,630 --> 00:02:08,251
+在界面上。
+in the interface.
+
+46
+00:02:08,251 --> 00:02:12,529
+如果我们在这里重复这个规格，就不会干了。
+If we repeated the spec here, it wouldn't be dry.
+
+47
+00:02:12,529 --> 00:02:14,070
+别再重复了。
+It wouldn't be don't repeat yourself.
+
+48
+00:02:14,070 --> 00:02:16,653
+但是什么都不说会使代码更难理解。
+But saying nothing at all makes the code harder to understand.
+
+49
+00:02:16,653 --> 00:02:19,910
+所以这表明读者应该
+So this signals that the reader should
+
+50
+00:02:19,910 --> 00:02:25,340
+去看看mystring中的子字符串规范。
+go and look at the substring spec in mystring.
+
+51
+00:02:25,340 --> 00:02:29,990
+最后，注意私有的空构造函数
+Finally, notice the private empty constructors
+
+52
+00:02:29,990 --> 00:02:33,700
+我们用来在子串中创建新的实例，
+that we're using to make new instances in substring,
+
+53
+00:02:33,700 --> 00:02:38,240
+尤其是在我们填写他们的代表之前
+in particular right here, before we fill in their reps
+
+54
+00:02:38,240 --> 00:02:38,810
+用数据。
+with data.
+
+55
+00:02:38,810 --> 00:02:41,143
+我们以前不必写这些空构造函数，
+We didn't have to write these empty constructors before,
+
+56
+00:02:41,143 --> 00:02:43,490
+因为Java默认提供了它们。
+because Java provided them by default.
+
+57
+00:02:43,490 --> 00:02:45,770
+添加构造函数以获取布尔值
+Adding the constructors to take Boolean
+
+58
+00:02:45,770 --> 00:02:48,370
+b意味着我们必须明确声明
+b means that we have to explicitly declare
+
+59
+00:02:48,370 --> 00:02:50,349
+另一个。
+this other one.
+
+60
+00:02:50,349 --> 00:02:52,890
+我们想保密因为我们只想用它
+And we want to make it private because we only want to use it
+
+61
+00:02:52,890 --> 00:02:55,150
+在这里的实现中。
+inside the implementation here.
+
+63
+00:02:59,700 --> 00:03:01,990
+既然我们对好广告了如指掌
+Now that we know good ADTs scrupulously
+
+64
+00:03:01,990 --> 00:03:05,200
+保留自己的不变量，这些构造函数什么也不做
+preserve their own invariants, these do-nothing constructors
+
+65
+00:03:05,200 --> 00:03:08,540
+实际上是个坏模式。
+are actually a bad pattern.
+
+66
+00:03:08,540 --> 00:03:10,457
+他们不会给代表赋值。
+They don't assign any values to the rep.
+
+67
+00:03:10,457 --> 00:03:12,540
+他们当然不会建立不变量
+They certainly don't establish the invariants that
+
+68
+00:03:12,540 --> 00:03:13,664
+对全班都很重要。
+are important to the class.
+
+70
+00:03:17,280 --> 00:03:19,816
+我们应该强烈考虑修订这一实施办法。
+We should strongly consider revising this implementation.
+
+71
+00:03:19,816 --> 00:03:21,980
+因为mystring是不可变的，所以起点
+Since mystring is immutable, the starting point
+
+72
+00:03:21,980 --> 00:03:25,410
+将使所有的领域都成为最终的。
+would be to make all the fields final.
+
+73
+00:03:25,410 --> 00:03:27,170
+现在客户将如何使用这个ADT？
+Now how will clients use this ADT?
+
+74
+00:03:27,170 --> 00:03:29,360
+这里有一个例子。
+Well here's an example.
+
+75
+00:03:29,360 --> 00:03:32,400
+他们可能从构建一个新的mystring开始。
+They might start out by constructing a new mystring.
+
+76
+00:03:32,400 --> 00:03:34,040
+当他们这样做的时候，他们必须使用
+And when they do this, they have to use
+
+77
+00:03:34,040 --> 00:03:37,030
+创建者操作之一——简单mystring或fast
+one of the creator operations-- either simple mystring or fast
+
+78
+00:03:37,030 --> 00:03:38,600
+我的字符串。
+mystring.
+
+79
+00:03:38,600 --> 00:03:40,870
+然后，建造了它，他们
+And then, having constructed it, they
+
+80
+00:03:40,870 --> 00:03:43,760
+将它赋给mystring类型的变量。
+assign it to a variable of type mystring.
+
+81
+00:03:43,760 --> 00:03:46,680
+所以我们只是使用抽象数据类型，
+So we're just using the abstract data type here,
+
+82
+00:03:46,680 --> 00:03:49,085
+不使用特定类型。
+and not using the specific type.
+
+83
+00:03:49,085 --> 00:03:50,750
+这和我们说的很相似
+This is similar to what we talked about
+
+84
+00:03:50,750 --> 00:03:53,590
+有数组列表和列表。
+with array list and list.
+
+85
+00:03:53,590 --> 00:03:55,140
+他们可以对它进行操作。
+And they can call operations on it.
+
+86
+00:03:55,140 --> 00:03:56,890
+所以这和密码很相似，
+So this is very similar to the code,
+
+87
+00:03:56,890 --> 00:04:00,010
+再说一遍，我们以前写Java集合类，
+again, that we used to write Java collections classes,
+
+88
+00:04:00,010 --> 00:04:03,370
+有数组列表和列表。
+with array list and list.
+
+89
+00:04:03,370 --> 00:04:06,025
+不幸的是，这个模式打破了抽象的障碍
+Unfortunately, this pattern breaks the abstraction barrier
+
+90
+00:04:06,025 --> 00:04:08,400
+我们努力在抽象类型之间建立
+that we worked so hard to build between the abstract type
+
+91
+00:04:08,400 --> 00:04:09,774
+以及它的具体表现，
+and its concrete representations,
+
+92
+00:04:09,774 --> 00:04:12,190
+因为客户必须知道
+because clients must know the name
+
+93
+00:04:12,190 --> 00:04:14,820
+具体表示类的。
+of the concrete representation class.
+
+94
+00:04:14,820 --> 00:04:17,180
+因为Java中的接口不能包含构造函数，
+Because interfaces in Java can't contain constructors,
+
+95
+00:04:17,180 --> 00:04:19,263
+必须直接调用其中一个具体类
+and must directly call one of the concrete classes
+
+96
+00:04:19,263 --> 00:04:21,970
+构造器，像这样。
+constructors, like this.
+
+97
+00:04:21,970 --> 00:04:23,560
+那个构造函数的规范不会
+The spec of that constructor won't
+
+98
+00:04:23,560 --> 00:04:25,850
+出现在界面本身的任何地方，
+appear anywhere in the interface itself,
+
+99
+00:04:25,850 --> 00:04:28,500
+所以没有静态保证不同的实现
+so there's no static guarantee that different implementations
+
+100
+00:04:28,500 --> 00:04:31,440
+甚至会提供相同的构造函数。
+will even provide the same constructors.
+
+101
+00:04:31,440 --> 00:04:34,250
+幸运的是，Java的最新版本
+Fortunately, the latest version of Java
+
+102
+00:04:34,250 --> 00:04:37,120
+允许接口包含静态方法。
+allows interfaces to contain static methods.
+
+103
+00:04:37,120 --> 00:04:38,860
+所以我们可以实现creator操作
+So we can implement the creator operation
+
+104
+00:04:38,860 --> 00:04:41,670
+作为静态工厂方法的值
+value of as a static factory method
+
+105
+00:04:41,670 --> 00:04:44,250
+在接口mystring中。
+in the interface mystring.
+
+106
+00:04:44,250 --> 00:04:46,570
+现在客户可以使用ADT而不必中断
+Now a client can use the ADT without breaking
+
+107
+00:04:46,570 --> 00:04:47,720
+抽象的障碍。
+that abstraction barrier.
+
+108
+00:04:47,720 --> 00:04:50,110
+他们只会说我的字符串，而不是价值，
+They'd simply say mystring, not value of,
+
+109
+00:04:50,110 --> 00:04:53,494
+你永远也看不到任何快速mystring的出现
+and you'd never see any occurrences of fast mystring
+
+110
+00:04:53,494 --> 00:04:54,410
+在这个代码的任何地方。
+anywhere in this code.
+
+112
+00:04:56,920 --> 00:04:57,950
+这是另一个例子。
+Here's another example.
+
+113
+00:04:57,950 --> 00:05:01,810
+所以Java集合类集是一个很好的例子
+So the Java collection class set is a good example
+
+114
+00:05:01,810 --> 00:05:04,180
+分离接口和实现的思想。
+of the idea of separating interface and implementation.
+
+115
+00:05:04,180 --> 00:05:09,340
+集合是其他类型E的有限元集合的ADT。
+Set is an ADT of finite sets of elements of some other type E.
+
+116
+00:05:09,340 --> 00:05:12,560
+这是set接口的简化版本。
+Here's a simplified version of the set interface.
+
+117
+00:05:12,560 --> 00:05:15,156
+它设置了一个泛型类型的示例--
+It sets an example of a generic type--
+
+118
+00:05:15,156 --> 00:05:18,430
+其规范是占位符类型的类型
+a type whose specification is in terms of a placeholder type
+
+119
+00:05:18,430 --> 00:05:20,020
+待以后填写。
+to be filled in later.
+
+120
+00:05:20,020 --> 00:05:22,640
+因此，不要编写单独的规范和实现
+So instead of writing separate specs and implementations
+
+121
+00:05:22,640 --> 00:05:24,200
+对于一组字符串，一组整数，
+for a set of strings, set of integer,
+
+122
+00:05:24,200 --> 00:05:28,150
+等等，我们设计并实现了一组E，
+and so on, we design and implement one set of E,
+
+123
+00:05:28,150 --> 00:05:31,440
+其中E是类型参数。
+where E is the type parameter.
+
+124
+00:05:31,440 --> 00:05:33,960
+因此我们可以将Java接口与我们的分类相匹配
+So we can match Java interfaces with our classification
+
+125
+00:05:33,960 --> 00:05:35,230
+ADT操作。
+of ADT operations.
+
+126
+00:05:35,230 --> 00:05:37,200
+所以我们从创造者开始。
+So we start with the creator.
+
+127
+00:05:37,200 --> 00:05:41,810
+在我们的版本中，这将被称为make。
+And in our version of set, that's going to be called make.
+
+128
+00:05:41,810 --> 00:05:44,710
+它需要由元素类型参数化
+It needs to be parameterized by the type of elements
+
+129
+00:05:44,710 --> 00:05:47,400
+我们想创建，但它返回一个新的set实例
+that we want to make, but it returns a new set instance
+
+130
+00:05:47,400 --> 00:05:49,950
+最初是空的。
+which is initially empty.
+
+131
+00:05:49,950 --> 00:05:52,180
+所以客户会编写代码
+So then clients will write code, sort of
+
+132
+00:05:52,180 --> 00:05:54,630
+例如，字符串集等于集合点生成。
+like, set of string strings equals set dot make.
+
+133
+00:05:54,630 --> 00:05:57,000
+编译器会理解的，因为
+And the compiler will understand, because of where
+
+134
+00:05:57,000 --> 00:05:59,800
+我们把它分配给，新的集合
+we are assigning it to, that the new set has
+
+135
+00:05:59,800 --> 00:06:03,570
+成为一组字符串对象。
+to be a set of string objects.
+
+136
+00:06:03,570 --> 00:06:07,210
+下面是观察者方法的一个例子。
+Here is an example of observer methods.
+
+137
+00:06:07,210 --> 00:06:12,070
+大小，例如，获取一个集合并返回其大小。
+Size, for example, that takes a set and returns its size.
+
+138
+00:06:12,070 --> 00:06:14,570
+包含在元素中接受集合并返回
+Contains that takes a set in an element and returns
+
+139
+00:06:14,570 --> 00:06:17,440
+是真是假，取决于元素是否在
+true or false, depending on whether the element is in that
+
+140
+00:06:17,440 --> 00:06:18,300
+准备好了。
+set.
+
+141
+00:06:18,300 --> 00:06:20,810
+注意，规范是用
+Notice that the specs are written in terms
+
+142
+00:06:20,810 --> 00:06:23,630
+我们抽象的集合概念。
+of our abstract notion of set.
+
+143
+00:06:23,630 --> 00:06:25,510
+如果我们提到细节那就糟了
+It would be bad if we mentioned the details
+
+144
+00:06:25,510 --> 00:06:28,090
+集合的任何特定实现
+of any particular implementation of sets
+
+145
+00:06:28,090 --> 00:06:29,950
+有特殊的私人领域。
+with particular private fields.
+
+146
+00:06:29,950 --> 00:06:33,200
+这些规范需要应用于集合的任何有效实现
+These specs need to apply to any valid implementation of the set
+
+147
+00:06:33,200 --> 00:06:35,240
+阿德特。
+ADT.
+
+148
+00:06:35,240 --> 00:06:36,990
+变异者的故事基本上是
+And the story for mutators is basically
+
+149
+00:06:36,990 --> 00:06:38,140
+与观察者相同。
+the same as for observers.
+
+150
+00:06:38,140 --> 00:06:39,840
+我们仍然在水平上写规格
+We still write specs at the level
+
+151
+00:06:39,840 --> 00:06:43,010
+我们抽象的集合模型。
+of our abstract model of sets.
+

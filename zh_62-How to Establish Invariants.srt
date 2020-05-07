@@ -1,0 +1,155 @@
+1
+00:00:00,280 --> 00:00:02,350
+记住，不变量是
+Now, remember that invariant is a property that's
+
+2
+00:00:02,350 --> 00:00:04,080
+整个程序都是这样。
+true for the entire program.
+
+3
+00:00:04,080 --> 00:00:06,340
+在物体不变的情况下
+Which in the case of an invariant about an object
+
+4
+00:00:06,340 --> 00:00:09,670
+表示对象的整个生命周期。
+means the entire lifetime of the object.
+
+5
+00:00:09,670 --> 00:00:11,590
+为了证明不变性，我们需要
+To show that invariant holds, we need
+
+6
+00:00:11,590 --> 00:00:14,600
+使不变量在对象的初始状态下为真
+to make the invariant true in the initial state of the object
+
+7
+00:00:14,600 --> 00:00:16,219
+当它第一次创建并确保
+when it's first created and ensure
+
+8
+00:00:16,219 --> 00:00:20,870
+所有对对象的更改都保持不变。
+that all changes to the object keep the invariant true.
+
+9
+00:00:20,870 --> 00:00:23,357
+所以在ATP操作的种类上，
+So in terms of kinds of ATP operations,
+
+10
+00:00:23,357 --> 00:00:24,190
+这是什么意思？
+what does this mean?
+
+11
+00:00:24,190 --> 00:00:26,680
+这意味着创作者和制作人
+This means that creators and producers, which
+
+12
+00:00:26,680 --> 00:00:29,440
+是创造物体初始状态的东西，
+are the things that create the initial state of the object,
+
+13
+00:00:29,440 --> 00:00:32,800
+必须为新对象实例建立不变量。
+must establish the invariant for new object instances.
+
+14
+00:00:32,800 --> 00:00:35,330
+变异者和观察者
+And mutator and observers, which are
+
+15
+00:00:35,330 --> 00:00:37,640
+在对象的生命周期内调用，
+called over the lifetime of the object,
+
+16
+00:00:37,640 --> 00:00:40,530
+必须保持不变。
+must preserve the invariant.
+
+17
+00:00:40,530 --> 00:00:43,380
+现在，销售代表暴露的风险使这种情况更加严重
+Now, the risk of rep exposure makes this situation much more
+
+18
+00:00:43,380 --> 00:00:44,349
+很复杂。
+complicated.
+
+19
+00:00:44,349 --> 00:00:45,265
+所以代表被曝光了。
+So the rep is exposed.
+
+20
+00:00:45,265 --> 00:00:48,020
+对象可能会在程序中的任何地方更改，
+And the object might be changed anywhere in the program,
+
+21
+00:00:48,020 --> 00:00:50,030
+不仅仅是在ADT的行动中。
+not just in the ADT's operations.
+
+22
+00:00:50,030 --> 00:00:52,410
+我们不能保证不变量仍然有效
+And we can't guarantee that the invariants still holds
+
+23
+00:00:52,410 --> 00:00:54,770
+在那些武断的改变之后。
+after those arbitrary changes.
+
+24
+00:00:54,770 --> 00:00:57,060
+所以证明不变性的全部规则
+So the full rule for proving invariance
+
+25
+00:00:57,060 --> 00:01:00,550
+这叫做结构归纳法--
+is-- and this is called structural induction--
+
+26
+00:01:00,550 --> 00:01:02,450
+如果不变量或抽象数据类型
+if an invariant or an abstract data type
+
+27
+00:01:02,450 --> 00:01:04,810
+是由创作者和制作人建立的
+is established by its creators and producers
+
+28
+00:01:04,810 --> 00:01:07,970
+被叛变者和观察者保存
+and preserved by its mutilators and observers
+
+29
+00:01:07,970 --> 00:01:11,410
+也不会暴露于表象，然后
+and no representation exposure occurs, then
+
+30
+00:01:11,410 --> 00:01:13,980
+不变量适用于抽象数据的所有实例
+the invariant is true of all instances of the abstract data
+
+31
+00:01:13,980 --> 00:01:15,530
+键入。
+type.
+

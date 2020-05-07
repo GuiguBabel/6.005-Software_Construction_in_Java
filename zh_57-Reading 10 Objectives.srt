@@ -1,0 +1,75 @@
+1
+00:00:00,700 --> 00:00:04,170
+在这篇文章中，我们将学习一个更正式的数学概念
+In this reading, we'll study a more formal mathematical idea
+
+2
+00:00:04,170 --> 00:00:06,960
+类实现抽象数据的含义
+of what it means for a class to implement an abstract data
+
+3
+00:00:06,960 --> 00:00:09,950
+使用抽象函数的概念输入
+type using notions of abstraction functions
+
+4
+00:00:09,950 --> 00:00:12,270
+以及表示不变性。
+and representation invariance.
+
+5
+00:00:12,270 --> 00:00:14,020
+这些数学概念非常突出
+These mathematical notions are eminently
+
+6
+00:00:14,020 --> 00:00:15,906
+软件设计实用。
+practical in software design.
+
+7
+00:00:15,906 --> 00:00:17,280
+抽象函数正在运行
+The abstraction function is going
+
+8
+00:00:17,280 --> 00:00:20,250
+给我们一个清晰定义质量操作的方法
+to give us a way to cleanly define the quality operation
+
+9
+00:00:20,250 --> 00:00:23,310
+以及抽象数据类型
+and abstract data type, which we'll talk about in more
+
+10
+00:00:23,310 --> 00:00:25,140
+深入未来的课程。
+depth in a future class.
+
+11
+00:00:25,140 --> 00:00:26,630
+表示不变量将
+The representation invariant will
+
+12
+00:00:26,630 --> 00:00:29,600
+更容易捕获由损坏的数据引起的错误
+make it easier to catch bugs caused by a corrupted data
+
+13
+00:00:29,600 --> 00:00:30,780
+结构。
+structure.
+
+14
+00:00:30,780 --> 00:00:31,280
+好 啊。
+OK.
+
+15
+00:00:31,280 --> 00:00:33,170
+我们开始吧。
+Let's get started.
+

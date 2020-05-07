@@ -1,0 +1,680 @@
+1
+00:00:00,630 --> 00:00:03,030
+理解合同中有关的部分
+To understand the part of the contract related
+
+2
+00:00:03,030 --> 00:00:05,960
+对于hashcode方法，我们需要了解hash
+to the hashcode method, we need to have some idea of how hash
+
+3
+00:00:05,960 --> 00:00:08,930
+表可以工作，因为有两个非常常见的集合
+tables work , because two very common collection
+
+4
+00:00:08,930 --> 00:00:12,310
+在Java库HashSet和HashMap中的实现
+implementations in the Java library HashSet and HashMap
+
+5
+00:00:12,310 --> 00:00:14,500
+两者都在内部使用哈希表数据结构。
+both use a hash table data structure inside.
+
+6
+00:00:14,500 --> 00:00:17,160
+它们依赖于对象的hashcode
+And they depend on the hashcode for the objects that
+
+7
+00:00:17,160 --> 00:00:21,420
+分别存储在集合中或用作映射中的键。
+are stored in the set or used as keys in the map respectively.
+
+8
+00:00:21,420 --> 00:00:23,780
+所以哈希表是映射的表示。
+So a hash table is a representation of a mapping.
+
+9
+00:00:23,780 --> 00:00:27,730
+它是一种将键映射到值的抽象数据类型。
+It's an abstract data type that maps keys to values.
+
+10
+00:00:27,730 --> 00:00:30,650
+哈希表提供恒定的时间查找。
+Hash tables offer constant time look up.
+
+11
+00:00:30,650 --> 00:00:32,960
+所以他们往往比树或列表表现得更好
+So they tend to perform better than trees or lists
+
+12
+00:00:32,960 --> 00:00:34,690
+当用于映射时。
+when used for a mapping.
+
+13
+00:00:34,690 --> 00:00:37,030
+哈希映射中的键不必排序，甚至
+The keys in a hash map don't have to be ordered, even
+
+14
+00:00:37,030 --> 00:00:40,070
+拥有任何特定的财产，除了
+to have any particular property, except for offering equals
+
+15
+00:00:40,070 --> 00:00:41,310
+还有哈希码。
+and hashcode.
+
+16
+00:00:41,310 --> 00:00:43,170
+下面是哈希表的工作原理。
+And here's how a hash table works.
+
+17
+00:00:43,170 --> 00:00:46,425
+所以它包含一个初始化为边大小的数组
+So it contains an array that's initialized to a side size
+
+18
+00:00:46,425 --> 00:00:48,050
+对应于元素的数量
+corresponding to the number of elements
+
+19
+00:00:48,050 --> 00:00:52,200
+我们希望最终出现在哈希集中。
+that we expect to eventually appear in the HashSet.
+
+20
+00:00:52,200 --> 00:00:54,110
+不过，这可能会增长和缩小。
+This can grow and shrink, though.
+
+21
+00:00:54,110 --> 00:00:56,740
+当某个值中有一个键表示要插入时，
+When a key in a value represented for insertion,
+
+22
+00:00:56,740 --> 00:01:00,390
+我们计算密钥的哈希码
+we compute the hashcode of the key
+
+23
+00:01:00,390 --> 00:01:04,940
+并将其转换为数组范围内的索引，
+and convert it into an index in the array's range,
+
+24
+00:01:04,940 --> 00:01:07,820
+通常由一些模块划分。
+usually by some modular division.
+
+25
+00:01:07,820 --> 00:01:12,100
+然后在索引处插入值。
+And then the value is inserted at that index.
+
+26
+00:01:12,100 --> 00:01:13,700
+散列表的rep不变量
+The rep invariant of a hash table
+
+27
+00:01:13,700 --> 00:01:15,790
+包含此基本约束
+includes this fundamental constraint
+
+28
+00:01:15,790 --> 00:01:18,960
+密钥存储在确定的插槽中
+that keys are stored in the slots determined
+
+29
+00:01:18,960 --> 00:01:21,324
+他们的散列码。
+by their hash codes.
+
+30
+00:01:21,324 --> 00:01:23,490
+现在哈希码的设计使得密钥
+Now hash codes are designed so that the keys will be
+
+31
+00:01:23,490 --> 00:01:25,060
+在指数上均匀分布。
+spread evenly over the indices.
+
+32
+00:01:25,060 --> 00:01:28,390
+但偶尔会发生冲突
+But occasionally a conflict occurs, and two keys
+
+33
+00:01:28,390 --> 00:01:30,850
+以相同的指数结束。
+end up at the same index.
+
+34
+00:01:30,850 --> 00:01:33,320
+所以，与其在一个指数中只保持一个值，
+So rather than holding at just a single value in an index,
+
+35
+00:01:33,320 --> 00:01:36,910
+哈希表实际上包含一个键值对列表，
+a hash table actually holds a list of key value pairs,
+
+36
+00:01:36,910 --> 00:01:39,270
+通常称为散列桶。
+usually called a hash bucket.
+
+37
+00:01:39,270 --> 00:01:42,050
+用Java实现的键-值对，通常
+Key value pairs implemented in Java, typically, simply
+
+38
+00:01:42,050 --> 00:01:44,380
+是具有两个字段的对象。
+is an object with two fields.
+
+39
+00:01:44,380 --> 00:01:47,340
+插入时，向数组槽中的列表中添加一对
+On insertion, you add a pair to the list in the array slot
+
+40
+00:01:47,340 --> 00:01:48,970
+由哈希码决定。
+determined by the hashcode.
+
+41
+00:01:48,970 --> 00:01:53,120
+查一下，你把钥匙散开，找到合适的位置，
+For look up, you hash the key, find the right slot,
+
+42
+00:01:53,120 --> 00:01:55,180
+然后检查每一对，
+and then examine each of the pairs,
+
+43
+00:01:55,180 --> 00:01:59,060
+直到找到与查询键相等的键。
+until one has found whose key equals the query key.
+
+44
+00:01:59,060 --> 00:02:01,560
+所以现在应该清楚为什么目标承包商需要
+So now it should be clear why the object contractor requires
+
+45
+00:02:01,560 --> 00:02:04,410
+具有相同哈希代码的相等对象。
+equal objects to have the same hashcode.
+
+46
+00:02:04,410 --> 00:02:06,880
+如果两个相等的对象有不同的散列码，
+If two equal objects had distinct hash codes,
+
+47
+00:02:06,880 --> 00:02:08,910
+它们可能被放在不同的位置。
+they might be placed in different slots.
+
+48
+00:02:08,910 --> 00:02:10,630
+所以如果你倾向于使用
+So if you tend to look up a value using
+
+49
+00:02:10,630 --> 00:02:15,052
+一把相当于插入的钥匙，
+a key equal to the one with which it was inserted,
+
+50
+00:02:15,052 --> 00:02:16,010
+查找可能会失败。
+the look-up might fail.
+
+52
+00:02:19,170 --> 00:02:22,110
+对象默认具有良好的实现是一致的
+Objects default has good implementation is consistent
+
+53
+00:02:22,110 --> 00:02:23,265
+默认等于。
+with it's default equals.
+
+54
+00:02:23,265 --> 00:02:25,390
+所以记住它是默认的等于。
+So remember that it's default equals.
+
+55
+00:02:25,390 --> 00:02:27,110
+这是指代平等。
+That's referential equality.
+
+56
+00:02:27,110 --> 00:02:30,360
+默认的hashcode实际上返回一个整数，基本上，
+It's default hashcode actually returns an integer, basically,
+
+57
+00:02:30,360 --> 00:02:32,700
+从存储器中表示或计算的
+representing or computed from the memory
+
+58
+00:02:32,700 --> 00:02:35,740
+对象的地址。
+address of the object.
+
+59
+00:02:35,740 --> 00:02:38,370
+所以对于参考文献a和b，如果a等于
+So for references a and b, if a equals equals
+
+60
+00:02:38,370 --> 00:02:41,830
+b、 那么a的地址必须等于b的地址。
+b, then the address of a has to equal equal the address of b.
+
+61
+00:02:41,830 --> 00:02:44,700
+所以标的合同确实得到了满足。
+So the object contract is indeed satisfied.
+
+62
+00:02:44,700 --> 00:02:47,280
+但是不可变的对象需要不同的实现
+But immutable objects need a different implementation
+
+63
+00:02:47,280 --> 00:02:51,610
+因为它们重写了这个equals方法。
+of hashcode, because they override this equals method.
+
+64
+00:02:51,610 --> 00:02:54,140
+现在是持续时间，因为我们还没有覆盖默认值
+Now for durations, since we haven't overridden the default
+
+65
+00:02:54,140 --> 00:02:56,310
+hashcode现在，我们正在破坏
+hashcode yet, we're actually currently breaking
+
+66
+00:02:56,310 --> 00:02:57,480
+目标合同。
+the object contract.
+
+67
+00:02:57,480 --> 00:03:00,010
+我们可以制作两个不同的持续时间对象。
+We can make two different duration objects.
+
+68
+00:03:00,010 --> 00:03:02,350
+但是如果他们有相同的时间，那么
+But if they have the same minutes and seconds, then
+
+69
+00:03:02,350 --> 00:03:04,530
+我们的平等，我们被超越的平等，
+our equals, our overridden equals,
+
+70
+00:03:04,530 --> 00:03:07,940
+将它们比较为相等，但有哈希码
+will compare them as equal, but there hashcodes
+
+71
+00:03:07,940 --> 00:03:10,250
+可能大不相同。
+may be wildly different.
+
+72
+00:03:10,250 --> 00:03:11,770
+所以我们需要解决这个问题。
+So we need to fix that.
+
+73
+00:03:11,770 --> 00:03:15,290
+现在一个简单而激烈的方法来确保合同得到履行
+Now a simple and drastic way to ensure the contract is met
+
+74
+00:03:15,290 --> 00:03:19,370
+hashcode总是返回相同的常量值
+is for hashcode to always return the same constant value
+
+75
+00:03:19,370 --> 00:03:22,150
+所以每个对象的hashcode，每个duration对象的
+so that every object's hashcode, every duration object's
+
+76
+00:03:22,150 --> 00:03:24,980
+例如，hashcode是相同的。
+hashcode, for example, is the same.
+
+77
+00:03:24,980 --> 00:03:26,820
+这符合目标合同，
+This satisfies the object contract,
+
+78
+00:03:26,820 --> 00:03:29,300
+但这会带来灾难性的业绩影响，
+but it would have a disastrous performance effect,
+
+79
+00:03:29,300 --> 00:03:32,770
+因为每一个密钥最终都会存储在同一个插槽中。
+since every key would end up being stored in the same slot.
+
+80
+00:03:32,770 --> 00:03:35,580
+假设我们选择了整数761，
+Let's say, we chose the integer 761,
+
+81
+00:03:35,580 --> 00:03:38,170
+哈希表的所有键都在那个槽中。
+all the keys of the hash table would be in that slot.
+
+82
+00:03:38,170 --> 00:03:40,100
+它的性能会退化
+And its performance would degenerate
+
+83
+00:03:40,100 --> 00:03:42,930
+只是一个长列表的线性搜索
+to just that of a linear search along a long list
+
+84
+00:03:42,930 --> 00:03:45,538
+在那个散列槽里。
+in that hash slot.
+
+85
+00:03:45,538 --> 00:03:48,360
+以及构造更合理的哈希代码的标准方法
+And a standard way to construct a more reasonable hashcode that
+
+86
+00:03:48,360 --> 00:03:51,000
+仍然满足契约是计算哈希码
+still satisfies the contract is to compute a hashcode
+
+87
+00:03:51,000 --> 00:03:52,900
+对于对象的每个组件
+for each component of the object that's
+
+88
+00:03:52,900 --> 00:03:56,350
+用于质量的终止——例如，这里，
+used in the termination of the quality-- for example, here,
+
+89
+00:03:56,350 --> 00:03:58,480
+我们用持续时间内的秒数--
+we're using the seconds in the duration--
+
+90
+00:03:58,480 --> 00:04:01,660
+然后把这些结合起来，再加上一些算法
+and then combining these, throwing in a few arithmetic
+
+91
+00:04:01,660 --> 00:04:02,340
+操作。
+operations.
+
+92
+00:04:02,340 --> 00:04:03,500
+在持续时间内，这很容易。
+For duration, this is easy.
+
+93
+00:04:03,500 --> 00:04:07,000
+类的抽象值已经是整数值，
+The abstract value of the class is already an integer value,
+
+94
+00:04:07,000 --> 00:04:08,990
+获取长度和秒数。
+get length and seconds.
+
+95
+00:04:08,990 --> 00:04:11,450
+所以我们可以把它作为hashcode返回。
+So we can actually just return that, as our hashcode.
+
+97
+00:04:14,110 --> 00:04:15,770
+现在有一本很棒的书
+Now there's a fantastic book written
+
+98
+00:04:15,770 --> 00:04:18,990
+作者Josh Bloch称之为有效Java
+by Josh Bloch called Effective Java-- that I highly
+
+99
+00:04:18,990 --> 00:04:21,892
+推荐——这就更详细地解释了这个问题
+recommend-- that explains this issue in more detail
+
+100
+00:04:21,892 --> 00:04:24,100
+并给出了一些编写适当哈希代码的策略
+and gives some strategies for writing decent hashcode
+
+101
+00:04:24,100 --> 00:04:24,640
+功能。
+functions.
+
+102
+00:04:24,640 --> 00:04:28,320
+他的建议已经在一本好书中总结了
+And his advice has been summarized in a good Slashdot
+
+103
+00:04:28,320 --> 00:04:32,580
+我也会鼓励你阅读。
+post that I would also encourage you to read.
+
+104
+00:04:32,580 --> 00:04:34,400
+但是Java的最新版本，现在，实际上
+But recent versions of Java, now, actually
+
+105
+00:04:34,400 --> 00:04:37,004
+有一个实用方法，对象的散列，
+have a utility method, object's hash,
+
+106
+00:04:37,004 --> 00:04:39,170
+这使得实现包含
+that makes it easier to implement hashcode involving
+
+107
+00:04:39,170 --> 00:04:40,750
+多个字段。
+multiple fields.
+
+108
+00:04:40,750 --> 00:04:43,514
+所以你可以在Java库中查找。
+So you can look that up in the Java library.
+
+109
+00:04:43,514 --> 00:04:45,930
+不过，请注意，只要您满足要求
+Note, however, that as long as you satisfy the requirement
+
+110
+00:04:45,930 --> 00:04:48,076
+相同的对象具有相同的hashcode值，
+that equal objects have the same hashcode value,
+
+111
+00:04:48,076 --> 00:04:49,950
+然后使用特定的散列技术
+then the particular hashing technique you use
+
+112
+00:04:49,950 --> 00:04:53,180
+不会影响代码的正确性。
+doesn't make a difference to the correctness of your code.
+
+113
+00:04:53,180 --> 00:04:55,260
+它可能通过创建
+It may affect its performance by creating
+
+114
+00:04:55,260 --> 00:04:57,700
+不同物体之间不必要的碰撞，
+these unnecessary collisions between different objects,
+
+115
+00:04:57,700 --> 00:05:00,280
+但即使是性能很差的散列函数
+but even a poorly performing hash function
+
+116
+00:05:00,280 --> 00:05:02,090
+总比坏了的好，
+is better than one that is broken,
+
+117
+00:05:02,090 --> 00:05:04,780
+那违反了合同。
+that breaks the contract.
+
+118
+00:05:04,780 --> 00:05:07,760
+最重要的是，如果不重写hashcode
+Most crucially notice that if you don't override hashcode
+
+119
+00:05:07,760 --> 00:05:10,570
+总之，您将得到一个来自对象的，它基于
+at all, you'll get a one from object, which is based
+
+120
+00:05:10,570 --> 00:05:12,700
+在对象的地址上。
+on the address of the object.
+
+121
+00:05:12,700 --> 00:05:14,420
+所以如果你重写了equals，
+So if you have overridden equals,
+
+122
+00:05:14,420 --> 00:05:16,880
+这意味着你几乎肯定违反了
+this will mean that you have almost certainly violated
+
+123
+00:05:16,880 --> 00:05:18,320
+合同。
+the contract.
+
+124
+00:05:18,320 --> 00:05:21,020
+所以一般来说，总是重写hashcode
+So as a general rule, always override hashcode
+
+125
+00:05:21,020 --> 00:05:24,350
+当你覆盖等于时。
+when you override equals.
+
+126
+00:05:24,350 --> 00:05:27,810
+现在搞糟这件事的一个方法是拼错哈希码。
+Now one way to mess this up is to misspell hashcode.
+
+127
+00:05:27,810 --> 00:05:30,179
+很多年前麻省理工学院的一个学生，
+Many years ago a student in this class, at MIT,
+
+128
+00:05:30,179 --> 00:05:32,220
+花了几个小时追踪一个项目中的错误
+spent hours tracking down a bug in a project that
+
+129
+00:05:32,220 --> 00:05:35,790
+只不过是拼错了哈希码
+amounted nothing more than misspelling hashcode
+
+130
+00:05:35,790 --> 00:05:38,250
+作为hashcode小写c。
+as hashcode lowercase c.
+
+131
+00:05:38,250 --> 00:05:40,382
+这创造了一种新的方法
+This created a new method, as we've
+
+132
+00:05:40,382 --> 00:05:41,590
+在前面的阅读中看到。
+seen earlier in this reading.
+
+133
+00:05:41,590 --> 00:05:42,884
+它是用等号创建的。
+It was created with equals.
+
+134
+00:05:42,884 --> 00:05:44,800
+这创建了一个没有重写的新方法
+This created a new method that didn't override
+
+135
+00:05:44,800 --> 00:05:48,200
+对象的hashcode方法和奇怪的东西
+the hashcode method of object at all and strange things
+
+136
+00:05:48,200 --> 00:05:49,190
+发生了。
+happened.
+
+137
+00:05:49,190 --> 00:05:51,580
+就像我们为平等而做的一样，永远
+So just like we did for equals, always
+
+138
+00:05:51,580 --> 00:05:54,900
+对hashcode也使用该重写。
+use that override for hashcode as well.
+

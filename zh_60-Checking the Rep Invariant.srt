@@ -1,0 +1,375 @@
+1
+00:00:00,500 --> 00:00:03,860
+下面是一个关于有理数的抽象数据类型的例子。
+Here's an example of an abstract data type for rational numbers.
+
+2
+00:00:03,860 --> 00:00:09,636
+让我们仔细看看它的rep不变量及其抽象
+Let's look closely at its rep invariant and its abstraction
+
+3
+00:00:09,636 --> 00:00:10,136
+功能。
+function.
+
+5
+00:00:16,309 --> 00:00:18,200
+下面是抽象函数的图片
+Here's a picture of the abstraction function
+
+6
+00:00:18,200 --> 00:00:20,780
+以及此代码的rep不变量。
+and the rep invariant for this code.
+
+7
+00:00:20,780 --> 00:00:23,460
+rep不变量要求分子和分母
+The rep invariant requires that the numerator and denominator
+
+8
+00:00:23,460 --> 00:00:27,170
+成对的是简化的形式，最低限度的。
+pairs be in reduced form, lowest terms.
+
+9
+00:00:27,170 --> 00:00:31,560
+所以像2逗号4，18逗号12这样的对
+So pairs like 2 comma 4, 18 comma 12
+
+10
+00:00:31,560 --> 00:00:34,922
+应该画成国际扶轮以外的。
+should be drawn as outside of the RI.
+
+11
+00:00:34,922 --> 00:00:37,220
+现在，这是完全合理的设计
+Now, it'd be perfectly reasonable to design
+
+12
+00:00:37,220 --> 00:00:39,190
+同一ADT的另一个实现
+another implementation of the same ADT
+
+13
+00:00:39,190 --> 00:00:40,760
+用一个更宽容的RI。
+with a more permissive RI.
+
+14
+00:00:40,760 --> 00:00:42,770
+有了这样的变化
+With such a change, some of the operations
+
+15
+00:00:42,770 --> 00:00:45,000
+可能会变得更昂贵，
+might become more expensive to perform,
+
+16
+00:00:45,000 --> 00:00:48,830
+但其他的可能会更便宜。
+but other ones might become cheaper.
+
+17
+00:00:48,830 --> 00:00:52,380
+现在，rep不变量不仅仅是一个简洁的数学概念。
+Now, the rep invariant isn't just a neat mathematical idea.
+
+18
+00:00:52,380 --> 00:00:56,130
+如果您的实现在运行时声明其rep不变量，
+If your implementation asserts its rep invariant at run time,
+
+19
+00:00:56,130 --> 00:00:57,490
+那么你可以很快失败。
+then you can fail fast.
+
+20
+00:00:57,490 --> 00:01:00,000
+你可以早点抓到虫子。
+You can catch bugs earlier.
+
+21
+00:01:00,000 --> 00:01:03,860
+这里有一个方法可以用来[？拉特南？]测试它的rep不变量。
+Here's a method for [? ratnam ?] that tests its rep invariant.
+
+22
+00:01:03,860 --> 00:01:06,080
+我们叫它支票代表。
+We'll call it check rep.
+
+23
+00:01:06,080 --> 00:01:10,300
+它返回void，因为它将执行断言。
+It returns void because it's going to be doing assertions.
+
+24
+00:01:10,300 --> 00:01:12,120
+注意，除非你
+Note that this does nothing unless you
+
+25
+00:01:12,120 --> 00:01:15,090
+打开断言检查。
+turn on assertion checking.
+
+26
+00:01:15,090 --> 00:01:20,436
+它所做的是断言发现的每一个条件
+And what it does is asserts each of the conditions found
+
+27
+00:01:20,436 --> 00:01:21,310
+在我们的代表不变量。
+in our rep invariant.
+
+29
+00:01:31,880 --> 00:01:34,520
+你当然应该打电话给支票代表
+You should certainly call check rep
+
+30
+00:01:34,520 --> 00:01:37,730
+在每个操作结束时断言rep不变量
+to assert the rep invariant at the end of every operation that
+
+31
+00:01:37,730 --> 00:01:40,990
+创造或变异代表——换句话说，创造者，
+creates or mutates the rep-- in other words, creators,
+
+32
+00:01:40,990 --> 00:01:43,350
+生产者和变异者。
+producers, and mutators.
+
+33
+00:01:43,350 --> 00:01:46,200
+所以如果你回头看看那个？拉特南？]上面的代码，
+So if you look back at the [? ratnam ?] code above,
+
+34
+00:01:46,200 --> 00:01:49,907
+你会看到它在每一个结束时调用check rep
+you will see that it calls check rep at the end of each
+
+35
+00:01:49,907 --> 00:01:50,740
+建造者的。
+of the constructors.
+
+36
+00:01:50,740 --> 00:01:51,740
+他们都是创造者。
+Those are both creators.
+
+38
+00:01:55,340 --> 00:01:58,010
+观察者方法通常不需要调用check rep，
+Observer methods don't normally need to call check rep,
+
+39
+00:01:58,010 --> 00:02:00,230
+但无论如何，这样做是很好的防守练习。
+but its good defensive practice to do so anyway.
+
+40
+00:02:00,230 --> 00:02:01,130
+为什么？
+Why?
+
+41
+00:02:01,130 --> 00:02:03,652
+嗯，每种方法都有召回检查代表，包括
+Well, with recall check rep in every method including
+
+42
+00:02:03,652 --> 00:02:05,110
+观察者，这意味着你会
+observers, that means you'd be more
+
+43
+00:02:05,110 --> 00:02:07,470
+可能会捕捉到代表不变的违反
+likely to catch rep invariant violations that
+
+44
+00:02:07,470 --> 00:02:10,289
+是由于暴露在rep中引起的。
+are caused by rep exposure.
+
+45
+00:02:10,289 --> 00:02:14,334
+为什么支票代表是私人的？
+Now, why is check rep private?
+
+46
+00:02:14,334 --> 00:02:16,500
+谁负责检查和执行
+Who should be responsible for checking and enforcing
+
+47
+00:02:16,500 --> 00:02:17,166
+代表不变量？
+a rep invariant?
+
+48
+00:02:17,166 --> 00:02:20,145
+客户还是实现本身？
+The clients or the implementation itself?
+
+50
+00:02:24,680 --> 00:02:26,550
+现在，回想一下我们的说明书
+Now, recall from our specs reading
+
+51
+00:02:26,550 --> 00:02:28,990
+空值非常麻烦和不安全
+that null values are troublesome and unsafe, so much
+
+52
+00:02:28,990 --> 00:02:31,490
+所以我们试图将它们从我们的编程中完全删除。
+so that we try to remove them from our programming entirely.
+
+53
+00:02:31,490 --> 00:02:34,390
+在6005年，先决条件和后决条件
+And in 6005 the preconditions and postconditions
+
+54
+00:02:34,390 --> 00:02:38,160
+我们的方法隐式地要求数组中的对象
+of our methods implicitly require that objects in arrays
+
+55
+00:02:38,160 --> 00:02:39,057
+非空。
+be non-null.
+
+56
+00:02:39,057 --> 00:02:40,140
+我们不必这么说。
+We don't have to say that.
+
+57
+00:02:40,140 --> 00:02:41,850
+我们只是不想要空的。
+We just don't want null.
+
+58
+00:02:41,850 --> 00:02:43,560
+所以我们应该延长禁令
+So we should extend that prohibition
+
+59
+00:02:43,560 --> 00:02:45,840
+给抽象数据类型的代表。
+to the reps of abstract data types.
+
+60
+00:02:45,840 --> 00:02:49,720
+默认情况下，在6005中，rep不变量隐式地
+By default, in 6005, the rep invariant implicitly
+
+61
+00:02:49,720 --> 00:02:53,370
+对于每个引用，includes x不等于null，
+includes x is not equal to null for every reference,
+
+62
+00:02:53,370 --> 00:02:56,880
+对象引用或数组引用，代表中的x。
+object reference or array reference, x in the rep.
+
+63
+00:02:56,880 --> 00:03:01,510
+所以如果你的rep是字符串s，那么它的rep不变
+So if your rep is string s, then its rep invariant automatically
+
+64
+00:03:01,510 --> 00:03:03,740
+includes s不等于空。
+includes s is not equal to null.
+
+65
+00:03:03,740 --> 00:03:07,120
+您不需要在rep不变注释中声明它。
+You don't need to state it in a rep invariant comment.
+
+66
+00:03:07,120 --> 00:03:09,740
+但是到了在支票中实现rep不变量的时候
+But when it's time to implement that rep invariant in a check
+
+67
+00:03:09,740 --> 00:03:13,430
+rep方法，您仍然应该实现
+rep method, you should still implement the s is not
+
+68
+00:03:13,430 --> 00:03:15,730
+等于空检查。
+equal to null check.
+
+69
+00:03:15,730 --> 00:03:19,400
+当s为空时，确保您的支票代表正确地失败。
+Make sure that your check rep correctly fails when s is null.
+
+70
+00:03:19,400 --> 00:03:21,234
+这种检查常常是从Java免费获得的
+So often that check comes for free from Java
+
+71
+00:03:21,234 --> 00:03:23,316
+因为检查你的代表不变量的其他部分
+because checking other parts of your rep invariant
+
+72
+00:03:23,316 --> 00:03:24,970
+如果s为空，将引发异常。
+will throw an exception if s is null.
+
+73
+00:03:24,970 --> 00:03:27,590
+例如，如果您的支票代表
+For example, if your check rep has
+
+74
+00:03:27,590 --> 00:03:32,130
+因为你在检查s的长度，
+to look like this because you're checking the length of s,
+
+75
+00:03:32,130 --> 00:03:33,920
+那么你不需要断言
+then you don't need to assert s is not
+
+76
+00:03:33,920 --> 00:03:36,220
+等于空，因为对s.length的调用
+equal to null because the call to s.length
+
+77
+00:03:36,220 --> 00:03:38,780
+在空引用上同样有效地失败。
+will fail just as effectively on a null reference.
+
+78
+00:03:38,780 --> 00:03:41,780
+但是如果s没有被rep不变量检查，
+But if s is not otherwise checked by the rep invariant,
+
+79
+00:03:41,780 --> 00:03:45,120
+则断言s不显式等于null。
+then assert s is not equal to null explicitly.
+

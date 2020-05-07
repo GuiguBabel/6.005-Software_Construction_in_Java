@@ -1,0 +1,225 @@
+1
+00:00:00,500 --> 00:00:02,810
+Java的接口是一种有用的语言机制
+Java's interface is a useful language mechanism
+
+2
+00:00:02,810 --> 00:00:04,940
+用于表示抽象数据类型。
+for expressing an abstract data type.
+
+3
+00:00:04,940 --> 00:00:08,850
+Java中的接口只是方法签名列表，
+An Interface in Java is just a list of method signatures,
+
+4
+00:00:08,850 --> 00:00:11,170
+没有方法体。
+no method bodies.
+
+5
+00:00:11,170 --> 00:00:13,820
+然后类实现一个接口
+And then a class implements an interface
+
+6
+00:00:13,820 --> 00:00:16,440
+如果它在implements子句中声明接口
+if it declares the interface in its implements clause
+
+7
+00:00:16,440 --> 00:00:18,490
+在类声明的顶部
+at the top of the class declaration
+
+8
+00:00:18,490 --> 00:00:21,650
+并提供了所有缺少的方法体
+and provides the method bodies that were missing for all
+
+9
+00:00:21,650 --> 00:00:24,680
+接口方法的。
+of the interfaces methods.
+
+10
+00:00:24,680 --> 00:00:27,570
+所以在Java中考虑抽象数据类型的一种方法
+So one way to think about an abstract data type in Java
+
+11
+00:00:27,570 --> 00:00:30,100
+它是一个接口，因为它完全定义了
+is that it's an interface because it's defined entirely
+
+12
+00:00:30,100 --> 00:00:31,460
+通过它的运作。
+by its operations.
+
+13
+00:00:31,460 --> 00:00:33,580
+然后它的实现是一个类
+And then its implementation is a class
+
+14
+00:00:33,580 --> 00:00:36,322
+实现那个接口的。
+that implements that interface.
+
+15
+00:00:36,322 --> 00:00:38,280
+现在，这种方法的一大优点是
+Now, one of the big advantages of this approach
+
+16
+00:00:38,280 --> 00:00:41,160
+接口指定了客户端的契约
+is that the interface specifies the contract for the client
+
+17
+00:00:41,160 --> 00:00:42,650
+再也没有了。
+and nothing more.
+
+18
+00:00:42,650 --> 00:00:45,100
+接口是客户机程序员所需要的
+The interface is all that a client programmer needs
+
+19
+00:00:45,100 --> 00:00:47,720
+阅读理解ADT。
+to read to understand the ADT.
+
+20
+00:00:47,720 --> 00:00:50,420
+客户端无法创建意外依赖项
+The client can't create inadvertent dependencies
+
+21
+00:00:50,420 --> 00:00:53,401
+因为实例变量不能
+on the ADT's rep because instance variables can't
+
+22
+00:00:53,401 --> 00:00:54,650
+完全被放在一个接口中。
+be put in an interface at all.
+
+23
+00:00:54,650 --> 00:00:56,040
+你没有代表。
+You don't have a rep.
+
+24
+00:00:56,040 --> 00:00:58,090
+执行情况得到了很好的保证
+The implementation is kept well and truly
+
+25
+00:00:58,090 --> 00:01:01,427
+完全分居在不同的阶级中。
+separated in a different class altogether.
+
+26
+00:01:01,427 --> 00:01:03,260
+另一个优点是
+Another advantage is that multiple different
+
+27
+00:01:03,260 --> 00:01:05,319
+抽象数据类型的表示
+representations of the abstract data type
+
+28
+00:01:05,319 --> 00:01:08,190
+可以与不同的类在同一程序中共存
+can coexist in the same program as different classes
+
+29
+00:01:08,190 --> 00:01:10,370
+实现相同的接口。
+implementing the same interface.
+
+30
+00:01:10,370 --> 00:01:12,440
+当抽象数据类型仅表示为
+When an abstract data type is represented just
+
+31
+00:01:12,440 --> 00:01:14,390
+作为一个没有接口的类，
+as a single class without an interface,
+
+32
+00:01:14,390 --> 00:01:16,720
+很难有多个代表。
+it's harder to have multiple representations.
+
+33
+00:01:16,720 --> 00:01:19,620
+所以在前面阅读的MyString示例中，
+So in the MyString example from the earlier reading,
+
+34
+00:01:19,620 --> 00:01:21,740
+MyString只是一个类。
+MyString was just a single class.
+
+35
+00:01:21,740 --> 00:01:24,200
+我们研究了MyString的两种不同表示，
+We explored two different representations for MyString,
+
+36
+00:01:24,200 --> 00:01:26,935
+但我们不能在ADT中同时使用这两种表示
+but we couldn't use both representations for the ADT
+
+37
+00:01:26,935 --> 00:01:30,628
+在同一个程序中。
+in the same program.
+
+38
+00:01:30,628 --> 00:01:32,750
+Java静态类型检查允许编译器
+Java Static type checking allows the compiler
+
+39
+00:01:32,750 --> 00:01:35,230
+在执行ADT合同时发现许多错误。
+to catch many mistakes in implementing an ADT's contract.
+
+40
+00:01:35,230 --> 00:01:37,050
+例如，这是一个编译时错误
+For instance, it's a compile time error
+
+41
+00:01:37,050 --> 00:01:40,300
+省略所需的方法之一
+to omit one of the required methods
+
+42
+00:01:40,300 --> 00:01:43,550
+或者给一个方法错误的返回类型。
+or to give a method the wrong return type.
+
+43
+00:01:43,550 --> 00:01:45,550
+不幸的是，编译器没有检查我们
+Unfortunately, the compiler doesn't check for us
+
+44
+00:01:45,550 --> 00:01:48,310
+代码遵循那些方法的规范
+that the code adheres to the specs of those methods that
+
+45
+00:01:48,310 --> 00:01:51,240
+都写在文档注释中。
+are written in the documentation comments.
+
